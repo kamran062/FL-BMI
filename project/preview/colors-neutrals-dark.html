@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Neutrals — dark</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html, body { background: #0E1411; }
+  body { margin: 0; padding: 24px 28px; height: 220px; box-sizing: border-box; display: flex; gap: 12px; color: #F5F7F4; }
+  .col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .col h4 { margin: 0 0 4px; font: var(--t-overline); color: #6E7873; }
+  .sw { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: var(--r-sm); background: #161D1A; box-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+  .chip { width: 22px; height: 22px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.10); flex: none; }
+  .tok { font: var(--t-caption); color: #F5F7F4; flex: 1; }
+  .hex { font: var(--t-caption); color: #6E7873; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+  <div class="col">
+    <h4>Surfaces</h4>
+    <div class="sw"><span class="chip" style="background:#0E1411"></span><span class="tok">bg-canvas</span><span class="hex">#0E1411</span></div>
+    <div class="sw"><span class="chip" style="background:#161D1A"></span><span class="tok">bg-surface</span><span class="hex">#161D1A</span></div>
+    <div class="sw"><span class="chip" style="background:#0A100D"></span><span class="tok">bg-sunken</span><span class="hex">#0A100D</span></div>
+    <div class="sw"><span class="chip" style="background:#122620"></span><span class="tok">bg-tint</span><span class="hex">#122620</span></div>
+  </div>
+  <div class="col">
+    <h4>Text</h4>
+    <div class="sw"><span class="chip" style="background:#F5F7F4"></span><span class="tok">fg-1 — primary</span><span class="hex">#F5F7F4</span></div>
+    <div class="sw"><span class="chip" style="background:#B0B8B4"></span><span class="tok">fg-2 — secondary</span><span class="hex">#B0B8B4</span></div>
+    <div class="sw"><span class="chip" style="background:#6E7873"></span><span class="tok">fg-3 — tertiary</span><span class="hex">#6E7873</span></div>
+    <div class="sw"><span class="chip" style="background:#2BC480"></span><span class="tok">brand-500 (lifted)</span><span class="hex">#2BC480</span></div>
+  </div>
+  <div class="col">
+    <h4>Borders</h4>
+    <div class="sw"><span class="chip" style="background:rgba(255,255,255,0.10)"></span><span class="tok">border-subtle</span><span class="hex">10 % wht</span></div>
+    <div class="sw"><span class="chip" style="background:rgba(255,255,255,0.06)"></span><span class="tok">border-faint</span><span class="hex">6 % wht</span></div>
+    <div class="sw"><span class="chip" style="background:#000;opacity:0.6"></span><span class="tok">bg-scrim</span><span class="hex">60 % blk</span></div>
+  </div>
+</body>
+</html>

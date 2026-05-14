@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Tabular numerals</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px 28px; background: var(--bg-canvas); height: 170px; box-sizing: border-box; display: flex; gap: 20px; align-items: stretch; }
+  .col { flex: 1; background: var(--bg-surface); border-radius: var(--r-lg); padding: 14px 18px; box-shadow: var(--elev-1); display: flex; flex-direction: column; gap: 6px; }
+  .ov { font: var(--t-overline); color: var(--fg-3); }
+  table { width: 100%; font: 400 15px/1.4 Inter; }
+  td.lbl { color: var(--fg-2); }
+  td.val { text-align: right; color: var(--fg-1); font-weight: 500; }
+  .tabular td.val { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+</style>
+</head>
+<body>
+  <div class="col">
+    <span class="ov">PROPORTIONAL · ✗</span>
+    <table>
+      <tr><td class="lbl">Mon</td><td class="val">81.2 kg</td></tr>
+      <tr><td class="lbl">Tue</td><td class="val">80.9 kg</td></tr>
+      <tr><td class="lbl">Wed</td><td class="val">79.7 kg</td></tr>
+      <tr><td class="lbl">Thu</td><td class="val">81.1 kg</td></tr>
+    </table>
+  </div>
+  <div class="col tabular">
+    <span class="ov">TABULAR · ✓</span>
+    <table>
+      <tr><td class="lbl">Mon</td><td class="val">81.2 kg</td></tr>
+      <tr><td class="lbl">Tue</td><td class="val">80.9 kg</td></tr>
+      <tr><td class="lbl">Wed</td><td class="val">79.7 kg</td></tr>
+      <tr><td class="lbl">Thu</td><td class="val">81.1 kg</td></tr>
+    </table>
+  </div>
+  <div class="col" style="justify-content:center">
+    <span class="ov">RULE</span>
+    <div style="font:var(--t-body);color:var(--fg-1)">Every metric — BMI, weight, dates, prices, percentages — uses <code style="font-family:ui-monospace;font-size:13px;background:var(--bg-sunken);padding:2px 6px;border-radius:6px">font-variant-numeric: tabular-nums</code>.</div>
+  </div>
+</body>
+</html>

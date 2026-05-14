@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Buttons</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px 28px; background: var(--bg-canvas); height: 230px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; align-items: center; gap: 12px; }
+  .ov { font: var(--t-overline); color: var(--fg-3); width: 90px; }
+  .btn { font: 600 15px/1 Inter; letter-spacing: -0.005em; border: none; border-radius: 14px; padding: 14px 22px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: filter 150ms var(--ease-out), transform 120ms var(--ease-out); }
+  .btn:hover { filter: brightness(1.04); }
+  .btn:active { transform: scale(0.98); filter: brightness(0.96); }
+  .primary { background: #1FB573; color: #fff; box-shadow: 0 1px 2px rgba(31,181,115,0.3), 0 4px 12px rgba(31,181,115,0.15); }
+  .secondary { background: #F1F2EE; color: #0E1411; }
+  .ghost { background: transparent; color: #1FB573; }
+  .destructive { background: #FDEAEA; color: #B91C1C; }
+  .lg { padding: 16px 28px; font-size: 17px; border-radius: 16px; }
+  .sm { padding: 9px 14px; font-size: 13px; border-radius: 10px; }
+  .disabled { opacity: 0.4; cursor: not-allowed; }
+</style>
+</head>
+<body>
+  <div class="row"><span class="ov">PRIMARY</span>
+    <button class="btn primary lg">Calculate BMI</button>
+    <button class="btn primary">Save result</button>
+    <button class="btn primary sm">Edit</button>
+    <button class="btn primary disabled">Disabled</button>
+  </div>
+  <div class="row"><span class="ov">SECONDARY</span>
+    <button class="btn secondary lg">Set goal</button>
+    <button class="btn secondary">Share result</button>
+    <button class="btn secondary sm">Cancel</button>
+  </div>
+  <div class="row"><span class="ov">GHOST</span>
+    <button class="btn ghost">Skip</button>
+    <button class="btn ghost">Restore purchases</button>
+  </div>
+  <div class="row"><span class="ov">DESTRUCTIVE</span>
+    <button class="btn destructive">Clear history</button>
+  </div>
+</body>
+</html>

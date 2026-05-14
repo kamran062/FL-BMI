@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMI category colors</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px 28px; background: var(--bg-canvas); height: 230px; box-sizing: border-box; }
+  .row { display: flex; gap: 12px; }
+  .cat { flex: 1; border-radius: var(--r-lg); padding: 14px 16px 16px; box-shadow: var(--elev-1); display: flex; flex-direction: column; gap: 10px; min-height: 150px; }
+  .cat .dot { width: 12px; height: 12px; border-radius: 999px; }
+  .cat .label { font: var(--t-body-strong); color: var(--fg-1); }
+  .cat .range { font: var(--t-caption); color: var(--fg-2); font-variant-numeric: tabular-nums; }
+  .cat .hex { font: var(--t-overline); color: var(--fg-3); font-variant-numeric: tabular-nums; margin-top: auto; }
+  .head { display: flex; align-items: center; justify-content: space-between; }
+  .pill { font: var(--t-overline); padding: 4px 10px; border-radius: 999px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="cat" style="background:#EAF1FE">
+      <div class="head"><span class="dot" style="background:#3B82F6"></span><span class="pill" style="background:#3B82F6;color:#fff">UNDER</span></div>
+      <div class="label">Underweight</div>
+      <div class="range">&lt; 18.5</div>
+      <div class="hex">#3B82F6 · --bmi-under</div>
+    </div>
+    <div class="cat" style="background:#E8F7EF">
+      <div class="head"><span class="dot" style="background:#1FB573"></span><span class="pill" style="background:#1FB573;color:#fff">NORMAL</span></div>
+      <div class="label">Normal</div>
+      <div class="range">18.5 – 24.9</div>
+      <div class="hex">#1FB573 · --bmi-normal</div>
+    </div>
+    <div class="cat" style="background:#FEF4E2">
+      <div class="head"><span class="dot" style="background:#F59E0B"></span><span class="pill" style="background:#F59E0B;color:#fff">OVER</span></div>
+      <div class="label">Overweight</div>
+      <div class="range">25.0 – 29.9</div>
+      <div class="hex">#F59E0B · --bmi-over</div>
+    </div>
+    <div class="cat" style="background:#FDEAEA">
+      <div class="head"><span class="dot" style="background:#EF4444"></span><span class="pill" style="background:#EF4444;color:#fff">OBESE</span></div>
+      <div class="label">Obese</div>
+      <div class="range">≥ 30.0</div>
+      <div class="hex">#EF4444 · --bmi-obese</div>
+    </div>
+  </div>
+</body>
+</html>

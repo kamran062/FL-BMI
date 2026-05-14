@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Logo</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px 28px; display: flex; align-items: center; gap: 32px; background: var(--bg-canvas); height: 152px; box-sizing: border-box; }
+  .group { display: flex; flex-direction: column; gap: 6px; }
+  .panel { display: flex; align-items: center; justify-content: center; padding: 18px 22px; background: var(--bg-surface); border-radius: var(--r-lg); box-shadow: var(--elev-1); min-height: 88px; }
+  .dark { background: #0E1411; }
+  .dark text { fill: #F5F7F4 !important; }
+  .lbl { font: var(--t-caption); color: var(--fg-3); }
+</style>
+</head>
+<body>
+  <div class="group">
+    <div class="panel"><img src="../assets/logo.svg" alt="" height="40" /></div>
+    <span class="lbl">Wordmark · light</span>
+  </div>
+  <div class="group">
+    <div class="panel dark">
+      <svg viewBox="0 0 240 56" width="172" height="40">
+        <g transform="translate(0,4)">
+          <path d="M 38 32 A 16 16 0 1 0 24 40" stroke="#2BC480" stroke-width="4" stroke-linecap="round" fill="none" />
+          <circle cx="24" cy="40" r="3.5" fill="#2BC480" />
+          <path d="M 16 24 L 20 24 L 22 20 L 26 28 L 28 24 L 32 24" stroke="#2BC480" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </g>
+        <text x="60" y="38" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="24" letter-spacing="-0.5" fill="#F5F7F4">BMI Health</text>
+      </svg>
+    </div>
+    <span class="lbl">Wordmark · dark</span>
+  </div>
+  <div class="group">
+    <div class="panel" style="width:88px;height:88px;padding:14px;"><img src="../assets/logomark.svg" alt="" width="44" height="44" /></div>
+    <span class="lbl">Logomark</span>
+  </div>
+</body>
+</html>

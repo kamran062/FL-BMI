@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BMI gauge</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 20px 28px; background: var(--bg-canvas); height: 280px; box-sizing: border-box; display: flex; align-items: center; gap: 28px; }
+  .gauge { position: relative; width: 220px; height: 220px; }
+  .gauge .num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .gauge .val { font: 700 56px/1 Inter; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: var(--fg-1); }
+  .gauge .lbl { font: var(--t-overline); color: var(--bmi-over); }
+  .gauge svg { transform: rotate(-90deg); }
+  .legend { display: flex; flex-direction: column; gap: 10px; font: var(--t-body); max-width: 280px; }
+  .leg-row { display: flex; align-items: center; gap: 10px; font-variant-numeric: tabular-nums; }
+  .leg-row .swatch { width: 14px; height: 14px; border-radius: 4px; }
+  .leg-row .name { color: var(--fg-1); flex: 1; }
+  .leg-row .range { color: var(--fg-3); font: var(--t-caption); }
+  .desc { font: var(--t-caption); color: var(--fg-3); }
+</style>
+</head>
+<body>
+  <div class="gauge">
+    <svg width="220" height="220" viewBox="0 0 220 220">
+      <!-- Track -->
+      <circle cx="110" cy="110" r="92" fill="none" stroke="#F1F2EE" stroke-width="18" />
+      <!-- 4-segment colored ring (gapped) -->
+      <circle cx="110" cy="110" r="92" fill="none" stroke="#3B82F6" stroke-width="18" stroke-linecap="round" stroke-dasharray="100 478" stroke-dashoffset="0" />
+      <circle cx="110" cy="110" r="92" fill="none" stroke="#1FB573" stroke-width="18" stroke-linecap="round" stroke-dasharray="135 443" stroke-dashoffset="-110" />
+      <circle cx="110" cy="110" r="92" fill="none" stroke="#F59E0B" stroke-width="18" stroke-linecap="round" stroke-dasharray="100 478" stroke-dashoffset="-255" />
+      <circle cx="110" cy="110" r="92" fill="none" stroke="#EF4444" stroke-width="18" stroke-linecap="round" stroke-dasharray="100 478" stroke-dashoffset="-365" />
+    </svg>
+    <!-- Indicator -->
+    <svg width="220" height="220" viewBox="0 0 220 220" style="position:absolute;inset:0;transform:none">
+      <g transform="rotate(72 110 110)">
+        <circle cx="110" cy="18" r="8" fill="#fff" stroke="#F59E0B" stroke-width="4" />
+      </g>
+    </svg>
+    <div class="num">
+      <span class="lbl">OVERWEIGHT</span>
+      <span class="val">26.4</span>
+    </div>
+  </div>
+  <div class="legend">
+    <span class="desc">CIRCULAR BMI GAUGE</span>
+    <div class="leg-row"><span class="swatch" style="background:#3B82F6"></span><span class="name">Underweight</span><span class="range">&lt; 18.5</span></div>
+    <div class="leg-row"><span class="swatch" style="background:#1FB573"></span><span class="name">Normal</span><span class="range">18.5 – 24.9</span></div>
+    <div class="leg-row"><span class="swatch" style="background:#F59E0B"></span><span class="name">Overweight</span><span class="range">25.0 – 29.9</span></div>
+    <div class="leg-row"><span class="swatch" style="background:#EF4444"></span><span class="name">Obese</span><span class="range">≥ 30.0</span></div>
+    <span class="desc">220 px hero — animates 600 ms ease-out on reveal</span>
+  </div>
+</body>
+</html>

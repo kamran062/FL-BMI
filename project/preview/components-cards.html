@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Cards</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px 28px; background: var(--bg-canvas); height: 220px; box-sizing: border-box; display: flex; gap: 14px; }
+  .card { background: var(--bg-surface); border-radius: var(--r-lg); padding: 18px 20px; box-shadow: var(--elev-1); flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .ov { font: var(--t-overline); color: var(--fg-3); }
+  .title { font: 600 17px/1.2 Inter; letter-spacing: -0.01em; color: var(--fg-1); }
+  .sub { font: var(--t-caption); color: var(--fg-2); }
+  .metric { font: 700 32px/1 Inter; letter-spacing: -0.025em; font-variant-numeric: tabular-nums; color: var(--fg-1); }
+  .unit { font: 500 14px Inter; color: var(--fg-3); margin-left: 4px; }
+  .row { display: flex; align-items: center; justify-content: space-between; }
+  .hero { background: linear-gradient(180deg,#E8F7EF 0%, #F4FBF7 100%); border-radius: var(--r-xl); }
+  .tinted { background: var(--bg-tint); }
+  .pressed { box-shadow: var(--elev-2); transform: translateY(-1px); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="ov">RESTING</span>
+    <div class="title">Today's weight</div>
+    <div class="metric">78.4<span class="unit">kg</span></div>
+    <span class="sub">−0.3 kg vs last entry</span>
+  </div>
+  <div class="card pressed">
+    <span class="ov">HOVER · ELEV-2</span>
+    <div class="title">Active goal</div>
+    <div class="metric">2.4<span class="unit">kg to go</span></div>
+    <span class="sub">On track · 6 weeks left</span>
+  </div>
+  <div class="card tinted">
+    <span class="ov">TINTED</span>
+    <div class="title">Daily tip</div>
+    <div class="sub" style="font:var(--t-body);color:var(--fg-1)">Drink a glass of water before your first coffee.</div>
+  </div>
+  <div class="card hero">
+    <span class="ov" style="color:#128055">HERO · 24 PX</span>
+    <div class="title" style="color:#128055">BMI ready</div>
+    <div class="metric" style="color:#0E1411">24.8</div>
+    <span class="sub">Within the normal range</span>
+  </div>
+</body>
+</html>

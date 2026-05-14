@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Badges & chips</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 24px 28px; background: var(--bg-canvas); height: 200px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+  .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ov { font: var(--t-overline); color: var(--fg-3); width: 100px; flex: none; }
+  .pill { font: 600 12px/1 Inter; letter-spacing: 0.02em; padding: 6px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 6px; height: 6px; border-radius: 999px; }
+  .tag-under  { background: #EAF1FE; color: #1D4ED8; }
+  .tag-normal { background: #E8F7EF; color: #128055; }
+  .tag-over   { background: #FEF4E2; color: #9A6500; }
+  .tag-obese  { background: #FDEAEA; color: #B91C1C; }
+  .solid { color: #fff; }
+  .solid.under { background: #3B82F6; }
+  .solid.normal { background: #1FB573; }
+  .solid.over { background: #F59E0B; }
+  .solid.obese { background: #EF4444; }
+  .chip { font: var(--t-caption); padding: 8px 14px; background: var(--bg-surface); border-radius: 999px; box-shadow: var(--elev-1); color: var(--fg-1); }
+  .chip.on { background: var(--brand-500); color: #fff; box-shadow: none; }
+</style>
+</head>
+<body>
+  <div class="row"><span class="ov">TINT</span>
+    <span class="pill tag-under"><span class="dot" style="background:#3B82F6"></span>Underweight</span>
+    <span class="pill tag-normal"><span class="dot" style="background:#1FB573"></span>Normal</span>
+    <span class="pill tag-over"><span class="dot" style="background:#F59E0B"></span>Overweight</span>
+    <span class="pill tag-obese"><span class="dot" style="background:#EF4444"></span>Obese</span>
+  </div>
+  <div class="row"><span class="ov">SOLID</span>
+    <span class="pill solid under">Under</span>
+    <span class="pill solid normal">Normal</span>
+    <span class="pill solid over">Over</span>
+    <span class="pill solid obese">Obese</span>
+    <span class="pill" style="background:#0E1411;color:#fff">PRO</span>
+  </div>
+  <div class="row"><span class="ov">FILTER CHIPS</span>
+    <span class="chip on">All</span>
+    <span class="chip">Diet</span>
+    <span class="chip">Exercise</span>
+    <span class="chip">Hydration</span>
+    <span class="chip">Lifestyle</span>
+  </div>
+</body>
+</html>

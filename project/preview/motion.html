@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Motion</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { margin: 0; padding: 20px 28px; background: var(--bg-canvas); height: 200px; box-sizing: border-box; display: flex; gap: 18px; align-items: stretch; }
+  .col { flex: 1; background: var(--bg-surface); border-radius: var(--r-lg); padding: 14px 18px; box-shadow: var(--elev-1); display: flex; flex-direction: column; gap: 10px; }
+  .ov { font: var(--t-overline); color: var(--fg-3); }
+  .body { font: var(--t-caption); color: var(--fg-1); }
+  .ease-out { animation: slide 1.6s var(--ease-out) infinite; }
+  .ease-spring { animation: slide 1.6s var(--ease-spring) infinite; }
+  .pulse { animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes slide { 0% { transform: translateX(0); } 50% { transform: translateX(140px); } 100% { transform: translateX(0); } }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.06); opacity: 1; } }
+  .dot { width: 14px; height: 14px; background: var(--brand-500); border-radius: 999px; }
+  .lane { position: relative; height: 24px; }
+  .tok { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 10px; color: var(--fg-3); }
+</style>
+</head>
+<body>
+  <div class="col">
+    <span class="ov">EASE-OUT · 220 MS</span>
+    <span class="body">Default for transitions, push, fade.</span>
+    <div class="lane"><div class="dot ease-out" style="position:absolute"></div></div>
+    <span class="tok">cubic-bezier(0.22, 0.61, 0.36, 1)</span>
+  </div>
+  <div class="col">
+    <span class="ov">SPRING · success</span>
+    <span class="body">Result reveal, goal achieved.</span>
+    <div class="lane"><div class="dot ease-spring" style="position:absolute"></div></div>
+    <span class="tok">cubic-bezier(0.34, 1.56, 0.64, 1)</span>
+  </div>
+  <div class="col" style="align-items:center;justify-content:center">
+    <span class="ov">SPLASH PULSE</span>
+    <div style="width:64px;height:64px;background:var(--brand-500);border-radius:999px" class="pulse"></div>
+    <span class="tok">2.4 s · ±4 % scale</span>
+  </div>
+</body>
+</html>
