@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'app.dart';
 import 'providers/app_provider.dart';
 import 'services/ad_service.dart';
-import 'services/purchase_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,20 +16,16 @@ void main() async {
   // Initialize AdMob
   await AdService.initialize();
 
-  // Initialize IAP and restore premium status from local cache
-  await PurchaseService.instance.init();
+  // Preload interstitial and app open ads so they're ready immediately
+  await AdService.instance.preload();
 
   // Load app data
   final provider = AppProvider();
   await provider.init();
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AppProvider>.value(value: provider),
-        ChangeNotifierProvider<PurchaseService>.value(
-            value: PurchaseService.instance),
-      ],
+    ChangeNotifierProvider<AppProvider>.value(
+      value: provider,
       child: const BmiHealthApp(),
     ),
   );

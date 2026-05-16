@@ -5,8 +5,7 @@ import '../widgets/app_card.dart';
 import '../widgets/screen_header.dart';
 
 class TipsScreen extends StatefulWidget {
-  final VoidCallback onOpenPaywall;
-  const TipsScreen({super.key, required this.onOpenPaywall});
+  const TipsScreen({super.key});
 
   @override
   State<TipsScreen> createState() => _TipsScreenState();
@@ -277,53 +276,6 @@ class _TipsScreenState extends State<TipsScreen> {
                     ),
                   )),
 
-                  // Premium nudge
-                  AppCard(
-                    padding: 18,
-                    radius: 24,
-                    tint: isDark ? AppColors.darkFg1 : AppColors.fg1,
-                    onTap: widget.onOpenPaywall,
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 36, height: 36,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.12),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(Icons.auto_awesome_rounded,
-                              size: 18, color: Colors.white),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Unlock 500+ premium tips',
-                                style: GoogleFonts.inter(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                'Personalized to your BMI and goals',
-                                style: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white.withOpacity(0.7),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(Icons.chevron_right_rounded,
-                            size: 18,
-                            color: Colors.white.withOpacity(0.7)),
-                      ],
-                    ),
-                  ),
                 ]),
               ),
             ),

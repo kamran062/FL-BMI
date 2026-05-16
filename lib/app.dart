@@ -4,6 +4,7 @@ import 'providers/app_provider.dart';
 import 'screens/main_app.dart';
 import 'screens/onboarding_screen.dart';
 import 'screens/splash_screen.dart';
+import 'services/ad_service.dart';
 import 'theme/app_theme.dart';
 
 class BmiHealthApp extends StatelessWidget {
@@ -51,8 +52,30 @@ class _RootNavigator extends StatefulWidget {
   State<_RootNavigator> createState() => _RootNavigatorState();
 }
 
-class _RootNavigatorState extends State<_RootNavigator> {
+class _RootNavigatorState extends State<_RootNavigator>
+    with WidgetsBindingObserver {
   _Phase _phase = _Phase.splash;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  // Show App Open ad when user returns to the app from the background.
+  // The 4-hour cooldown inside AdService prevents over-frequency.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _phase == _Phase.app) {
+      AdService.instance.showAppOpenIfReady();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

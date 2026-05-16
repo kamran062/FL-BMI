@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
-import '../services/purchase_service.dart';
 import '../theme/app_colors.dart';
-import '../widgets/app_button.dart';
 import '../widgets/app_card.dart';
 import '../widgets/app_toggle.dart';
 import '../widgets/overline_label.dart';
 import '../widgets/screen_header.dart';
 
 class SettingsScreen extends StatelessWidget {
-  final VoidCallback onOpenPaywall;
-  const SettingsScreen({super.key, required this.onOpenPaywall});
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +83,6 @@ class SettingsScreen extends StatelessWidget {
                 onTap: () => _showPrivacyDialog(context, isDark, fg1, fg3, brand),
               ),
               _Row(
-                icon: Icons.restore_rounded,
-                label: 'Restore purchases',
-                kind: _RowKind.nav,
-                onTap: () => _restorePurchases(context, brand, fg3),
-              ),
-              _Row(
                 icon: Icons.info_outline_rounded,
                 label: 'Version',
                 kind: _RowKind.meta,
@@ -113,110 +104,6 @@ class SettingsScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
-                      // Premium upsell card
-                      GestureDetector(
-                        onTap: onOpenPaywall,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: isDark
-                                  ? const [Color(0xFF1A3028), Color(0xFF0C1510)]
-                                  : const [Color(0xFF0E1411), Color(0xFF1A2E20)],
-                            ),
-                            border: isDark
-                                ? Border.all(
-                                    color: AppColors.darkBrand500.withAlpha(60),
-                                    width: 1.5,
-                                  )
-                                : null,
-                            boxShadow: [
-                              BoxShadow(
-                                color: brand.withAlpha(isDark ? 50 : 30),
-                                blurRadius: 24,
-                                offset: const Offset(0, 8),
-                              ),
-                            ],
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          child: Stack(
-                            children: [
-                              // Radial glow
-                              Positioned(
-                                right: -40, top: -40,
-                                child: Container(
-                                  width: 180, height: 180,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: RadialGradient(
-                                      colors: [
-                                        brand.withAlpha(isDark ? 90 : 70),
-                                        brand.withAlpha(0),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Icon(Icons.auto_awesome_rounded,
-                                            size: 16, color: brand),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          'PREMIUM',
-                                          style: GoogleFonts.inter(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w600,
-                                            letterSpacing: 0.12 * 11,
-                                            color: brand,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      'Track your full journey',
-                                      style: GoogleFonts.inter(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        letterSpacing: -0.02 * 20,
-                                        color: Colors.white,
-                                        height: 1.2,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text(
-                                      'Unlimited goals, advanced insights, and 500+ tips — from \$2.50 / mo.',
-                                      style: GoogleFonts.inter(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white.withAlpha(165),
-                                        height: 1.45,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    AppButton(
-                                      label: 'See plans',
-                                      variant: AppButtonVariant.primary,
-                                      size: AppButtonSize.sm,
-                                      icon: Icons.arrow_forward_rounded,
-                                      onPressed: onOpenPaywall,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
                       ...sections.map((sec) => Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Column(
@@ -356,64 +243,6 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  // ── Restore purchases ──────────────────────────────────────────────────────
-  Future<void> _restorePurchases(
-      BuildContext context, Color brand, Color fg3) async {
-    final svc = PurchaseService.instance;
-
-    // Show loading snack
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Row(
-        children: [
-          SizedBox(
-            width: 16, height: 16,
-            child: CircularProgressIndicator(
-              strokeWidth: 2, color: brand,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Text('Restoring purchases…',
-              style: GoogleFonts.inter(fontSize: 14)),
-        ],
-      ),
-      duration: const Duration(seconds: 3),
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)),
-    ));
-
-    await svc.restore();
-
-    if (!context.mounted) return;
-    ScaffoldMessenger.of(context).clearSnackBars();
-
-    if (svc.isPremium) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Row(
-          children: [
-            Icon(Icons.check_circle_outline_rounded,
-                color: brand, size: 18),
-            const SizedBox(width: 10),
-            Text('Premium restored successfully!',
-                style: GoogleFonts.inter(fontSize: 14)),
-          ],
-        ),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12)),
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          svc.error ?? 'No active purchases found for this account.',
-          style: GoogleFonts.inter(fontSize: 14),
-        ),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12)),
-      ));
-    }
-  }
 }
 
 enum _RowKind { toggle, meta, nav }

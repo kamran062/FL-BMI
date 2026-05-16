@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
-import '../services/purchase_service.dart';
 import '../theme/app_colors.dart';
+import '../services/ad_service.dart';
 import '../widgets/banner_ad_widget.dart';
 import 'goal_screen.dart';
 import 'history_screen.dart';
 import 'home_screen.dart';
-import 'paywall_screen.dart';
 import 'result_screen.dart';
 import 'settings_screen.dart';
 import 'share_screen.dart';
@@ -24,8 +23,9 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   int _tab = 0;
-  String? _overlay; // 'result' | 'goal' | 'paywall' | 'share'
+  String? _overlay; // 'result' | 'goal' | 'share'
   double? _overlayBmi; // overrides provider.currentBmi when viewing a saved entry
+  double _bannerH = 50.0; // updated by BannerAdWidget via callback
 
   static const _tabs = [
     (icon: Icons.calculate_outlined,  iconActive: Icons.calculate_rounded,   label: 'Calculate'),
@@ -70,7 +70,6 @@ class _MainAppState extends State<MainApp> {
     final navBg = (isDark ? AppColors.darkBgSurface : AppColors.bgSurface)
         .withOpacity(0.85);
     final provider = context.watch<AppProvider>();
-    final isPremium = context.watch<PurchaseService>().isPremium;
 
     // Current tab body
     final tabBody = IndexedStack(
@@ -85,30 +84,38 @@ class _MainAppState extends State<MainApp> {
           onAddEntry: () => setState(() => _tab = 0),
           onViewEntry: (entry) => _openLastResult(entry.bmi),
         ),
-        TipsScreen(onOpenPaywall: () => _openOverlay('paywall')),
-        SettingsScreen(onOpenPaywall: () => _openOverlay('paywall')),
+        const TipsScreen(),
+        const SettingsScreen(),
       ],
     );
 
     final bottomPad = MediaQuery.of(context).padding.bottom;
     // Nav bar: 64px height + 12px bottom margin + safe area
     final navTotalH = 64.0 + 12.0 + bottomPad;
+    // Extra padding so content is never hidden behind the banner
+    final bannerExtraH = _overlay == null ? _bannerH : 0.0;
 
     return Scaffold(
       body: Stack(
         children: [
-          // Tab content — padded so it never hides behind the floating nav
+          // Tab content — padded so it never hides behind the floating nav or banner
           Padding(
-            padding: EdgeInsets.only(bottom: _overlay == null ? navTotalH : 0),
+            padding: EdgeInsets.only(
+              bottom: _overlay == null ? navTotalH + bannerExtraH : 0,
+            ),
             child: tabBody,
           ),
 
-          // Banner ad (free users) — sits just above the nav bar
-          if (_overlay == null && !isPremium)
+          // Banner ad — sits just above the nav bar
+          if (_overlay == null)
             Positioned(
               left: 0, right: 0,
               bottom: navTotalH,
-              child: const BannerAdWidget(),
+              child: BannerAdWidget(
+                onHeightChanged: (h) {
+                  if (_bannerH != h) setState(() => _bannerH = h);
+                },
+              ),
             ),
 
           // ── Floating pill nav bar ─────────────────────────────────────────
@@ -232,11 +239,20 @@ class _MainAppState extends State<MainApp> {
                 bmi: _overlayBmi ??
                     (provider.currentBmi > 0 ? provider.currentBmi : 24.0),
                 readOnly: _overlayBmi != null,
-                onClose: _closeOverlay,
+                // Fresh calculation closed without saving → natural transition,
+                // show interstitial. History entry dismissed → just close, no ad.
+                onClose: _overlayBmi != null
+                    ? _closeOverlay
+                    : () {
+                        _closeOverlay();
+                        AdService.instance.showInterstitialIfReady();
+                      },
                 onSave: _overlayBmi != null ? null : () async {
                   await provider.saveCurrentResult();
                   _closeOverlay();
                   setState(() => _tab = 1);
+                  // Natural break: user just finished saving — show interstitial.
+                  AdService.instance.showInterstitialIfReady();
                 },
                 onSetGoal: () => _openOverlay('goal'),
                 onShare: () => _openOverlay('share'),
@@ -253,11 +269,6 @@ class _MainAppState extends State<MainApp> {
                 },
                 onClose: () => _openOverlay('result'),
               ),
-            ),
-
-          if (_overlay == 'paywall')
-            _Overlay(
-              child: PaywallScreen(onClose: _closeOverlay),
             ),
 
           if (_overlay == 'share')
