@@ -11,11 +11,13 @@ import '../widgets/segmented_control.dart';
 class HomeScreen extends StatefulWidget {
   final VoidCallback onCalculate;
   final VoidCallback onOpenSettings;
+  final void Function(double bmi)? onViewLastResult;
 
   const HomeScreen({
     super.key,
     required this.onCalculate,
     required this.onOpenSettings,
+    this.onViewLastResult,
   });
 
   @override
@@ -341,7 +343,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-                      child: _LastResultCard(entry: last, isDark: isDark),
+                      child: _LastResultCard(
+                        entry: last,
+                        isDark: isDark,
+                        onTap: () => widget.onViewLastResult
+                            ?.call(last.bmi),
+                      ),
                     ),
                   ),
 
@@ -716,8 +723,9 @@ class _GradientButtonState extends State<_GradientButton>
 class _LastResultCard extends StatelessWidget {
   final dynamic entry;
   final bool isDark;
+  final VoidCallback? onTap;
 
-  const _LastResultCard({required this.entry, required this.isDark});
+  const _LastResultCard({required this.entry, required this.isDark, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -733,7 +741,9 @@ class _LastResultCard extends StatelessWidget {
     final d = entry.date as DateTime;
     final dateStr = '${d.day} ${months[d.month]}';
 
-    return Container(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
       decoration: BoxDecoration(
         color: surface,
         borderRadius: BorderRadius.circular(20),
@@ -820,6 +830,7 @@ class _LastResultCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

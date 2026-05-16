@@ -25,6 +25,7 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   int _tab = 0;
   String? _overlay; // 'result' | 'goal' | 'paywall' | 'share'
+  double? _overlayBmi; // overrides provider.currentBmi when viewing a saved entry
 
   static const _tabs = [
     (icon: Icons.calculate_outlined,  iconActive: Icons.calculate_rounded,   label: 'Calculate'),
@@ -34,7 +35,10 @@ class _MainAppState extends State<MainApp> {
   ];
 
   void _openOverlay(String name) => setState(() => _overlay = name);
-  void _closeOverlay() => setState(() => _overlay = null);
+  void _closeOverlay() => setState(() { _overlay = null; _overlayBmi = null; });
+
+  void _openLastResult(double bmi) =>
+      setState(() { _overlayBmi = bmi; _overlay = 'result'; });
 
   void _calculate() {
     final provider = context.read<AppProvider>();
@@ -75,8 +79,12 @@ class _MainAppState extends State<MainApp> {
         HomeScreen(
           onCalculate: _calculate,
           onOpenSettings: () => setState(() => _tab = 3),
+          onViewLastResult: _openLastResult,
         ),
-        HistoryScreen(onAddEntry: () => setState(() => _tab = 0)),
+        HistoryScreen(
+          onAddEntry: () => setState(() => _tab = 0),
+          onViewEntry: (entry) => _openLastResult(entry.bmi),
+        ),
         TipsScreen(onOpenPaywall: () => _openOverlay('paywall')),
         SettingsScreen(onOpenPaywall: () => _openOverlay('paywall')),
       ],
@@ -221,11 +229,11 @@ class _MainAppState extends State<MainApp> {
           if (_overlay == 'result')
             _Overlay(
               child: ResultScreen(
-                bmi: provider.currentBmi > 0
-                    ? provider.currentBmi
-                    : 24.0,
+                bmi: _overlayBmi ??
+                    (provider.currentBmi > 0 ? provider.currentBmi : 24.0),
+                readOnly: _overlayBmi != null,
                 onClose: _closeOverlay,
-                onSave: () async {
+                onSave: _overlayBmi != null ? null : () async {
                   await provider.saveCurrentResult();
                   _closeOverlay();
                   setState(() => _tab = 1);

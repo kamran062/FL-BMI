@@ -10,16 +10,18 @@ import '../widgets/status_pill.dart';
 
 class ResultScreen extends StatelessWidget {
   final double bmi;
+  final bool readOnly;
   final VoidCallback onClose;
-  final VoidCallback onSave;
+  final VoidCallback? onSave;
   final VoidCallback onSetGoal;
   final VoidCallback onShare;
 
   const ResultScreen({
     super.key,
     required this.bmi,
+    this.readOnly = false,
     required this.onClose,
-    required this.onSave,
+    this.onSave,
     required this.onSetGoal,
     required this.onShare,
   });
@@ -250,16 +252,18 @@ class ResultScreen extends StatelessWidget {
                   // Action row
                   Row(
                     children: [
-                      Expanded(
-                        child: AppButton(
-                          label: 'Save result',
-                          variant: AppButtonVariant.secondary,
-                          icon: Icons.bookmark_border_rounded,
-                          onPressed: onSave,
-                          fullWidth: true,
+                      if (!readOnly) ...[
+                        Expanded(
+                          child: AppButton(
+                            label: 'Save result',
+                            variant: AppButtonVariant.secondary,
+                            icon: Icons.bookmark_border_rounded,
+                            onPressed: onSave,
+                            fullWidth: true,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
+                        const SizedBox(width: 10),
+                      ],
                       Expanded(
                         child: AppButton(
                           label: 'Set goal',

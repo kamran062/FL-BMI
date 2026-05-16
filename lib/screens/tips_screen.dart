@@ -88,9 +88,6 @@ class _TipsScreenState extends State<TipsScreen> {
               child: ScreenHeader(
                 title: 'Daily tips',
                 large: true,
-                trailing: Icon(Icons.bookmark_border_rounded,
-                    color: isDark ? AppColors.darkBrand500 : AppColors.brand500,
-                    size: 22),
               ),
             ),
 
