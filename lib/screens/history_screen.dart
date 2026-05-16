@@ -53,7 +53,7 @@ class HistoryScreen extends StatelessWidget {
                             // Trend chart card
                             _TrendCard(entries: entries,
                                 brand: brand, normalTint: normalTint,
-                                fg1: fg1, fg3: fg3),
+                                fg1: fg1, fg3: fg3, isDark: isDark),
                             const SizedBox(height: 14),
 
                             // Entry list card
@@ -168,6 +168,7 @@ class _TrendCard extends StatelessWidget {
   final Color normalTint;
   final Color fg1;
   final Color fg3;
+  final bool isDark;
 
   const _TrendCard({
     required this.entries,
@@ -175,6 +176,7 @@ class _TrendCard extends StatelessWidget {
     required this.normalTint,
     required this.fg1,
     required this.fg3,
+    required this.isDark,
   });
 
   @override
@@ -222,8 +224,8 @@ class _TrendCard extends StatelessWidget {
                     vertical: 6, horizontal: 10),
                 decoration: BoxDecoration(
                   color: delta <= 0
-                      ? AppColors.bmiNormalTint
-                      : AppColors.bmiOverTint,
+                      ? (isDark ? AppColors.bmiNormalTintDark : AppColors.bmiNormalTint)
+                      : (isDark ? AppColors.bmiOverTintDark   : AppColors.bmiOverTint),
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Row(
@@ -234,8 +236,8 @@ class _TrendCard extends StatelessWidget {
                           : Icons.trending_up_rounded,
                       size: 12,
                       color: delta <= 0
-                          ? AppColors.bmiNormalInk
-                          : AppColors.bmiOverInk,
+                          ? (isDark ? AppColors.bmiNormalInkDark : AppColors.bmiNormalInk)
+                          : (isDark ? AppColors.bmiOverInkDark   : AppColors.bmiOverInk),
                     ),
                     const SizedBox(width: 4),
                     Text(
@@ -243,8 +245,8 @@ class _TrendCard extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 12, fontWeight: FontWeight.w600,
                         color: delta <= 0
-                            ? AppColors.bmiNormalInk
-                            : AppColors.bmiOverInk,
+                            ? (isDark ? AppColors.bmiNormalInkDark : AppColors.bmiNormalInk)
+                            : (isDark ? AppColors.bmiOverInkDark   : AppColors.bmiOverInk),
                         fontFeatures: const [FontFeature.tabularFigures()],
                       ),
                     ),
@@ -301,7 +303,9 @@ class _TrendCard extends StatelessWidget {
                 ],
                 lineTouchData: LineTouchData(
                   touchTooltipData: LineTouchTooltipData(
-                    getTooltipColor: (_) => AppColors.fg1.withOpacity(0.9),
+                    getTooltipColor: (_) => isDark
+                        ? AppColors.darkBgSurface
+                        : AppColors.fg1.withOpacity(0.9),
                     tooltipRoundedRadius: 8,
                     getTooltipItems: (spots) => spots.map((s) =>
                         LineTooltipItem(
@@ -354,6 +358,8 @@ class _EntryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cat = BmiCalculator.category(entry.bmi);
+    final catTint = isDark ? cat.tintDark : cat.tint;
+    final catInk  = isDark ? cat.inkDark  : cat.ink;
     final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
     final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
     final border = isDark ? AppColors.darkBorderFaint : AppColors.borderFaint;
@@ -384,7 +390,7 @@ class _EntryRow extends StatelessWidget {
             Container(
               width: 38, height: 38,
               decoration: BoxDecoration(
-                color: cat.tint,
+                color: catTint,
                 borderRadius: BorderRadius.circular(11),
               ),
               child: Icon(
@@ -393,7 +399,7 @@ class _EntryRow extends StatelessWidget {
                     : delta > 0
                         ? Icons.trending_up_rounded
                         : Icons.remove_rounded,
-                size: 18, color: cat.ink,
+                size: 18, color: catInk,
               ),
             ),
             const SizedBox(width: 14),
@@ -424,7 +430,7 @@ class _EntryRow extends StatelessWidget {
               cat.label,
               style: GoogleFonts.inter(
                 fontSize: 12, fontWeight: FontWeight.w600,
-                color: cat.ink,
+                color: catInk,
               ),
             ),
           ],

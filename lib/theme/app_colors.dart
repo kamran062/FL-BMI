@@ -58,8 +58,15 @@ class AppColors {
 
   static const darkBrand500 = Color(0xFF2BC480);
 
-  static Color bmiUnderTintDark   = const Color(0xFF3B82F6).withOpacity(0.12);
-  static Color bmiNormalTintDark  = const Color(0xFF1FB573).withOpacity(0.12);
-  static Color bmiOverTintDark    = const Color(0xFFF59E0B).withOpacity(0.12);
-  static Color bmiObeseTintDark   = const Color(0xFFEF4444).withOpacity(0.12);
+  // Dark-mode BMI tints (deep, hued surfaces)
+  static const bmiUnderTintDark  = Color(0xFF162236);
+  static const bmiNormalTintDark = Color(0xFF0F2219);
+  static const bmiOverTintDark   = Color(0xFF271B08);
+  static const bmiObeseTintDark  = Color(0xFF271010);
+
+  // Dark-mode BMI ink (light pastels — readable on dark surfaces)
+  static const bmiUnderInkDark  = Color(0xFF93C5FD);
+  static const bmiNormalInkDark = Color(0xFF6EE7B7);
+  static const bmiOverInkDark   = Color(0xFFFCD34D);
+  static const bmiObeseInkDark  = Color(0xFFFCA5A5);
 }

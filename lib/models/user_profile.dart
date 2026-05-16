@@ -30,10 +30,13 @@ class UserProfile {
 
   double get heightInCm {
     if (heightUnit == 'cm') return height;
-    // height stored as feet (decimal: 5.10 = 5ft 10in)
-    final feet = height.truncate();
-    final inches = (height - feet) * 100;
-    return feet * 30.48 + inches * 2.54;
+    // Values < 12 are legacy feet.decimal (e.g. 5.8 → 5'8"); ≥ 12 are total inches
+    if (height < 12) {
+      final feet = height.truncate();
+      final inches = ((height - feet) * 100).round().clamp(0, 11);
+      return (feet * 12 + inches) * 2.54;
+    }
+    return height * 2.54;
   }
 
   double get weightInKg {

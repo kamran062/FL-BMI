@@ -35,6 +35,8 @@ class ResultScreen extends StatelessWidget {
     final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
     final normal = isDark ? AppColors.darkBrand500 : AppColors.bmiNormal;
     final cat = BmiCalculator.category(bmi);
+    final catTint = isDark ? cat.tintDark : cat.tint;
+    final catInk  = isDark ? cat.inkDark  : cat.ink;
     final advice = BmiCalculator.advice(cat.key);
 
     return Scaffold(
@@ -134,34 +136,72 @@ class ResultScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 14),
-                        ...((advice['steps'] as List<String>).map((s) => Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 18, height: 18,
-                                margin: const EdgeInsets.only(top: 2),
-                                decoration: BoxDecoration(
-                                  color: cat.tint,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(Icons.check_rounded,
-                                    size: 12, color: cat.ink),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Text(
-                                  s,
-                                  style: GoogleFonts.inter(
-                                    fontSize: 14, fontWeight: FontWeight.w400,
-                                    color: fg1, height: 1.45,
+                        ...((advice['steps'] as List<String>).asMap().entries.map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 22, height: 22,
+                                  margin: const EdgeInsets.only(top: 1),
+                                  decoration: BoxDecoration(
+                                    color: catTint,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '${e.key + 1}',
+                                      style: GoogleFonts.inter(
+                                        fontSize: 11, fontWeight: FontWeight.w700,
+                                        color: catInk, height: 1,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    e.value,
+                                    style: GoogleFonts.inter(
+                                      fontSize: 14, fontWeight: FontWeight.w400,
+                                      color: fg1, height: 1.5,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ))),
+                        )),
+                        if (advice['note'] != null) ...[
+                          const SizedBox(height: 4),
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? AppColors.darkBgSunken
+                                  : AppColors.bgSunken,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(Icons.info_outline_rounded,
+                                    size: 15, color: fg3),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    advice['note'] as String,
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12, fontWeight: FontWeight.w400,
+                                      color: fg3, height: 1.5,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),

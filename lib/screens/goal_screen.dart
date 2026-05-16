@@ -29,10 +29,13 @@ class _GoalScreenState extends State<GoalScreen> {
   double _target = 70;
   int _weeks = 8;
 
+  static const _sliderMin = 20.0;
+  static const _sliderMax = 200.0;
+
   @override
   void initState() {
     super.initState();
-    _target = widget.currentWeight;
+    _target = widget.currentWeight.clamp(_sliderMin, _sliderMax);
   }
 
   @override
@@ -181,7 +184,7 @@ class _GoalScreenState extends State<GoalScreen> {
                             trackHeight: 4,
                           ),
                           child: Slider(
-                            min: 40, max: 150, divisions: 220,
+                            min: _sliderMin, max: _sliderMax, divisions: 360,
                             value: _target,
                             onChanged: (v) => setState(() => _target = v),
                           ),
@@ -189,10 +192,10 @@ class _GoalScreenState extends State<GoalScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('40 kg',
+                            Text('20 kg',
                                 style: GoogleFonts.inter(
                                     fontSize: 11, color: fg3)),
-                            Text('150 kg',
+                            Text('200 kg',
                                 style: GoogleFonts.inter(
                                     fontSize: 11, color: fg3)),
                           ],

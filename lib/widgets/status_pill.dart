@@ -18,8 +18,13 @@ class StatusPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg = solid ? category.color : category.tint;
-    final fg = solid ? Colors.white : category.ink;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = solid
+        ? category.color
+        : (isDark ? category.tintDark : category.tint);
+    final fg = solid
+        ? Colors.white
+        : (isDark ? category.inkDark : category.ink);
     final dotColor = solid ? Colors.white : category.color;
 
     final (padV, padH, fontSize) = switch (size) {

@@ -59,11 +59,11 @@ class _TipsScreenState extends State<TipsScreen> {
   ];
 
   static const _cats = [
-    ('all', 'All'),
-    ('diet', 'Diet'),
-    ('exercise', 'Exercise'),
-    ('hydration', 'Hydration'),
-    ('lifestyle', 'Lifestyle'),
+    ('all',       'All',        Icons.apps_rounded,                Color(0xFF1FB573), Color(0xFFE8F7EF)),
+    ('diet',      'Diet',       Icons.eco_outlined,                Color(0xFF16A34A), Color(0xFFE6F7EC)),
+    ('exercise',  'Exercise',   Icons.fitness_center_outlined,     Color(0xFFF59E0B), Color(0xFFFEF4E2)),
+    ('hydration', 'Hydration',  Icons.water_drop_outlined,         Color(0xFF3B82F6), Color(0xFFEAF1FE)),
+    ('lifestyle', 'Lifestyle',  Icons.self_improvement_outlined,   Color(0xFF8B5CF6), Color(0xFFF0EBFE)),
   ];
 
   @override
@@ -94,44 +94,74 @@ class _TipsScreenState extends State<TipsScreen> {
               ),
             ),
 
-            // Category chips
+            // Category tabs
             SliverToBoxAdapter(
               child: SizedBox(
-                height: 44,
+                height: 90,
                 child: ListView(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   scrollDirection: Axis.horizontal,
                   children: _cats.map((c) {
                     final active = c.$1 == _cat;
+                    final catColor = c.$4;
+                    final catTint  = c.$5;
                     return GestureDetector(
                       onTap: () => setState(() => _cat = c.$1),
                       child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 150),
-                        margin: const EdgeInsets.only(right: 8),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 9, horizontal: 14),
+                        duration: const Duration(milliseconds: 180),
+                        curve: Curves.easeOut,
+                        margin: const EdgeInsets.only(right: 10),
+                        width: 80,
                         decoration: BoxDecoration(
-                          color: active ? fg1 : surfaceBg,
-                          borderRadius: BorderRadius.circular(999),
+                          color: active ? catColor : surfaceBg,
+                          borderRadius: BorderRadius.circular(18),
                           boxShadow: active
-                              ? []
+                              ? [
+                                  BoxShadow(
+                                    color: catColor.withAlpha(60),
+                                    blurRadius: 12,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ]
                               : [
                                   BoxShadow(
-                                    color: const Color(0xFF0E1411)
-                                        .withOpacity(0.04),
-                                    blurRadius: 2,
-                                    offset: const Offset(0, 1),
-                                  )
+                                    color: Colors.black.withAlpha(8),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
                                 ],
                         ),
-                        child: Text(
-                          c.$2,
-                          style: GoogleFonts.inter(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: active ? Colors.white : fg1,
-                            height: 1,
-                          ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 180),
+                              width: 38, height: 38,
+                              decoration: BoxDecoration(
+                                color: active
+                                    ? Colors.white.withAlpha(30)
+                                    : catTint,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                c.$3,
+                                size: 20,
+                                color: active ? Colors.white : catColor,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              c.$2,
+                              style: GoogleFonts.inter(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: active
+                                    ? Colors.white
+                                    : (isDark ? AppColors.darkFg2 : AppColors.fg2),
+                                height: 1,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -139,6 +169,7 @@ class _TipsScreenState extends State<TipsScreen> {
                 ),
               ),
             ),
+            const SliverToBoxAdapter(child: SizedBox(height: 4)),
 
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
@@ -183,7 +214,7 @@ class _TipsScreenState extends State<TipsScreen> {
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
                               letterSpacing: -0.02 * 24,
-                              color: AppColors.fg1,
+                              color: fg1,
                               height: 1.25,
                             ),
                           ),
@@ -193,7 +224,7 @@ class _TipsScreenState extends State<TipsScreen> {
                             style: GoogleFonts.inter(
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
-                              color: AppColors.fg2,
+                              color: fg2,
                               height: 1.5,
                             ),
                           ),

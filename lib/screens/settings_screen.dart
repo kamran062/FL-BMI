@@ -111,78 +111,106 @@ class SettingsScreen extends StatelessWidget {
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
                       // Premium upsell card
-                      AppCard(
-                        padding: 20,
-                        radius: 24,
-                        tint: isDark ? AppColors.darkFg1 : AppColors.fg1,
+                      GestureDetector(
                         onTap: onOpenPaywall,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              right: -40, top: -40,
-                              child: Container(
-                                width: 160, height: 160,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      AppColors.brand500.withOpacity(0.45),
-                                      AppColors.brand500.withOpacity(0),
-                                    ],
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: isDark
+                                  ? const [Color(0xFF1A3028), Color(0xFF0C1510)]
+                                  : const [Color(0xFF0E1411), Color(0xFF1A2E20)],
+                            ),
+                            border: isDark
+                                ? Border.all(
+                                    color: AppColors.darkBrand500.withAlpha(60),
+                                    width: 1.5,
+                                  )
+                                : null,
+                            boxShadow: [
+                              BoxShadow(
+                                color: brand.withAlpha(isDark ? 50 : 30),
+                                blurRadius: 24,
+                                offset: const Offset(0, 8),
+                              ),
+                            ],
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: Stack(
+                            children: [
+                              // Radial glow
+                              Positioned(
+                                right: -40, top: -40,
+                                child: Container(
+                                  width: 180, height: 180,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: RadialGradient(
+                                      colors: [
+                                        brand.withAlpha(isDark ? 90 : 70),
+                                        brand.withAlpha(0),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.auto_awesome_rounded,
-                                        size: 16, color: brand),
-                                    const SizedBox(width: 8),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.auto_awesome_rounded,
+                                            size: 16, color: brand),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          'PREMIUM',
+                                          style: GoogleFonts.inter(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                            letterSpacing: 0.12 * 11,
+                                            color: brand,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
                                     Text(
-                                      'PREMIUM',
+                                      'Track your full journey',
                                       style: GoogleFonts.inter(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 0.12 * 11,
-                                        color: brand,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: -0.02 * 20,
+                                        color: Colors.white,
+                                        height: 1.2,
                                       ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      'Unlimited goals, advanced insights, and 500+ tips — from \$2.50 / mo.',
+                                      style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white.withAlpha(165),
+                                        height: 1.45,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AppButton(
+                                      label: 'See plans',
+                                      variant: AppButtonVariant.primary,
+                                      size: AppButtonSize.sm,
+                                      icon: Icons.arrow_forward_rounded,
+                                      onPressed: onOpenPaywall,
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'Track your full journey',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: -0.015 * 19,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  'Unlimited goals, advanced insights, and 500+ tips — from \$2.50 / mo.',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white.withOpacity(0.65),
-                                    height: 1.4,
-                                  ),
-                                ),
-                                const SizedBox(height: 14),
-                                AppButton(
-                                  label: 'See plans',
-                                  variant: AppButtonVariant.primary,
-                                  size: AppButtonSize.sm,
-                                  icon: Icons.arrow_forward_rounded,
-                                  onPressed: onOpenPaywall,
-                                ),
-                              ],
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
 
