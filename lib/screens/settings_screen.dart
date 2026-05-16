@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import '../services/purchase_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/app_button.dart';
 import '../widgets/app_card.dart';
@@ -82,11 +83,13 @@ class SettingsScreen extends StatelessWidget {
                 label: 'Privacy',
                 kind: _RowKind.nav,
                 meta: 'On-device',
+                onTap: () => _showPrivacyDialog(context, isDark, fg1, fg3, brand),
               ),
               _Row(
                 icon: Icons.restore_rounded,
                 label: 'Restore purchases',
                 kind: _RowKind.nav,
+                onTap: () => _restorePurchases(context, brand, fg3),
               ),
               _Row(
                 icon: Icons.info_outline_rounded,
@@ -264,6 +267,153 @@ class SettingsScreen extends StatelessWidget {
       },
     );
   }
+
+  // ── Privacy dialog ─────────────────────────────────────────────────────────
+  void _showPrivacyDialog(BuildContext context, bool isDark,
+      Color fg1, Color fg3, Color brand) {
+    final bg = isDark ? AppColors.darkBgSurface : AppColors.bgSurface;
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: bg,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: [
+            Icon(Icons.privacy_tip_outlined, color: brand, size: 20),
+            const SizedBox(width: 10),
+            Text(
+              'Privacy Policy',
+              style: GoogleFonts.inter(
+                fontSize: 17, fontWeight: FontWeight.w700, color: fg1,
+              ),
+            ),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _privacySection(
+                '🔒 Data stays on your device',
+                'BMI Health stores all your data — weight entries, goals, and profile — '
+                'locally on your device using SQLite. Nothing is sent to any server.',
+                fg1, fg3,
+              ),
+              _privacySection(
+                '📊 No analytics or tracking',
+                'We do not use any analytics SDKs, crash reporters, or user-tracking tools. '
+                'We have no idea who you are, and we prefer it that way.',
+                fg1, fg3,
+              ),
+              _privacySection(
+                '📢 Ads (free plan only)',
+                'Free users see banner ads powered by Google AdMob. AdMob may use a '
+                'device advertising ID for ad personalisation. Upgrade to Premium to '
+                'remove all ads entirely.',
+                fg1, fg3,
+              ),
+              _privacySection(
+                '🗑 Deleting your data',
+                'Uninstalling the app permanently deletes all your data from the device. '
+                'There is no cloud backup unless you subscribe to Premium.',
+                fg1, fg3,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Got it',
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w600, color: brand,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _privacySection(
+      String title, String body, Color fg1, Color fg3) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title,
+              style: GoogleFonts.inter(
+                  fontSize: 13, fontWeight: FontWeight.w600, color: fg1)),
+          const SizedBox(height: 4),
+          Text(body,
+              style: GoogleFonts.inter(
+                  fontSize: 13, fontWeight: FontWeight.w400,
+                  color: fg3, height: 1.5)),
+        ],
+      ),
+    );
+  }
+
+  // ── Restore purchases ──────────────────────────────────────────────────────
+  Future<void> _restorePurchases(
+      BuildContext context, Color brand, Color fg3) async {
+    final svc = PurchaseService.instance;
+
+    // Show loading snack
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Row(
+        children: [
+          SizedBox(
+            width: 16, height: 16,
+            child: CircularProgressIndicator(
+              strokeWidth: 2, color: brand,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text('Restoring purchases…',
+              style: GoogleFonts.inter(fontSize: 14)),
+        ],
+      ),
+      duration: const Duration(seconds: 3),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+    ));
+
+    await svc.restore();
+
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).clearSnackBars();
+
+    if (svc.isPremium) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.check_circle_outline_rounded,
+                color: brand, size: 18),
+            const SizedBox(width: 10),
+            Text('Premium restored successfully!',
+                style: GoogleFonts.inter(fontSize: 14)),
+          ],
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12)),
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          svc.error ?? 'No active purchases found for this account.',
+          style: GoogleFonts.inter(fontSize: 14),
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12)),
+      ));
+    }
+  }
 }
 
 enum _RowKind { toggle, meta, nav }
@@ -275,6 +425,7 @@ class _Row {
   final String? meta;
   final bool? toggleValue;
   final ValueChanged<bool>? onToggle;
+  final VoidCallback? onTap;
 
   const _Row({
     required this.icon,
@@ -283,6 +434,7 @@ class _Row {
     this.meta,
     this.toggleValue,
     this.onToggle,
+    this.onTap,
   });
 }
 
@@ -314,7 +466,14 @@ class _SettingsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final border = isDark ? AppColors.darkBorderFaint : AppColors.borderFaint;
-    return Container(
+    final canTap = row.onTap != null || row.kind == _RowKind.nav;
+
+    return InkWell(
+      onTap: row.onTap,
+      borderRadius: BorderRadius.circular(0),
+      splashColor: brand.withAlpha(20),
+      highlightColor: brand.withAlpha(10),
+      child: Container(
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
       decoration: BoxDecoration(
         border: index > 0
@@ -357,9 +516,11 @@ class _SettingsRow extends StatelessWidget {
                       fontSize: 13, fontWeight: FontWeight.w500, color: fg3)),
               const SizedBox(width: 4),
             ],
-            Icon(Icons.chevron_right_rounded, size: 18, color: fg3),
+            Icon(Icons.chevron_right_rounded, size: 18,
+                color: canTap ? fg3 : fg3.withAlpha(80)),
           ],
         ],
+      ),
       ),
     );
   }

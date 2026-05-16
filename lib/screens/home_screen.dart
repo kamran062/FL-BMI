@@ -56,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final fg3   = isDark ? AppColors.darkFg3   : AppColors.fg3;
     final bgCanvas  = isDark ? AppColors.darkBgCanvas  : AppColors.bgCanvas;
     final bgSurface = isDark ? AppColors.darkBgSurface : AppColors.bgSurface;
-    final bgTint    = isDark ? AppColors.darkBgTint    : AppColors.bgTint;
     final brand     = isDark ? AppColors.darkBrand500  : AppColors.brand500;
 
     return Consumer<AppProvider>(
@@ -585,7 +584,6 @@ class _GenderPills extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bgSunken = isDark ? AppColors.darkBgSunken : AppColors.bgSunken;
-    final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
     final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
 
     return Row(

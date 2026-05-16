@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import '../services/purchase_service.dart';
 import '../theme/app_colors.dart';
+import '../widgets/banner_ad_widget.dart';
 import 'goal_screen.dart';
 import 'history_screen.dart';
 import 'home_screen.dart';
@@ -64,6 +66,7 @@ class _MainAppState extends State<MainApp> {
     final navBg = (isDark ? AppColors.darkBgSurface : AppColors.bgSurface)
         .withOpacity(0.85);
     final provider = context.watch<AppProvider>();
+    final isPremium = context.watch<PurchaseService>().isPremium;
 
     // Current tab body
     final tabBody = IndexedStack(
@@ -79,58 +82,129 @@ class _MainAppState extends State<MainApp> {
       ],
     );
 
+    final bottomPad = MediaQuery.of(context).padding.bottom;
+    // Nav bar: 64px height + 12px bottom margin + safe area
+    final navTotalH = 64.0 + 12.0 + bottomPad;
+
     return Scaffold(
       body: Stack(
         children: [
-          // Tab content
-          tabBody,
+          // Tab content — padded so it never hides behind the floating nav
+          Padding(
+            padding: EdgeInsets.only(bottom: _overlay == null ? navTotalH : 0),
+            child: tabBody,
+          ),
 
-          // Bottom nav
+          // Banner ad (free users) — sits just above the nav bar
+          if (_overlay == null && !isPremium)
+            Positioned(
+              left: 0, right: 0,
+              bottom: navTotalH,
+              child: const BannerAdWidget(),
+            ),
+
+          // ── Floating pill nav bar ─────────────────────────────────────────
           if (_overlay == null)
             Positioned(
-              left: 0, right: 0, bottom: 0,
-              child: ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+              left: 16, right: 16, bottom: 0,
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
                   child: Container(
+                    height: 64,
                     decoration: BoxDecoration(
                       color: navBg,
-                      border: Border(
-                          top: BorderSide(color: border, width: 1)),
+                      borderRadius: BorderRadius.circular(28),
+                      border: Border.all(color: border, width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(isDark ? 90 : 18),
+                          blurRadius: 32, offset: const Offset(0, 10),
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withAlpha(isDark ? 40 : 8),
+                          blurRadius: 8, offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    child: SafeArea(
-                      top: false,
-                      child: SizedBox(
-                        height: 64,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                         child: Row(
                           children: _tabs.asMap().entries.map((e) {
-                            final i = e.key;
-                            final t = e.value;
+                            final i  = e.key;
+                            final t  = e.value;
                             final on = i == _tab;
                             return Expanded(
-                              child: GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () => setState(() => _tab = i),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      on ? t.iconActive : t.icon,
-                                      size: 22,
-                                      color: on ? brand : fg3,
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      t.label,
-                                      style: GoogleFonts.inter(
-                                        fontSize: 10.5,
-                                        fontWeight: FontWeight.w600,
-                                        color: on ? brand : fg3,
-                                        letterSpacing: 0.1,
-                                        height: 1,
+                              child: SizedBox(
+                                height: 50,
+                                child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () => setState(() => _tab = i),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 260),
+                                      curve: Curves.easeOutCubic,
+                                      decoration: BoxDecoration(
+                                        color: on
+                                            ? brand
+                                            : Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          // Icon with switch animation
+                                          AnimatedSwitcher(
+                                            duration: const Duration(
+                                                milliseconds: 200),
+                                            transitionBuilder: (child, anim) =>
+                                                ScaleTransition(
+                                                    scale: anim, child: child),
+                                            child: Icon(
+                                              on ? t.iconActive : t.icon,
+                                              key: ValueKey(
+                                                  'nav_${t.label}_$on'),
+                                              size: 21,
+                                              color: on
+                                                  ? Colors.white
+                                                  : fg3,
+                                            ),
+                                          ),
+                                          // Label slides in when active
+                                          AnimatedSize(
+                                            duration: const Duration(
+                                                milliseconds: 240),
+                                            curve: Curves.easeOutCubic,
+                                            child: on
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 6),
+                                                    child: Text(
+                                                      t.label,
+                                                      style: GoogleFonts.inter(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Colors.white,
+                                                        letterSpacing: -0.01 * 12,
+                                                        height: 1,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             );

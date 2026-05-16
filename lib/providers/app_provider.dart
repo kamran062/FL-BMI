@@ -4,6 +4,7 @@ import '../database/database_helper.dart';
 import '../models/bmi_entry.dart';
 import '../models/goal.dart';
 import '../models/user_profile.dart';
+import '../services/purchase_service.dart';
 import '../utils/bmi_calculator.dart';
 
 class AppProvider extends ChangeNotifier {
@@ -29,6 +30,7 @@ class AppProvider extends ChangeNotifier {
   bool get loading => _loading;
   bool get dailyReminder => _dailyReminder;
   bool get weeklyCheckIn => _weeklyCheckIn;
+  bool get isPremium => PurchaseService.instance.isPremium;
 
   BmiEntry? get lastEntry => _entries.isNotEmpty ? _entries.first : null;
 
