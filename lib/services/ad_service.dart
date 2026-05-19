@@ -3,39 +3,20 @@ import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 // ── Ad Unit IDs ────────────────────────────────────────────────────────────────
-// Release mode → real IDs; debug/profile → official Google test IDs.
-//
-// TODO before publishing:
-//   1. Create banner + interstitial + app-open units in AdMob console
-//   2. Replace the _real* constants below with your actual unit IDs
-//   3. Make sure the app ID in AndroidManifest / Info.plist is the real one too
+// Currently using Google's official test IDs in all build modes.
+// TODO: before monetising, replace these with real IDs from AdMob console
+//       and restore the kReleaseMode switch.
 
-const _realBannerAndroid   = 'ca-app-pub-REPLACE_ME/BANNER_ANDROID';
-const _realBannerIos       = 'ca-app-pub-REPLACE_ME/BANNER_IOS';
-const _realInterAndroid    = 'ca-app-pub-REPLACE_ME/INTER_ANDROID';
-const _realInterIos        = 'ca-app-pub-REPLACE_ME/INTER_IOS';
-const _realAppOpenAndroid  = 'ca-app-pub-REPLACE_ME/APPOPEN_ANDROID';
-const _realAppOpenIos      = 'ca-app-pub-REPLACE_ME/APPOPEN_IOS';
+const _bannerAndroid   = 'ca-app-pub-3940256099942544/6300978111';
+const _bannerIos       = 'ca-app-pub-3940256099942544/2934735716';
+const _interAndroid    = 'ca-app-pub-3940256099942544/1033173712';
+const _interIos        = 'ca-app-pub-3940256099942544/4411468910';
+const _appOpenAndroid  = 'ca-app-pub-3940256099942544/9257395921';
+const _appOpenIos      = 'ca-app-pub-3940256099942544/5575463023';
 
-// Official Google test IDs — safe in dev, never generate revenue
-const _testBannerAndroid   = 'ca-app-pub-3940256099942544/6300978111';
-const _testBannerIos       = 'ca-app-pub-3940256099942544/2934735716';
-const _testInterAndroid    = 'ca-app-pub-3940256099942544/1033173712';
-const _testInterIos        = 'ca-app-pub-3940256099942544/4411468910';
-const _testAppOpenAndroid  = 'ca-app-pub-3940256099942544/9257395921';
-const _testAppOpenIos      = 'ca-app-pub-3940256099942544/5575463023';
-
-String get _bannerAdUnitId => kReleaseMode
-    ? (Platform.isAndroid ? _realBannerAndroid  : _realBannerIos)
-    : (Platform.isAndroid ? _testBannerAndroid  : _testBannerIos);
-
-String get _interAdUnitId => kReleaseMode
-    ? (Platform.isAndroid ? _realInterAndroid   : _realInterIos)
-    : (Platform.isAndroid ? _testInterAndroid   : _testInterIos);
-
-String get _appOpenAdUnitId => kReleaseMode
-    ? (Platform.isAndroid ? _realAppOpenAndroid : _realAppOpenIos)
-    : (Platform.isAndroid ? _testAppOpenAndroid : _testAppOpenIos);
+String get _bannerAdUnitId  => Platform.isAndroid ? _bannerAndroid  : _bannerIos;
+String get _interAdUnitId   => Platform.isAndroid ? _interAndroid   : _interIos;
+String get _appOpenAdUnitId => Platform.isAndroid ? _appOpenAndroid : _appOpenIos;
 
 // Expose banner unit ID for BannerAdWidget
 String get bannerAdUnitId => _bannerAdUnitId;

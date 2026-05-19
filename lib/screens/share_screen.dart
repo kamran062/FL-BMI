@@ -30,7 +30,7 @@ class _ShareScreenState extends State<ShareScreen> {
       final file = File('${dir.path}/bmi_card.png');
       await file.writeAsBytes(bytes);
       await Share.shareXFiles([XFile(file.path)],
-          text: 'My BMI is ${widget.bmi.toStringAsFixed(1)} — tracked with BMI Health');
+          text: 'My BMI is ${widget.bmi.toStringAsFixed(1)} — tracked with BMI Calculator & Health');
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -168,7 +168,7 @@ class _ShareCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'BMI Health',
+                'BMI Calculator & Health',
                 style: GoogleFonts.inter(
                   fontSize: 13, fontWeight: FontWeight.w600,
                   color: Colors.white, letterSpacing: -0.005 * 13,

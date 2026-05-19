@@ -153,71 +153,49 @@ class _MainAppState extends State<MainApp> {
                             final t  = e.value;
                             final on = i == _tab;
                             return Expanded(
-                              child: SizedBox(
-                                height: 50,
-                                child: GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () => setState(() => _tab = i),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: AnimatedContainer(
-                                      duration:
-                                          const Duration(milliseconds: 260),
-                                      curve: Curves.easeOutCubic,
-                                      decoration: BoxDecoration(
-                                        color: on
-                                            ? brand
-                                            : Colors.transparent,
-                                        borderRadius:
-                                            BorderRadius.circular(10),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          // Icon with switch animation
-                                          AnimatedSwitcher(
-                                            duration: const Duration(
-                                                milliseconds: 200),
-                                            transitionBuilder: (child, anim) =>
-                                                ScaleTransition(
-                                                    scale: anim, child: child),
-                                            child: Icon(
-                                              on ? t.iconActive : t.icon,
-                                              key: ValueKey(
-                                                  'nav_${t.label}_$on'),
-                                              size: 21,
-                                              color: on
-                                                  ? Colors.white
-                                                  : fg3,
-                                            ),
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () => setState(() => _tab = i),
+                                child: Center(
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 240),
+                                    curve: Curves.easeOutCubic,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 5),
+                                    decoration: BoxDecoration(
+                                      color: on
+                                          ? brand.withAlpha(30)
+                                          : Colors.transparent,
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        AnimatedSwitcher(
+                                          duration: const Duration(milliseconds: 200),
+                                          transitionBuilder: (child, anim) =>
+                                              ScaleTransition(scale: anim, child: child),
+                                          child: Icon(
+                                            on ? t.iconActive : t.icon,
+                                            key: ValueKey('nav_${t.label}_$on'),
+                                            size: 20,
+                                            color: on ? brand : fg3,
                                           ),
-                                          // Label slides in when active
-                                          AnimatedSize(
-                                            duration: const Duration(
-                                                milliseconds: 240),
-                                            curve: Curves.easeOutCubic,
-                                            child: on
-                                                ? Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 6),
-                                                    child: Text(
-                                                      t.label,
-                                                      style: GoogleFonts.inter(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color: Colors.white,
-                                                        letterSpacing: -0.01 * 12,
-                                                        height: 1,
-                                                      ),
-                                                    ),
-                                                  )
-                                                : const SizedBox.shrink(),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          t.label,
+                                          style: GoogleFonts.inter(
+                                            fontSize: 10,
+                                            fontWeight: on
+                                                ? FontWeight.w700
+                                                : FontWeight.w500,
+                                            color: on ? brand : fg3,
+                                            letterSpacing: -0.01 * 10,
+                                            height: 1,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

@@ -182,7 +182,7 @@ class SettingsScreen extends StatelessWidget {
             children: [
               _privacySection(
                 '🔒 Data stays on your device',
-                'BMI Health stores all your data — weight entries, goals, and profile — '
+                'BMI Calculator & Health stores all your data — weight entries, goals, and profile — '
                 'locally on your device using SQLite. Nothing is sent to any server.',
                 fg1, fg3,
               ),
@@ -193,16 +193,25 @@ class SettingsScreen extends StatelessWidget {
                 fg1, fg3,
               ),
               _privacySection(
-                '📢 Ads (free plan only)',
-                'Free users see banner ads powered by Google AdMob. AdMob may use a '
-                'device advertising ID for ad personalisation. Upgrade to Premium to '
-                'remove all ads entirely.',
+                '📢 Ads',
+                'BMI Calculator & Health is free and supported by ads powered by Google AdMob. '
+                'AdMob may use your device\'s advertising ID to show relevant ads. '
+                'You can opt out of personalised ads at any time in your device settings '
+                'under Google → Ads → Delete advertising ID.',
+                fg1, fg3,
+              ),
+              _privacySection(
+                '🔗 Third-party ad services',
+                'Google AdMob may collect certain device information (such as IP address, '
+                'device identifiers, and general location) to serve ads. This data is '
+                'governed by Google\'s Privacy Policy. BMI Calculator & Health does not have access '
+                'to this data.',
                 fg1, fg3,
               ),
               _privacySection(
                 '🗑 Deleting your data',
-                'Uninstalling the app permanently deletes all your data from the device. '
-                'There is no cloud backup unless you subscribe to Premium.',
+                'Uninstalling the app permanently deletes all your health data from the '
+                'device. There is no cloud backup — your data never leaves your phone.',
                 fg1, fg3,
               ),
             ],

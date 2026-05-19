@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
@@ -51,24 +52,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Top bar with skip
+            // Top bar — logomark left, skip right
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: !isLast
-                    ? GestureDetector(
-                        onTap: () => context.read<AppProvider>().completeOnboarding(),
-                        child: Text(
-                          'Skip',
-                          style: GoogleFonts.inter(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.brand500,
-                          ),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    'project/assets/logomark.svg',
+                    width: 28,
+                    height: 28,
+                  ),
+                  const Spacer(),
+                  if (!isLast)
+                    GestureDetector(
+                      onTap: () => context.read<AppProvider>().completeOnboarding(),
+                      child: Text(
+                        'Skip',
+                        style: GoogleFonts.inter(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.brand500,
                         ),
-                      )
-                    : const SizedBox(height: 20),
+                      ),
+                    )
+                  else
+                    const SizedBox(width: 28),
+                ],
               ),
             ),
 

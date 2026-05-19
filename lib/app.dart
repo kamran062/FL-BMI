@@ -15,7 +15,7 @@ class BmiHealthApp extends StatelessWidget {
     return Consumer<AppProvider>(
       builder: (context, provider, _) {
         return MaterialApp(
-          title: 'BMI Health',
+          title: 'BMI Calculator & Health',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light(),
           darkTheme: AppTheme.dark(),

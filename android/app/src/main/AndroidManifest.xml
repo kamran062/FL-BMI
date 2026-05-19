@@ -1,10 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Required for in-app purchases -->
-    <uses-permission android:name="com.android.vending.BILLING" />
     <!-- Required for AdMob -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
-        android:label="bmi_health"
+        android:label="BMI Calculator &amp; Health"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
