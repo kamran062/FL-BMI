@@ -30,7 +30,8 @@ class UserProfile {
 
   double get heightInCm {
     if (heightUnit == 'cm') return height;
-    // Values < 12 are legacy feet.decimal (e.g. 5.8 → 5'8"); ≥ 12 are total inches
+    // Values < 12 are the legacy feet.inches format, where the decimals are
+    // inches ×100 (5.10 → 5'10", 5.08 → 5'8"); ≥ 12 are total inches
     if (height < 12) {
       final feet = height.truncate();
       final inches = ((height - feet) * 100).round().clamp(0, 11);

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
+import '../services/ad_service.dart';
 import '../utils/bmi_calculator.dart';
 import '../widgets/app_button.dart';
 
@@ -29,8 +30,21 @@ class _ShareScreenState extends State<ShareScreen> {
       final dir = await getTemporaryDirectory();
       final file = File('${dir.path}/bmi_card.png');
       await file.writeAsBytes(bytes);
-      await Share.shareXFiles([XFile(file.path)],
-          text: 'My BMI is ${widget.bmi.toStringAsFixed(1)} — tracked with BMI Calculator & Health');
+      // The share sheet leaves the app; don't treat coming back as an app open.
+      AdService.instance.beginExternalUi();
+      try {
+        await Share.shareXFiles([XFile(file.path)],
+            text: 'My BMI is ${widget.bmi.toStringAsFixed(1)} — tracked with BMI Calculator & Health');
+      } finally {
+        AdService.instance.endExternalUi();
+      }
+    } catch (e) {
+      debugPrint('Share failed: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not share right now. Please try again.')),
+        );
+      }
     } finally {
       if (mounted) setState(() => _saving = false);
     }

@@ -24,6 +24,24 @@ class BmiCategory {
 class BmiCalculator {
   BmiCalculator._();
 
+  // Accepted input range, based on the shortest/tallest and lightest/heaviest
+  // recorded people. Anything outside is a typo, not a real measurement.
+  static const minHeightCm = 50.0;
+  static const maxHeightCm = 272.0;
+  static const minWeightKg = 2.0;
+  static const maxWeightKg = 635.0;
+
+  /// Returns a user-facing error message, or null when the values are usable.
+  static String? validate({required double heightCm, required double weightKg}) {
+    if (heightCm.isNaN || heightCm < minHeightCm || heightCm > maxHeightCm) {
+      return 'Enter a height between 50 and 272 cm (20–107 in).';
+    }
+    if (weightKg.isNaN || weightKg < minWeightKg || weightKg > maxWeightKg) {
+      return 'Enter a weight between 2 and 635 kg (5–1400 lbs).';
+    }
+    return null;
+  }
+
   static double calculate(double weightKg, double heightCm) {
     if (heightCm <= 0) return 0;
     final m = heightCm / 100;

@@ -50,6 +50,33 @@ class _HomeScreenState extends State<HomeScreen> {
     provider.updateProfile(provider.profile.copyWith(height: h, weight: w));
   }
 
+  void _onCalculatePressed() {
+    final provider = context.read<AppProvider>();
+    final p = provider.profile;
+    final h = double.tryParse(_heightCtrl.text.trim());
+    final w = double.tryParse(_weightCtrl.text.trim());
+    final error = (h == null || w == null)
+        ? 'Enter your height and weight to calculate.'
+        : BmiCalculator.validate(
+            heightCm: p.copyWith(height: h).heightInCm,
+            weightKg: p.copyWith(weight: w).weightInKg,
+          );
+    if (error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error, style: GoogleFonts.inter(fontSize: 14)),
+          backgroundColor: AppColors.fg1,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+      return;
+    }
+    provider.updateProfile(p.copyWith(height: h, weight: w));
+    widget.onCalculate();
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -333,7 +360,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: _GradientButton(
                       label: 'Calculate BMI',
                       icon: Icons.calculate_rounded,
-                      onTap: widget.onCalculate,
+                      onTap: _onCalculatePressed,
                     ),
                   ),
                 ),

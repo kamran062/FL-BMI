@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../database/database_helper.dart';
 import '../models/bmi_entry.dart';
@@ -14,6 +15,7 @@ class AppProvider extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
   bool _onboardingDone = false;
   bool _loading = true;
+  String _appVersion = '';
 
   // ── Notification prefs (stored in SharedPreferences) ─────────
   bool _dailyReminder = true;
@@ -27,6 +29,7 @@ class AppProvider extends ChangeNotifier {
   bool get isDark => _themeMode == ThemeMode.dark;
   bool get onboardingDone => _onboardingDone;
   bool get loading => _loading;
+  String get appVersion => _appVersion;
   bool get dailyReminder => _dailyReminder;
   bool get weeklyCheckIn => _weeklyCheckIn;
 
@@ -46,6 +49,9 @@ class AppProvider extends ChangeNotifier {
         : ThemeMode.light;
     _dailyReminder = prefs.getBool('daily_reminder') ?? true;
     _weeklyCheckIn = prefs.getBool('weekly_check_in') ?? false;
+
+    final info = await PackageInfo.fromPlatform();
+    _appVersion = '${info.version} (build ${info.buildNumber})';
 
     // Restore profile from prefs
     _profile = UserProfile(

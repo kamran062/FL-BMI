@@ -1,10 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../services/ad_service.dart';
 
 /// Self-contained adaptive banner ad.
-/// Reports its rendered height via [onHeightChanged] so the parent can
-/// add the correct bottom padding to content above it.
+/// Reports its height via [onHeightChanged] only once an ad has actually
+/// loaded, so the parent never reserves space for an empty banner.
 class BannerAdWidget extends StatefulWidget {
   final ValueChanged<double>? onHeightChanged;
   const BannerAdWidget({super.key, this.onHeightChanged});
@@ -15,64 +16,102 @@ class BannerAdWidget extends StatefulWidget {
 
 class _BannerAdWidgetState extends State<BannerAdWidget> {
   BannerAd? _ad;
-  bool _loaded = false;
+  bool _loading = false;
+  // Retry with backoff: 30s → 60s → 120s, then give up for this session
+  static const _retryDelays = [30, 60, 120];
+  int _retryCount = 0;
+  bool _gaveUp = false;
+  Timer? _retryTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    AdService.instance.ready.addListener(_maybeLoad);
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_ad == null) _loadAd();
+    _maybeLoad();
+  }
+
+  // Guarded entry point: dependency changes (e.g. keyboard opening) and the
+  // ready notifier can both call this, but only one load runs at a time.
+  void _maybeLoad() {
+    if (!mounted ||
+        !AdService.instance.ready.value ||
+        _ad != null ||
+        _loading ||
+        _gaveUp ||
+        (_retryTimer?.isActive ?? false)) {
+      return;
+    }
+    _loadAd();
   }
 
   Future<void> _loadAd() async {
-    final width = MediaQuery.of(context).size.width.truncate();
+    _loading = true;
+    final width = MediaQuery.sizeOf(context).width.truncate();
     final adSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
           Orientation.portrait,
           width,
         ) ??
         AdSize.banner;
 
-    // Report height as soon as ad size is known (before ad renders)
-    widget.onHeightChanged?.call(adSize.height.toDouble());
-
-    final ad = BannerAd(
-      adUnitId: bannerAdUnitId,
-      size: adSize,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          if (mounted) setState(() => _loaded = true);
-        },
-        onAdFailedToLoad: (ad, _) => ad.dispose(),
-      ),
-    );
-
-    await ad.load();
-    if (mounted) {
-      setState(() => _ad = ad);
-    } else {
-      ad.dispose();
+    if (!mounted) {
+      _loading = false;
+      return;
     }
+
+    BannerAd(
+      adUnitId: AdService.instance.bannerAdUnitId,
+      size: adSize,
+      request: AdService.instance.adRequest,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          _loading = false;
+          _retryCount = 0;
+          if (!mounted) {
+            ad.dispose();
+            return;
+          }
+          setState(() => _ad = ad as BannerAd);
+          widget.onHeightChanged?.call(adSize.height.toDouble());
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          _loading = false;
+          if (!mounted) return;
+          if (_retryCount < _retryDelays.length) {
+            final delay = _retryDelays[_retryCount++];
+            _retryTimer = Timer(Duration(seconds: delay), _maybeLoad);
+          } else {
+            _gaveUp = true;
+          }
+        },
+      ),
+    ).load();
   }
 
   @override
   void dispose() {
+    AdService.instance.ready.removeListener(_maybeLoad);
+    _retryTimer?.cancel();
     _ad?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_ad == null || !_loaded) {
-      return const SizedBox(height: 50);
-    }
+    final ad = _ad;
+    if (ad == null) return const SizedBox.shrink();
 
-    return SafeArea(
-      top: false,
-      child: SizedBox(
-        height: _ad!.size.height.toDouble(),
-        width: double.infinity,
-        child: AdWidget(ad: _ad!),
-      ),
+    // No SafeArea here: the parent positions the banner above the nav bar,
+    // which already accounts for the bottom inset.
+    return SizedBox(
+      height: ad.size.height.toDouble(),
+      width: double.infinity,
+      child: AdWidget(ad: ad),
     );
   }
 }

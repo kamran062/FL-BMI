@@ -13,12 +13,6 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  // Initialize AdMob
-  await AdService.initialize();
-
-  // Preload interstitial and app open ads so they're ready immediately
-  await AdService.instance.preload();
-
   // Load app data
   final provider = AppProvider();
   await provider.init();
@@ -29,4 +23,8 @@ void main() async {
       child: const BmiHealthApp(),
     ),
   );
+
+  // Ads start after the first frame so launch is never blocked by the network.
+  // Consent (UMP) is gathered first; no ad is requested before it completes.
+  AdService.instance.initialize();
 }

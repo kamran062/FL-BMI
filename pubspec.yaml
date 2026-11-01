@@ -1,7 +1,7 @@
 name: bmi_health
 description: BMI Calculator & Health — Know Your Body. Improve Your Health.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.1+3
 
 environment:
   sdk: '>=3.7.0 <4.0.0'
@@ -23,6 +23,7 @@ dependencies:
   in_app_purchase: ^3.2.0
   google_mobile_ads: ^5.1.0
   flutter_svg: ^2.0.10+1
+  package_info_plus: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -42,4 +43,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - project/assets/
+    - assets/

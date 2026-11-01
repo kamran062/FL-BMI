@@ -25,7 +25,7 @@ class _MainAppState extends State<MainApp> {
   int _tab = 0;
   String? _overlay; // 'result' | 'goal' | 'share'
   double? _overlayBmi; // overrides provider.currentBmi when viewing a saved entry
-  double _bannerH = 50.0; // updated by BannerAdWidget via callback
+  double _bannerH = 0.0; // set by BannerAdWidget once an ad has loaded
 
   static const _tabs = [
     (icon: Icons.calculate_outlined,  iconActive: Icons.calculate_rounded,   label: 'Calculate'),
@@ -35,7 +35,13 @@ class _MainAppState extends State<MainApp> {
   ];
 
   void _openOverlay(String name) => setState(() => _overlay = name);
-  void _closeOverlay() => setState(() { _overlay = null; _overlayBmi = null; });
+  // The banner is rebuilt when the overlay closes, so its space is reserved
+  // again only after the new ad loads.
+  void _closeOverlay() => setState(() {
+        _overlay = null;
+        _overlayBmi = null;
+        _bannerH = 0;
+      });
 
   void _openLastResult(double bmi) =>
       setState(() { _overlayBmi = bmi; _overlay = 'result'; });
@@ -252,9 +258,8 @@ class _MainAppState extends State<MainApp> {
           if (_overlay == 'share')
             _Overlay(
               child: ShareScreen(
-                bmi: provider.currentBmi > 0
-                    ? provider.currentBmi
-                    : 24.0,
+                bmi: _overlayBmi ??
+                    (provider.currentBmi > 0 ? provider.currentBmi : 24.0),
                 onClose: () => _openOverlay('result'),
               ),
             ),

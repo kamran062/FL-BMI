@@ -45,5 +45,24 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- AdMob: the SDK stops the app at launch without this key.
+	     This is Google's TEST App ID. Replace it with your iOS App ID from the
+	     AdMob console (Apps → Add app → iOS) before releasing on the App Store. -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<!-- Shown by the iOS App Tracking Transparency prompt (via AdMob's
+	     Privacy & messaging IDFA message). -->
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier is used to show you more relevant ads. Your health data never leaves your device.</string>
+	<!-- SKAdNetwork IDs for ad attribution. Google's own ID is listed; add the
+	     third-party buyer IDs from Google's docs:
+	     https://developers.google.com/admob/ios/privacy/strategies -->
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import '../services/ad_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/app_card.dart';
 import '../widgets/app_toggle.dart';
@@ -20,7 +21,9 @@ class SettingsScreen extends StatelessWidget {
     final bgTint = isDark ? AppColors.darkBgTint : AppColors.bgTint;
     final brand = isDark ? AppColors.darkBrand500 : AppColors.brand500;
 
-    return Consumer<AppProvider>(
+    return ValueListenableBuilder<bool>(
+      valueListenable: AdService.instance.privacyOptionsRequired,
+      builder: (context, showAdPrivacy, _) => Consumer<AppProvider>(
       builder: (context, provider, _) {
         final sections = [
           _Section(
@@ -82,11 +85,19 @@ class SettingsScreen extends StatelessWidget {
                 meta: 'On-device',
                 onTap: () => _showPrivacyDialog(context, isDark, fg1, fg3, brand),
               ),
+              // Required by Google's consent policy in regions like the EEA/UK
+              if (showAdPrivacy)
+                _Row(
+                  icon: Icons.ads_click_rounded,
+                  label: 'Ad privacy choices',
+                  kind: _RowKind.nav,
+                  onTap: AdService.instance.showPrivacyOptions,
+                ),
               _Row(
                 icon: Icons.info_outline_rounded,
                 label: 'Version',
                 kind: _RowKind.meta,
-                meta: '1.0 (build 1)',
+                meta: provider.appVersion,
               ),
             ],
           ),
@@ -152,6 +163,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         );
       },
+      ),
     );
   }
 

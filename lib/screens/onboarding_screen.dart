@@ -58,7 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Row(
                 children: [
                   SvgPicture.asset(
-                    'project/assets/logomark.svg',
+                    'assets/logomark.svg',
                     width: 28,
                     height: 28,
                   ),

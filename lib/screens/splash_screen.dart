@@ -13,7 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _ctrl;
 
   // Logo build sequence
@@ -227,7 +227,7 @@ class _SplashScreenState extends State<SplashScreen>
                     child: Column(
                       children: [
                         SvgPicture.asset(
-                          'project/assets/logo.svg',
+                          'assets/logo.svg',
                           height: 34,
                         ),
                         const SizedBox(height: 10),
