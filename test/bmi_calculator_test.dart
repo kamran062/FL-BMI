@@ -1,4 +1,4 @@
-import 'package:bmi_health/utils/bmi_calculator.dart';
+import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -239,16 +239,18 @@ Every module in this roadmap is only "done" when it meets all of these.
 ### 0.2 Architecture refactor
 
 **Scope**
-- Move to the feature-folder structure in §2; move the existing BMI screens into `features/body/bmi/`
-- Replace the Stack-overlay navigation in `main_app.dart` with **go_router** (nested routes, Android back button works)
-- Split `AppProvider` into feature providers (or move to **Riverpod**: recommended for testability)
-- Move from raw `sqflite` to **drift**, with migration v1 → v2 that keeps existing `bmi_entries` and `goals` intact
-- Add a logger, a global error handler and a crash reporting SDK
-- Add the l10n setup (English + Urdu, RTL layout check for Urdu)
+- [x] Upgrade Kotlin 1.8.22 → 2.1.0
+- [x] Move to the feature-folder structure in §2; existing BMI screens now live in `features/body/bmi/`
+- [x] Replace the Stack-overlay navigation with **go_router** (`lib/app/router.dart`): tabs keep their state, result/goal/share are real pages, Android back works
+- [x] Numbered schema migrations on the existing `sqflite` database (`DatabaseHelper._migrations`), v1 → v2 adds a history date index. Kept `sqflite` instead of moving to drift: no code generation, zero change to how existing users' data is stored. Revisit drift in Phase 1 if the number of tables makes raw SQL painful.
+- [ ] Split `AppProvider` into feature providers. Deferred to Phase 1.1, where the profile is rebuilt anyway.
+- [ ] Add a logger, a global error handler and a crash reporting SDK (needs a Firebase or Sentry project)
+- [ ] Add the l10n setup (English + Urdu, RTL layout check for Urdu)
 
 **Testing**
-- Migration test: a v1 database with real BMI history upgrades with zero data loss
-- Integration test: full BMI flow (enter → calculate → save → history → delete) passes after the refactor
+- [x] Migration tests (`test/database_migration_test.dart`): a v1 database with real BMI history upgrades with zero data loss; fresh and upgraded installs end with identical schemas
+- [x] Navigation widget tests (`test/navigation_test.dart`): back button on tabs and on the result page
+- [ ] Integration test: full BMI flow (enter → calculate → save → history → delete) on a real device
 - **Done when:** the app behaves exactly as before for existing users, and the back button works everywhere
 
 ### 0.3 Engineering infrastructure

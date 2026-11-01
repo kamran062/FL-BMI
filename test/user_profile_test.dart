@@ -1,4 +1,4 @@
-import 'package:bmi_health/models/user_profile.dart';
+import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

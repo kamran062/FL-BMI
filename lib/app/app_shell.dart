@@ -1,0 +1,176 @@
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:bmi_health/shared/theme/app_colors.dart';
+import 'package:bmi_health/features/ads/banner_ad_widget.dart';
+
+/// Tab shell: floating pill nav bar + banner ad above it.
+/// Full-screen pages (result, goal, share) are pushed above this shell by the
+/// router, so they cover the nav bar and banner automatically.
+class AppShell extends StatefulWidget {
+  final StatefulNavigationShell navigationShell;
+  const AppShell({super.key, required this.navigationShell});
+
+  @override
+  State<AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends State<AppShell> {
+  double _bannerH = 0.0; // set by BannerAdWidget once an ad has loaded
+
+  static const _tabs = [
+    (icon: Icons.calculate_outlined,  iconActive: Icons.calculate_rounded,   label: 'Calculate'),
+    (icon: Icons.show_chart_rounded,   iconActive: Icons.show_chart_rounded,  label: 'History'),
+    (icon: Icons.lightbulb_outline,   iconActive: Icons.lightbulb_rounded,   label: 'Tips'),
+    (icon: Icons.settings_outlined,   iconActive: Icons.settings_rounded,    label: 'Settings'),
+  ];
+
+  void _goTab(int i) {
+    final shell = widget.navigationShell;
+    // Tapping the active tab again returns it to its first page.
+    shell.goBranch(i, initialLocation: i == shell.currentIndex);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final brand = isDark ? AppColors.darkBrand500 : AppColors.brand500;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    final border = isDark ? AppColors.darkBorderFaint : AppColors.borderFaint;
+    final navBg = (isDark ? AppColors.darkBgSurface : AppColors.bgSurface)
+        .withOpacity(0.85);
+    final current = widget.navigationShell.currentIndex;
+
+    final bottomPad = MediaQuery.of(context).padding.bottom;
+    // Nav bar: 64px height + 12px bottom margin + safe area
+    final navTotalH = 64.0 + 12.0 + bottomPad;
+
+    // System back on any tab but the first returns to Calculate instead of
+    // closing the app.
+    return PopScope(
+      canPop: current == 0,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _goTab(0);
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            // Tab content — padded so it never hides behind the floating nav or banner
+            Padding(
+              padding: EdgeInsets.only(bottom: navTotalH + _bannerH),
+              child: widget.navigationShell,
+            ),
+
+            // Banner ad — sits just above the nav bar
+            Positioned(
+              left: 0, right: 0,
+              bottom: navTotalH,
+              child: BannerAdWidget(
+                onHeightChanged: (h) {
+                  if (_bannerH != h) setState(() => _bannerH = h);
+                },
+              ),
+            ),
+
+            // ── Floating pill nav bar ───────────────────────────────────────
+            Positioned(
+              left: 16, right: 16, bottom: 0,
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Container(
+                    height: 64,
+                    decoration: BoxDecoration(
+                      color: navBg,
+                      borderRadius: BorderRadius.circular(28),
+                      border: Border.all(color: border, width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(isDark ? 90 : 18),
+                          blurRadius: 32, offset: const Offset(0, 10),
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withAlpha(isDark ? 40 : 8),
+                          blurRadius: 8, offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Row(
+                          children: _tabs.asMap().entries.map((e) {
+                            final i  = e.key;
+                            final t  = e.value;
+                            final on = i == current;
+                            return Expanded(
+                              child: Semantics(
+                                button: true,
+                                selected: on,
+                                label: t.label,
+                                child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () => _goTab(i),
+                                  child: Center(
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 240),
+                                      curve: Curves.easeOutCubic,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12, vertical: 5),
+                                      decoration: BoxDecoration(
+                                        color: on
+                                            ? brand.withAlpha(30)
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          AnimatedSwitcher(
+                                            duration: const Duration(milliseconds: 200),
+                                            transitionBuilder: (child, anim) =>
+                                                ScaleTransition(scale: anim, child: child),
+                                            child: Icon(
+                                              on ? t.iconActive : t.icon,
+                                              key: ValueKey('nav_${t.label}_$on'),
+                                              size: 20,
+                                              color: on ? brand : fg3,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 2),
+                                          Text(
+                                            t.label,
+                                            style: GoogleFonts.inter(
+                                              fontSize: 10,
+                                              fontWeight: on
+                                                  ? FontWeight.w700
+                                                  : FontWeight.w500,
+                                              color: on ? brand : fg3,
+                                              letterSpacing: -0.01 * 10,
+                                              height: 1,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
