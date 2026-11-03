@@ -6,6 +6,7 @@ import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
+import 'package:bmi_health/features/fuel/fuel_provider.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/app/router.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
@@ -21,6 +22,7 @@ class BmiHealthProviders extends StatelessWidget {
     required this.bmi,
     required this.body,
     required this.workouts,
+    required this.fuel,
     required this.catalog,
     required this.child,
   });
@@ -30,6 +32,7 @@ class BmiHealthProviders extends StatelessWidget {
   final BmiProvider bmi;
   final BodyProvider body;
   final WorkoutProvider workouts;
+  final FuelProvider fuel;
   final ExerciseCatalog catalog;
   final Widget child;
 
@@ -41,6 +44,7 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: bmi),
           ChangeNotifierProvider.value(value: body),
           ChangeNotifierProvider.value(value: workouts),
+          ChangeNotifierProvider.value(value: fuel),
           Provider.value(value: catalog),
         ],
         child: child,

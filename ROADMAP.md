@@ -357,6 +357,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 1.5 Fuel v1 — calorie & macro targets
 
+> **Status: done.** Mifflin-St Jeor BMR (sex-specific, "Other" uses formula basis), activity from training days, goal adjustment, safety floor (1200/1500 kcal), protein by goal, 25 % fat, water ≈ 35 ml/kg. Fuel tab: calories left, macros, water ±250 ml, quick food log with optional protein, swipe to delete. Schema v6. Not yet: per-entry carbs/fat, custom activity level, history beyond today.
+
 **Features**
 - BMR and TDEE (Mifflin-St Jeor, gender-specific), activity level, goal adjustment (cut / maintain / bulk)
 - Protein, carb and fat targets
@@ -368,6 +370,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Done when:** targets update immediately when weight, goal or gender changes.
 
 ### 1.6 Today dashboard v1
+
+> **Status: done.** New home tab: weekly workouts vs plan with start/resume, calories, water, latest weight, last BMI, tip of the day (rotates daily). Tabs are now Today · Body · Train · Fuel · Settings; the BMI calculator lives under Body, all tips under Today → More tips.
 
 **Features**
 - Today's workout card, water, weight check-in, calories left, weekly workout streak

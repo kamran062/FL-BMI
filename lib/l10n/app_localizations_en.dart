@@ -1013,4 +1013,119 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eqKettlebell => 'Kettlebell';
+
+  @override
+  String get navToday => 'Today';
+
+  @override
+  String get navFuel => 'Fuel';
+
+  @override
+  String get fuelTitle => 'Fuel';
+
+  @override
+  String get caloriesTitle => 'Calories';
+
+  @override
+  String kcalOf(int eaten, int target) {
+    return '$eaten / $target kcal';
+  }
+
+  @override
+  String kcalLeft(int count) {
+    return '$count kcal left';
+  }
+
+  @override
+  String kcalOver(int count) {
+    return '$count kcal over';
+  }
+
+  @override
+  String get macroProtein => 'Protein';
+
+  @override
+  String get macroCarbs => 'Carbs';
+
+  @override
+  String get macroFat => 'Fat';
+
+  @override
+  String gramsOf(int eaten, int target) {
+    return '$eaten / $target g';
+  }
+
+  @override
+  String gramsTarget(int target) {
+    return '$target g';
+  }
+
+  @override
+  String get logFood => 'Log food';
+
+  @override
+  String get foodName => 'What did you eat? (optional)';
+
+  @override
+  String get foodKcal => 'Calories (kcal)';
+
+  @override
+  String get foodProtein => 'Protein (g, optional)';
+
+  @override
+  String get foodKcalError => 'Enter calories between 1 and 5000.';
+
+  @override
+  String get foodEmpty => 'Nothing logged today. Quick-add calories after each meal.';
+
+  @override
+  String get foodUnnamed => 'Food';
+
+  @override
+  String get waterTitle => 'Water';
+
+  @override
+  String waterOf(int drunk, int goal) {
+    return '$drunk / $goal ml';
+  }
+
+  @override
+  String get addGlass => '+250 ml';
+
+  @override
+  String get removeGlass => '−250 ml';
+
+  @override
+  String get targetsExplain => 'Based on your age, height, weight, gender, goal and training days (Mifflin-St Jeor). A starting point, not a medical prescription.';
+
+  @override
+  String get completeProfileForTargets => 'Set your goal in Personal details for personalised targets.';
+
+  @override
+  String greeting(String name) {
+    return 'Hi, $name';
+  }
+
+  @override
+  String get greetingNoName => 'Today';
+
+  @override
+  String thisWeekWorkouts(int done, int target) {
+    return '$done of $target workouts this week';
+  }
+
+  @override
+  String get startWorkout => 'Start workout';
+
+  @override
+  String get latestWeight => 'Latest weight';
+
+  @override
+  String get tipOfTheDay => 'Tip of the day';
+
+  @override
+  String get moreTips => 'More tips';
+
+  @override
+  String get calculateBmiShort => 'Calculate BMI';
 }

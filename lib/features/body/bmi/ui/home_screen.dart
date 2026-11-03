@@ -17,11 +17,15 @@ class HomeScreen extends StatefulWidget {
   final VoidCallback onOpenSettings;
   final void Function(double bmi)? onViewLastResult;
 
+  /// Shows a back button when the calculator is opened from Body or Today.
+  final VoidCallback? onBack;
+
   const HomeScreen({
     super.key,
     required this.onCalculate,
     required this.onOpenSettings,
     this.onViewLastResult,
+    this.onBack,
   });
 
   @override
@@ -116,6 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        if (widget.onBack != null)
+                          BackButton(onPressed: widget.onBack),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

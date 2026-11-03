@@ -1009,4 +1009,119 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get eqKettlebell => 'کیٹل بیل';
+
+  @override
+  String get navToday => 'آج';
+
+  @override
+  String get navFuel => 'غذا';
+
+  @override
+  String get fuelTitle => 'غذا';
+
+  @override
+  String get caloriesTitle => 'کیلوریز';
+
+  @override
+  String kcalOf(int eaten, int target) {
+    return '$eaten / $target کیلوکیلوریز';
+  }
+
+  @override
+  String kcalLeft(int count) {
+    return '$count کیلوکیلوریز باقی';
+  }
+
+  @override
+  String kcalOver(int count) {
+    return '$count کیلوکیلوریز زیادہ';
+  }
+
+  @override
+  String get macroProtein => 'پروٹین';
+
+  @override
+  String get macroCarbs => 'کاربوہائیڈریٹس';
+
+  @override
+  String get macroFat => 'چکنائی';
+
+  @override
+  String gramsOf(int eaten, int target) {
+    return '$eaten / $target گرام';
+  }
+
+  @override
+  String gramsTarget(int target) {
+    return '$target گرام';
+  }
+
+  @override
+  String get logFood => 'کھانا درج کریں';
+
+  @override
+  String get foodName => 'آپ نے کیا کھایا؟ (اختیاری)';
+
+  @override
+  String get foodKcal => 'کیلوریز (kcal)';
+
+  @override
+  String get foodProtein => 'پروٹین (گرام، اختیاری)';
+
+  @override
+  String get foodKcalError => '1 سے 5000 کے درمیان کیلوریز درج کریں۔';
+
+  @override
+  String get foodEmpty => 'آج کچھ درج نہیں ہوا۔ ہر کھانے کے بعد کیلوریز شامل کریں۔';
+
+  @override
+  String get foodUnnamed => 'کھانا';
+
+  @override
+  String get waterTitle => 'پانی';
+
+  @override
+  String waterOf(int drunk, int goal) {
+    return '$drunk / $goal ملی لیٹر';
+  }
+
+  @override
+  String get addGlass => '+250 ملی لیٹر';
+
+  @override
+  String get removeGlass => '−250 ملی لیٹر';
+
+  @override
+  String get targetsExplain => 'آپ کی عمر، قد، وزن، جنس، ہدف اور ورزش کے دنوں کی بنیاد پر (مفلن سینٹ جیور)۔ یہ ابتدائی رہنمائی ہے، طبی نسخہ نہیں۔';
+
+  @override
+  String get completeProfileForTargets => 'ذاتی اہداف کے لیے ذاتی معلومات میں اپنا ہدف مقرر کریں۔';
+
+  @override
+  String greeting(String name) {
+    return 'السلام علیکم، $name';
+  }
+
+  @override
+  String get greetingNoName => 'آج';
+
+  @override
+  String thisWeekWorkouts(int done, int target) {
+    return 'اس ہفتے $target میں سے $done ورزشیں';
+  }
+
+  @override
+  String get startWorkout => 'ورزش شروع کریں';
+
+  @override
+  String get latestWeight => 'تازہ ترین وزن';
+
+  @override
+  String get tipOfTheDay => 'آج کا مشورہ';
+
+  @override
+  String get moreTips => 'مزید مشورے';
+
+  @override
+  String get calculateBmiShort => 'بی ایم آئی معلوم کریں';
 }

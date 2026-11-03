@@ -7,7 +7,24 @@ import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class TipsScreen extends StatefulWidget {
-  const TipsScreen({super.key});
+  /// Shows a back button when opened from Today.
+  final VoidCallback? onBack;
+  const TipsScreen({super.key, this.onBack});
+
+  /// The same tip all day, a different one each day.
+  static ({String title, String body, IconData icon, Color color}) tipOfTheDay(
+      AppLocalizations l, DateTime day) {
+    final dayIndex =
+        DateTime.utc(day.year, day.month, day.day).millisecondsSinceEpoch ~/
+            Duration.millisecondsPerDay;
+    final t = _TipsScreenState._tips[dayIndex % _TipsScreenState._tips.length];
+    return (
+      title: _TipsScreenState._tipTitle(l, t.id),
+      body: _TipsScreenState._tipBody(l, t.id),
+      icon: t.icon,
+      color: t.color,
+    );
+  }
 
   @override
   State<TipsScreen> createState() => _TipsScreenState();
@@ -101,6 +118,9 @@ class _TipsScreenState extends State<TipsScreen> {
               child: ScreenHeader(
                 title: l.tipsTitle,
                 large: true,
+                leading: widget.onBack == null
+                    ? null
+                    : BackButton(onPressed: widget.onBack),
               ),
             ),
 

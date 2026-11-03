@@ -11,6 +11,7 @@ import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
+import 'package:bmi_health/features/fuel/fuel_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 
@@ -38,9 +39,11 @@ void main() async {
     final bmi = BmiProvider(db);
     final body = BodyProvider(db);
     final workouts = WorkoutProvider(db);
+    final fuel = FuelProvider(db);
     final catalog = await ExerciseCatalog.loadBundled();
     await Future.wait([
       settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
+      fuel.load(),
     ]);
 
     runApp(BmiHealthProviders(
@@ -49,6 +52,7 @@ void main() async {
       bmi: bmi,
       body: body,
       workouts: workouts,
+      fuel: fuel,
       catalog: catalog,
       child: const BmiHealthApp(),
     ));

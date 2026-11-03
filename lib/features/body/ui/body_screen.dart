@@ -22,8 +22,10 @@ import 'package:bmi_health/shared/widgets/screen_header.dart';
 /// Body tab: weight trend, body-fat estimate, measurements, BMI history.
 class BodyScreen extends StatelessWidget {
   final VoidCallback onOpenBmiHistory;
+  final VoidCallback onCalculateBmi;
 
-  const BodyScreen({super.key, required this.onOpenBmiHistory});
+  const BodyScreen(
+      {super.key, required this.onOpenBmiHistory, required this.onCalculateBmi});
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,13 @@ class BodyScreen extends StatelessWidget {
                     profile: profile, latest: body.latestMeasurement),
                 const SizedBox(height: 14),
                 _BmiCard(bmi: lastBmi?.bmi, onOpen: onOpenBmiHistory),
+                const SizedBox(height: 10),
+                AppButton(
+                  label: l.calculateBmi,
+                  icon: Icons.calculate_rounded,
+                  fullWidth: true,
+                  onPressed: onCalculateBmi,
+                ),
                 const SizedBox(height: 18),
                 Text(
                   l.wellnessDisclaimer,

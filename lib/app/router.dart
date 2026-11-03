@@ -24,15 +24,19 @@ import 'package:bmi_health/features/body/bmi/ui/tips_screen.dart';
 import 'package:bmi_health/features/onboarding/ui/onboarding_screen.dart';
 import 'package:bmi_health/features/onboarding/ui/splash_screen.dart';
 import 'package:bmi_health/features/profile/ui/settings_screen.dart';
+import 'package:bmi_health/features/fuel/ui/fuel_screen.dart';
+import 'package:bmi_health/features/today/ui/today_screen.dart';
 
 /// Route paths. Use these instead of string literals.
 abstract final class Routes {
   static const splash     = '/splash';
   static const onboarding = '/onboarding';
-  static const calculate  = '/calculate';
+  static const today      = '/today';
+  static const tips       = '/today/tips';
   static const body       = '/body';
+  static const calculate  = '/body/calculate';
   static const history    = '/body/history';
-  static const tips       = '/tips';
+  static const fuel       = '/fuel';
   static const settings   = '/settings';
   static const result     = '/result';
   static const goal       = '/goal';
@@ -81,7 +85,7 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
       // profile questions once (they can choose "Later").
       if (g.needsSetup) return path == Routes.setup ? null : Routes.setup;
       if (path == Routes.onboarding || path == Routes.setup) {
-        return Routes.calculate;
+        return Routes.today;
       }
       return null;
     },
@@ -90,7 +94,7 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
         path: Routes.splash,
         builder: (context, _) => SplashScreen(
           // The redirect sends new users to onboarding / profile setup.
-          onDone: () => context.go(Routes.calculate),
+          onDone: () => context.go(Routes.today),
         ),
       ),
       GoRoute(
@@ -113,12 +117,21 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
         branches: [
           StatefulShellBranch(routes: [
             GoRoute(
-              path: Routes.calculate,
-              builder: (context, _) => HomeScreen(
-                onCalculate: () => context.push(Routes.resultFor()),
-                onOpenSettings: () => context.go(Routes.settings),
-                onViewLastResult: (bmi) => context.push(Routes.resultFor(bmi)),
+              path: Routes.today,
+              builder: (context, _) => TodayScreen(
+                onOpenWorkout: () => context.push(Routes.workout),
+                onOpenFuel: () => context.go(Routes.fuel),
+                onOpenBody: () => context.go(Routes.body),
+                onCalculateBmi: () => context.go(Routes.calculate),
+                onOpenTips: () => context.go(Routes.tips),
               ),
+              routes: [
+                GoRoute(
+                  path: 'tips',
+                  builder: (context, _) =>
+                      TipsScreen(onBack: () => context.go(Routes.today)),
+                ),
+              ],
             ),
           ]),
           StatefulShellBranch(routes: [
@@ -126,9 +139,20 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
               path: Routes.body,
               builder: (context, _) => BodyScreen(
                 onOpenBmiHistory: () => context.go(Routes.history),
+                onCalculateBmi: () => context.go(Routes.calculate),
               ),
               routes: [
                 // Nested so the Body tab stays underneath and Back returns to it
+                GoRoute(
+                  path: 'calculate',
+                  builder: (context, _) => HomeScreen(
+                    onCalculate: () => context.push(Routes.resultFor()),
+                    onOpenSettings: () => context.go(Routes.settings),
+                    onViewLastResult: (bmi) =>
+                        context.push(Routes.resultFor(bmi)),
+                    onBack: () => context.go(Routes.body),
+                  ),
+                ),
                 GoRoute(
                   path: 'history',
                   builder: (context, _) => HistoryScreen(
@@ -152,8 +176,10 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
           ]),
           StatefulShellBranch(routes: [
             GoRoute(
-              path: Routes.tips,
-              builder: (_, __) => const TipsScreen(),
+              path: Routes.fuel,
+              builder: (context, _) => FuelScreen(
+                onOpenProfile: () => context.push(Routes.profile),
+              ),
             ),
           ]),
           StatefulShellBranch(routes: [

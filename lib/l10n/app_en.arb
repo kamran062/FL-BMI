@@ -1395,5 +1395,201 @@
   "eqKettlebell": "Kettlebell",
   "@eqKettlebell": {
     "description": "Equipment"
+  },
+  "navToday": "Today",
+  "@navToday": {
+    "description": "Bottom nav tab: home dashboard"
+  },
+  "navFuel": "Fuel",
+  "@navFuel": {
+    "description": "Bottom nav tab: calories and water"
+  },
+  "fuelTitle": "Fuel",
+  "@fuelTitle": {
+    "description": "Fuel screen title"
+  },
+  "caloriesTitle": "Calories",
+  "@caloriesTitle": {
+    "description": "Card title"
+  },
+  "kcalOf": "{eaten} / {target} kcal",
+  "@kcalOf": {
+    "description": "Calories eaten of target",
+    "placeholders": {
+      "eaten": {
+        "type": "int",
+        "example": "1200"
+      },
+      "target": {
+        "type": "int",
+        "example": "2100"
+      }
+    }
+  },
+  "kcalLeft": "{count} kcal left",
+  "@kcalLeft": {
+    "description": "Calories remaining today",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "900"
+      }
+    }
+  },
+  "kcalOver": "{count} kcal over",
+  "@kcalOver": {
+    "description": "Calories over target today",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "150"
+      }
+    }
+  },
+  "macroProtein": "Protein",
+  "@macroProtein": {
+    "description": "Macronutrient"
+  },
+  "macroCarbs": "Carbs",
+  "@macroCarbs": {
+    "description": "Macronutrient"
+  },
+  "macroFat": "Fat",
+  "@macroFat": {
+    "description": "Macronutrient"
+  },
+  "gramsOf": "{eaten} / {target} g",
+  "@gramsOf": {
+    "description": "Grams eaten of target",
+    "placeholders": {
+      "eaten": {
+        "type": "int",
+        "example": "80"
+      },
+      "target": {
+        "type": "int",
+        "example": "140"
+      }
+    }
+  },
+  "gramsTarget": "{target} g",
+  "@gramsTarget": {
+    "description": "Daily grams target",
+    "placeholders": {
+      "target": {
+        "type": "int",
+        "example": "220"
+      }
+    }
+  },
+  "logFood": "Log food",
+  "@logFood": {
+    "description": "Button and dialog title"
+  },
+  "foodName": "What did you eat? (optional)",
+  "@foodName": {
+    "description": "Food name field"
+  },
+  "foodKcal": "Calories (kcal)",
+  "@foodKcal": {
+    "description": "Calories field"
+  },
+  "foodProtein": "Protein (g, optional)",
+  "@foodProtein": {
+    "description": "Protein field"
+  },
+  "foodKcalError": "Enter calories between 1 and 5000.",
+  "@foodKcalError": {
+    "description": "Validation error"
+  },
+  "foodEmpty": "Nothing logged today. Quick-add calories after each meal.",
+  "@foodEmpty": {
+    "description": "Food list empty state"
+  },
+  "foodUnnamed": "Food",
+  "@foodUnnamed": {
+    "description": "Name shown for an unnamed food entry"
+  },
+  "waterTitle": "Water",
+  "@waterTitle": {
+    "description": "Card title"
+  },
+  "waterOf": "{drunk} / {goal} ml",
+  "@waterOf": {
+    "description": "Water drunk of goal",
+    "placeholders": {
+      "drunk": {
+        "type": "int",
+        "example": "1250"
+      },
+      "goal": {
+        "type": "int",
+        "example": "2500"
+      }
+    }
+  },
+  "addGlass": "+250 ml",
+  "@addGlass": {
+    "description": "Adds a glass of water"
+  },
+  "removeGlass": "−250 ml",
+  "@removeGlass": {
+    "description": "Removes a glass of water"
+  },
+  "targetsExplain": "Based on your age, height, weight, gender, goal and training days (Mifflin-St Jeor). A starting point, not a medical prescription.",
+  "@targetsExplain": {
+    "description": "Explains how the targets are calculated"
+  },
+  "completeProfileForTargets": "Set your goal in Personal details for personalised targets.",
+  "@completeProfileForTargets": {
+    "description": "Shown when the profile has no goal"
+  },
+  "greeting": "Hi, {name}",
+  "@greeting": {
+    "description": "Today header with the user's name",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Kamran"
+      }
+    }
+  },
+  "greetingNoName": "Today",
+  "@greetingNoName": {
+    "description": "Today header without a name"
+  },
+  "thisWeekWorkouts": "{done} of {target} workouts this week",
+  "@thisWeekWorkouts": {
+    "description": "Weekly training progress",
+    "placeholders": {
+      "done": {
+        "type": "int",
+        "example": "2"
+      },
+      "target": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "startWorkout": "Start workout",
+  "@startWorkout": {
+    "description": "Button"
+  },
+  "latestWeight": "Latest weight",
+  "@latestWeight": {
+    "description": "Card label"
+  },
+  "tipOfTheDay": "Tip of the day",
+  "@tipOfTheDay": {
+    "description": "Card label"
+  },
+  "moreTips": "More tips",
+  "@moreTips": {
+    "description": "Link to all tips"
+  },
+  "calculateBmiShort": "Calculate BMI",
+  "@calculateBmiShort": {
+    "description": "Quick action"
   }
 }

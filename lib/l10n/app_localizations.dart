@@ -1930,6 +1930,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Kettlebell'**
   String get eqKettlebell;
+
+  /// Bottom nav tab: home dashboard
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get navToday;
+
+  /// Bottom nav tab: calories and water
+  ///
+  /// In en, this message translates to:
+  /// **'Fuel'**
+  String get navFuel;
+
+  /// Fuel screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Fuel'**
+  String get fuelTitle;
+
+  /// Card title
+  ///
+  /// In en, this message translates to:
+  /// **'Calories'**
+  String get caloriesTitle;
+
+  /// Calories eaten of target
+  ///
+  /// In en, this message translates to:
+  /// **'{eaten} / {target} kcal'**
+  String kcalOf(int eaten, int target);
+
+  /// Calories remaining today
+  ///
+  /// In en, this message translates to:
+  /// **'{count} kcal left'**
+  String kcalLeft(int count);
+
+  /// Calories over target today
+  ///
+  /// In en, this message translates to:
+  /// **'{count} kcal over'**
+  String kcalOver(int count);
+
+  /// Macronutrient
+  ///
+  /// In en, this message translates to:
+  /// **'Protein'**
+  String get macroProtein;
+
+  /// Macronutrient
+  ///
+  /// In en, this message translates to:
+  /// **'Carbs'**
+  String get macroCarbs;
+
+  /// Macronutrient
+  ///
+  /// In en, this message translates to:
+  /// **'Fat'**
+  String get macroFat;
+
+  /// Grams eaten of target
+  ///
+  /// In en, this message translates to:
+  /// **'{eaten} / {target} g'**
+  String gramsOf(int eaten, int target);
+
+  /// Daily grams target
+  ///
+  /// In en, this message translates to:
+  /// **'{target} g'**
+  String gramsTarget(int target);
+
+  /// Button and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Log food'**
+  String get logFood;
+
+  /// Food name field
+  ///
+  /// In en, this message translates to:
+  /// **'What did you eat? (optional)'**
+  String get foodName;
+
+  /// Calories field
+  ///
+  /// In en, this message translates to:
+  /// **'Calories (kcal)'**
+  String get foodKcal;
+
+  /// Protein field
+  ///
+  /// In en, this message translates to:
+  /// **'Protein (g, optional)'**
+  String get foodProtein;
+
+  /// Validation error
+  ///
+  /// In en, this message translates to:
+  /// **'Enter calories between 1 and 5000.'**
+  String get foodKcalError;
+
+  /// Food list empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing logged today. Quick-add calories after each meal.'**
+  String get foodEmpty;
+
+  /// Name shown for an unnamed food entry
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get foodUnnamed;
+
+  /// Card title
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get waterTitle;
+
+  /// Water drunk of goal
+  ///
+  /// In en, this message translates to:
+  /// **'{drunk} / {goal} ml'**
+  String waterOf(int drunk, int goal);
+
+  /// Adds a glass of water
+  ///
+  /// In en, this message translates to:
+  /// **'+250 ml'**
+  String get addGlass;
+
+  /// Removes a glass of water
+  ///
+  /// In en, this message translates to:
+  /// **'−250 ml'**
+  String get removeGlass;
+
+  /// Explains how the targets are calculated
+  ///
+  /// In en, this message translates to:
+  /// **'Based on your age, height, weight, gender, goal and training days (Mifflin-St Jeor). A starting point, not a medical prescription.'**
+  String get targetsExplain;
+
+  /// Shown when the profile has no goal
+  ///
+  /// In en, this message translates to:
+  /// **'Set your goal in Personal details for personalised targets.'**
+  String get completeProfileForTargets;
+
+  /// Today header with the user's name
+  ///
+  /// In en, this message translates to:
+  /// **'Hi, {name}'**
+  String greeting(String name);
+
+  /// Today header without a name
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get greetingNoName;
+
+  /// Weekly training progress
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {target} workouts this week'**
+  String thisWeekWorkouts(int done, int target);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Start workout'**
+  String get startWorkout;
+
+  /// Card label
+  ///
+  /// In en, this message translates to:
+  /// **'Latest weight'**
+  String get latestWeight;
+
+  /// Card label
+  ///
+  /// In en, this message translates to:
+  /// **'Tip of the day'**
+  String get tipOfTheDay;
+
+  /// Link to all tips
+  ///
+  /// In en, this message translates to:
+  /// **'More tips'**
+  String get moreTips;
+
+  /// Quick action
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate BMI'**
+  String get calculateBmiShort;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

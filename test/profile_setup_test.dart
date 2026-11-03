@@ -49,7 +49,7 @@ void main() {
     expect(p.equipment, Equipment.gym);
     expect(p.daysPerWeek, 4);
     expect(p.demonstrator, Sex.male);
-    expect(find.text('Calculate BMI'), findsOneWidget);
+    expect(find.text('Start workout'), findsOneWidget);
   });
 
   testWidgets('"Later" skips setup and does not ask again', (tester) async {
@@ -58,7 +58,7 @@ void main() {
 
     expect(app.settings.profileSetupDismissed, isTrue);
     expect(app.profile.profile.completed, isFalse);
-    expect(find.text('Calculate BMI'), findsOneWidget);
+    expect(find.text('Start workout'), findsOneWidget);
   });
 
   testWidgets('goal is required before continuing', (tester) async {

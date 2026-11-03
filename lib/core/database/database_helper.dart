@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
 import 'package:bmi_health/features/body/metrics/domain/body_metrics.dart';
+import 'package:bmi_health/features/fuel/domain/nutrition.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
 
@@ -11,7 +12,7 @@ class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 5;
+  static const schemaVersion = 6;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -101,6 +102,27 @@ class DatabaseHelper {
           exercise_ids TEXT NOT NULL
         )
       ''');
+    },
+    // 5 → 6: Fuel (quick calorie log + water)
+    (db) async {
+      await db.execute('''
+        CREATE TABLE food_logs (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date INTEGER NOT NULL,
+          name TEXT NOT NULL DEFAULT '',
+          kcal INTEGER NOT NULL,
+          protein_g REAL
+        )
+      ''');
+      await db.execute('CREATE INDEX idx_food_logs_date ON food_logs(date)');
+      await db.execute('''
+        CREATE TABLE water_logs (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date INTEGER NOT NULL,
+          ml INTEGER NOT NULL
+        )
+      ''');
+      await db.execute('CREATE INDEX idx_water_logs_date ON water_logs(date)');
     },
   ];
 
@@ -300,6 +322,31 @@ class DatabaseHelper {
 
   Future<void> deleteRoutine(int id) async =>
       (await db).delete('routines', where: 'id = ?', whereArgs: [id]);
+
+  // ── Fuel ─────────────────────────────────────────────────────
+
+  Future<List<FoodLog>> getFoodSince(DateTime from) async {
+    final rows = await (await db).query('food_logs',
+        where: 'date >= ?', whereArgs: [from.millisecondsSinceEpoch],
+        orderBy: 'date ASC');
+    return rows.map(FoodLog.fromMap).toList();
+  }
+
+  Future<int> insertFood(FoodLog f) async =>
+      (await db).insert('food_logs', f.toMap());
+
+  Future<void> deleteFood(int id) async =>
+      (await db).delete('food_logs', where: 'id = ?', whereArgs: [id]);
+
+  Future<int> getWaterSince(DateTime from) async {
+    final rows = await (await db).rawQuery(
+        'SELECT COALESCE(SUM(ml), 0) AS total FROM water_logs WHERE date >= ?',
+        [from.millisecondsSinceEpoch]);
+    return (rows.first['total'] as num).toInt();
+  }
+
+  Future<void> insertWater(DateTime at, int ml) async => (await db)
+      .insert('water_logs', {'date': at.millisecondsSinceEpoch, 'ml': ml});
 
   // ── BMI Entries ──────────────────────────────────────────────
 

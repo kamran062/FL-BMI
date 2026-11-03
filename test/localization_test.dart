@@ -61,7 +61,7 @@ void main() {
 
   testWidgets('English is the default', (tester) async {
     await launchApp(tester);
-    expect(find.text('Calculate BMI'), findsOneWidget);
+    expect(find.text('Start workout'), findsOneWidget);
   });
 
   testWidgets('choosing Urdu shows Urdu text right-to-left', (tester) async {
