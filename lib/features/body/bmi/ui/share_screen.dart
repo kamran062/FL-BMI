@@ -9,6 +9,7 @@ import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/text_tracking.dart';
+import 'package:bmi_health/core/monitoring/crash_reporting.dart';
 
 class ShareScreen extends StatefulWidget {
   final double bmi;
@@ -41,8 +42,8 @@ class _ShareScreenState extends State<ShareScreen> {
       } finally {
         AdService.instance.endExternalUi();
       }
-    } catch (e) {
-      debugPrint('Share failed: $e');
+    } catch (e, stack) {
+      reportError(e, stack, reason: 'share');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l.shareError)),

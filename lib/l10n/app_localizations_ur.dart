@@ -228,7 +228,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get privacyAnalyticsTitle => '📊 کوئی اینالیٹکس یا ٹریکنگ نہیں';
 
   @override
-  String get privacyAnalyticsBody => 'ہم کوئی اینالیٹکس SDK، کریش رپورٹر یا ٹریکنگ ٹول استعمال نہیں کرتے۔ ہمیں نہیں معلوم کہ آپ کون ہیں، اور ہم یہی پسند کرتے ہیں۔';
+  String get privacyAnalyticsBody => 'ہم کوئی اینالیٹکس یا ٹریکنگ ٹول استعمال نہیں کرتے۔ اگر ایپ کریش ہو جائے تو ایک گمنام کریش رپورٹ (فون کا ماڈل، اینڈرائیڈ یا آئی او ایس ورژن اور تکنیکی خرابی) ہماری کریش رپورٹنگ سروس Sentry کو بھیجی جا سکتی ہے تاکہ ہم مسئلہ حل کر سکیں۔ کریش رپورٹس میں آپ کا وزن، بی ایم آئی یا صحت کا کوئی اور ڈیٹا کبھی شامل نہیں ہوتا۔';
 
   @override
   String get privacyAdsTitle => '📢 اشتہارات';

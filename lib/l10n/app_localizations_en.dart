@@ -228,7 +228,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyAnalyticsTitle => '📊 No analytics or tracking';
 
   @override
-  String get privacyAnalyticsBody => 'We do not use any analytics SDKs, crash reporters, or user-tracking tools. We have no idea who you are, and we prefer it that way.';
+  String get privacyAnalyticsBody => 'We do not use analytics or user-tracking tools. If the app crashes, an anonymous crash report (device model, Android or iOS version, and the technical error) may be sent to our crash-reporting service, Sentry, so we can fix the problem. Crash reports never include your weight, BMI or other health data.';
 
   @override
   String get privacyAdsTitle => '📢 Ads';

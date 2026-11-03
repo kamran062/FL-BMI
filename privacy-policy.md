@@ -3,7 +3,7 @@
 **App Name:** BMI Calculator & Health
 **Developer:** Kamran Iqbal
 **Effective Date:** May 17, 2026
-**Last Updated:** May 17, 2026
+**Last Updated:** November 3, 2026
 
 ---
 
@@ -37,6 +37,15 @@ Our App uses **Google AdMob** to display advertisements. AdMob may automatically
 
 This information is collected and processed by Google according to their privacy policy.
 
+### 1.3 Crash Reports (via Sentry)
+If the App crashes or hits a technical error, an anonymous crash report may be sent to Sentry, our crash-reporting service. A report contains:
+
+- Device model, operating system and version
+- App version
+- The technical error and where in the code it happened
+
+Crash reports **never** include your weight, height, BMI, goals, history, screenshots of the App, or your advertising ID. We use them only to find and fix bugs.
+
 ---
 
 ## 2. How We Use Your Information
@@ -55,7 +64,7 @@ We do **not** sell, rent, or share your personal health information with any thi
 
 ## 3. Third-Party Services
 
-Our App uses the following third-party service:
+Our App uses the following third-party services:
 
 ### Google AdMob
 We use Google AdMob to display advertisements within the App. AdMob may use cookies and similar technologies to deliver personalized ads based on your interests.
@@ -65,6 +74,10 @@ You can learn more about how Google uses data from apps that use their services 
 
 You can opt out of personalized advertising by going to:
 **Settings → Google → Ads → Opt out of Ads Personalization** on your Android device.
+
+### Sentry
+We use Sentry to receive anonymous crash reports (see section 1.3). Sentry processes this data under its own privacy policy:
+[https://sentry.io/privacy/](https://sentry.io/privacy/)
 
 ---
 

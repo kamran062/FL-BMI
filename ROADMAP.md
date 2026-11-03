@@ -244,7 +244,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 - [x] Replace the Stack-overlay navigation with **go_router** (`lib/app/router.dart`): tabs keep their state, result/goal/share are real pages, Android back works
 - [x] Numbered schema migrations on the existing `sqflite` database (`DatabaseHelper._migrations`), v1 → v2 adds a history date index. Kept `sqflite` instead of moving to drift: no code generation, zero change to how existing users' data is stored. Revisit drift in Phase 1 if the number of tables makes raw SQL painful.
 - [ ] Split `AppProvider` into feature providers. Deferred to Phase 1.1, where the profile is rebuilt anyway.
-- [ ] Add a logger, a global error handler and a crash reporting SDK (needs a Firebase or Sentry project)
+- [x] Crash reporting with **Sentry** (`lib/core/monitoring/crash_reporting.dart`): wraps app start-up, off unless `SENTRY_DSN` is in `.env.json`, never in debug. No PII, screenshots or view hierarchy; navigation/console breadcrumbs dropped because routes carry BMI values. `reportError()` for handled errors. Privacy dialog (en/ur) and `privacy-policy.md` updated.
 - [x] English + Urdu localization (`lib/l10n/*.arb`, `tool/gen_arb.py`): all 175 user-facing strings, plurals, Urdu dates, RTL layout checked on an emulator. Language picker in Settings. Urdu stays hidden in release builds (`urduReady = false` in `lib/l10n/l10n.dart`) until a native speaker reviews the translations. Paywall strings are left for Phase 3.5 (premium launch).
 
 **Testing**

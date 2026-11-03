@@ -521,10 +521,10 @@ abstract class AppLocalizations {
   /// **'📊 No analytics or tracking'**
   String get privacyAnalyticsTitle;
 
-  /// Privacy dialog text. Must be updated if crash reporting is added.
+  /// Privacy dialog text. Must stay accurate about crash reporting (Sentry, no health data).
   ///
   /// In en, this message translates to:
-  /// **'We do not use any analytics SDKs, crash reporters, or user-tracking tools. We have no idea who you are, and we prefer it that way.'**
+  /// **'We do not use analytics or user-tracking tools. If the app crashes, an anonymous crash report (device model, Android or iOS version, and the technical error) may be sent to our crash-reporting service, Sentry, so we can fix the problem. Crash reports never include your weight, BMI or other health data.'**
   String get privacyAnalyticsBody;
 
   /// Privacy dialog section
