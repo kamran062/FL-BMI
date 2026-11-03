@@ -12,6 +12,11 @@ import 'package:bmi_health/features/profile/ui/profile_setup_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/goal_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/history_screen.dart';
 import 'package:bmi_health/features/body/ui/body_screen.dart';
+import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
+import 'package:bmi_health/features/train/exercises/ui/exercise_detail_screen.dart';
+import 'package:bmi_health/features/train/exercises/ui/exercise_library_screen.dart';
+import 'package:bmi_health/features/train/ui/train_screen.dart';
+import 'package:bmi_health/features/train/workouts/ui/active_workout_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/home_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/result_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/share_screen.dart';
@@ -33,6 +38,10 @@ abstract final class Routes {
   static const goal       = '/goal';
   static const share      = '/share';
   static const setup      = '/setup';
+  static const train      = '/train';
+  static const workout    = '/workout';
+  static const exercises  = '/exercises';
+  static String exercise(String id) => '/exercises/$id';
   static const profile    = '/profile';
 
   /// Result for a saved BMI (read-only) — or a fresh calculation when [bmi] is null.
@@ -134,6 +143,15 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
           ]),
           StatefulShellBranch(routes: [
             GoRoute(
+              path: Routes.train,
+              builder: (context, _) => TrainScreen(
+                onOpenWorkout: () => context.push(Routes.workout),
+                onOpenLibrary: () => context.push(Routes.exercises),
+              ),
+            ),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
               path: Routes.tips,
               builder: (_, __) => const TipsScreen(),
             ),
@@ -156,6 +174,42 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
         builder: (_, state) => _ResultPage(
           savedBmi: double.tryParse(state.uri.queryParameters['bmi'] ?? ''),
         ),
+      ),
+      GoRoute(
+        path: Routes.workout,
+        parentNavigatorKey: _rootKey,
+        builder: (context, _) => ActiveWorkoutScreen(
+          // The picker returns the chosen exercise id via pop()
+          pickExercise: () =>
+              context.push<String>('${Routes.exercises}?pick=1'),
+          onClose: () => context.pop(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.exercises,
+        parentNavigatorKey: _rootKey,
+        builder: (context, state) {
+          final picking = state.uri.queryParameters['pick'] == '1';
+          return ExerciseLibraryScreen(
+            onPick: picking ? (e) => context.pop(e.id) : null,
+            onOpen: (e) => context.push(Routes.exercise(e.id)),
+            onClose: () => context.pop(),
+          );
+        },
+        routes: [
+          GoRoute(
+            path: ':id',
+            parentNavigatorKey: _rootKey,
+            builder: (context, state) {
+              final e = context
+                  .read<ExerciseCatalog>()
+                  .byId(state.pathParameters['id']!);
+              if (e == null) return const SizedBox.shrink();
+              return ExerciseDetailScreen(
+                  exercise: e, onClose: () => context.pop());
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: Routes.profile,

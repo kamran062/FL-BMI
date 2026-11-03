@@ -312,6 +312,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 1.3 Exercise library (human videos)
 
+> **Status: built, waiting for video content.** 30-exercise bundled catalog (`assets/exercises/catalog.json`, English + Urdu names, form steps), search, muscle filter and "my equipment" filter from the profile, detail page with the gender-matched demonstrator player (falls back to the other demonstrator, "Video coming soon" placeholder until clips exist). Not yet: remote catalog download, offline video cache, Urdu form steps, the remaining 70 exercises.
+
 **Features**
 - 100 exercises with male and female human videos (§4)
 - Filters: muscle group, equipment, difficulty, home/gym
@@ -331,6 +333,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Done when:** all launch exercises play in both genders, offline fallback works, and the cache stays under its limit.
 
 ### 1.4 Workout tracker
+
+> **Status: done (MVP).** Train tab: start empty or from a routine, add exercises via the library picker, sets prefilled from last time with a "previous" column, tick sets, 90 s rest timer with haptic, swipe to delete a set, finish summary (duration, volume, PRs) with save-as-routine, recent workouts with PR badges. Every change is saved immediately (survives the app being killed). Schema v5. Not yet: background rest-timer notification, set types (warm-up/drop), RPE, editing finished workouts, charts.
 
 **Features**
 - Start an empty workout, a saved routine, or repeat the last workout

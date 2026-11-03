@@ -5,12 +5,13 @@ import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
 import 'package:bmi_health/features/body/metrics/domain/body_metrics.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
+import 'package:bmi_health/features/train/workouts/domain/workout.dart';
 
 class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 4;
+  static const schemaVersion = 5;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -69,6 +70,37 @@ class DatabaseHelper {
       ''');
       await db.execute(
           'CREATE INDEX idx_measurements_date ON measurements(date)');
+    },
+    // 4 → 5: workout tracker
+    (db) async {
+      await db.execute('''
+        CREATE TABLE workouts (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL DEFAULT '',
+          started_at INTEGER NOT NULL,
+          finished_at INTEGER
+        )
+      ''');
+      await db.execute('''
+        CREATE TABLE workout_sets (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          workout_id INTEGER NOT NULL REFERENCES workouts(id) ON DELETE CASCADE,
+          exercise_id TEXT NOT NULL,
+          exercise_order INTEGER NOT NULL,
+          weight_kg REAL NOT NULL DEFAULT 0,
+          reps INTEGER NOT NULL DEFAULT 0,
+          done INTEGER NOT NULL DEFAULT 0
+        )
+      ''');
+      await db.execute(
+          'CREATE INDEX idx_workout_sets_workout ON workout_sets(workout_id)');
+      await db.execute('''
+        CREATE TABLE routines (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          exercise_ids TEXT NOT NULL
+        )
+      ''');
     },
   ];
 
@@ -199,6 +231,75 @@ class DatabaseHelper {
     final database = await db;
     await database.delete('measurements', where: 'id = ?', whereArgs: [id]);
   }
+
+  // ── Workouts ─────────────────────────────────────────────────
+
+  Future<int> insertWorkout(Workout w) async =>
+      (await db).insert('workouts', w.toMap());
+
+  Future<void> updateWorkout(Workout w) async => (await db)
+      .update('workouts', w.toMap(), where: 'id = ?', whereArgs: [w.id]);
+
+  /// Deletes the workout and its sets.
+  Future<void> deleteWorkout(int id) async {
+    final database = await db;
+    await database.transaction((txn) async {
+      await txn.delete('workout_sets', where: 'workout_id = ?', whereArgs: [id]);
+      await txn.delete('workouts', where: 'id = ?', whereArgs: [id]);
+    });
+  }
+
+  /// The unfinished workout, if the app was closed during one.
+  Future<Workout?> getActiveWorkout() async {
+    final rows = await (await db).query('workouts',
+        where: 'finished_at IS NULL', orderBy: 'started_at DESC', limit: 1);
+    return rows.isEmpty ? null : Workout.fromMap(rows.first);
+  }
+
+  /// Finished workouts, newest first.
+  Future<List<Workout>> getFinishedWorkouts() async {
+    final rows = await (await db).query('workouts',
+        where: 'finished_at IS NOT NULL', orderBy: 'started_at DESC');
+    return rows.map(Workout.fromMap).toList();
+  }
+
+  Future<List<WorkoutSet>> getSets(int workoutId) async {
+    final rows = await (await db).query('workout_sets',
+        where: 'workout_id = ?', whereArgs: [workoutId],
+        orderBy: 'exercise_order ASC, id ASC');
+    return rows.map(WorkoutSet.fromMap).toList();
+  }
+
+  /// Every completed set of finished workouts (for PRs and "previous").
+  Future<List<WorkoutSet>> getAllFinishedSets() async {
+    final rows = await (await db).rawQuery('''
+      SELECT s.* FROM workout_sets s
+      JOIN workouts w ON w.id = s.workout_id
+      WHERE w.finished_at IS NOT NULL AND s.done = 1
+      ORDER BY w.started_at ASC, s.id ASC
+    ''');
+    return rows.map(WorkoutSet.fromMap).toList();
+  }
+
+  Future<int> insertSet(WorkoutSet s) async =>
+      (await db).insert('workout_sets', s.toMap());
+
+  Future<void> updateSet(WorkoutSet s) async => (await db)
+      .update('workout_sets', s.toMap(), where: 'id = ?', whereArgs: [s.id]);
+
+  Future<void> deleteSet(int id) async =>
+      (await db).delete('workout_sets', where: 'id = ?', whereArgs: [id]);
+
+  Future<List<Routine>> getRoutines() async {
+    final rows = await (await db).query('routines', orderBy: 'name COLLATE NOCASE');
+    return rows.map(Routine.fromMap).toList();
+  }
+
+  Future<int> insertRoutine(Routine r) async =>
+      (await db).insert('routines', r.toMap());
+
+  Future<void> deleteRoutine(int id) async =>
+      (await db).delete('routines', where: 'id = ?', whereArgs: [id]);
 
   // ── BMI Entries ──────────────────────────────────────────────
 

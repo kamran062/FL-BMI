@@ -808,4 +808,209 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wellnessDisclaimer => 'For general wellness only. Not medical advice.';
+
+  @override
+  String get navTrain => 'Train';
+
+  @override
+  String get trainTitle => 'Train';
+
+  @override
+  String get startEmptyWorkout => 'Start empty workout';
+
+  @override
+  String get resumeWorkout => 'Resume workout';
+
+  @override
+  String workoutInProgress(String elapsed) {
+    return 'Workout in progress · $elapsed';
+  }
+
+  @override
+  String get exerciseLibrary => 'Exercise library';
+
+  @override
+  String get routines => 'Routines';
+
+  @override
+  String get routinesEmpty => 'Save a workout as a routine to repeat it with one tap.';
+
+  @override
+  String get recentWorkouts => 'Recent workouts';
+
+  @override
+  String get noWorkoutsYet => 'Your finished workouts will appear here.';
+
+  @override
+  String exercisesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count exercises',
+      one: '1 exercise',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String minutesShort(int count) {
+    return '$count min';
+  }
+
+  @override
+  String prCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count PRs',
+      one: '1 PR',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String volumeLabel(String value) {
+    return 'Volume $value';
+  }
+
+  @override
+  String get workoutDefaultName => 'Workout';
+
+  @override
+  String get addExercise => 'Add exercise';
+
+  @override
+  String get addSet => 'Add set';
+
+  @override
+  String get setLabel => 'Set';
+
+  @override
+  String get previousLabel => 'Previous';
+
+  @override
+  String get repsLabel => 'Reps';
+
+  @override
+  String get finishWorkout => 'Finish';
+
+  @override
+  String get discardWorkout => 'Discard workout';
+
+  @override
+  String get discardConfirm => 'Discard this workout? Logged sets will be deleted.';
+
+  @override
+  String get discard => 'Discard';
+
+  @override
+  String get removeExercise => 'Remove exercise';
+
+  @override
+  String restTimer(String time) {
+    return 'Rest $time';
+  }
+
+  @override
+  String get skip2 => 'Skip';
+
+  @override
+  String get workoutComplete => 'Workout complete';
+
+  @override
+  String newPrs(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new personal records!',
+      one: 'New personal record!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get saveAsRoutine => 'Save as routine';
+
+  @override
+  String get routineName => 'Routine name';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get nothingLogged => 'No sets were ticked, so the workout was not saved.';
+
+  @override
+  String get searchExercises => 'Search exercises';
+
+  @override
+  String get myEquipmentOnly => 'My equipment';
+
+  @override
+  String get allMuscles => 'All';
+
+  @override
+  String get howTo => 'How to do it';
+
+  @override
+  String get videoComingSoon => 'Video coming soon';
+
+  @override
+  String videoWithTrainer(String trainer) {
+    return 'With $trainer';
+  }
+
+  @override
+  String get targetMuscles => 'Target muscles';
+
+  @override
+  String get muscleChest => 'Chest';
+
+  @override
+  String get muscleBack => 'Back';
+
+  @override
+  String get muscleShoulders => 'Shoulders';
+
+  @override
+  String get muscleBiceps => 'Biceps';
+
+  @override
+  String get muscleTriceps => 'Triceps';
+
+  @override
+  String get muscleQuads => 'Quads';
+
+  @override
+  String get muscleHamstrings => 'Hamstrings';
+
+  @override
+  String get muscleGlutes => 'Glutes';
+
+  @override
+  String get muscleCalves => 'Calves';
+
+  @override
+  String get muscleCore => 'Core';
+
+  @override
+  String get eqBarbell => 'Barbell';
+
+  @override
+  String get eqDumbbell => 'Dumbbell';
+
+  @override
+  String get eqMachine => 'Machine';
+
+  @override
+  String get eqCable => 'Cable';
+
+  @override
+  String get eqBodyweight => 'Bodyweight';
+
+  @override
+  String get eqBand => 'Band';
+
+  @override
+  String get eqKettlebell => 'Kettlebell';
 }

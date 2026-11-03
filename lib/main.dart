@@ -9,6 +9,8 @@ import 'package:bmi_health/core/monitoring/crash_reporting.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/features/body/metrics/body_provider.dart';
+import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
+import 'package:bmi_health/features/train/workouts/workout_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 
@@ -35,14 +37,19 @@ void main() async {
     final profile = ProfileProvider(ProfileRepository(db));
     final bmi = BmiProvider(db);
     final body = BodyProvider(db);
-    await Future.wait(
-        [settings.load(), profile.load(), bmi.load(), body.load()]);
+    final workouts = WorkoutProvider(db);
+    final catalog = await ExerciseCatalog.loadBundled();
+    await Future.wait([
+      settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
+    ]);
 
     runApp(BmiHealthProviders(
       settings: settings,
       profile: profile,
       bmi: bmi,
       body: body,
+      workouts: workouts,
+      catalog: catalog,
       child: const BmiHealthApp(),
     ));
 

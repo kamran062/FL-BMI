@@ -25,6 +25,7 @@ class _AppShellState extends State<AppShell> {
   static const _tabs = [
     (icon: Icons.calculate_outlined,  iconActive: Icons.calculate_rounded),
     (icon: Icons.monitor_weight_outlined, iconActive: Icons.monitor_weight_rounded),
+    (icon: Icons.fitness_center_outlined, iconActive: Icons.fitness_center_rounded),
     (icon: Icons.lightbulb_outline,   iconActive: Icons.lightbulb_rounded),
     (icon: Icons.settings_outlined,   iconActive: Icons.settings_rounded),
   ];
@@ -45,7 +46,7 @@ class _AppShellState extends State<AppShell> {
         .withOpacity(0.85);
     final current = widget.navigationShell.currentIndex;
     final l = context.l10n;
-    final labels = [l.navCalculate, l.navBody, l.navTips, l.navSettings];
+    final labels = [l.navCalculate, l.navBody, l.navTrain, l.navTips, l.navSettings];
 
     final bottomPad = MediaQuery.of(context).padding.bottom;
     // Nav bar: 64px height + 12px bottom margin + safe area

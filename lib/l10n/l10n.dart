@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:bmi_health/core/config/feature_flags.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
+import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/l10n/app_localizations.dart';
 
 export 'package:bmi_health/l10n/app_localizations.dart';
@@ -112,6 +113,35 @@ extension L10nDomain on AppLocalizations {
   String formulaBody(Sex s) => switch (s) {
         Sex.male => bodyMale,
         Sex.female => bodyFemale,
+      };
+
+  String muscle(Muscle m) => switch (m) {
+        Muscle.chest => muscleChest,
+        Muscle.back => muscleBack,
+        Muscle.shoulders => muscleShoulders,
+        Muscle.biceps => muscleBiceps,
+        Muscle.triceps => muscleTriceps,
+        Muscle.quads => muscleQuads,
+        Muscle.hamstrings => muscleHamstrings,
+        Muscle.glutes => muscleGlutes,
+        Muscle.calves => muscleCalves,
+        Muscle.core => muscleCore,
+      };
+
+  String exerciseEquipment(ExerciseEquipment e) => switch (e) {
+        ExerciseEquipment.barbell => eqBarbell,
+        ExerciseEquipment.dumbbell => eqDumbbell,
+        ExerciseEquipment.machine => eqMachine,
+        ExerciseEquipment.cable => eqCable,
+        ExerciseEquipment.bodyweight => eqBodyweight,
+        ExerciseEquipment.band => eqBand,
+        ExerciseEquipment.kettlebell => eqKettlebell,
+      };
+
+  String difficulty(Difficulty d) => switch (d) {
+        Difficulty.beginner => expBeginner,
+        Difficulty.intermediate => expIntermediate,
+        Difficulty.advanced => expAdvanced,
       };
 
   String bmiInputError(BmiInputError error) => switch (error) {

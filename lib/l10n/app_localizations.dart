@@ -1588,6 +1588,348 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'For general wellness only. Not medical advice.'**
   String get wellnessDisclaimer;
+
+  /// Bottom nav tab: workouts
+  ///
+  /// In en, this message translates to:
+  /// **'Train'**
+  String get navTrain;
+
+  /// Train screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Train'**
+  String get trainTitle;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Start empty workout'**
+  String get startEmptyWorkout;
+
+  /// Card shown while a workout is in progress
+  ///
+  /// In en, this message translates to:
+  /// **'Resume workout'**
+  String get resumeWorkout;
+
+  /// Subtitle of the resume card
+  ///
+  /// In en, this message translates to:
+  /// **'Workout in progress · {elapsed}'**
+  String workoutInProgress(String elapsed);
+
+  /// Button and screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Exercise library'**
+  String get exerciseLibrary;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Routines'**
+  String get routines;
+
+  /// Routines empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Save a workout as a routine to repeat it with one tap.'**
+  String get routinesEmpty;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Recent workouts'**
+  String get recentWorkouts;
+
+  /// History empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Your finished workouts will appear here.'**
+  String get noWorkoutsYet;
+
+  /// Count of exercises
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 exercise} other{{count} exercises}}'**
+  String exercisesCount(int count);
+
+  /// Duration in minutes
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min'**
+  String minutesShort(int count);
+
+  /// Personal records in a workout
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 PR} other{{count} PRs}}'**
+  String prCount(int count);
+
+  /// Total weight lifted
+  ///
+  /// In en, this message translates to:
+  /// **'Volume {value}'**
+  String volumeLabel(String value);
+
+  /// Name of a workout started without a routine
+  ///
+  /// In en, this message translates to:
+  /// **'Workout'**
+  String get workoutDefaultName;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add exercise'**
+  String get addExercise;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add set'**
+  String get addSet;
+
+  /// Column header
+  ///
+  /// In en, this message translates to:
+  /// **'Set'**
+  String get setLabel;
+
+  /// Column header: last time's set
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get previousLabel;
+
+  /// Column header
+  ///
+  /// In en, this message translates to:
+  /// **'Reps'**
+  String get repsLabel;
+
+  /// Ends the workout
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finishWorkout;
+
+  /// Deletes the active workout
+  ///
+  /// In en, this message translates to:
+  /// **'Discard workout'**
+  String get discardWorkout;
+
+  /// Confirmation
+  ///
+  /// In en, this message translates to:
+  /// **'Discard this workout? Logged sets will be deleted.'**
+  String get discardConfirm;
+
+  /// Confirm button
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get discard;
+
+  /// Menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Remove exercise'**
+  String get removeExercise;
+
+  /// Rest countdown
+  ///
+  /// In en, this message translates to:
+  /// **'Rest {time}'**
+  String restTimer(String time);
+
+  /// Skips the rest timer
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip2;
+
+  /// Summary dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Workout complete'**
+  String get workoutComplete;
+
+  /// Celebration in the summary
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{New personal record!} other{{count} new personal records!}}'**
+  String newPrs(int count);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Save as routine'**
+  String get saveAsRoutine;
+
+  /// Text field label
+  ///
+  /// In en, this message translates to:
+  /// **'Routine name'**
+  String get routineName;
+
+  /// Closes a dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// Snack bar after finishing an empty workout
+  ///
+  /// In en, this message translates to:
+  /// **'No sets were ticked, so the workout was not saved.'**
+  String get nothingLogged;
+
+  /// Search field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Search exercises'**
+  String get searchExercises;
+
+  /// Filter chip: only exercises for the user's equipment
+  ///
+  /// In en, this message translates to:
+  /// **'My equipment'**
+  String get myEquipmentOnly;
+
+  /// Filter chip: any muscle
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allMuscles;
+
+  /// Section title on the exercise page
+  ///
+  /// In en, this message translates to:
+  /// **'How to do it'**
+  String get howTo;
+
+  /// Placeholder until the demonstrator clip is filmed
+  ///
+  /// In en, this message translates to:
+  /// **'Video coming soon'**
+  String get videoComingSoon;
+
+  /// Which demonstrator the video shows
+  ///
+  /// In en, this message translates to:
+  /// **'With {trainer}'**
+  String videoWithTrainer(String trainer);
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Target muscles'**
+  String get targetMuscles;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Chest'**
+  String get muscleChest;
+
+  /// Muscle group (upper/lower back)
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get muscleBack;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulders'**
+  String get muscleShoulders;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Biceps'**
+  String get muscleBiceps;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Triceps'**
+  String get muscleTriceps;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Quads'**
+  String get muscleQuads;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Hamstrings'**
+  String get muscleHamstrings;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Glutes'**
+  String get muscleGlutes;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Calves'**
+  String get muscleCalves;
+
+  /// Muscle group
+  ///
+  /// In en, this message translates to:
+  /// **'Core'**
+  String get muscleCore;
+
+  /// Equipment
+  ///
+  /// In en, this message translates to:
+  /// **'Barbell'**
+  String get eqBarbell;
+
+  /// Equipment
+  ///
+  /// In en, this message translates to:
+  /// **'Dumbbell'**
+  String get eqDumbbell;
+
+  /// Equipment
+  ///
+  /// In en, this message translates to:
+  /// **'Machine'**
+  String get eqMachine;
+
+  /// Equipment
+  ///
+  /// In en, this message translates to:
+  /// **'Cable'**
+  String get eqCable;
+
+  /// Equipment
+  ///
+  /// In en, this message translates to:
+  /// **'Bodyweight'**
+  String get eqBodyweight;
+
+  /// Equipment
+  ///
+  /// In en, this message translates to:
+  /// **'Band'**
+  String get eqBand;
+
+  /// Equipment
+  ///
+  /// In en, this message translates to:
+  /// **'Kettlebell'**
+  String get eqKettlebell;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

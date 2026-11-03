@@ -1119,5 +1119,281 @@
   "wellnessDisclaimer": "For general wellness only. Not medical advice.",
   "@wellnessDisclaimer": {
     "description": "Footer disclaimer on body screens"
+  },
+  "navTrain": "Train",
+  "@navTrain": {
+    "description": "Bottom nav tab: workouts"
+  },
+  "trainTitle": "Train",
+  "@trainTitle": {
+    "description": "Train screen title"
+  },
+  "startEmptyWorkout": "Start empty workout",
+  "@startEmptyWorkout": {
+    "description": "Button"
+  },
+  "resumeWorkout": "Resume workout",
+  "@resumeWorkout": {
+    "description": "Card shown while a workout is in progress"
+  },
+  "workoutInProgress": "Workout in progress · {elapsed}",
+  "@workoutInProgress": {
+    "description": "Subtitle of the resume card",
+    "placeholders": {
+      "elapsed": {
+        "type": "String",
+        "example": "24 min"
+      }
+    }
+  },
+  "exerciseLibrary": "Exercise library",
+  "@exerciseLibrary": {
+    "description": "Button and screen title"
+  },
+  "routines": "Routines",
+  "@routines": {
+    "description": "Section title"
+  },
+  "routinesEmpty": "Save a workout as a routine to repeat it with one tap.",
+  "@routinesEmpty": {
+    "description": "Routines empty state"
+  },
+  "recentWorkouts": "Recent workouts",
+  "@recentWorkouts": {
+    "description": "Section title"
+  },
+  "noWorkoutsYet": "Your finished workouts will appear here.",
+  "@noWorkoutsYet": {
+    "description": "History empty state"
+  },
+  "exercisesCount": "{count, plural, =1{1 exercise} other{{count} exercises}}",
+  "@exercisesCount": {
+    "description": "Count of exercises",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "minutesShort": "{count} min",
+  "@minutesShort": {
+    "description": "Duration in minutes",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "45"
+      }
+    }
+  },
+  "prCount": "{count, plural, =1{1 PR} other{{count} PRs}}",
+  "@prCount": {
+    "description": "Personal records in a workout",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "volumeLabel": "Volume {value}",
+  "@volumeLabel": {
+    "description": "Total weight lifted",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "4,200 kg"
+      }
+    }
+  },
+  "workoutDefaultName": "Workout",
+  "@workoutDefaultName": {
+    "description": "Name of a workout started without a routine"
+  },
+  "addExercise": "Add exercise",
+  "@addExercise": {
+    "description": "Button"
+  },
+  "addSet": "Add set",
+  "@addSet": {
+    "description": "Button"
+  },
+  "setLabel": "Set",
+  "@setLabel": {
+    "description": "Column header"
+  },
+  "previousLabel": "Previous",
+  "@previousLabel": {
+    "description": "Column header: last time's set"
+  },
+  "repsLabel": "Reps",
+  "@repsLabel": {
+    "description": "Column header"
+  },
+  "finishWorkout": "Finish",
+  "@finishWorkout": {
+    "description": "Ends the workout"
+  },
+  "discardWorkout": "Discard workout",
+  "@discardWorkout": {
+    "description": "Deletes the active workout"
+  },
+  "discardConfirm": "Discard this workout? Logged sets will be deleted.",
+  "@discardConfirm": {
+    "description": "Confirmation"
+  },
+  "discard": "Discard",
+  "@discard": {
+    "description": "Confirm button"
+  },
+  "removeExercise": "Remove exercise",
+  "@removeExercise": {
+    "description": "Menu item"
+  },
+  "restTimer": "Rest {time}",
+  "@restTimer": {
+    "description": "Rest countdown",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "1:30"
+      }
+    }
+  },
+  "skip2": "Skip",
+  "@skip2": {
+    "description": "Skips the rest timer"
+  },
+  "workoutComplete": "Workout complete",
+  "@workoutComplete": {
+    "description": "Summary dialog title"
+  },
+  "newPrs": "{count, plural, =1{New personal record!} other{{count} new personal records!}}",
+  "@newPrs": {
+    "description": "Celebration in the summary",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "saveAsRoutine": "Save as routine",
+  "@saveAsRoutine": {
+    "description": "Button"
+  },
+  "routineName": "Routine name",
+  "@routineName": {
+    "description": "Text field label"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Closes a dialog"
+  },
+  "nothingLogged": "No sets were ticked, so the workout was not saved.",
+  "@nothingLogged": {
+    "description": "Snack bar after finishing an empty workout"
+  },
+  "searchExercises": "Search exercises",
+  "@searchExercises": {
+    "description": "Search field hint"
+  },
+  "myEquipmentOnly": "My equipment",
+  "@myEquipmentOnly": {
+    "description": "Filter chip: only exercises for the user's equipment"
+  },
+  "allMuscles": "All",
+  "@allMuscles": {
+    "description": "Filter chip: any muscle"
+  },
+  "howTo": "How to do it",
+  "@howTo": {
+    "description": "Section title on the exercise page"
+  },
+  "videoComingSoon": "Video coming soon",
+  "@videoComingSoon": {
+    "description": "Placeholder until the demonstrator clip is filmed"
+  },
+  "videoWithTrainer": "With {trainer}",
+  "@videoWithTrainer": {
+    "description": "Which demonstrator the video shows",
+    "placeholders": {
+      "trainer": {
+        "type": "String",
+        "example": "female trainer"
+      }
+    }
+  },
+  "targetMuscles": "Target muscles",
+  "@targetMuscles": {
+    "description": "Section title"
+  },
+  "muscleChest": "Chest",
+  "@muscleChest": {
+    "description": "Muscle group"
+  },
+  "muscleBack": "Back",
+  "@muscleBack": {
+    "description": "Muscle group (upper/lower back)"
+  },
+  "muscleShoulders": "Shoulders",
+  "@muscleShoulders": {
+    "description": "Muscle group"
+  },
+  "muscleBiceps": "Biceps",
+  "@muscleBiceps": {
+    "description": "Muscle group"
+  },
+  "muscleTriceps": "Triceps",
+  "@muscleTriceps": {
+    "description": "Muscle group"
+  },
+  "muscleQuads": "Quads",
+  "@muscleQuads": {
+    "description": "Muscle group"
+  },
+  "muscleHamstrings": "Hamstrings",
+  "@muscleHamstrings": {
+    "description": "Muscle group"
+  },
+  "muscleGlutes": "Glutes",
+  "@muscleGlutes": {
+    "description": "Muscle group"
+  },
+  "muscleCalves": "Calves",
+  "@muscleCalves": {
+    "description": "Muscle group"
+  },
+  "muscleCore": "Core",
+  "@muscleCore": {
+    "description": "Muscle group"
+  },
+  "eqBarbell": "Barbell",
+  "@eqBarbell": {
+    "description": "Equipment"
+  },
+  "eqDumbbell": "Dumbbell",
+  "@eqDumbbell": {
+    "description": "Equipment"
+  },
+  "eqMachine": "Machine",
+  "@eqMachine": {
+    "description": "Equipment"
+  },
+  "eqCable": "Cable",
+  "@eqCable": {
+    "description": "Equipment"
+  },
+  "eqBodyweight": "Bodyweight",
+  "@eqBodyweight": {
+    "description": "Equipment"
+  },
+  "eqBand": "Band",
+  "@eqBand": {
+    "description": "Equipment"
+  },
+  "eqKettlebell": "Kettlebell",
+  "@eqKettlebell": {
+    "description": "Equipment"
   }
 }

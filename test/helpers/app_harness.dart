@@ -5,6 +5,8 @@ import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/features/body/metrics/body_provider.dart';
+import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
+import 'package:bmi_health/features/train/workouts/workout_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,7 @@ typedef AppState = ({
   ProfileProvider profile,
   BmiProvider bmi,
   BodyProvider body,
+  WorkoutProvider workouts,
 });
 
 /// Launches the real app as a returning user who has already answered (or
@@ -58,19 +61,28 @@ Future<AppState> launchApp(
   final profile = ProfileProvider(ProfileRepository(db));
   final bmi = BmiProvider(db);
   final body = BodyProvider(db);
-  await tester.runAsync(() => Future.wait(
-      [settings.load(), profile.load(), bmi.load(), body.load()]));
+  final workouts = WorkoutProvider(db);
+  final catalog = ExerciseCatalog.parse(
+      File('assets/exercises/catalog.json').readAsStringSync());
+  await tester.runAsync(() => Future.wait([
+        settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
+      ]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
     profile: profile,
     bmi: bmi,
     body: body,
+    workouts: workouts,
+    catalog: catalog,
     child: const BmiHealthApp(),
   ));
   // Splash hands off after 2.6 s
   await tester.pump(const Duration(seconds: 3));
   await tester.pumpAndSettle();
-  return (settings: settings, profile: profile, bmi: bmi, body: body);
+  return (
+    settings: settings, profile: profile, bmi: bmi, body: body,
+    workouts: workouts,
+  );
 }
 
 /// Simulates the Android system back button.

@@ -28,6 +28,7 @@ dependencies:
   package_info_plus: ^8.0.0
   go_router: ^17.0.0
   sentry_flutter: ^9.30.1
+  video_player: ^2.10.1
 
 dev_dependencies:
   flutter_test:
@@ -53,3 +54,4 @@ flutter:
     # Inter, bundled so text renders offline and no font requests go to
     # Google at runtime (privacy). OFL-licensed; see OFL.txt.
     - assets/google_fonts/
+    - assets/exercises/

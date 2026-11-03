@@ -807,4 +807,206 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get wellnessDisclaimer => 'صرف عمومی صحت کے لیے۔ یہ طبی مشورہ نہیں ہے۔';
+
+  @override
+  String get navTrain => 'ورزش';
+
+  @override
+  String get trainTitle => 'ورزش';
+
+  @override
+  String get startEmptyWorkout => 'خالی ورزش شروع کریں';
+
+  @override
+  String get resumeWorkout => 'ورزش جاری رکھیں';
+
+  @override
+  String workoutInProgress(String elapsed) {
+    return 'ورزش جاری ہے · $elapsed';
+  }
+
+  @override
+  String get exerciseLibrary => 'ورزشوں کی لائبریری';
+
+  @override
+  String get routines => 'روٹینز';
+
+  @override
+  String get routinesEmpty => 'کسی ورزش کو روٹین کے طور پر محفوظ کریں تاکہ ایک ٹیپ میں دہرا سکیں۔';
+
+  @override
+  String get recentWorkouts => 'حالیہ ورزشیں';
+
+  @override
+  String get noWorkoutsYet => 'آپ کی مکمل ورزشیں یہاں نظر آئیں گی۔';
+
+  @override
+  String exercisesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ورزشیں',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String minutesShort(int count) {
+    return '$count منٹ';
+  }
+
+  @override
+  String prCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نئے ریکارڈ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String volumeLabel(String value) {
+    return 'حجم $value';
+  }
+
+  @override
+  String get workoutDefaultName => 'ورزش';
+
+  @override
+  String get addExercise => 'ورزش شامل کریں';
+
+  @override
+  String get addSet => 'سیٹ شامل کریں';
+
+  @override
+  String get setLabel => 'سیٹ';
+
+  @override
+  String get previousLabel => 'پچھلا';
+
+  @override
+  String get repsLabel => 'ریپس';
+
+  @override
+  String get finishWorkout => 'ختم کریں';
+
+  @override
+  String get discardWorkout => 'ورزش منسوخ کریں';
+
+  @override
+  String get discardConfirm => 'یہ ورزش منسوخ کریں؟ درج سیٹس حذف ہو جائیں گے۔';
+
+  @override
+  String get discard => 'منسوخ کریں';
+
+  @override
+  String get removeExercise => 'ورزش ہٹائیں';
+
+  @override
+  String restTimer(String time) {
+    return 'آرام $time';
+  }
+
+  @override
+  String get skip2 => 'چھوڑیں';
+
+  @override
+  String get workoutComplete => 'ورزش مکمل';
+
+  @override
+  String newPrs(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نئے ذاتی ریکارڈ!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get saveAsRoutine => 'روٹین کے طور پر محفوظ کریں';
+
+  @override
+  String get routineName => 'روٹین کا نام';
+
+  @override
+  String get done => 'ہو گیا';
+
+  @override
+  String get nothingLogged => 'کوئی سیٹ مکمل نہیں ہوا، اس لیے ورزش محفوظ نہیں ہوئی۔';
+
+  @override
+  String get searchExercises => 'ورزشیں تلاش کریں';
+
+  @override
+  String get myEquipmentOnly => 'میرا سامان';
+
+  @override
+  String get allMuscles => 'تمام';
+
+  @override
+  String get howTo => 'طریقہ';
+
+  @override
+  String get videoComingSoon => 'ویڈیو جلد آ رہی ہے';
+
+  @override
+  String videoWithTrainer(String trainer) {
+    return '$trainer کے ساتھ';
+  }
+
+  @override
+  String get targetMuscles => 'ہدف پٹھے';
+
+  @override
+  String get muscleChest => 'سینہ';
+
+  @override
+  String get muscleBack => 'کمر';
+
+  @override
+  String get muscleShoulders => 'کندھے';
+
+  @override
+  String get muscleBiceps => 'بائسیپس';
+
+  @override
+  String get muscleTriceps => 'ٹرائیسیپس';
+
+  @override
+  String get muscleQuads => 'رانوں کے اگلے پٹھے';
+
+  @override
+  String get muscleHamstrings => 'ہیمسٹرنگز';
+
+  @override
+  String get muscleGlutes => 'کولہوں کے پٹھے';
+
+  @override
+  String get muscleCalves => 'پنڈلیاں';
+
+  @override
+  String get muscleCore => 'پیٹ اور کمر';
+
+  @override
+  String get eqBarbell => 'باربیل';
+
+  @override
+  String get eqDumbbell => 'ڈمبل';
+
+  @override
+  String get eqMachine => 'مشین';
+
+  @override
+  String get eqCable => 'کیبل';
+
+  @override
+  String get eqBodyweight => 'جسمانی وزن';
+
+  @override
+  String get eqBand => 'بینڈ';
+
+  @override
+  String get eqKettlebell => 'کیٹل بیل';
 }
