@@ -1338,4 +1338,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String setsCount(String count) {
     return '$count sets';
   }
+
+  @override
+  String get repCounter => 'Rep counter';
+
+  @override
+  String get repCounterIntro => 'Place your phone so your whole body is visible from the side, then start moving.';
+
+  @override
+  String get repCounterPrivacy => 'Analysed on your phone. Nothing is recorded or uploaded.';
+
+  @override
+  String repsCounted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reps',
+      one: '1 rep',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cueGoLower => 'Go lower';
+
+  @override
+  String get cueKeepHipsUp => 'Keep your hips up';
+
+  @override
+  String get cueFullExtension => 'Use the full range';
+
+  @override
+  String get cueStepIntoFrame => 'Step into the frame';
+
+  @override
+  String get countSquat => 'Squat';
+
+  @override
+  String get countPushUp => 'Push-up';
+
+  @override
+  String get countCurl => 'Curl';
+
+  @override
+  String get countShoulderPress => 'Shoulder press';
+
+  @override
+  String get countLunge => 'Lunge';
+
+  @override
+  String get resetCount => 'Reset';
+
+  @override
+  String get logSet => 'Log set';
+
+  @override
+  String setLogged(int count) {
+    return 'Set logged: $count reps';
+  }
+
+  @override
+  String get cameraDenied => 'Camera access is off. Allow it in your phone\'s settings to count reps.';
+
+  @override
+  String get cameraUnavailable => 'No camera is available on this device.';
 }

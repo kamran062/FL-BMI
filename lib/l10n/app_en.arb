@@ -1917,5 +1917,89 @@
         "example": "6.5"
       }
     }
+  },
+  "repCounter": "Rep counter",
+  "@repCounter": {
+    "description": "Camera rep counter title and button"
+  },
+  "repCounterIntro": "Place your phone so your whole body is visible from the side, then start moving.",
+  "@repCounterIntro": {
+    "description": "Setup hint"
+  },
+  "repCounterPrivacy": "Analysed on your phone. Nothing is recorded or uploaded.",
+  "@repCounterPrivacy": {
+    "description": "Privacy note on the camera screen"
+  },
+  "repsCounted": "{count, plural, =1{1 rep} other{{count} reps}}",
+  "@repsCounted": {
+    "description": "Live rep count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "cueGoLower": "Go lower",
+  "@cueGoLower": {
+    "description": "Form cue"
+  },
+  "cueKeepHipsUp": "Keep your hips up",
+  "@cueKeepHipsUp": {
+    "description": "Form cue"
+  },
+  "cueFullExtension": "Use the full range",
+  "@cueFullExtension": {
+    "description": "Form cue"
+  },
+  "cueStepIntoFrame": "Step into the frame",
+  "@cueStepIntoFrame": {
+    "description": "Form cue"
+  },
+  "countSquat": "Squat",
+  "@countSquat": {
+    "description": "Counted exercise"
+  },
+  "countPushUp": "Push-up",
+  "@countPushUp": {
+    "description": "Counted exercise"
+  },
+  "countCurl": "Curl",
+  "@countCurl": {
+    "description": "Counted exercise"
+  },
+  "countShoulderPress": "Shoulder press",
+  "@countShoulderPress": {
+    "description": "Counted exercise"
+  },
+  "countLunge": "Lunge",
+  "@countLunge": {
+    "description": "Counted exercise"
+  },
+  "resetCount": "Reset",
+  "@resetCount": {
+    "description": "Resets the rep count"
+  },
+  "logSet": "Log set",
+  "@logSet": {
+    "description": "Adds the counted reps as a set"
+  },
+  "setLogged": "Set logged: {count} reps",
+  "@setLogged": {
+    "description": "Snack bar",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "cameraDenied": "Camera access is off. Allow it in your phone's settings to count reps.",
+  "@cameraDenied": {
+    "description": "Camera permission denied"
+  },
+  "cameraUnavailable": "No camera is available on this device.",
+  "@cameraUnavailable": {
+    "description": "No camera"
   }
 }

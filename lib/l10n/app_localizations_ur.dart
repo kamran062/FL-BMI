@@ -1332,4 +1332,67 @@ class AppLocalizationsUr extends AppLocalizations {
   String setsCount(String count) {
     return '$count سیٹ';
   }
+
+  @override
+  String get repCounter => 'ریپ کاؤنٹر';
+
+  @override
+  String get repCounterIntro => 'فون ایسے رکھیں کہ پہلو سے آپ کا پورا جسم نظر آئے، پھر ورزش شروع کریں۔';
+
+  @override
+  String get repCounterPrivacy => 'آپ کے فون پر ہی تجزیہ ہوتا ہے۔ کچھ بھی ریکارڈ یا اپ لوڈ نہیں ہوتا۔';
+
+  @override
+  String repsCounted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ریپس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cueGoLower => 'مزید نیچے جائیں';
+
+  @override
+  String get cueKeepHipsUp => 'کولہے اوپر رکھیں';
+
+  @override
+  String get cueFullExtension => 'پوری حرکت کریں';
+
+  @override
+  String get cueStepIntoFrame => 'فریم میں آئیں';
+
+  @override
+  String get countSquat => 'اسکواٹ';
+
+  @override
+  String get countPushUp => 'پش اپ';
+
+  @override
+  String get countCurl => 'کرل';
+
+  @override
+  String get countShoulderPress => 'شولڈر پریس';
+
+  @override
+  String get countLunge => 'لنج';
+
+  @override
+  String get resetCount => 'دوبارہ';
+
+  @override
+  String get logSet => 'سیٹ درج کریں';
+
+  @override
+  String setLogged(int count) {
+    return 'سیٹ درج ہو گیا: $count ریپس';
+  }
+
+  @override
+  String get cameraDenied => 'کیمرے تک رسائی بند ہے۔ ریپس گننے کے لیے فون کی ترتیبات میں اجازت دیں۔';
+
+  @override
+  String get cameraUnavailable => 'اس آلے پر کوئی کیمرا دستیاب نہیں۔';
 }

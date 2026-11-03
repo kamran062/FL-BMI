@@ -27,6 +27,7 @@ import 'package:bmi_health/features/profile/ui/settings_screen.dart';
 import 'package:bmi_health/features/fuel/ui/fuel_screen.dart';
 import 'package:bmi_health/features/today/ui/today_screen.dart';
 import 'package:bmi_health/features/movement/ui/timeline_screen.dart';
+import 'package:bmi_health/features/train/rep_counter/rep_counter_screen.dart';
 
 /// Route paths. Use these instead of string literals.
 abstract final class Routes {
@@ -47,6 +48,7 @@ abstract final class Routes {
   static const train      = '/train';
   static const workout    = '/workout';
   static const exercises  = '/exercises';
+  static const repCounter = '/rep-counter';
   static String exercise(String id) => '/exercises/$id';
   static const profile    = '/profile';
 
@@ -179,6 +181,7 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
               builder: (context, _) => TrainScreen(
                 onOpenWorkout: () => context.push(Routes.workout),
                 onOpenLibrary: () => context.push(Routes.exercises),
+                onOpenRepCounter: () => context.push(Routes.repCounter),
               ),
             ),
           ]),
@@ -218,6 +221,12 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
               context.push<String>('${Routes.exercises}?pick=1'),
           onClose: () => context.pop(),
         ),
+      ),
+      GoRoute(
+        path: Routes.repCounter,
+        parentNavigatorKey: _rootKey,
+        builder: (context, _) =>
+            RepCounterScreen(onClose: () => context.pop()),
       ),
       GoRoute(
         path: Routes.exercises,

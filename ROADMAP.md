@@ -516,6 +516,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Testing:** golden tests for both body models in light and dark mode
 
 ### 3.4 Camera rep counter & form check
+
+> **Status: built; accuracy not yet measured on people.** Front camera (falls back to back), ML Kit pose (on device, nothing recorded), squat / push-up / curl / shoulder press / lunge counted from joint angles with hysteresis and 3-frame smoothing, best-visible body side, cues: go lower, keep hips up, full range, step into frame; "Log set" adds the reps to the active workout. Verified on emulator: permission, preview, frames reach ML Kit (CameraX YUV→NV21 conversion added). **Still required:** the 50-sets-per-exercise accuracy study on real people (target ≥95 %) and threshold tuning. **Size:** ML Kit adds ~21 MB per device (arm64 download now ~50 MB); consider Play Feature Delivery for the rep counter.
 - Counts reps for squats, push-ups, lunges, curls, shoulder press and jumping jacks
 - Live form cues: depth, knee position, back angle
 - Runs fully on the phone; **no video is saved or uploaded**

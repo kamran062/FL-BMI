@@ -19,9 +19,14 @@ import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 class TrainScreen extends StatelessWidget {
   final VoidCallback onOpenWorkout;
   final VoidCallback onOpenLibrary;
+  final VoidCallback onOpenRepCounter;
 
-  const TrainScreen(
-      {super.key, required this.onOpenWorkout, required this.onOpenLibrary});
+  const TrainScreen({
+    super.key,
+    required this.onOpenWorkout,
+    required this.onOpenLibrary,
+    required this.onOpenRepCounter,
+  });
 
   Future<void> _start(BuildContext context, {Routine? routine}) async {
     final l = context.l10n;
@@ -87,13 +92,27 @@ class TrainScreen extends StatelessWidget {
                     onPressed: () => _start(context),
                   ),
                 const SizedBox(height: 12),
-                AppButton(
-                  label: l.exerciseLibrary,
-                  icon: Icons.menu_book_rounded,
-                  variant: AppButtonVariant.secondary,
-                  fullWidth: true,
-                  onPressed: onOpenLibrary,
-                ),
+                Row(children: [
+                  Expanded(
+                    child: AppButton(
+                      label: l.exerciseLibrary,
+                      icon: Icons.menu_book_rounded,
+                      variant: AppButtonVariant.secondary,
+                      fullWidth: true,
+                      onPressed: onOpenLibrary,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: AppButton(
+                      label: l.repCounter,
+                      icon: Icons.videocam_rounded,
+                      variant: AppButtonVariant.secondary,
+                      fullWidth: true,
+                      onPressed: onOpenRepCounter,
+                    ),
+                  ),
+                ]),
                 const SizedBox(height: 20),
                 OverlineLabel(l.programs),
                 const SizedBox(height: 8),

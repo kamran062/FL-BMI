@@ -2470,6 +2470,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} sets'**
   String setsCount(String count);
+
+  /// Camera rep counter title and button
+  ///
+  /// In en, this message translates to:
+  /// **'Rep counter'**
+  String get repCounter;
+
+  /// Setup hint
+  ///
+  /// In en, this message translates to:
+  /// **'Place your phone so your whole body is visible from the side, then start moving.'**
+  String get repCounterIntro;
+
+  /// Privacy note on the camera screen
+  ///
+  /// In en, this message translates to:
+  /// **'Analysed on your phone. Nothing is recorded or uploaded.'**
+  String get repCounterPrivacy;
+
+  /// Live rep count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 rep} other{{count} reps}}'**
+  String repsCounted(int count);
+
+  /// Form cue
+  ///
+  /// In en, this message translates to:
+  /// **'Go lower'**
+  String get cueGoLower;
+
+  /// Form cue
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your hips up'**
+  String get cueKeepHipsUp;
+
+  /// Form cue
+  ///
+  /// In en, this message translates to:
+  /// **'Use the full range'**
+  String get cueFullExtension;
+
+  /// Form cue
+  ///
+  /// In en, this message translates to:
+  /// **'Step into the frame'**
+  String get cueStepIntoFrame;
+
+  /// Counted exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Squat'**
+  String get countSquat;
+
+  /// Counted exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Push-up'**
+  String get countPushUp;
+
+  /// Counted exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Curl'**
+  String get countCurl;
+
+  /// Counted exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulder press'**
+  String get countShoulderPress;
+
+  /// Counted exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Lunge'**
+  String get countLunge;
+
+  /// Resets the rep count
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetCount;
+
+  /// Adds the counted reps as a set
+  ///
+  /// In en, this message translates to:
+  /// **'Log set'**
+  String get logSet;
+
+  /// Snack bar
+  ///
+  /// In en, this message translates to:
+  /// **'Set logged: {count} reps'**
+  String setLogged(int count);
+
+  /// Camera permission denied
+  ///
+  /// In en, this message translates to:
+  /// **'Camera access is off. Allow it in your phone\'s settings to count reps.'**
+  String get cameraDenied;
+
+  /// No camera
+  ///
+  /// In en, this message translates to:
+  /// **'No camera is available on this device.'**
+  String get cameraUnavailable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
