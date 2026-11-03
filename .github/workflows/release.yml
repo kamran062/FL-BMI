@@ -1,0 +1,78 @@
+# Builds a signed Play Store bundle when a version tag is pushed:
+#   git tag v1.0.2 && git push origin v1.0.2
+# The tag must match the version in pubspec.yaml (without the +build part).
+#
+# Repository secrets needed (Settings → Secrets and variables → Actions):
+#   ANDROID_KEYSTORE_BASE64   base64 of the upload keystore (.jks)
+#   ANDROID_KEY_ALIAS         key alias
+#   ANDROID_KEY_PASSWORD      key password
+#   ANDROID_STORE_PASSWORD    keystore password
+#   ENV_JSON                  contents of .env.json (AdMob IDs, SENTRY_DSN)
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+env:
+  FLUTTER_VERSION: '3.29.2'
+
+jobs:
+  android-bundle:
+    name: Signed Android bundle (prod)
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tag matches pubspec version
+        run: |
+          version=$(grep '^version:' pubspec.yaml | sed -E 's/version: *([^+]+).*/\1/')
+          if [ "v$version" != "${GITHUB_REF_NAME}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match pubspec version $version"
+            exit 1
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install SQLite
+        run: sudo apt-get update && sudo apt-get install -y libsqlite3-dev
+
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos
+      - run: flutter test
+
+      - name: Write signing config and env file
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          ENV_JSON: ${{ secrets.ENV_JSON }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+          cat > android/key.properties <<PROPS
+          storeFile=upload-keystore.jks
+          storePassword=$STORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEY_PASSWORD
+          PROPS
+          printf '%s' "$ENV_JSON" > .env.json
+
+      - name: Build bundle
+        run: flutter build appbundle --release --flavor prod --dart-define-from-file=.env.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-prod-release-${{ github.ref_name }}
+          path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+          retention-days: 30

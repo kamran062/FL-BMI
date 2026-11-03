@@ -1,0 +1,35 @@
+{
+  // Android needs a flavor since Phase 0.3 (dev / staging / prod).
+  // Dev installs next to the store app as "BMI Health Dev".
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Dev (debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": ["--flavor", "dev"]
+    },
+    {
+      "name": "Dev (debug, no ads)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": ["--flavor", "dev", "--dart-define=FLAG_ADS=false"]
+    },
+    {
+      "name": "Staging (profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "args": ["--flavor", "staging", "--dart-define-from-file=.env.json"]
+    },
+    {
+      "name": "Prod (release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "args": ["--flavor", "prod", "--dart-define-from-file=.env.json"]
+    }
+  ]
+}

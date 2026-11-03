@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show appFlavor;
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Crash reporting (Sentry). Off unless SENTRY_DSN is provided at build time:
@@ -8,11 +9,15 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 const _sentryDsn = String.fromEnvironment('SENTRY_DSN');
 
-/// 'production', 'staging' or 'development'. Set APP_ENV per flavor.
-const appEnvironment = String.fromEnvironment(
-  'APP_ENV',
-  defaultValue: kReleaseMode ? 'production' : 'development',
-);
+/// 'production', 'staging' or 'development', from the build flavor
+/// (`--flavor dev|staging|prod`). iOS has no flavors yet, so it falls back
+/// to the build mode.
+String get appEnvironment => switch (appFlavor) {
+      'dev' => 'development',
+      'staging' => 'staging',
+      'prod' => 'production',
+      _ => kReleaseMode ? 'production' : 'development',
+    };
 
 bool get crashReportingEnabled => _sentryDsn.isNotEmpty && !kDebugMode;
 

@@ -1,16 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:bmi_health/core/config/feature_flags.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/l10n/app_localizations.dart';
 
 export 'package:bmi_health/l10n/app_localizations.dart';
 
-/// Urdu ships to users only once every screen is translated. Until then it is
-/// available in debug and profile builds for testing, and release builds
-/// stay English-only so nobody sees a half-translated app.
-const urduReady = false;
-
-bool get urduEnabled => urduReady || !kReleaseMode;
+/// Whether this build offers Urdu. See [FeatureFlags.urdu].
+bool get urduEnabled => FeatureFlags.urdu;
 
 /// Locales the app offers in this build.
 List<Locale> get appSupportedLocales => urduEnabled

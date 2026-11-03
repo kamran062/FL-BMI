@@ -245,7 +245,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 - [x] Numbered schema migrations on the existing `sqflite` database (`DatabaseHelper._migrations`), v1 → v2 adds a history date index. Kept `sqflite` instead of moving to drift: no code generation, zero change to how existing users' data is stored. Revisit drift in Phase 1 if the number of tables makes raw SQL painful.
 - [ ] Split `AppProvider` into feature providers. Deferred to Phase 1.1, where the profile is rebuilt anyway.
 - [x] Crash reporting with **Sentry** (`lib/core/monitoring/crash_reporting.dart`): wraps app start-up, off unless `SENTRY_DSN` is in `.env.json`, never in debug. No PII, screenshots or view hierarchy; navigation/console breadcrumbs dropped because routes carry BMI values. `reportError()` for handled errors. Privacy dialog (en/ur) and `privacy-policy.md` updated.
-- [x] English + Urdu localization (`lib/l10n/*.arb`, `tool/gen_arb.py`): all 175 user-facing strings, plurals, Urdu dates, RTL layout checked on an emulator. Language picker in Settings. Urdu stays hidden in release builds (`urduReady = false` in `lib/l10n/l10n.dart`) until a native speaker reviews the translations. Paywall strings are left for Phase 3.5 (premium launch).
+- [x] English + Urdu localization (`lib/l10n/*.arb`, `tool/gen_arb.py`): all 175 user-facing strings, plurals, Urdu dates, RTL layout checked on an emulator. Language picker in Settings. Urdu stays hidden in release builds (`FeatureFlags.urdu` in `lib/core/config/feature_flags.dart`; force with `--dart-define=FLAG_URDU=true`) until a native speaker reviews the translations. Paywall strings are left for Phase 3.5 (premium launch).
 
 **Testing**
 - [x] Migration tests (`test/database_migration_test.dart`): a v1 database with real BMI history upgrades with zero data loss; fresh and upgraded installs end with identical schemas
@@ -256,10 +256,11 @@ Every module in this roadmap is only "done" when it meets all of these.
 ### 0.3 Engineering infrastructure
 
 **Scope**
-- GitHub Actions CI: analyze, test, build APK/AAB and IPA
-- Flavors: `dev` / `staging` / `prod` with separate app names and ad configs
-- Feature flag service (Firebase Remote Config or a simple local JSON)
-- Test helpers: fake database, fake clock, fake location stream, fake health data
+- [x] GitHub Actions: `ci.yml` (analyze, tests, stale-translation check, dev APK on every push/PR) and `release.yml` (signed prod AAB on `v*` tags, tag must match pubspec version). Needs the repo on GitHub plus the signing/env secrets listed in the file.
+- [x] Android flavors `dev` / `staging` / `prod`: dev and staging install side by side ("BMI Health Dev", "BMI Health Staging"); prod keeps `com.bmihealth.bmi_health`. `make run`, `make check`, `make release`, and VS Code launch configs.
+- [ ] iOS flavors (Xcode schemes/configurations): set up together with the first App Store release
+- [x] Feature flags (`lib/core/config/feature_flags.dart`): build-time defaults, overridable per build with `--dart-define=FLAG_…`; Urdu and ads are behind flags. Remote Config can replace this when remote switches are needed.
+- [x] Test helpers: shared app harness (`test/helpers/app_harness.dart`), in-memory/temporary database via `sqflite_common_ffi`. Fake clock/location/health-data helpers get added with the features that need them (Phase 1–2).
 
 **Done when:** every PR runs CI automatically, and a release build can be produced from a git tag.
 

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:bmi_health/core/config/feature_flags.dart';
 
 // ── Ad Unit IDs ────────────────────────────────────────────────────────────────
 // Release builds read real IDs injected at build time from .env.json:
@@ -110,6 +111,11 @@ class AdService {
   Future<void> initialize() async {
     if (_initStarted) return;
     _initStarted = true;
+
+    if (!FeatureFlags.ads) {
+      debugPrint('AdService: ads turned off for this build (FLAG_ADS=false).');
+      return;
+    }
 
     if (kReleaseMode && !_hasReleaseIds) {
       debugPrint('AdService: ad unit IDs missing — build with '
