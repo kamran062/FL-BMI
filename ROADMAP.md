@@ -272,6 +272,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 1.1 Profile & onboarding v2
 
+> **Status: done** (1.1a `e86e9c8`, 1.1b). Profile lives in the database (schema v3) with a one-time import of the v1.0 profile; `AppProvider` is split into Settings/Profile/BMI providers. Setup flow: name → gender (+ formula basis and trainer for "Other") → body → goal → experience → equipment → days, shown after the intro and once to existing users ("Later" available), editable from Settings → Personal details. Inter is now bundled (no runtime font downloads).
+
 **Features**
 - Onboarding flow: name → gender → age → height and weight → goal (lose fat / build muscle / get stronger / stay fit) → experience level → equipment (gym / home / none) → training days per week
 - Gender-aware steps as defined in §3 (demonstrator preference, formula basis for `o`)

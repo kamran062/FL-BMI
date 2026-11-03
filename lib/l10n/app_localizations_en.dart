@@ -572,4 +572,158 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adviceObeseNote => 'BMI alone does not diagnose health. Speak with a doctor or registered dietitian for a plan tailored to your medical history.';
+
+  @override
+  String stepOf(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get finish => 'Finish';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get personalDetails => 'Personal details';
+
+  @override
+  String get notSet => 'Not set';
+
+  @override
+  String get setupIntro => 'A few quick questions so the app can tailor workouts and targets to you.';
+
+  @override
+  String get setupNameTitle => 'What should we call you?';
+
+  @override
+  String get setupNameHint => 'Your name (optional)';
+
+  @override
+  String get setupGenderTitle => 'What is your gender?';
+
+  @override
+  String get setupGenderBody => 'We use this for calorie and body-fat formulas and to show exercise videos with a matching trainer. You can change it any time.';
+
+  @override
+  String get setupFormulaTitle => 'Calculations based on';
+
+  @override
+  String get setupFormulaBody => 'Calorie and body-fat formulas differ for male and female bodies. Pick the one that fits you best.';
+
+  @override
+  String get bodyMale => 'Male body';
+
+  @override
+  String get bodyFemale => 'Female body';
+
+  @override
+  String get setupDemonstratorTitle => 'Exercise videos show';
+
+  @override
+  String get demonstratorAuto => 'Match my profile';
+
+  @override
+  String get demonstratorMale => 'Male trainer';
+
+  @override
+  String get demonstratorFemale => 'Female trainer';
+
+  @override
+  String get setupBodyTitle => 'About your body';
+
+  @override
+  String get setupGoalTitle => 'What is your main goal?';
+
+  @override
+  String get goalLoseFat => 'Lose fat';
+
+  @override
+  String get goalLoseFatBody => 'Burn fat while keeping muscle';
+
+  @override
+  String get goalBuildMuscle => 'Build muscle';
+
+  @override
+  String get goalBuildMuscleBody => 'Gain size and shape';
+
+  @override
+  String get goalGetStronger => 'Get stronger';
+
+  @override
+  String get goalGetStrongerBody => 'Lift heavier, step by step';
+
+  @override
+  String get goalStayFit => 'Stay fit & healthy';
+
+  @override
+  String get goalStayFitBody => 'Move more and feel better';
+
+  @override
+  String get setupExperienceTitle => 'How experienced are you with training?';
+
+  @override
+  String get expBeginner => 'Beginner';
+
+  @override
+  String get expBeginnerBody => 'New to training or returning after a long break';
+
+  @override
+  String get expIntermediate => 'Intermediate';
+
+  @override
+  String get expIntermediateBody => 'Training regularly for 6+ months';
+
+  @override
+  String get expAdvanced => 'Advanced';
+
+  @override
+  String get expAdvancedBody => 'Several years of consistent training';
+
+  @override
+  String get setupEquipmentTitle => 'Where will you train?';
+
+  @override
+  String get equipGym => 'Gym';
+
+  @override
+  String get equipGymBody => 'Full access to machines and free weights';
+
+  @override
+  String get equipHome => 'Home with some equipment';
+
+  @override
+  String get equipHomeBody => 'Dumbbells, bands or a bench';
+
+  @override
+  String get equipNone => 'No equipment';
+
+  @override
+  String get equipNoneBody => 'Bodyweight exercises only';
+
+  @override
+  String get setupDaysTitle => 'How many days a week can you train?';
+
+  @override
+  String daysPerWeek(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days a week',
+      one: '1 day a week',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get setupDaysTip => '3–4 days is a great start for most people.';
+
+  @override
+  String get sectionProfile => 'Profile';
 }

@@ -20,9 +20,16 @@ void setUpAppHarness() {
   GoogleFonts.config.allowRuntimeFetching = false;
 }
 
-/// Launches the real app as a returning user and waits past the splash.
+typedef AppState = ({
+  SettingsProvider settings,
+  ProfileProvider profile,
+  BmiProvider bmi,
+});
+
+/// Launches the real app as a returning user who has already answered (or
+/// postponed) the profile questions, and waits past the splash.
 /// [prefs] are extra SharedPreferences values, e.g. {'language': 'ur'}.
-Future<void> launchApp(
+Future<AppState> launchApp(
   WidgetTester tester, {
   Map<String, Object> prefs = const {},
 }) async {
@@ -31,7 +38,11 @@ Future<void> launchApp(
   tester.view.devicePixelRatio = 3;
   addTearDown(tester.view.reset);
 
-  SharedPreferences.setMockInitialValues({'onboarding_done': true, ...prefs});
+  SharedPreferences.setMockInitialValues({
+    'onboarding_done': true,
+    'profile_setup_dismissed': true,
+    ...prefs,
+  });
   PackageInfo.setMockInitialValues(
     appName: 'BMI Health', packageName: 'com.bmihealth.bmi_health',
     version: '1.0.1', buildNumber: '3', buildSignature: '',
@@ -55,6 +66,7 @@ Future<void> launchApp(
   // Splash hands off after 2.6 s
   await tester.pump(const Duration(seconds: 3));
   await tester.pumpAndSettle();
+  return (settings: settings, profile: profile, bmi: bmi);
 }
 
 /// Simulates the Android system back button.

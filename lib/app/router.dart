@@ -8,6 +8,7 @@ import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
+import 'package:bmi_health/features/profile/ui/profile_setup_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/goal_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/history_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/home_screen.dart';
@@ -29,6 +30,8 @@ abstract final class Routes {
   static const result     = '/result';
   static const goal       = '/goal';
   static const share      = '/share';
+  static const setup      = '/setup';
+  static const profile    = '/profile';
 
   /// Result for a saved BMI (read-only) — or a fresh calculation when [bmi] is null.
   static String resultFor([double? bmi]) => bmi == null
@@ -41,23 +44,32 @@ abstract final class Routes {
 
 final _rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
-GoRouter createRouter(SettingsProvider provider) {
-  // Redirects depend only on onboarding state, so routing re-runs only when
-  // that changes, not on every settings change.
-  final onboardingDone = ValueNotifier(provider.onboardingDone);
-  provider.addListener(() => onboardingDone.value = provider.onboardingDone);
+GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
+  // Routing only depends on these flags. Listening to the providers
+  // directly would re-run it on every keystroke in the calculator.
+  ({bool onboarded, bool needsSetup}) gate() => (
+        onboarded: settings.onboardingDone,
+        needsSetup:
+            !profile.profile.completed && !settings.profileSetupDismissed,
+      );
+  final gateState = ValueNotifier(gate());
+  void refresh() => gateState.value = gate();
+  settings.addListener(refresh);
+  profile.addListener(refresh);
 
   return GoRouter(
     navigatorKey: _rootKey,
     initialLocation: Routes.splash,
-    refreshListenable: onboardingDone,
+    refreshListenable: gateState,
     redirect: (context, state) {
       final path = state.matchedLocation;
+      final g = gateState.value;
       if (path == Routes.splash) return null;
-      if (!provider.onboardingDone && path != Routes.onboarding) {
-        return Routes.onboarding;
-      }
-      if (provider.onboardingDone && path == Routes.onboarding) {
+      if (!g.onboarded) return path == Routes.onboarding ? null : Routes.onboarding;
+      // Intro done: new users and not-yet-asked existing users answer the
+      // profile questions once (they can choose "Later").
+      if (g.needsSetup) return path == Routes.setup ? null : Routes.setup;
+      if (path == Routes.onboarding || path == Routes.setup) {
         return Routes.calculate;
       }
       return null;
@@ -66,14 +78,22 @@ GoRouter createRouter(SettingsProvider provider) {
       GoRoute(
         path: Routes.splash,
         builder: (context, _) => SplashScreen(
-          onDone: () => context.go(
-            provider.onboardingDone ? Routes.calculate : Routes.onboarding,
-          ),
+          // The redirect sends new users to onboarding / profile setup.
+          onDone: () => context.go(Routes.calculate),
         ),
       ),
       GoRoute(
         path: Routes.onboarding,
         builder: (_, __) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: Routes.setup,
+        builder: (context, _) => ProfileSetupScreen(
+          mode: ProfileSetupMode.firstRun,
+          // Saving marks the profile complete; the redirect moves on.
+          onDone: () {},
+          onDismiss: () => context.read<SettingsProvider>().dismissProfileSetup(),
+        ),
       ),
 
       // ── Tabs ──────────────────────────────────────────────────────────────
@@ -109,7 +129,9 @@ GoRouter createRouter(SettingsProvider provider) {
           StatefulShellBranch(routes: [
             GoRoute(
               path: Routes.settings,
-              builder: (_, __) => const SettingsScreen(),
+              builder: (context, _) => SettingsScreen(
+                onOpenProfile: () => context.push(Routes.profile),
+              ),
             ),
           ]),
         ],
@@ -121,6 +143,15 @@ GoRouter createRouter(SettingsProvider provider) {
         parentNavigatorKey: _rootKey,
         builder: (_, state) => _ResultPage(
           savedBmi: double.tryParse(state.uri.queryParameters['bmi'] ?? ''),
+        ),
+      ),
+      GoRoute(
+        path: Routes.profile,
+        parentNavigatorKey: _rootKey,
+        builder: (context, _) => ProfileSetupScreen(
+          mode: ProfileSetupMode.edit,
+          onDone: () => context.pop(),
+          onDismiss: () => context.pop(),
         ),
       ),
       GoRoute(

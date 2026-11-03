@@ -45,7 +45,8 @@ class BmiHealthApp extends StatefulWidget {
 class _BmiHealthAppState extends State<BmiHealthApp>
     with WidgetsBindingObserver {
   // Created once — rebuilding the router would reset navigation.
-  late final GoRouter _router = createRouter(context.read<SettingsProvider>());
+  late final GoRouter _router = createRouter(
+      context.read<SettingsProvider>(), context.read<ProfileProvider>());
 
   @override
   void initState() {

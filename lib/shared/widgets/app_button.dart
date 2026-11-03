@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 enum AppButtonVariant { primary, secondary, ghost, dark, destructive, light }
 enum AppButtonSize { sm, md, lg }
@@ -133,14 +134,20 @@ class _AppButtonState extends State<AppButton>
                   Icon(widget.icon, size: iconSize, color: fg),
                   const SizedBox(width: 8),
                 ],
-                Text(
-                  widget.label,
-                  style: GoogleFonts.inter(
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w600,
-                    color: fg,
-                    letterSpacing: -0.005 * fontSize,
-                    height: 1,
+                // Flexible so long translations or large system fonts
+                // shrink with an ellipsis instead of overflowing.
+                Flexible(
+                  child: Text(
+                    widget.label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.inter(
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.w600,
+                      color: fg,
+                      letterSpacing: tracking(context, -0.005 * fontSize),
+                      height: 1.2,
+                    ),
                   ),
                 ),
               ],

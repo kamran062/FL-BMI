@@ -795,5 +795,213 @@
   "adviceObeseNote": "BMI alone does not diagnose health. Speak with a doctor or registered dietitian for a plan tailored to your medical history.",
   "@adviceObeseNote": {
     "description": "Medical note for BMI category 'obese'"
+  },
+  "stepOf": "Step {current} of {total}",
+  "@stepOf": {
+    "description": "Progress label in the profile setup",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "2"
+      },
+      "total": {
+        "type": "int",
+        "example": "7"
+      }
+    }
+  },
+  "later": "Later",
+  "@later": {
+    "description": "Postpones the profile setup"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Previous step"
+  },
+  "finish": "Finish",
+  "@finish": {
+    "description": "Last step of the profile setup"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Saves edited profile details"
+  },
+  "personalDetails": "Personal details",
+  "@personalDetails": {
+    "description": "Settings row and profile editor title"
+  },
+  "notSet": "Not set",
+  "@notSet": {
+    "description": "Shown when a profile value is empty"
+  },
+  "setupIntro": "A few quick questions so the app can tailor workouts and targets to you.",
+  "@setupIntro": {
+    "description": "Subtitle on the first profile setup step"
+  },
+  "setupNameTitle": "What should we call you?",
+  "@setupNameTitle": {
+    "description": "Profile setup question"
+  },
+  "setupNameHint": "Your name (optional)",
+  "@setupNameHint": {
+    "description": "Name field placeholder"
+  },
+  "setupGenderTitle": "What is your gender?",
+  "@setupGenderTitle": {
+    "description": "Profile setup question"
+  },
+  "setupGenderBody": "We use this for calorie and body-fat formulas and to show exercise videos with a matching trainer. You can change it any time.",
+  "@setupGenderBody": {
+    "description": "Explains why gender is asked"
+  },
+  "setupFormulaTitle": "Calculations based on",
+  "@setupFormulaTitle": {
+    "description": "Asked when gender is Other"
+  },
+  "setupFormulaBody": "Calorie and body-fat formulas differ for male and female bodies. Pick the one that fits you best.",
+  "@setupFormulaBody": {
+    "description": "Explains the formula basis question"
+  },
+  "bodyMale": "Male body",
+  "@bodyMale": {
+    "description": "Formula basis option"
+  },
+  "bodyFemale": "Female body",
+  "@bodyFemale": {
+    "description": "Formula basis option"
+  },
+  "setupDemonstratorTitle": "Exercise videos show",
+  "@setupDemonstratorTitle": {
+    "description": "Demonstrator preference question"
+  },
+  "demonstratorAuto": "Match my profile",
+  "@demonstratorAuto": {
+    "description": "Demonstrator option"
+  },
+  "demonstratorMale": "Male trainer",
+  "@demonstratorMale": {
+    "description": "Demonstrator option"
+  },
+  "demonstratorFemale": "Female trainer",
+  "@demonstratorFemale": {
+    "description": "Demonstrator option"
+  },
+  "setupBodyTitle": "About your body",
+  "@setupBodyTitle": {
+    "description": "Profile setup step title"
+  },
+  "setupGoalTitle": "What is your main goal?",
+  "@setupGoalTitle": {
+    "description": "Profile setup question"
+  },
+  "goalLoseFat": "Lose fat",
+  "@goalLoseFat": {
+    "description": "Fitness goal"
+  },
+  "goalLoseFatBody": "Burn fat while keeping muscle",
+  "@goalLoseFatBody": {
+    "description": "Fitness goal description"
+  },
+  "goalBuildMuscle": "Build muscle",
+  "@goalBuildMuscle": {
+    "description": "Fitness goal"
+  },
+  "goalBuildMuscleBody": "Gain size and shape",
+  "@goalBuildMuscleBody": {
+    "description": "Fitness goal description"
+  },
+  "goalGetStronger": "Get stronger",
+  "@goalGetStronger": {
+    "description": "Fitness goal"
+  },
+  "goalGetStrongerBody": "Lift heavier, step by step",
+  "@goalGetStrongerBody": {
+    "description": "Fitness goal description"
+  },
+  "goalStayFit": "Stay fit & healthy",
+  "@goalStayFit": {
+    "description": "Fitness goal"
+  },
+  "goalStayFitBody": "Move more and feel better",
+  "@goalStayFitBody": {
+    "description": "Fitness goal description"
+  },
+  "setupExperienceTitle": "How experienced are you with training?",
+  "@setupExperienceTitle": {
+    "description": "Profile setup question"
+  },
+  "expBeginner": "Beginner",
+  "@expBeginner": {
+    "description": "Experience level"
+  },
+  "expBeginnerBody": "New to training or returning after a long break",
+  "@expBeginnerBody": {
+    "description": "Experience description"
+  },
+  "expIntermediate": "Intermediate",
+  "@expIntermediate": {
+    "description": "Experience level"
+  },
+  "expIntermediateBody": "Training regularly for 6+ months",
+  "@expIntermediateBody": {
+    "description": "Experience description"
+  },
+  "expAdvanced": "Advanced",
+  "@expAdvanced": {
+    "description": "Experience level"
+  },
+  "expAdvancedBody": "Several years of consistent training",
+  "@expAdvancedBody": {
+    "description": "Experience description"
+  },
+  "setupEquipmentTitle": "Where will you train?",
+  "@setupEquipmentTitle": {
+    "description": "Profile setup question"
+  },
+  "equipGym": "Gym",
+  "@equipGym": {
+    "description": "Equipment option"
+  },
+  "equipGymBody": "Full access to machines and free weights",
+  "@equipGymBody": {
+    "description": "Equipment description"
+  },
+  "equipHome": "Home with some equipment",
+  "@equipHome": {
+    "description": "Equipment option"
+  },
+  "equipHomeBody": "Dumbbells, bands or a bench",
+  "@equipHomeBody": {
+    "description": "Equipment description"
+  },
+  "equipNone": "No equipment",
+  "@equipNone": {
+    "description": "Equipment option"
+  },
+  "equipNoneBody": "Bodyweight exercises only",
+  "@equipNoneBody": {
+    "description": "Equipment description"
+  },
+  "setupDaysTitle": "How many days a week can you train?",
+  "@setupDaysTitle": {
+    "description": "Profile setup question"
+  },
+  "daysPerWeek": "{count, plural, =1{1 day a week} other{{count} days a week}}",
+  "@daysPerWeek": {
+    "description": "Training frequency",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "setupDaysTip": "3–4 days is a great start for most people.",
+  "@setupDaysTip": {
+    "description": "Hint below the training days choice"
+  },
+  "sectionProfile": "Profile",
+  "@sectionProfile": {
+    "description": "Settings section"
   }
 }

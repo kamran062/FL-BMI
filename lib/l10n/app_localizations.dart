@@ -1144,6 +1144,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'BMI alone does not diagnose health. Speak with a doctor or registered dietitian for a plan tailored to your medical history.'**
   String get adviceObeseNote;
+
+  /// Progress label in the profile setup
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String stepOf(int current, int total);
+
+  /// Postpones the profile setup
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get later;
+
+  /// Previous step
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// Last step of the profile setup
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finish;
+
+  /// Saves edited profile details
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// Settings row and profile editor title
+  ///
+  /// In en, this message translates to:
+  /// **'Personal details'**
+  String get personalDetails;
+
+  /// Shown when a profile value is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get notSet;
+
+  /// Subtitle on the first profile setup step
+  ///
+  /// In en, this message translates to:
+  /// **'A few quick questions so the app can tailor workouts and targets to you.'**
+  String get setupIntro;
+
+  /// Profile setup question
+  ///
+  /// In en, this message translates to:
+  /// **'What should we call you?'**
+  String get setupNameTitle;
+
+  /// Name field placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Your name (optional)'**
+  String get setupNameHint;
+
+  /// Profile setup question
+  ///
+  /// In en, this message translates to:
+  /// **'What is your gender?'**
+  String get setupGenderTitle;
+
+  /// Explains why gender is asked
+  ///
+  /// In en, this message translates to:
+  /// **'We use this for calorie and body-fat formulas and to show exercise videos with a matching trainer. You can change it any time.'**
+  String get setupGenderBody;
+
+  /// Asked when gender is Other
+  ///
+  /// In en, this message translates to:
+  /// **'Calculations based on'**
+  String get setupFormulaTitle;
+
+  /// Explains the formula basis question
+  ///
+  /// In en, this message translates to:
+  /// **'Calorie and body-fat formulas differ for male and female bodies. Pick the one that fits you best.'**
+  String get setupFormulaBody;
+
+  /// Formula basis option
+  ///
+  /// In en, this message translates to:
+  /// **'Male body'**
+  String get bodyMale;
+
+  /// Formula basis option
+  ///
+  /// In en, this message translates to:
+  /// **'Female body'**
+  String get bodyFemale;
+
+  /// Demonstrator preference question
+  ///
+  /// In en, this message translates to:
+  /// **'Exercise videos show'**
+  String get setupDemonstratorTitle;
+
+  /// Demonstrator option
+  ///
+  /// In en, this message translates to:
+  /// **'Match my profile'**
+  String get demonstratorAuto;
+
+  /// Demonstrator option
+  ///
+  /// In en, this message translates to:
+  /// **'Male trainer'**
+  String get demonstratorMale;
+
+  /// Demonstrator option
+  ///
+  /// In en, this message translates to:
+  /// **'Female trainer'**
+  String get demonstratorFemale;
+
+  /// Profile setup step title
+  ///
+  /// In en, this message translates to:
+  /// **'About your body'**
+  String get setupBodyTitle;
+
+  /// Profile setup question
+  ///
+  /// In en, this message translates to:
+  /// **'What is your main goal?'**
+  String get setupGoalTitle;
+
+  /// Fitness goal
+  ///
+  /// In en, this message translates to:
+  /// **'Lose fat'**
+  String get goalLoseFat;
+
+  /// Fitness goal description
+  ///
+  /// In en, this message translates to:
+  /// **'Burn fat while keeping muscle'**
+  String get goalLoseFatBody;
+
+  /// Fitness goal
+  ///
+  /// In en, this message translates to:
+  /// **'Build muscle'**
+  String get goalBuildMuscle;
+
+  /// Fitness goal description
+  ///
+  /// In en, this message translates to:
+  /// **'Gain size and shape'**
+  String get goalBuildMuscleBody;
+
+  /// Fitness goal
+  ///
+  /// In en, this message translates to:
+  /// **'Get stronger'**
+  String get goalGetStronger;
+
+  /// Fitness goal description
+  ///
+  /// In en, this message translates to:
+  /// **'Lift heavier, step by step'**
+  String get goalGetStrongerBody;
+
+  /// Fitness goal
+  ///
+  /// In en, this message translates to:
+  /// **'Stay fit & healthy'**
+  String get goalStayFit;
+
+  /// Fitness goal description
+  ///
+  /// In en, this message translates to:
+  /// **'Move more and feel better'**
+  String get goalStayFitBody;
+
+  /// Profile setup question
+  ///
+  /// In en, this message translates to:
+  /// **'How experienced are you with training?'**
+  String get setupExperienceTitle;
+
+  /// Experience level
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get expBeginner;
+
+  /// Experience description
+  ///
+  /// In en, this message translates to:
+  /// **'New to training or returning after a long break'**
+  String get expBeginnerBody;
+
+  /// Experience level
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get expIntermediate;
+
+  /// Experience description
+  ///
+  /// In en, this message translates to:
+  /// **'Training regularly for 6+ months'**
+  String get expIntermediateBody;
+
+  /// Experience level
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get expAdvanced;
+
+  /// Experience description
+  ///
+  /// In en, this message translates to:
+  /// **'Several years of consistent training'**
+  String get expAdvancedBody;
+
+  /// Profile setup question
+  ///
+  /// In en, this message translates to:
+  /// **'Where will you train?'**
+  String get setupEquipmentTitle;
+
+  /// Equipment option
+  ///
+  /// In en, this message translates to:
+  /// **'Gym'**
+  String get equipGym;
+
+  /// Equipment description
+  ///
+  /// In en, this message translates to:
+  /// **'Full access to machines and free weights'**
+  String get equipGymBody;
+
+  /// Equipment option
+  ///
+  /// In en, this message translates to:
+  /// **'Home with some equipment'**
+  String get equipHome;
+
+  /// Equipment description
+  ///
+  /// In en, this message translates to:
+  /// **'Dumbbells, bands or a bench'**
+  String get equipHomeBody;
+
+  /// Equipment option
+  ///
+  /// In en, this message translates to:
+  /// **'No equipment'**
+  String get equipNone;
+
+  /// Equipment description
+  ///
+  /// In en, this message translates to:
+  /// **'Bodyweight exercises only'**
+  String get equipNoneBody;
+
+  /// Profile setup question
+  ///
+  /// In en, this message translates to:
+  /// **'How many days a week can you train?'**
+  String get setupDaysTitle;
+
+  /// Training frequency
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day a week} other{{count} days a week}}'**
+  String daysPerWeek(int count);
+
+  /// Hint below the training days choice
+  ///
+  /// In en, this message translates to:
+  /// **'3–4 days is a great start for most people.'**
+  String get setupDaysTip;
+
+  /// Settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get sectionProfile;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

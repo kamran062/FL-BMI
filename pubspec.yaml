@@ -50,3 +50,6 @@ flutter:
 
   assets:
     - assets/
+    # Inter, bundled so text renders offline and no font requests go to
+    # Google at runtime (privacy). OFL-licensed; see OFL.txt.
+    - assets/google_fonts/

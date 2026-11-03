@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:bmi_health/core/config/feature_flags.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
+import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/l10n/app_localizations.dart';
 
 export 'package:bmi_health/l10n/app_localizations.dart';
@@ -62,6 +63,55 @@ extension L10nDomain on AppLocalizations {
             steps: [adviceObeseStep1, adviceObeseStep2, adviceObeseStep3, adviceObeseStep4, adviceObeseStep5, adviceObeseStep6],
             note: adviceObeseNote,
           ),
+      };
+
+  String fitnessGoal(FitnessGoal g) => switch (g) {
+        FitnessGoal.loseFat => goalLoseFat,
+        FitnessGoal.buildMuscle => goalBuildMuscle,
+        FitnessGoal.getStronger => goalGetStronger,
+        FitnessGoal.stayFit => goalStayFit,
+      };
+
+  String fitnessGoalBody(FitnessGoal g) => switch (g) {
+        FitnessGoal.loseFat => goalLoseFatBody,
+        FitnessGoal.buildMuscle => goalBuildMuscleBody,
+        FitnessGoal.getStronger => goalGetStrongerBody,
+        FitnessGoal.stayFit => goalStayFitBody,
+      };
+
+  String experience(Experience e) => switch (e) {
+        Experience.beginner => expBeginner,
+        Experience.intermediate => expIntermediate,
+        Experience.advanced => expAdvanced,
+      };
+
+  String experienceBody(Experience e) => switch (e) {
+        Experience.beginner => expBeginnerBody,
+        Experience.intermediate => expIntermediateBody,
+        Experience.advanced => expAdvancedBody,
+      };
+
+  String equipment(Equipment e) => switch (e) {
+        Equipment.gym => equipGym,
+        Equipment.home => equipHome,
+        Equipment.none => equipNone,
+      };
+
+  String equipmentBody(Equipment e) => switch (e) {
+        Equipment.gym => equipGymBody,
+        Equipment.home => equipHomeBody,
+        Equipment.none => equipNoneBody,
+      };
+
+  String demonstrator(DemonstratorPref d) => switch (d) {
+        DemonstratorPref.auto => demonstratorAuto,
+        DemonstratorPref.male => demonstratorMale,
+        DemonstratorPref.female => demonstratorFemale,
+      };
+
+  String formulaBody(Sex s) => switch (s) {
+        Sex.male => bodyMale,
+        Sex.female => bodyFemale,
       };
 
   String bmiInputError(BmiInputError error) => switch (error) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:bmi_health/app/app.dart';
 import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/core/database/database_helper.dart';
@@ -11,6 +13,13 @@ import 'package:bmi_health/features/profile/profile_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Fonts ship with the app (assets/google_fonts); never download them.
+  GoogleFonts.config.allowRuntimeFetching = false;
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('assets/google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
 
   // Everything runs inside crash reporting so start-up failures
   // (e.g. a database migration error) are reported too.

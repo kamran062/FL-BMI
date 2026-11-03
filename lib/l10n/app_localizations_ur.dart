@@ -572,4 +572,157 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get adviceObeseNote => 'صرف بی ایم آئی سے صحت کی تشخیص نہیں ہوتی۔ اپنی طبی تاریخ کے مطابق منصوبے کے لیے ڈاکٹر یا مستند ماہرِ غذائیت سے بات کریں۔';
+
+  @override
+  String stepOf(int current, int total) {
+    return 'مرحلہ $current از $total';
+  }
+
+  @override
+  String get later => 'بعد میں';
+
+  @override
+  String get back => 'پیچھے';
+
+  @override
+  String get finish => 'مکمل کریں';
+
+  @override
+  String get save => 'محفوظ کریں';
+
+  @override
+  String get personalDetails => 'ذاتی معلومات';
+
+  @override
+  String get notSet => 'شامل نہیں';
+
+  @override
+  String get setupIntro => 'چند مختصر سوالات تاکہ ایپ ورزش اور اہداف آپ کے مطابق بنا سکے۔';
+
+  @override
+  String get setupNameTitle => 'ہم آپ کو کس نام سے پکاریں؟';
+
+  @override
+  String get setupNameHint => 'آپ کا نام (اختیاری)';
+
+  @override
+  String get setupGenderTitle => 'آپ کی جنس کیا ہے؟';
+
+  @override
+  String get setupGenderBody => 'ہم اسے کیلوریز اور جسمانی چربی کے فارمولوں کے لیے اور ورزش کی ویڈیوز میں مناسب ٹرینر دکھانے کے لیے استعمال کرتے ہیں۔ آپ اسے کسی بھی وقت بدل سکتے ہیں۔';
+
+  @override
+  String get setupFormulaTitle => 'حساب کی بنیاد';
+
+  @override
+  String get setupFormulaBody => 'کیلوریز اور جسمانی چربی کے فارمولے مرد اور خاتون کے جسم کے لیے مختلف ہوتے ہیں۔ جو آپ کے لیے بہتر ہو وہ منتخب کریں۔';
+
+  @override
+  String get bodyMale => 'مردانہ جسم';
+
+  @override
+  String get bodyFemale => 'زنانہ جسم';
+
+  @override
+  String get setupDemonstratorTitle => 'ورزش کی ویڈیوز میں';
+
+  @override
+  String get demonstratorAuto => 'میرے پروفائل کے مطابق';
+
+  @override
+  String get demonstratorMale => 'مرد ٹرینر';
+
+  @override
+  String get demonstratorFemale => 'خاتون ٹرینر';
+
+  @override
+  String get setupBodyTitle => 'آپ کے جسم کے بارے میں';
+
+  @override
+  String get setupGoalTitle => 'آپ کا بنیادی ہدف کیا ہے؟';
+
+  @override
+  String get goalLoseFat => 'چربی کم کرنا';
+
+  @override
+  String get goalLoseFatBody => 'پٹھے برقرار رکھتے ہوئے چربی کم کریں';
+
+  @override
+  String get goalBuildMuscle => 'پٹھے بنانا';
+
+  @override
+  String get goalBuildMuscleBody => 'جسم کو مضبوط اور سڈول بنائیں';
+
+  @override
+  String get goalGetStronger => 'طاقتور بننا';
+
+  @override
+  String get goalGetStrongerBody => 'قدم بہ قدم زیادہ وزن اٹھائیں';
+
+  @override
+  String get goalStayFit => 'فٹ اور صحت مند رہنا';
+
+  @override
+  String get goalStayFitBody => 'زیادہ متحرک رہیں اور بہتر محسوس کریں';
+
+  @override
+  String get setupExperienceTitle => 'ورزش کا آپ کا تجربہ کتنا ہے؟';
+
+  @override
+  String get expBeginner => 'نیا';
+
+  @override
+  String get expBeginnerBody => 'ورزش میں نئے یا لمبے وقفے کے بعد واپسی';
+
+  @override
+  String get expIntermediate => 'درمیانہ';
+
+  @override
+  String get expIntermediateBody => '6 مہینے سے زیادہ باقاعدہ ورزش';
+
+  @override
+  String get expAdvanced => 'تجربہ کار';
+
+  @override
+  String get expAdvancedBody => 'کئی سال کی مسلسل ورزش';
+
+  @override
+  String get setupEquipmentTitle => 'آپ کہاں ورزش کریں گے؟';
+
+  @override
+  String get equipGym => 'جم';
+
+  @override
+  String get equipGymBody => 'مشینوں اور فری ویٹس تک مکمل رسائی';
+
+  @override
+  String get equipHome => 'گھر پر کچھ سامان کے ساتھ';
+
+  @override
+  String get equipHomeBody => 'ڈمبل، بینڈز یا بینچ';
+
+  @override
+  String get equipNone => 'بغیر سامان';
+
+  @override
+  String get equipNoneBody => 'صرف جسمانی وزن والی ورزشیں';
+
+  @override
+  String get setupDaysTitle => 'آپ ہفتے میں کتنے دن ورزش کر سکتے ہیں؟';
+
+  @override
+  String daysPerWeek(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ہفتے میں $count دن',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get setupDaysTip => 'زیادہ تر لوگوں کے لیے 3–4 دن بہترین آغاز ہے۔';
+
+  @override
+  String get sectionProfile => 'پروفائل';
 }

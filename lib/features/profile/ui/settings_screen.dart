@@ -12,7 +12,8 @@ import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  final VoidCallback onOpenProfile;
+  const SettingsScreen({super.key, required this.onOpenProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,20 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, showAdPrivacy, _) => Consumer2<SettingsProvider, ProfileProvider>(
       builder: (context, provider, profileProvider, _) {
         final l = context.l10n;
+        final name = profileProvider.profile.name;
         final sections = [
+          _Section(
+            title: l.sectionProfile,
+            rows: [
+              _Row(
+                icon: Icons.person_outline_rounded,
+                label: l.personalDetails,
+                kind: _RowKind.nav,
+                meta: name.isEmpty ? l.notSet : name,
+                onTap: onOpenProfile,
+              ),
+            ],
+          ),
           _Section(
             title: l.sectionAppearance,
             rows: [
