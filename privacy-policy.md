@@ -37,7 +37,10 @@ Our App uses **Google AdMob** to display advertisements. AdMob may automatically
 
 This information is collected and processed by Google according to their privacy policy.
 
-### 1.3 Crash Reports (via Sentry)
+### 1.3 Step Count (Health Connect / Apple Health)
+If you choose to connect, the App reads your **daily step count** from Health Connect (Android) or Apple Health (iOS) to show it on your Today screen. The App only reads steps; it does not read any other health data and does not write to these services. Step data is **never** sent off your device, shared with advertisers, or used for advertising. You can revoke access at any time in Health Connect or the Health app.
+
+### 1.4 Crash Reports (via Sentry)
 If the App crashes or hits a technical error, an anonymous crash report may be sent to Sentry, our crash-reporting service. A report contains:
 
 - Device model, operating system and version
@@ -76,7 +79,7 @@ You can opt out of personalized advertising by going to:
 **Settings → Google → Ads → Opt out of Ads Personalization** on your Android device.
 
 ### Sentry
-We use Sentry to receive anonymous crash reports (see section 1.3). Sentry processes this data under its own privacy policy:
+We use Sentry to receive anonymous crash reports (see section 1.4). Sentry processes this data under its own privacy policy:
 [https://sentry.io/privacy/](https://sentry.io/privacy/)
 
 ---

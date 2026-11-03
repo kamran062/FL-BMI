@@ -393,6 +393,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 2.1 Steps & health platform sync
 
+> **Status: steps done.** `health` package, read-only STEPS on Health Connect / HealthKit, asked only from the Connect button; install prompt when Health Connect is missing; refresh on app resume; daily goal 8,000; privacy policy updated. **minSdk raised to 26** (Android 8.0) as Health Connect requires. Verified on an Android 16 emulator incl. revoke → reconnect. Not yet: hourly chart, distance/active calories, sleep & heart rate, custom step goal. Play Console needs the Health Connect permission declaration before release.
+
 **Features**
 - Daily steps, distance and active calories; hourly breakdown chart
 - Daily step goal with a ring on the Today tab

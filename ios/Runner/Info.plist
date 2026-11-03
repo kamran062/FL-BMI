@@ -52,6 +52,10 @@
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<!-- Shown by the iOS App Tracking Transparency prompt (via AdMob's
 	     Privacy & messaging IDFA message). -->
+	<key>NSHealthShareUsageDescription</key>
+	<string>Your daily step count is shown on your Today screen. It stays on your device.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>BMI Health does not write to Apple Health.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier is used to show you more relevant ads. Your health data never leaves your device.</string>
 	<!-- SKAdNetwork IDs for ad attribution. Google's own ID is listed; add the

@@ -2176,6 +2176,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications are turned off for this app. Turn them on in your phone\'s settings to get reminders.'**
   String get notificationsDenied;
+
+  /// Card title
+  ///
+  /// In en, this message translates to:
+  /// **'Steps'**
+  String get stepsTitle;
+
+  /// Steps of daily goal
+  ///
+  /// In en, this message translates to:
+  /// **'{steps} / {goal}'**
+  String stepsOf(int steps, int goal);
+
+  /// Explains the steps connection (Android)
+  ///
+  /// In en, this message translates to:
+  /// **'See your daily steps here. Steps are read from Health Connect and stay on your phone.'**
+  String get stepsConnectBody;
+
+  /// Explains the steps connection (iOS)
+  ///
+  /// In en, this message translates to:
+  /// **'See your daily steps here. Steps are read from Apple Health and stay on your phone.'**
+  String get stepsConnectBodyIos;
+
+  /// Button that asks for step access
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get connectSteps;
+
+  /// Button when Health Connect is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Get Health Connect'**
+  String get installHealthConnect;
+
+  /// Shown when Health Connect is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Step counting needs Google\'s Health Connect app.'**
+  String get stepsNeedsInstall;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1148,4 +1148,27 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get notificationsDenied => 'اس ایپ کی اطلاعات بند ہیں۔ یاد دہانیاں حاصل کرنے کے لیے فون کی ترتیبات میں انہیں آن کریں۔';
+
+  @override
+  String get stepsTitle => 'قدم';
+
+  @override
+  String stepsOf(int steps, int goal) {
+    return '$steps / $goal';
+  }
+
+  @override
+  String get stepsConnectBody => 'اپنے روزانہ کے قدم یہاں دیکھیں۔ قدم ہیلتھ کنیکٹ سے پڑھے جاتے ہیں اور آپ کے فون پر ہی رہتے ہیں۔';
+
+  @override
+  String get stepsConnectBodyIos => 'اپنے روزانہ کے قدم یہاں دیکھیں۔ قدم ایپل ہیلتھ سے پڑھے جاتے ہیں اور آپ کے فون پر ہی رہتے ہیں۔';
+
+  @override
+  String get connectSteps => 'جوڑیں';
+
+  @override
+  String get installHealthConnect => 'ہیلتھ کنیکٹ حاصل کریں';
+
+  @override
+  String get stepsNeedsInstall => 'قدم گننے کے لیے گوگل کی ہیلتھ کنیکٹ ایپ درکار ہے۔';
 }

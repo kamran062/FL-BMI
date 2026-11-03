@@ -1152,4 +1152,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationsDenied => 'Notifications are turned off for this app. Turn them on in your phone\'s settings to get reminders.';
+
+  @override
+  String get stepsTitle => 'Steps';
+
+  @override
+  String stepsOf(int steps, int goal) {
+    return '$steps / $goal';
+  }
+
+  @override
+  String get stepsConnectBody => 'See your daily steps here. Steps are read from Health Connect and stay on your phone.';
+
+  @override
+  String get stepsConnectBodyIos => 'See your daily steps here. Steps are read from Apple Health and stay on your phone.';
+
+  @override
+  String get connectSteps => 'Connect';
+
+  @override
+  String get installHealthConnect => 'Get Health Connect';
+
+  @override
+  String get stepsNeedsInstall => 'Step counting needs Google\'s Health Connect app.';
 }

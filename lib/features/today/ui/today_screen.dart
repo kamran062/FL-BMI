@@ -18,6 +18,8 @@ import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
+import 'package:bmi_health/features/movement/steps_provider.dart';
+import 'dart:io' show Platform;
 
 /// Home dashboard: the day at a glance with one-tap actions.
 class TodayScreen extends StatelessWidget {
@@ -113,6 +115,7 @@ class TodayScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 14),
+                const _StepsCard(),
                 // ── Fuel ───────────────────────────────────────────────
                 CaloriesCard(
                     eaten: fuel.kcal, target: targets.calories, onTap: onOpenFuel),
@@ -224,3 +227,81 @@ class TodayScreen extends StatelessWidget {
     );
   }
 }
+
+class _StepsCard extends StatelessWidget {
+  const _StepsCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final steps = context.watch<StepsProvider>();
+    if (steps.status == StepsStatus.unsupported) return const SizedBox.shrink();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    final sunken = isDark ? AppColors.darkBgSunken : AppColors.bgSunken;
+    const color = AppColors.bmiOver;
+
+    final Widget body = switch (steps.status) {
+      StepsStatus.connected => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l.stepsOf(steps.today, steps.goal),
+                style: GoogleFonts.inter(
+                    fontSize: 22, fontWeight: FontWeight.w700, color: fg1)),
+            const SizedBox(height: 10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: LinearProgressIndicator(
+                value: (steps.today / steps.goal).clamp(0.0, 1.0),
+                minHeight: 10,
+                color: color,
+                backgroundColor: sunken,
+              ),
+            ),
+          ],
+        ),
+      _ => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              steps.status == StepsStatus.needsInstall
+                  ? l.stepsNeedsInstall
+                  : (Platform.isIOS ? l.stepsConnectBodyIos : l.stepsConnectBody),
+              style: GoogleFonts.inter(fontSize: 14, color: fg3, height: 1.45),
+            ),
+            const SizedBox(height: 10),
+            AppButton(
+              label: steps.status == StepsStatus.needsInstall
+                  ? l.installHealthConnect
+                  : l.connectSteps,
+              icon: Icons.directions_walk_rounded,
+              variant: AppButtonVariant.secondary,
+              fullWidth: true,
+              onPressed: steps.connect,
+            ),
+          ],
+        ),
+    };
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: AppCard(
+        padding: 18,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              const Icon(Icons.directions_walk_rounded, color: color, size: 20),
+              const SizedBox(width: 6),
+              OverlineLabel(l.stepsTitle),
+            ]),
+            const SizedBox(height: 8),
+            body,
+          ],
+        ),
+      ),
+    );
+  }
+}
+

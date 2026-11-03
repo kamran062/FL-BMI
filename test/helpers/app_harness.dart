@@ -8,6 +8,7 @@ import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
 import 'package:bmi_health/features/fuel/fuel_provider.dart';
+import 'package:bmi_health/features/movement/steps_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ typedef AppState = ({
   BodyProvider body,
   WorkoutProvider workouts,
   FuelProvider fuel,
+  StepsProvider steps,
 });
 
 /// Launches the real app as a returning user who has already answered (or
@@ -39,6 +41,7 @@ typedef AppState = ({
 Future<AppState> launchApp(
   WidgetTester tester, {
   Map<String, Object> prefs = const {},
+  StepsSource? steps,
 }) async {
   // iPhone 14-sized screen instead of the default 800×600 test surface
   tester.view.physicalSize = const Size(1170, 2532);
@@ -65,11 +68,12 @@ Future<AppState> launchApp(
   final body = BodyProvider(db);
   final workouts = WorkoutProvider(db);
   final fuel = FuelProvider(db);
+  final stepsProvider = StepsProvider(source: steps);
   final catalog = ExerciseCatalog.parse(
       File('assets/exercises/catalog.json').readAsStringSync());
   await tester.runAsync(() => Future.wait([
         settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-        fuel.load(),
+        fuel.load(), stepsProvider.load(),
       ]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
@@ -78,6 +82,7 @@ Future<AppState> launchApp(
     body: body,
     workouts: workouts,
     fuel: fuel,
+    steps: stepsProvider,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));
@@ -86,7 +91,7 @@ Future<AppState> launchApp(
   await tester.pumpAndSettle();
   return (
     settings: settings, profile: profile, bmi: bmi, body: body,
-    workouts: workouts, fuel: fuel,
+    workouts: workouts, fuel: fuel, steps: stepsProvider,
   );
 }
 

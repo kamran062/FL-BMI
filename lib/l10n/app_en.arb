@@ -1623,5 +1623,43 @@
   "notificationsDenied": "Notifications are turned off for this app. Turn them on in your phone's settings to get reminders.",
   "@notificationsDenied": {
     "description": "Shown when the user denies notification permission"
+  },
+  "stepsTitle": "Steps",
+  "@stepsTitle": {
+    "description": "Card title"
+  },
+  "stepsOf": "{steps} / {goal}",
+  "@stepsOf": {
+    "description": "Steps of daily goal",
+    "placeholders": {
+      "steps": {
+        "type": "int",
+        "example": "5420"
+      },
+      "goal": {
+        "type": "int",
+        "example": "8000"
+      }
+    }
+  },
+  "stepsConnectBody": "See your daily steps here. Steps are read from Health Connect and stay on your phone.",
+  "@stepsConnectBody": {
+    "description": "Explains the steps connection (Android)"
+  },
+  "stepsConnectBodyIos": "See your daily steps here. Steps are read from Apple Health and stay on your phone.",
+  "@stepsConnectBodyIos": {
+    "description": "Explains the steps connection (iOS)"
+  },
+  "connectSteps": "Connect",
+  "@connectSteps": {
+    "description": "Button that asks for step access"
+  },
+  "installHealthConnect": "Get Health Connect",
+  "@installHealthConnect": {
+    "description": "Button when Health Connect is missing"
+  },
+  "stepsNeedsInstall": "Step counting needs Google's Health Connect app.",
+  "@stepsNeedsInstall": {
+    "description": "Shown when Health Connect is missing"
   }
 }

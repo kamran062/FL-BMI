@@ -40,7 +40,8 @@ android {
 
     defaultConfig {
         applicationId = "com.bmihealth.bmi_health"
-        minSdk        = flutter.minSdkVersion
+        // Health Connect (health package) needs Android 8.0+
+        minSdk        = 26
         targetSdk     = flutter.targetSdkVersion
         versionCode   = flutter.versionCode
         versionName   = flutter.versionName
