@@ -18,6 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:bmi_health/features/premium/purchase_service.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -72,6 +73,8 @@ Future<AppState> launchApp(
   final fuel = FuelProvider(db);
   final stepsProvider = StepsProvider(source: steps);
   final movement = MovementProvider(db);
+  // Unconfigured: premium hidden, as in builds without the server URL
+  final purchases = PurchaseService(publicKey: '');
   final catalog = ExerciseCatalog.parse(
       File('assets/exercises/catalog.json').readAsStringSync());
   await tester.runAsync(() => Future.wait([
@@ -87,6 +90,7 @@ Future<AppState> launchApp(
     fuel: fuel,
     steps: stepsProvider,
     movement: movement,
+    purchases: purchases,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));

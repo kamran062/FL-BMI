@@ -11,10 +11,13 @@ import 'package:bmi_health/shared/widgets/app_toggle.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/core/notifications/reminder_service.dart';
+import 'package:bmi_health/features/premium/purchase_service.dart';
 
 class SettingsScreen extends StatelessWidget {
   final VoidCallback onOpenProfile;
-  const SettingsScreen({super.key, required this.onOpenProfile});
+  final VoidCallback onOpenPremium;
+  const SettingsScreen(
+      {super.key, required this.onOpenProfile, required this.onOpenPremium});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,21 @@ class SettingsScreen extends StatelessWidget {
       builder: (context, provider, profileProvider, _) {
         final l = context.l10n;
         final name = profileProvider.profile.name;
+        final purchases = context.watch<PurchaseService>();
         final sections = [
+          // Hidden until premium is configured for this build
+          if (purchases.configured)
+            _Section(
+              title: l.premiumBadge,
+              rows: [
+                _Row(
+                  icon: Icons.auto_awesome_rounded,
+                  label: purchases.isPremium ? l.premiumActive : l.goPremium,
+                  kind: _RowKind.nav,
+                  onTap: onOpenPremium,
+                ),
+              ],
+            ),
           _Section(
             title: l.sectionProfile,
             rows: [

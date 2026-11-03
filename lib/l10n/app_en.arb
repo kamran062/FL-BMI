@@ -2001,5 +2001,111 @@
   "cameraUnavailable": "No camera is available on this device.",
   "@cameraUnavailable": {
     "description": "No camera"
+  },
+  "goPremium": "Go Premium",
+  "@goPremium": {
+    "description": "Settings row that opens the paywall"
+  },
+  "premiumActive": "Premium active",
+  "@premiumActive": {
+    "description": "Settings row value when premium"
+  },
+  "premiumBadge": "Premium",
+  "@premiumBadge": {
+    "description": "Small label above the paywall headline"
+  },
+  "premiumHeadline": "Train without interruptions",
+  "@premiumHeadline": {
+    "description": "Paywall headline"
+  },
+  "premiumBody": "Remove every ad and help fund new features.",
+  "@premiumBody": {
+    "description": "Paywall intro"
+  },
+  "premiumWelcome": "Welcome to Premium!",
+  "@premiumWelcome": {
+    "description": "Paywall headline after purchase"
+  },
+  "premiumThanksBody": "Ads are removed. Thank you for supporting BMI Health.",
+  "@premiumThanksBody": {
+    "description": "Paywall text after purchase"
+  },
+  "premiumFeatureNoAds": "No banner or full-screen ads",
+  "@premiumFeatureNoAds": {
+    "description": "Premium benefit"
+  },
+  "premiumFeatureSupport": "Support an independent app",
+  "@premiumFeatureSupport": {
+    "description": "Premium benefit"
+  },
+  "premiumFeaturePrivacy": "Same privacy: your health data stays on your phone",
+  "@premiumFeaturePrivacy": {
+    "description": "Premium benefit"
+  },
+  "planMonthly": "Monthly",
+  "@planMonthly": {
+    "description": "Plan name"
+  },
+  "planYearly": "Yearly",
+  "@planYearly": {
+    "description": "Plan name"
+  },
+  "planLifetime": "Lifetime",
+  "@planLifetime": {
+    "description": "Plan name"
+  },
+  "planPerMonth": "per month",
+  "@planPerMonth": {
+    "description": "Plan subtitle"
+  },
+  "planYearlyPerMonth": "{price} / month, billed yearly",
+  "@planYearlyPerMonth": {
+    "description": "Yearly plan subtitle, monthly equivalent",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "Rs 250"
+      }
+    }
+  },
+  "planOneTime": "one-time payment",
+  "@planOneTime": {
+    "description": "Plan subtitle"
+  },
+  "bestValue": "Best value",
+  "@bestValue": {
+    "description": "Badge on the yearly plan"
+  },
+  "restore": "Restore",
+  "@restore": {
+    "description": "Restore purchases"
+  },
+  "processing": "Processing…",
+  "@processing": {
+    "description": "Button while a purchase runs"
+  },
+  "upgradeNow": "Upgrade now",
+  "@upgradeNow": {
+    "description": "Purchase button"
+  },
+  "allSet": "You're all set!",
+  "@allSet": {
+    "description": "Button after purchase"
+  },
+  "storeUnavailable": "The store is not available on this device.",
+  "@storeUnavailable": {
+    "description": "Error"
+  },
+  "pricesLoading": "Loading prices…",
+  "@pricesLoading": {
+    "description": "Shown until store prices load"
+  },
+  "renewNote": "Subscriptions renew automatically until cancelled. Cancel anytime in your Google Play or App Store subscriptions. No tracking. No data sold.",
+  "@renewNote": {
+    "description": "Legal note under the purchase button"
+  },
+  "thanksNote": "Thank you for supporting BMI Health.",
+  "@thanksNote": {
+    "description": "Note after purchase"
   }
 }

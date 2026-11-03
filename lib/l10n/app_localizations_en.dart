@@ -1402,4 +1402,81 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cameraUnavailable => 'No camera is available on this device.';
+
+  @override
+  String get goPremium => 'Go Premium';
+
+  @override
+  String get premiumActive => 'Premium active';
+
+  @override
+  String get premiumBadge => 'Premium';
+
+  @override
+  String get premiumHeadline => 'Train without interruptions';
+
+  @override
+  String get premiumBody => 'Remove every ad and help fund new features.';
+
+  @override
+  String get premiumWelcome => 'Welcome to Premium!';
+
+  @override
+  String get premiumThanksBody => 'Ads are removed. Thank you for supporting BMI Health.';
+
+  @override
+  String get premiumFeatureNoAds => 'No banner or full-screen ads';
+
+  @override
+  String get premiumFeatureSupport => 'Support an independent app';
+
+  @override
+  String get premiumFeaturePrivacy => 'Same privacy: your health data stays on your phone';
+
+  @override
+  String get planMonthly => 'Monthly';
+
+  @override
+  String get planYearly => 'Yearly';
+
+  @override
+  String get planLifetime => 'Lifetime';
+
+  @override
+  String get planPerMonth => 'per month';
+
+  @override
+  String planYearlyPerMonth(String price) {
+    return '$price / month, billed yearly';
+  }
+
+  @override
+  String get planOneTime => 'one-time payment';
+
+  @override
+  String get bestValue => 'Best value';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get processing => 'Processing…';
+
+  @override
+  String get upgradeNow => 'Upgrade now';
+
+  @override
+  String get allSet => 'You\'re all set!';
+
+  @override
+  String get storeUnavailable => 'The store is not available on this device.';
+
+  @override
+  String get pricesLoading => 'Loading prices…';
+
+  @override
+  String get renewNote => 'Subscriptions renew automatically until cancelled. Cancel anytime in your Google Play or App Store subscriptions. No tracking. No data sold.';
+
+  @override
+  String get thanksNote => 'Thank you for supporting BMI Health.';
 }

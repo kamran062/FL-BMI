@@ -16,6 +16,7 @@ import 'package:bmi_health/features/movement/steps_provider.dart';
 import 'package:bmi_health/features/movement/movement_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
+import 'package:bmi_health/features/premium/purchase_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,7 @@ void main() async {
     final fuel = FuelProvider(db);
     final steps = StepsProvider();
     final movement = MovementProvider(db);
+    final purchases = PurchaseService.instance;
     final catalog = await ExerciseCatalog.loadBundled();
     await Future.wait([
       settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
@@ -59,6 +61,7 @@ void main() async {
       fuel: fuel,
       steps: steps,
       movement: movement,
+      purchases: purchases,
       catalog: catalog,
       child: const BmiHealthApp(),
     ));
@@ -66,5 +69,8 @@ void main() async {
     // Ads start after the first frame so launch is never blocked by the network.
     // Consent (UMP) is gathered first; no ad is requested before it completes.
     AdService.instance.initialize();
+    // Store connection after the first frame too; premium state is read
+    // from the saved signed entitlement inside.
+    purchases.init();
   });
 }

@@ -1395,4 +1395,81 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get cameraUnavailable => 'اس آلے پر کوئی کیمرا دستیاب نہیں۔';
+
+  @override
+  String get goPremium => 'پریمیم حاصل کریں';
+
+  @override
+  String get premiumActive => 'پریمیم فعال ہے';
+
+  @override
+  String get premiumBadge => 'پریمیم';
+
+  @override
+  String get premiumHeadline => 'بغیر رکاوٹ ورزش کریں';
+
+  @override
+  String get premiumBody => 'تمام اشتہارات ہٹائیں اور نئے فیچرز میں مدد کریں۔';
+
+  @override
+  String get premiumWelcome => 'پریمیم میں خوش آمدید!';
+
+  @override
+  String get premiumThanksBody => 'اشتہارات ہٹا دیے گئے۔ بی ایم آئی ہیلتھ کی مدد کا شکریہ۔';
+
+  @override
+  String get premiumFeatureNoAds => 'کوئی بینر یا فل اسکرین اشتہار نہیں';
+
+  @override
+  String get premiumFeatureSupport => 'ایک آزاد ایپ کی مدد کریں';
+
+  @override
+  String get premiumFeaturePrivacy => 'وہی پرائیویسی: آپ کا صحت کا ڈیٹا آپ کے فون پر رہتا ہے';
+
+  @override
+  String get planMonthly => 'ماہانہ';
+
+  @override
+  String get planYearly => 'سالانہ';
+
+  @override
+  String get planLifetime => 'تاحیات';
+
+  @override
+  String get planPerMonth => 'فی مہینہ';
+
+  @override
+  String planYearlyPerMonth(String price) {
+    return '$price فی مہینہ، سالانہ بل';
+  }
+
+  @override
+  String get planOneTime => 'ایک بار ادائیگی';
+
+  @override
+  String get bestValue => 'بہترین قیمت';
+
+  @override
+  String get restore => 'بحال کریں';
+
+  @override
+  String get processing => 'جاری ہے…';
+
+  @override
+  String get upgradeNow => 'ابھی اپ گریڈ کریں';
+
+  @override
+  String get allSet => 'سب تیار ہے!';
+
+  @override
+  String get storeUnavailable => 'اس آلے پر اسٹور دستیاب نہیں۔';
+
+  @override
+  String get pricesLoading => 'قیمتیں لوڈ ہو رہی ہیں…';
+
+  @override
+  String get renewNote => 'سبسکرپشن منسوخ کرنے تک خود بخود تجدید ہوتی ہے۔ گوگل پلے یا ایپ اسٹور کی سبسکرپشنز میں کسی بھی وقت منسوخ کریں۔ کوئی ٹریکنگ نہیں۔ کوئی ڈیٹا فروخت نہیں ہوتا۔';
+
+  @override
+  String get thanksNote => 'بی ایم آئی ہیلتھ کی مدد کا شکریہ۔';
 }

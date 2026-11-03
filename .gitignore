@@ -51,3 +51,9 @@ android/key.properties
 
 # Environment / secrets — never commit these
 .env.json
+
+# Cloud Functions
+functions/node_modules/
+entitlement_private.pem
+*.p8
+play-service-account*.json

@@ -2578,6 +2578,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No camera is available on this device.'**
   String get cameraUnavailable;
+
+  /// Settings row that opens the paywall
+  ///
+  /// In en, this message translates to:
+  /// **'Go Premium'**
+  String get goPremium;
+
+  /// Settings row value when premium
+  ///
+  /// In en, this message translates to:
+  /// **'Premium active'**
+  String get premiumActive;
+
+  /// Small label above the paywall headline
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get premiumBadge;
+
+  /// Paywall headline
+  ///
+  /// In en, this message translates to:
+  /// **'Train without interruptions'**
+  String get premiumHeadline;
+
+  /// Paywall intro
+  ///
+  /// In en, this message translates to:
+  /// **'Remove every ad and help fund new features.'**
+  String get premiumBody;
+
+  /// Paywall headline after purchase
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Premium!'**
+  String get premiumWelcome;
+
+  /// Paywall text after purchase
+  ///
+  /// In en, this message translates to:
+  /// **'Ads are removed. Thank you for supporting BMI Health.'**
+  String get premiumThanksBody;
+
+  /// Premium benefit
+  ///
+  /// In en, this message translates to:
+  /// **'No banner or full-screen ads'**
+  String get premiumFeatureNoAds;
+
+  /// Premium benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Support an independent app'**
+  String get premiumFeatureSupport;
+
+  /// Premium benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Same privacy: your health data stays on your phone'**
+  String get premiumFeaturePrivacy;
+
+  /// Plan name
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get planMonthly;
+
+  /// Plan name
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get planYearly;
+
+  /// Plan name
+  ///
+  /// In en, this message translates to:
+  /// **'Lifetime'**
+  String get planLifetime;
+
+  /// Plan subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'per month'**
+  String get planPerMonth;
+
+  /// Yearly plan subtitle, monthly equivalent
+  ///
+  /// In en, this message translates to:
+  /// **'{price} / month, billed yearly'**
+  String planYearlyPerMonth(String price);
+
+  /// Plan subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'one-time payment'**
+  String get planOneTime;
+
+  /// Badge on the yearly plan
+  ///
+  /// In en, this message translates to:
+  /// **'Best value'**
+  String get bestValue;
+
+  /// Restore purchases
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restore;
+
+  /// Button while a purchase runs
+  ///
+  /// In en, this message translates to:
+  /// **'Processing…'**
+  String get processing;
+
+  /// Purchase button
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade now'**
+  String get upgradeNow;
+
+  /// Button after purchase
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all set!'**
+  String get allSet;
+
+  /// Error
+  ///
+  /// In en, this message translates to:
+  /// **'The store is not available on this device.'**
+  String get storeUnavailable;
+
+  /// Shown until store prices load
+  ///
+  /// In en, this message translates to:
+  /// **'Loading prices…'**
+  String get pricesLoading;
+
+  /// Legal note under the purchase button
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions renew automatically until cancelled. Cancel anytime in your Google Play or App Store subscriptions. No tracking. No data sold.'**
+  String get renewNote;
+
+  /// Note after purchase
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for supporting BMI Health.'**
+  String get thanksNote;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

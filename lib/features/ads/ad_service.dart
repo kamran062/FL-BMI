@@ -56,6 +56,11 @@ class AdService {
   /// Widgets must not request ads before this is true.
   final ValueNotifier<bool> ready = ValueNotifier(false);
 
+  /// Premium users see no ads (set by PurchaseService).
+  final ValueNotifier<bool> premiumNotifier = ValueNotifier(false);
+  bool get premium => premiumNotifier.value;
+  set premium(bool v) => premiumNotifier.value = v;
+
   /// True when the user is in a region where a privacy options entry point
   /// must be shown in Settings (e.g. EEA / UK).
   final ValueNotifier<bool> privacyOptionsRequired = ValueNotifier(false);
@@ -226,7 +231,7 @@ class AdService {
   /// Shows the interstitial at a natural break point (e.g. after saving a result).
   /// Returns true if an ad was shown.
   bool showInterstitialIfReady() {
-    if (!ready.value) return false;
+    if (!ready.value || premium) return false;
     if (_interstitial == null) {
       _loadInterstitial();
       return false;
@@ -281,7 +286,7 @@ class AdService {
   /// Call this from an AppLifecycleState.resumed handler.
   /// Returns true if an ad was shown.
   bool showAppOpenIfReady() {
-    if (!ready.value || _appOpenSuppressed) return false;
+    if (!ready.value || premium || _appOpenSuppressed) return false;
     if (_appOpenAd == null) {
       _loadAppOpen();
       return false;

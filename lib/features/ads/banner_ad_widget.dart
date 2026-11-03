@@ -27,6 +27,16 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   void initState() {
     super.initState();
     AdService.instance.ready.addListener(_maybeLoad);
+    AdService.instance.premiumNotifier.addListener(_onPremium);
+  }
+
+  // Going premium removes the banner straight away.
+  void _onPremium() {
+    if (!AdService.instance.premium || !mounted) return;
+    _retryTimer?.cancel();
+    _ad?.dispose();
+    setState(() => _ad = null);
+    widget.onHeightChanged?.call(0);
   }
 
   @override
@@ -40,6 +50,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   void _maybeLoad() {
     if (!mounted ||
         !AdService.instance.ready.value ||
+        AdService.instance.premium ||
         _ad != null ||
         _loading ||
         _gaveUp ||
@@ -96,6 +107,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   @override
   void dispose() {
     AdService.instance.ready.removeListener(_maybeLoad);
+    AdService.instance.premiumNotifier.removeListener(_onPremium);
     _retryTimer?.cancel();
     _ad?.dispose();
     super.dispose();

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
+import 'package:bmi_health/l10n/l10n.dart';
 
 class PaywallScreen extends StatefulWidget {
   final VoidCallback onClose;
@@ -14,26 +16,37 @@ class PaywallScreen extends StatefulWidget {
 }
 
 class _PaywallScreenState extends State<PaywallScreen> {
-  final _svc = PurchaseService.instance;
+  late final PurchaseService _svc = context.read<PurchaseService>();
   String _selectedId = kProductYearly;
-
-  // Fallback display data while products load from store
-  static const _planMeta = {
-    kProductMonthly:  (label: 'Monthly',  sub: 'per month',              badge: '',           fallbackPrice: '\$4.99'),
-    kProductYearly:   (label: 'Yearly',   sub: '\$2.50 / mo · save 50%', badge: 'BEST VALUE', fallbackPrice: '\$29.99'),
-    kProductLifetime: (label: 'Lifetime', sub: 'one-time payment',       badge: '',           fallbackPrice: '\$79.99'),
-  };
 
   static const _orderedIds = [kProductMonthly, kProductYearly, kProductLifetime];
 
-  static const _features = [
-    (icon: Icons.block_outlined,          label: 'Remove all ads'),
-    (icon: Icons.show_chart_rounded,      label: 'Detailed history charts'),
-    (icon: Icons.track_changes_rounded,   label: 'Unlimited goal tracking'),
-    (icon: Icons.auto_awesome_rounded,    label: 'AI-personalized recommendations'),
-    (icon: Icons.lightbulb_outline,       label: '500+ premium daily tips'),
-    (icon: Icons.cloud_outlined,          label: 'Encrypted cloud backup'),
-  ];
+  /// Only what premium actually gives today. Add a line here only when the
+  /// feature ships — store rules forbid advertising features that don't exist.
+  static List<({IconData icon, String label})> _features(AppLocalizations l) => [
+        (icon: Icons.block_outlined, label: l.premiumFeatureNoAds),
+        (icon: Icons.favorite_border_rounded, label: l.premiumFeatureSupport),
+        (icon: Icons.lock_outline_rounded, label: l.premiumFeaturePrivacy),
+      ];
+
+  ({String label, String sub, String badge}) _meta(AppLocalizations l, String id) =>
+      switch (id) {
+        kProductMonthly => (label: l.planMonthly, sub: l.planPerMonth, badge: ''),
+        kProductYearly => (
+            label: l.planYearly,
+            sub: _yearlyPerMonth(l) ?? '',
+            badge: l.bestValue.toUpperCase(),
+          ),
+        _ => (label: l.planLifetime, sub: l.planOneTime, badge: ''),
+      };
+
+  /// Monthly equivalent of the real yearly store price (never hard-coded).
+  String? _yearlyPerMonth(AppLocalizations l) {
+    final y = _svc.products.where((p) => p.id == kProductYearly).firstOrNull;
+    if (y == null) return null;
+    final perMonth = (y.rawPrice / 12).toStringAsFixed(2);
+    return l.planYearlyPerMonth('${y.currencySymbol}$perMonth');
+  }
 
   @override
   void initState() {
@@ -58,14 +71,13 @@ class _PaywallScreenState extends State<PaywallScreen> {
     }
   }
 
-  String _priceFor(String id) {
-    final storeProduct = _svc.products.where((p) => p.id == id).firstOrNull;
-    return storeProduct?.price ?? _planMeta[id]!.fallbackPrice;
-  }
+  /// Store price only; "…" until it loads. Prices are never hard-coded.
+  String _priceFor(String id) =>
+      _svc.products.where((p) => p.id == id).firstOrNull?.price ?? '…';
 
   Future<void> _purchase() async {
-    if (!_svc.available) {
-      _showSnack('Store not available on this device.');
+    if (!_svc.available || _svc.products.isEmpty) {
+      _showSnack(context.l10n.storeUnavailable);
       return;
     }
     await _svc.buy(_selectedId);
@@ -73,7 +85,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
 
   Future<void> _restore() async {
     if (!_svc.available) {
-      _showSnack('Store not available on this device.');
+      _showSnack(context.l10n.storeUnavailable);
       return;
     }
     await _svc.restore();
@@ -90,6 +102,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgCanvas = isDark ? AppColors.darkBgCanvas : AppColors.bgCanvas;
     final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
@@ -132,7 +145,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                         GestureDetector(
                           onTap: loading ? null : _restore,
                           child: Text(
-                            'Restore',
+                            l.restore,
                             style: GoogleFonts.inter(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -158,7 +171,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                                 size: 14, color: brand),
                             const SizedBox(width: 6),
                             Text(
-                              'PREMIUM',
+                              l.premiumBadge.toUpperCase(),
                               style: GoogleFonts.inter(
                                 fontSize: 11, fontWeight: FontWeight.w600,
                                 letterSpacing: 0.12 * 11, color: brand,
@@ -168,9 +181,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          _svc.isPremium
-                              ? 'Welcome to Premium!'
-                              : 'Unlock your full health journey',
+                          _svc.isPremium ? l.premiumWelcome : l.premiumHeadline,
                           style: GoogleFonts.inter(
                             fontSize: 28, fontWeight: FontWeight.w700,
                             letterSpacing: -0.025 * 28,
@@ -179,9 +190,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          _svc.isPremium
-                              ? 'Ads removed. All features unlocked. Enjoy BMI Health Premium.'
-                              : 'Everything in BMI Health, plus the long-term tools to turn one reading into a habit.',
+                          _svc.isPremium ? l.premiumThanksBody : l.premiumBody,
                           style: GoogleFonts.inter(
                             fontSize: 15, fontWeight: FontWeight.w400,
                             color: fg2, height: 1.5,
@@ -199,9 +208,8 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     child: AppCard(
                       padding: 18,
                       child: Column(
-                        children: _features.map((f) => Padding(
-                          padding: EdgeInsets.only(
-                              bottom: f == _features.last ? 0 : 12),
+                        children: _features(l).map((f) => Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
                           child: Row(
                             children: [
                               Container(
@@ -223,11 +231,13 @@ class _PaywallScreenState extends State<PaywallScreen> {
                                 ),
                               ),
                               const SizedBox(width: 12),
-                              Text(
-                                f.label,
-                                style: GoogleFonts.inter(
-                                  fontSize: 15, fontWeight: FontWeight.w500,
-                                  color: fg1,
+                              Expanded(
+                                child: Text(
+                                  f.label,
+                                  style: GoogleFonts.inter(
+                                    fontSize: 15, fontWeight: FontWeight.w500,
+                                    color: fg1,
+                                  ),
                                 ),
                               ),
                             ],
@@ -246,7 +256,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       delegate: SliverChildBuilderDelegate(
                         (_, i) {
                           final id = _orderedIds[i];
-                          final meta = _planMeta[id]!;
+                          final meta = _meta(l, id);
                           final on = id == _selectedId;
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 10),
@@ -345,6 +355,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                                             ],
                                           ),
                                           const SizedBox(height: 2),
+                                          if (meta.sub.isNotEmpty)
                                           Text(
                                             meta.sub,
                                             style: GoogleFonts.inter(
@@ -385,7 +396,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
                     child: _svc.isPremium
                         ? AppButton(
-                            label: 'You\'re all set!',
+                            label: l.allSet,
                             variant: AppButtonVariant.secondary,
                             size: AppButtonSize.lg,
                             icon: Icons.check_circle_outline_rounded,
@@ -393,7 +404,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                             onPressed: widget.onClose,
                           )
                         : AppButton(
-                            label: loading ? 'Processing…' : 'Upgrade now',
+                            label: loading ? l.processing : l.upgradeNow,
                             variant: AppButtonVariant.primary,
                             size: AppButtonSize.lg,
                             icon: loading
@@ -428,9 +439,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 12, 20, 40),
                     child: Text(
-                      _svc.isPremium
-                          ? 'Thank you for supporting BMI Health.'
-                          : 'Auto-renews. Cancel anytime in your account settings.\nNo tracking. No data sold.',
+                      _svc.isPremium ? l.thanksNote : l.renewNote,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         fontSize: 12,

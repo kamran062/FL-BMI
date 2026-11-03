@@ -14,6 +14,7 @@ import 'package:bmi_health/app/router.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_theme.dart';
+import 'package:bmi_health/features/premium/purchase_service.dart';
 
 /// Supplies the app-wide state objects. Used by main() and by tests.
 class BmiHealthProviders extends StatelessWidget {
@@ -27,6 +28,7 @@ class BmiHealthProviders extends StatelessWidget {
     required this.fuel,
     required this.steps,
     required this.movement,
+    required this.purchases,
     required this.catalog,
     required this.child,
   });
@@ -39,6 +41,7 @@ class BmiHealthProviders extends StatelessWidget {
   final FuelProvider fuel;
   final StepsProvider steps;
   final MovementProvider movement;
+  final PurchaseService purchases;
   final ExerciseCatalog catalog;
   final Widget child;
 
@@ -53,6 +56,7 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: fuel),
           ChangeNotifierProvider.value(value: steps),
           ChangeNotifierProvider.value(value: movement),
+          ChangeNotifierProvider.value(value: purchases),
           Provider.value(value: catalog),
         ],
         child: child,

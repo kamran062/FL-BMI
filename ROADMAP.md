@@ -530,6 +530,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - Performance: ≥ 20 fps pose inference on a mid-range phone; temperature check over a 20-min session
 
 ### 3.5 Premium launch
+
+> **Status: built; needs your accounts to go live.** `functions/` HTTPS function verifies receipts with Google Play (subscriptionsv2 / products) and Apple (App Store Server API) and returns an ES256-signed entitlement; the app verifies it with a bundled public key (no Firebase SDK in the app). Grace period / cancelled-until-expiry handled; entitlement re-checked at least every 35 days; offline keeps premium until then; restore timeout; purchase always acknowledged. Premium removes all ads. Paywall rewritten: only real benefits, store prices only, localised. Hidden until `PREMIUM_VERIFY_URL` + `ENTITLEMENT_PUBLIC_KEY` are set. **To go live:** follow `functions/README.md` (Firebase Blaze project, keys, Play service account, App Store key), create the 3 products in both stores, add Terms of Use + Privacy Policy links to the paywall (Apple requirement). **Decide:** which features (if any) beyond ad removal become premium-only.
 - Premium: no ads, all programs, overload suggestions, rep counter, advanced charts, timeline insights
 - Fix the purchase service from the audit: server-side receipt validation (Google Play Developer API / App Store Server API), subscription expiry handling, restore with timeout
 - Hide ads for premium users everywhere
