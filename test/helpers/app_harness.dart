@@ -4,6 +4,7 @@ import 'package:bmi_health/app/app.dart';
 import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
+import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ typedef AppState = ({
   SettingsProvider settings,
   ProfileProvider profile,
   BmiProvider bmi,
+  BodyProvider body,
 });
 
 /// Launches the real app as a returning user who has already answered (or
@@ -55,18 +57,20 @@ Future<AppState> launchApp(
   final settings = SettingsProvider();
   final profile = ProfileProvider(ProfileRepository(db));
   final bmi = BmiProvider(db);
-  await tester.runAsync(
-      () => Future.wait([settings.load(), profile.load(), bmi.load()]));
+  final body = BodyProvider(db);
+  await tester.runAsync(() => Future.wait(
+      [settings.load(), profile.load(), bmi.load(), body.load()]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
     profile: profile,
     bmi: bmi,
+    body: body,
     child: const BmiHealthApp(),
   ));
   // Splash hands off after 2.6 s
   await tester.pump(const Duration(seconds: 3));
   await tester.pumpAndSettle();
-  return (settings: settings, profile: profile, bmi: bmi);
+  return (settings: settings, profile: profile, bmi: bmi, body: body);
 }
 
 /// Simulates the Android system back button.

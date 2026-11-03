@@ -8,6 +8,7 @@ import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/core/monitoring/crash_reporting.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
+import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 
@@ -33,12 +34,15 @@ void main() async {
     final settings = SettingsProvider();
     final profile = ProfileProvider(ProfileRepository(db));
     final bmi = BmiProvider(db);
-    await Future.wait([settings.load(), profile.load(), bmi.load()]);
+    final body = BodyProvider(db);
+    await Future.wait(
+        [settings.load(), profile.load(), bmi.load(), body.load()]);
 
     runApp(BmiHealthProviders(
       settings: settings,
       profile: profile,
       bmi: bmi,
+      body: body,
       child: const BmiHealthApp(),
     ));
 

@@ -105,6 +105,17 @@ void main() {
     await helper.close();
   });
 
+  test('migration 4 turns every BMI entry into a weight log', () async {
+    final path = await createV1Database(); // 2 entries: 70.5 kg, 69.0 kg
+    final helper = DatabaseHelper.test(factory, path);
+
+    final logs = await helper.getWeightLogs();
+    expect(logs.map((l) => l.weightKg), [70.5, 69.0]); // oldest first
+    expect(logs.first.date, DateTime(2026, 5, 17));
+    expect(await helper.getMeasurements(), isEmpty);
+    await helper.close();
+  });
+
   test('saving a goal leaves exactly one active goal', () async {
     final helper = DatabaseHelper.test(factory, p.join(tmp.path, 'goals.db'));
     Goal goal(double target) => Goal(

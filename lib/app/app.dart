@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
+import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/app/router.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
@@ -16,12 +17,14 @@ class BmiHealthProviders extends StatelessWidget {
     required this.settings,
     required this.profile,
     required this.bmi,
+    required this.body,
     required this.child,
   });
 
   final SettingsProvider settings;
   final ProfileProvider profile;
   final BmiProvider bmi;
+  final BodyProvider body;
   final Widget child;
 
   @override
@@ -30,6 +33,7 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: settings),
           ChangeNotifierProvider.value(value: profile),
           ChangeNotifierProvider.value(value: bmi),
+          ChangeNotifierProvider.value(value: body),
         ],
         child: child,
       );

@@ -3,13 +3,14 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
+import 'package:bmi_health/features/body/metrics/domain/body_metrics.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 
 class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 3;
+  static const schemaVersion = 4;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -43,6 +44,32 @@ class DatabaseHelper {
         completed INTEGER NOT NULL DEFAULT 0
       )
     '''),
+    // 3 → 4: Body module. Weight history starts from every saved BMI entry,
+    // so existing users see their past weights straight away.
+    (db) async {
+      await db.execute('''
+        CREATE TABLE weight_logs (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date INTEGER NOT NULL,
+          weight_kg REAL NOT NULL
+        )
+      ''');
+      await db.execute(
+          'CREATE INDEX idx_weight_logs_date ON weight_logs(date)');
+      await db.execute(
+          'INSERT INTO weight_logs (date, weight_kg) '
+          'SELECT date, weight FROM bmi_entries');
+      await db.execute('''
+        CREATE TABLE measurements (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date INTEGER NOT NULL,
+          neck REAL, chest REAL, waist REAL,
+          hips REAL, arm REAL, thigh REAL
+        )
+      ''');
+      await db.execute(
+          'CREATE INDEX idx_measurements_date ON measurements(date)');
+    },
   ];
 
   DatabaseHelper._(this._factory, this._path);
@@ -135,6 +162,42 @@ class DatabaseHelper {
     final database = await db;
     await database.insert('profile', {'id': 1, ...profile.toMap()},
         conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  // ── Weight logs & measurements ───────────────────────────────
+
+  /// Oldest first (chart order).
+  Future<List<WeightLog>> getWeightLogs() async {
+    final database = await db;
+    final rows = await database.query('weight_logs', orderBy: 'date ASC');
+    return rows.map(WeightLog.fromMap).toList();
+  }
+
+  Future<int> insertWeightLog(WeightLog log) async {
+    final database = await db;
+    return database.insert('weight_logs', log.toMap());
+  }
+
+  Future<void> deleteWeightLog(int id) async {
+    final database = await db;
+    await database.delete('weight_logs', where: 'id = ?', whereArgs: [id]);
+  }
+
+  /// Newest first.
+  Future<List<Measurement>> getMeasurements() async {
+    final database = await db;
+    final rows = await database.query('measurements', orderBy: 'date DESC');
+    return rows.map(Measurement.fromMap).toList();
+  }
+
+  Future<int> insertMeasurement(Measurement m) async {
+    final database = await db;
+    return database.insert('measurements', m.toMap());
+  }
+
+  Future<void> deleteMeasurement(int id) async {
+    final database = await db;
+    await database.delete('measurements', where: 'id = ?', whereArgs: [id]);
   }
 
   // ── BMI Entries ──────────────────────────────────────────────
