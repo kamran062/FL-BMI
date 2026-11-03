@@ -1432,6 +1432,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get sectionProfile;
+
+  /// Bottom nav tab: body tracking
+  ///
+  /// In en, this message translates to:
+  /// **'Body'**
+  String get navBody;
+
+  /// Body screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Body'**
+  String get bodyTitle;
+
+  /// Button and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Log weight'**
+  String get logWeight;
+
+  /// Weight card empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Log your weight regularly to see your trend.'**
+  String get weightEmpty;
+
+  /// Smoothed weight under the latest weigh-in
+  ///
+  /// In en, this message translates to:
+  /// **'7-day average: {value}'**
+  String weightAverage(String value);
+
+  /// Date of the latest weigh-in
+  ///
+  /// In en, this message translates to:
+  /// **'Last logged {date}'**
+  String lastLogged(String date);
+
+  /// Card title
+  ///
+  /// In en, this message translates to:
+  /// **'Body fat (estimate)'**
+  String get bodyFatTitle;
+
+  /// Shown when measurements are missing (male formula)
+  ///
+  /// In en, this message translates to:
+  /// **'Add neck and waist measurements to estimate your body fat.'**
+  String get bodyFatNeedsMale;
+
+  /// Shown when measurements are missing (female formula)
+  ///
+  /// In en, this message translates to:
+  /// **'Add neck, waist and hip measurements to estimate your body fat.'**
+  String get bodyFatNeedsFemale;
+
+  /// Explains the body-fat number
+  ///
+  /// In en, this message translates to:
+  /// **'US Navy tape method — an estimate, not a medical measurement.'**
+  String get bodyFatMethod;
+
+  /// Card and sheet title
+  ///
+  /// In en, this message translates to:
+  /// **'Measurements'**
+  String get measurementsTitle;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add measurements'**
+  String get addMeasurements;
+
+  /// Measurements card empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Track your waist, hips and more to see changes the scale misses.'**
+  String get measurementsEmpty;
+
+  /// Body measurement
+  ///
+  /// In en, this message translates to:
+  /// **'Neck'**
+  String get measureNeck;
+
+  /// Body measurement (male/other wording)
+  ///
+  /// In en, this message translates to:
+  /// **'Chest'**
+  String get measureChest;
+
+  /// Body measurement (female wording)
+  ///
+  /// In en, this message translates to:
+  /// **'Bust'**
+  String get measureBust;
+
+  /// Body measurement
+  ///
+  /// In en, this message translates to:
+  /// **'Waist'**
+  String get measureWaist;
+
+  /// Body measurement
+  ///
+  /// In en, this message translates to:
+  /// **'Hips'**
+  String get measureHips;
+
+  /// Body measurement
+  ///
+  /// In en, this message translates to:
+  /// **'Arm'**
+  String get measureArm;
+
+  /// Body measurement
+  ///
+  /// In en, this message translates to:
+  /// **'Thigh'**
+  String get measureThigh;
+
+  /// Instructions in the measurements sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Measure relaxed, at the widest point, without pulling the tape tight.'**
+  String get measureHint;
+
+  /// Validation error
+  ///
+  /// In en, this message translates to:
+  /// **'Measurements must be between 5 and 300 cm (2–118 in).'**
+  String get measureRangeError;
+
+  /// Card title / link
+  ///
+  /// In en, this message translates to:
+  /// **'BMI history'**
+  String get bmiHistory;
+
+  /// Link to a full list
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get viewAll;
+
+  /// BMI card empty state
+  ///
+  /// In en, this message translates to:
+  /// **'No BMI saved yet'**
+  String get noBmiYet;
+
+  /// Footer disclaimer on body screens
+  ///
+  /// In en, this message translates to:
+  /// **'For general wellness only. Not medical advice.'**
+  String get wellnessDisclaimer;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

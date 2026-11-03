@@ -1003,5 +1003,121 @@
   "sectionProfile": "Profile",
   "@sectionProfile": {
     "description": "Settings section"
+  },
+  "navBody": "Body",
+  "@navBody": {
+    "description": "Bottom nav tab: body tracking"
+  },
+  "bodyTitle": "Body",
+  "@bodyTitle": {
+    "description": "Body screen title"
+  },
+  "logWeight": "Log weight",
+  "@logWeight": {
+    "description": "Button and dialog title"
+  },
+  "weightEmpty": "Log your weight regularly to see your trend.",
+  "@weightEmpty": {
+    "description": "Weight card empty state"
+  },
+  "weightAverage": "7-day average: {value}",
+  "@weightAverage": {
+    "description": "Smoothed weight under the latest weigh-in",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "81.2 kg"
+      }
+    }
+  },
+  "lastLogged": "Last logged {date}",
+  "@lastLogged": {
+    "description": "Date of the latest weigh-in",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "3 Nov"
+      }
+    }
+  },
+  "bodyFatTitle": "Body fat (estimate)",
+  "@bodyFatTitle": {
+    "description": "Card title"
+  },
+  "bodyFatNeedsMale": "Add neck and waist measurements to estimate your body fat.",
+  "@bodyFatNeedsMale": {
+    "description": "Shown when measurements are missing (male formula)"
+  },
+  "bodyFatNeedsFemale": "Add neck, waist and hip measurements to estimate your body fat.",
+  "@bodyFatNeedsFemale": {
+    "description": "Shown when measurements are missing (female formula)"
+  },
+  "bodyFatMethod": "US Navy tape method — an estimate, not a medical measurement.",
+  "@bodyFatMethod": {
+    "description": "Explains the body-fat number"
+  },
+  "measurementsTitle": "Measurements",
+  "@measurementsTitle": {
+    "description": "Card and sheet title"
+  },
+  "addMeasurements": "Add measurements",
+  "@addMeasurements": {
+    "description": "Button"
+  },
+  "measurementsEmpty": "Track your waist, hips and more to see changes the scale misses.",
+  "@measurementsEmpty": {
+    "description": "Measurements card empty state"
+  },
+  "measureNeck": "Neck",
+  "@measureNeck": {
+    "description": "Body measurement"
+  },
+  "measureChest": "Chest",
+  "@measureChest": {
+    "description": "Body measurement (male/other wording)"
+  },
+  "measureBust": "Bust",
+  "@measureBust": {
+    "description": "Body measurement (female wording)"
+  },
+  "measureWaist": "Waist",
+  "@measureWaist": {
+    "description": "Body measurement"
+  },
+  "measureHips": "Hips",
+  "@measureHips": {
+    "description": "Body measurement"
+  },
+  "measureArm": "Arm",
+  "@measureArm": {
+    "description": "Body measurement"
+  },
+  "measureThigh": "Thigh",
+  "@measureThigh": {
+    "description": "Body measurement"
+  },
+  "measureHint": "Measure relaxed, at the widest point, without pulling the tape tight.",
+  "@measureHint": {
+    "description": "Instructions in the measurements sheet"
+  },
+  "measureRangeError": "Measurements must be between 5 and 300 cm (2–118 in).",
+  "@measureRangeError": {
+    "description": "Validation error"
+  },
+  "bmiHistory": "BMI history",
+  "@bmiHistory": {
+    "description": "Card title / link"
+  },
+  "viewAll": "View all",
+  "@viewAll": {
+    "description": "Link to a full list"
+  },
+  "noBmiYet": "No BMI saved yet",
+  "@noBmiYet": {
+    "description": "BMI card empty state"
+  },
+  "wellnessDisclaimer": "For general wellness only. Not medical advice.",
+  "@wellnessDisclaimer": {
+    "description": "Footer disclaimer on body screens"
   }
 }

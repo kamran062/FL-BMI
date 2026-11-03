@@ -11,6 +11,7 @@ import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/profile/ui/profile_setup_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/goal_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/history_screen.dart';
+import 'package:bmi_health/features/body/ui/body_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/home_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/result_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/share_screen.dart';
@@ -24,7 +25,8 @@ abstract final class Routes {
   static const splash     = '/splash';
   static const onboarding = '/onboarding';
   static const calculate  = '/calculate';
-  static const history    = '/history';
+  static const body       = '/body';
+  static const history    = '/body/history';
   static const tips       = '/tips';
   static const settings   = '/settings';
   static const result     = '/result';
@@ -112,12 +114,22 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
           ]),
           StatefulShellBranch(routes: [
             GoRoute(
-              path: Routes.history,
-              builder: (context, _) => HistoryScreen(
-                onAddEntry: () => context.go(Routes.calculate),
-                onViewEntry: (entry) =>
-                    context.push(Routes.resultFor(entry.bmi)),
+              path: Routes.body,
+              builder: (context, _) => BodyScreen(
+                onOpenBmiHistory: () => context.go(Routes.history),
               ),
+              routes: [
+                // Nested so the Body tab stays underneath and Back returns to it
+                GoRoute(
+                  path: 'history',
+                  builder: (context, _) => HistoryScreen(
+                    onAddEntry: () => context.go(Routes.calculate),
+                    onViewEntry: (entry) =>
+                        context.push(Routes.resultFor(entry.bmi)),
+                    onBack: () => context.go(Routes.body),
+                  ),
+                ),
+              ],
             ),
           ]),
           StatefulShellBranch(routes: [

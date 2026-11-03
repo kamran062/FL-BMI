@@ -726,4 +726,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sectionProfile => 'Profile';
+
+  @override
+  String get navBody => 'Body';
+
+  @override
+  String get bodyTitle => 'Body';
+
+  @override
+  String get logWeight => 'Log weight';
+
+  @override
+  String get weightEmpty => 'Log your weight regularly to see your trend.';
+
+  @override
+  String weightAverage(String value) {
+    return '7-day average: $value';
+  }
+
+  @override
+  String lastLogged(String date) {
+    return 'Last logged $date';
+  }
+
+  @override
+  String get bodyFatTitle => 'Body fat (estimate)';
+
+  @override
+  String get bodyFatNeedsMale => 'Add neck and waist measurements to estimate your body fat.';
+
+  @override
+  String get bodyFatNeedsFemale => 'Add neck, waist and hip measurements to estimate your body fat.';
+
+  @override
+  String get bodyFatMethod => 'US Navy tape method — an estimate, not a medical measurement.';
+
+  @override
+  String get measurementsTitle => 'Measurements';
+
+  @override
+  String get addMeasurements => 'Add measurements';
+
+  @override
+  String get measurementsEmpty => 'Track your waist, hips and more to see changes the scale misses.';
+
+  @override
+  String get measureNeck => 'Neck';
+
+  @override
+  String get measureChest => 'Chest';
+
+  @override
+  String get measureBust => 'Bust';
+
+  @override
+  String get measureWaist => 'Waist';
+
+  @override
+  String get measureHips => 'Hips';
+
+  @override
+  String get measureArm => 'Arm';
+
+  @override
+  String get measureThigh => 'Thigh';
+
+  @override
+  String get measureHint => 'Measure relaxed, at the widest point, without pulling the tape tight.';
+
+  @override
+  String get measureRangeError => 'Measurements must be between 5 and 300 cm (2–118 in).';
+
+  @override
+  String get bmiHistory => 'BMI history';
+
+  @override
+  String get viewAll => 'View all';
+
+  @override
+  String get noBmiYet => 'No BMI saved yet';
+
+  @override
+  String get wellnessDisclaimer => 'For general wellness only. Not medical advice.';
 }

@@ -292,6 +292,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 1.2 Body module (existing BMI + new metrics)
 
+> **Status: done** (1.2a `2ec79b6`, 1.2b). Body tab replaces the History tab (History opens from it). Weight log with 7-day trend chart (existing BMI entries imported as weight history), gender-specific measurements, US Navy body-fat estimate, disclaimer. Logging a weight also updates the calculator's weight. Not yet: editing/deleting single weigh-ins and measurements from the UI (storage supports it), progress photos (Phase 4.6).
+
 **Features**
 - **BMI (existing):** calculator, history, goals, share, tips, moved into Body
 - **Weight tracking:** quick log, 7-day moving-average trend, goal line

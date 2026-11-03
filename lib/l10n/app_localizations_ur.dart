@@ -725,4 +725,86 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get sectionProfile => 'پروفائل';
+
+  @override
+  String get navBody => 'جسم';
+
+  @override
+  String get bodyTitle => 'جسم';
+
+  @override
+  String get logWeight => 'وزن درج کریں';
+
+  @override
+  String get weightEmpty => 'اپنا رجحان دیکھنے کے لیے باقاعدگی سے وزن درج کریں۔';
+
+  @override
+  String weightAverage(String value) {
+    return '7 دن کا اوسط: $value';
+  }
+
+  @override
+  String lastLogged(String date) {
+    return 'آخری اندراج $date';
+  }
+
+  @override
+  String get bodyFatTitle => 'جسمانی چربی (اندازہ)';
+
+  @override
+  String get bodyFatNeedsMale => 'جسمانی چربی کا اندازہ لگانے کے لیے گردن اور کمر کی پیمائش شامل کریں۔';
+
+  @override
+  String get bodyFatNeedsFemale => 'جسمانی چربی کا اندازہ لگانے کے لیے گردن، کمر اور کولہوں کی پیمائش شامل کریں۔';
+
+  @override
+  String get bodyFatMethod => 'امریکی نیوی ٹیپ طریقہ — یہ ایک اندازہ ہے، طبی پیمائش نہیں۔';
+
+  @override
+  String get measurementsTitle => 'پیمائشیں';
+
+  @override
+  String get addMeasurements => 'پیمائشیں شامل کریں';
+
+  @override
+  String get measurementsEmpty => 'کمر، کولہوں اور دیگر پیمائشوں کو ٹریک کریں تاکہ وہ تبدیلیاں نظر آئیں جو ترازو نہیں دکھاتا۔';
+
+  @override
+  String get measureNeck => 'گردن';
+
+  @override
+  String get measureChest => 'سینہ';
+
+  @override
+  String get measureBust => 'سینہ';
+
+  @override
+  String get measureWaist => 'کمر';
+
+  @override
+  String get measureHips => 'کولہے';
+
+  @override
+  String get measureArm => 'بازو';
+
+  @override
+  String get measureThigh => 'ران';
+
+  @override
+  String get measureHint => 'آرام کی حالت میں، سب سے چوڑی جگہ سے، ٹیپ کو زیادہ کسے بغیر ناپیں۔';
+
+  @override
+  String get measureRangeError => 'پیمائش 5 سے 300 سینٹی میٹر (2 سے 118 انچ) کے درمیان ہونی چاہیے۔';
+
+  @override
+  String get bmiHistory => 'بی ایم آئی ریکارڈ';
+
+  @override
+  String get viewAll => 'سب دیکھیں';
+
+  @override
+  String get noBmiYet => 'ابھی کوئی بی ایم آئی محفوظ نہیں';
+
+  @override
+  String get wellnessDisclaimer => 'صرف عمومی صحت کے لیے۔ یہ طبی مشورہ نہیں ہے۔';
 }

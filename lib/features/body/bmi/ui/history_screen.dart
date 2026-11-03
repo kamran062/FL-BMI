@@ -63,7 +63,11 @@ extension _CategoryExt on _Category {
 class HistoryScreen extends StatefulWidget {
   final VoidCallback onAddEntry;
   final void Function(BmiEntry entry)? onViewEntry;
-  const HistoryScreen({super.key, required this.onAddEntry, this.onViewEntry});
+
+  /// Shows a back button when History is opened from another screen.
+  final VoidCallback? onBack;
+  const HistoryScreen(
+      {super.key, required this.onAddEntry, this.onViewEntry, this.onBack});
 
   @override
   State<HistoryScreen> createState() => _HistoryScreenState();
@@ -93,20 +97,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
   void _openFilter(BuildContext context, Color brand, bool isDark) {
     showModalBottomSheet(
       context: context,
+      // Above the tab bar and banner, which sit over each tab's navigator
+      useRootNavigator: true,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => _FilterSheet(
+      // Close with the sheet's own context: the screen's context belongs to
+      // the tab navigator, and popping it would close History instead.
+      builder: (sheetContext) => _FilterSheet(
         period: _period,
         category: _category,
         brand: brand,
         isDark: isDark,
         onApply: (p, c) {
           setState(() { _period = p; _category = c; });
-          Navigator.pop(context);
+          Navigator.pop(sheetContext);
         },
         onClear: () {
           setState(() { _period = _Period.all; _category = _Category.all; });
-          Navigator.pop(context);
+          Navigator.pop(sheetContext);
         },
       ),
     );
@@ -131,7 +139,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
         final noFilterResults = !noEntries && filtered.isEmpty;
 
         if (noEntries) {
-          return _EmptyState(onAddEntry: widget.onAddEntry);
+          return _EmptyState(
+              onAddEntry: widget.onAddEntry, onBack: widget.onBack);
         }
 
         return Scaffold(
@@ -143,6 +152,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: ScreenHeader(
                     title: context.l10n.historyTitle,
                     large: true,
+                    leading: widget.onBack == null
+                        ? null
+                        : BackButton(onPressed: widget.onBack),
                     trailing: GestureDetector(
                       onTap: () => _openFilter(context, brand, isDark),
                       child: Stack(
@@ -562,7 +574,8 @@ class _OptionChip extends StatelessWidget {
 
 class _EmptyState extends StatelessWidget {
   final VoidCallback onAddEntry;
-  const _EmptyState({required this.onAddEntry});
+  final VoidCallback? onBack;
+  const _EmptyState({required this.onAddEntry, this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -577,7 +590,11 @@ class _EmptyState extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            ScreenHeader(title: context.l10n.historyTitle, large: true),
+            ScreenHeader(
+              title: context.l10n.historyTitle,
+              large: true,
+              leading: onBack == null ? null : BackButton(onPressed: onBack),
+            ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
