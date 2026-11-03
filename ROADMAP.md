@@ -412,6 +412,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 2.2 Movement timeline (signature feature)
 
+> **Status: done (free approach).** `geolocator` stream as a visible Android foreground service started from the app — **no ACCESS_BACKGROUND_LOCATION** (no background-location declaration/video needed; only the foreground-service `location` declaration). ~1 fix/minute, stays ≥5 min within 100 m become visits, trips classed walk/run/vehicle by speed, noisy fixes dropped, named places, OpenStreetMap map with route, day picker, delete day/all, auto-resume on launch, follows today across midnight. Verified on emulator with simulated GPS. **Limits:** stops if the app is swiped away (restarts on next open); OEM battery savers may pause it; OSM's public tile server is for light use — switch to a paid tile provider before scale.
+
 **Features**
 - Daily timeline: places visited, arrival and departure times, **time stayed at each place**
 - Route map between places, coloured by activity (walk / run / cycle / vehicle)
@@ -442,6 +444,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 2.3 Automatic walk & run detection
 
+> **Status: partly done.** Trips in the timeline are classified walk / run / vehicle with distance and duration. Not yet: per-run pace & splits, manual start/stop cardio sessions.
+
 **Features**
 - Detects walks and runs over 10 min; shows route, pace, splits and calories
 - Manual start and stop for outdoor cardio sessions
@@ -450,6 +454,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - Field test: 20 recorded walks and runs compared with a reference app (distance within ±3 %)
 
 ### 2.4 Automatic gym check-in (signature feature)
+
+> **Status: done.** Mark any visited place as "my gym"; after 3 minutes inside it (while tracking) a notification offers to start the workout, at most once per 3 h; weekly gym time on Today. Not yet: linking the gym visit to the logged workout, attendance calendar.
 
 **Features**
 - User marks their gym on the map (or picks a place from the timeline)
@@ -489,16 +495,22 @@ Every module in this roadmap is only "done" when it meets all of these.
 **Goal:** coaching features worth paying for. **Duration:** ~8 weeks.
 
 ### 3.1 Programs
+
+> **Status: done (v1).** 5 built-in programs (home full body, beginner gym full body, glutes & lower, PPL, 5×5), ordered by equipment fit, goal, experience and gender — all open to everyone; one tap starts a program day. Not yet: weekly schedule tracking, automatic deloads.
 - Ready-made programs: beginner full body, push/pull/legs, upper/lower, 5×5, home no-equipment, glutes and lower body, fat-loss conditioning
 - Recommendations based on goal, experience, equipment, days per week and gender (§3), with every program available to everyone
 - Weekly schedule with automatic deload weeks
 - **Testing:** unit tests for schedule generation; widget tests for program switching mid-cycle
 
 ### 3.2 Progressive overload suggestions
+
+> **Status: done.** Double progression (8–12 reps): top of range → +weight (2.5 kg barbell, 2 kg dumbbell…), in range → +1 rep, missed twice → −10 % deload; bodyweight by reps; shown under each exercise in the logger.
 - "Last time 60 kg × 10 → try 62.5 kg × 8–10 today", based on RPE and history
 - **Testing:** unit tests with simulated 12-week histories (stall, progress, missed sessions)
 
 ### 3.3 Muscle heatmap
+
+> **Status: done as heat bars.** Weekly hard sets per muscle (secondary = ½), colour-coded, under-trained list. The front/back body diagram (gender-specific) needs illustration assets.
 - Front and back body diagram (gender-specific body model) shaded by weekly volume per muscle
 - Shows under-trained muscles with suggested exercises
 - **Testing:** golden tests for both body models in light and dark mode

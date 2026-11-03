@@ -1661,5 +1661,261 @@
   "stepsNeedsInstall": "Step counting needs Google's Health Connect app.",
   "@stepsNeedsInstall": {
     "description": "Shown when Health Connect is missing"
+  },
+  "activityChannel": "Activity",
+  "@activityChannel": {
+    "description": "Android notification channel for gym check-in and tracking"
+  },
+  "movementTitle": "Timeline",
+  "@movementTitle": {
+    "description": "Movement timeline screen title"
+  },
+  "movementCardTitle": "Your day",
+  "@movementCardTitle": {
+    "description": "Today card title for the timeline"
+  },
+  "trackingOff": "Turn on tracking to see where you went, how long you stayed and how far you walked. Your location never leaves this phone.",
+  "@trackingOff": {
+    "description": "Explains the timeline before it is turned on"
+  },
+  "trackingOn": "Tracking is on",
+  "@trackingOn": {
+    "description": "Status label"
+  },
+  "startTracking": "Start tracking",
+  "@startTracking": {
+    "description": "Button"
+  },
+  "stopTracking": "Stop tracking",
+  "@stopTracking": {
+    "description": "Button"
+  },
+  "trackingNotificationTitle": "Tracking your day",
+  "@trackingNotificationTitle": {
+    "description": "Ongoing notification while tracking"
+  },
+  "trackingNotificationBody": "Building your private timeline. Tap to open.",
+  "@trackingNotificationBody": {
+    "description": "Ongoing notification text"
+  },
+  "locationDenied": "Location access is off. Allow it in your phone's settings to build your timeline.",
+  "@locationDenied": {
+    "description": "Shown when location permission is denied"
+  },
+  "locationServiceOff": "Turn on location (GPS) on your phone to track your day.",
+  "@locationServiceOff": {
+    "description": "Shown when GPS is off"
+  },
+  "placesVisited": "{count, plural, =0{No places yet} =1{1 place} other{{count} places}}",
+  "@placesVisited": {
+    "description": "Number of places visited today",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "distanceKm": "{km} km",
+  "@distanceKm": {
+    "description": "Distance",
+    "placeholders": {
+      "km": {
+        "type": "String",
+        "example": "2.4"
+      }
+    }
+  },
+  "durationHm": "{hours} h {minutes} min",
+  "@durationHm": {
+    "description": "Duration over an hour",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "1"
+      },
+      "minutes": {
+        "type": "int",
+        "example": "20"
+      }
+    }
+  },
+  "unnamedPlace": "Unnamed place",
+  "@unnamedPlace": {
+    "description": "Visit with no label"
+  },
+  "modeWalk": "Walk",
+  "@modeWalk": {
+    "description": "Travel mode"
+  },
+  "modeRun": "Run / cycle",
+  "@modeRun": {
+    "description": "Travel mode"
+  },
+  "modeVehicle": "Vehicle",
+  "@modeVehicle": {
+    "description": "Travel mode"
+  },
+  "namePlace": "Name this place",
+  "@namePlace": {
+    "description": "Button and dialog title"
+  },
+  "placeName": "Place name",
+  "@placeName": {
+    "description": "Text field label"
+  },
+  "thisIsMyGym": "This is my gym",
+  "@thisIsMyGym": {
+    "description": "Checkbox: mark the place as the user's gym"
+  },
+  "noTimelineYet": "No movement recorded for this day.",
+  "@noTimelineYet": {
+    "description": "Timeline empty state"
+  },
+  "deleteDay": "Delete this day",
+  "@deleteDay": {
+    "description": "Menu item"
+  },
+  "deleteAllLocation": "Delete all location history",
+  "@deleteAllLocation": {
+    "description": "Menu item"
+  },
+  "deleteLocationConfirm": "This permanently deletes the selected location history from this phone.",
+  "@deleteLocationConfirm": {
+    "description": "Confirmation"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Confirm button"
+  },
+  "gymTimeWeek": "Gym time this week: {time}",
+  "@gymTimeWeek": {
+    "description": "Weekly gym time",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "3 h 20 min"
+      }
+    }
+  },
+  "gymCheckInTitle": "You're at the gym 💪",
+  "@gymCheckInTitle": {
+    "description": "Gym check-in notification title"
+  },
+  "gymCheckInBody": "Start today's workout? Open the app to begin logging.",
+  "@gymCheckInBody": {
+    "description": "Gym check-in notification text"
+  },
+  "trackingLimitNote": "Tracking pauses if you close the app from recent apps.",
+  "@trackingLimitNote": {
+    "description": "Explains the limitation of tracking"
+  },
+  "programs": "Programs",
+  "@programs": {
+    "description": "Section title"
+  },
+  "programDays": "{count, plural, =1{1 day a week} other{{count} days a week}}",
+  "@programDays": {
+    "description": "Program frequency",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "startDay": "Start {day}",
+  "@startDay": {
+    "description": "Starts a workout for one program day",
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "Push"
+      }
+    }
+  },
+  "recommended": "Recommended",
+  "@recommended": {
+    "description": "Badge on the suggested program"
+  },
+  "suggestionIncrease": "Try {weight} × {reps}",
+  "@suggestionIncrease": {
+    "description": "Next-session suggestion: heavier",
+    "placeholders": {
+      "weight": {
+        "type": "String",
+        "example": "62.5 kg"
+      },
+      "reps": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "suggestionAddRep": "Aim for {reps} reps at {weight}",
+  "@suggestionAddRep": {
+    "description": "Next-session suggestion: one more rep",
+    "placeholders": {
+      "weight": {
+        "type": "String",
+        "example": "60 kg"
+      },
+      "reps": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "suggestionDeload": "Reset to {weight} × {reps}",
+  "@suggestionDeload": {
+    "description": "Next-session suggestion: back off",
+    "placeholders": {
+      "weight": {
+        "type": "String",
+        "example": "90 kg"
+      },
+      "reps": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "suggestionRepsOnly": "Aim for {reps} reps",
+  "@suggestionRepsOnly": {
+    "description": "Suggestion for bodyweight exercises",
+    "placeholders": {
+      "reps": {
+        "type": "int",
+        "example": "16"
+      }
+    }
+  },
+  "muscleMapTitle": "Muscles this week",
+  "@muscleMapTitle": {
+    "description": "Heatmap card title"
+  },
+  "muscleMapHint": "Hard sets per muscle (secondary muscles count half). About 10 a week builds muscle.",
+  "@muscleMapHint": {
+    "description": "Heatmap explanation"
+  },
+  "undertrained": "Needs more work: {muscles}",
+  "@undertrained": {
+    "description": "Lists under-trained muscles",
+    "placeholders": {
+      "muscles": {
+        "type": "String",
+        "example": "Quads, Calves"
+      }
+    }
+  },
+  "setsCount": "{count} sets",
+  "@setsCount": {
+    "description": "Weekly sets for a muscle",
+    "placeholders": {
+      "count": {
+        "type": "String",
+        "example": "6.5"
+      }
+    }
   }
 }

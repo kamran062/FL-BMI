@@ -9,6 +9,7 @@ import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
 import 'package:bmi_health/features/fuel/fuel_provider.dart';
 import 'package:bmi_health/features/movement/steps_provider.dart';
+import 'package:bmi_health/features/movement/movement_provider.dart';
 import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ typedef AppState = ({
   WorkoutProvider workouts,
   FuelProvider fuel,
   StepsProvider steps,
+  MovementProvider movement,
 });
 
 /// Launches the real app as a returning user who has already answered (or
@@ -69,11 +71,12 @@ Future<AppState> launchApp(
   final workouts = WorkoutProvider(db);
   final fuel = FuelProvider(db);
   final stepsProvider = StepsProvider(source: steps);
+  final movement = MovementProvider(db);
   final catalog = ExerciseCatalog.parse(
       File('assets/exercises/catalog.json').readAsStringSync());
   await tester.runAsync(() => Future.wait([
         settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-        fuel.load(), stepsProvider.load(),
+        fuel.load(), stepsProvider.load(), movement.load(),
       ]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
@@ -83,6 +86,7 @@ Future<AppState> launchApp(
     workouts: workouts,
     fuel: fuel,
     steps: stepsProvider,
+    movement: movement,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));
@@ -92,6 +96,7 @@ Future<AppState> launchApp(
   return (
     settings: settings, profile: profile, bmi: bmi, body: body,
     workouts: workouts, fuel: fuel, steps: stepsProvider,
+    movement: movement,
   );
 }
 

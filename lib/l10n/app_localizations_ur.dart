@@ -1171,4 +1171,165 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get stepsNeedsInstall => 'قدم گننے کے لیے گوگل کی ہیلتھ کنیکٹ ایپ درکار ہے۔';
+
+  @override
+  String get activityChannel => 'سرگرمی';
+
+  @override
+  String get movementTitle => 'ٹائم لائن';
+
+  @override
+  String get movementCardTitle => 'آپ کا دن';
+
+  @override
+  String get trackingOff => 'ٹریکنگ آن کریں تاکہ دیکھ سکیں آپ کہاں گئے، کتنی دیر رہے اور کتنا چلے۔ آپ کا مقام کبھی اس فون سے باہر نہیں جاتا۔';
+
+  @override
+  String get trackingOn => 'ٹریکنگ آن ہے';
+
+  @override
+  String get startTracking => 'ٹریکنگ شروع کریں';
+
+  @override
+  String get stopTracking => 'ٹریکنگ بند کریں';
+
+  @override
+  String get trackingNotificationTitle => 'آپ کا دن ٹریک ہو رہا ہے';
+
+  @override
+  String get trackingNotificationBody => 'آپ کی نجی ٹائم لائن بن رہی ہے۔ کھولنے کے لیے ٹیپ کریں۔';
+
+  @override
+  String get locationDenied => 'مقام تک رسائی بند ہے۔ ٹائم لائن کے لیے فون کی ترتیبات میں اجازت دیں۔';
+
+  @override
+  String get locationServiceOff => 'اپنا دن ٹریک کرنے کے لیے فون کا مقام (جی پی ایس) آن کریں۔';
+
+  @override
+  String placesVisited(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count جگہیں',
+      zero: 'ابھی کوئی جگہ نہیں',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String distanceKm(String km) {
+    return '$km کلومیٹر';
+  }
+
+  @override
+  String durationHm(int hours, int minutes) {
+    return '$hours گھنٹے $minutes منٹ';
+  }
+
+  @override
+  String get unnamedPlace => 'بے نام جگہ';
+
+  @override
+  String get modeWalk => 'پیدل';
+
+  @override
+  String get modeRun => 'دوڑ / سائیکل';
+
+  @override
+  String get modeVehicle => 'گاڑی';
+
+  @override
+  String get namePlace => 'اس جگہ کا نام رکھیں';
+
+  @override
+  String get placeName => 'جگہ کا نام';
+
+  @override
+  String get thisIsMyGym => 'یہ میرا جم ہے';
+
+  @override
+  String get noTimelineYet => 'اس دن کی کوئی حرکت ریکارڈ نہیں ہوئی۔';
+
+  @override
+  String get deleteDay => 'یہ دن حذف کریں';
+
+  @override
+  String get deleteAllLocation => 'مقام کی پوری تاریخ حذف کریں';
+
+  @override
+  String get deleteLocationConfirm => 'یہ منتخب مقام کی تاریخ اس فون سے مستقل طور پر حذف کر دے گا۔';
+
+  @override
+  String get delete => 'حذف کریں';
+
+  @override
+  String gymTimeWeek(String time) {
+    return 'اس ہفتے جم میں وقت: $time';
+  }
+
+  @override
+  String get gymCheckInTitle => 'آپ جم میں ہیں 💪';
+
+  @override
+  String get gymCheckInBody => 'آج کی ورزش شروع کریں؟ لاگ کرنا شروع کرنے کے لیے ایپ کھولیں۔';
+
+  @override
+  String get trackingLimitNote => 'اگر آپ حالیہ ایپس سے ایپ بند کر دیں تو ٹریکنگ رک جاتی ہے۔';
+
+  @override
+  String get programs => 'پروگرام';
+
+  @override
+  String programDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ہفتے میں $count دن',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String startDay(String day) {
+    return '$day شروع کریں';
+  }
+
+  @override
+  String get recommended => 'تجویز کردہ';
+
+  @override
+  String suggestionIncrease(String weight, int reps) {
+    return '$weight × $reps آزمائیں';
+  }
+
+  @override
+  String suggestionAddRep(String weight, int reps) {
+    return '$weight پر $reps ریپس کا ہدف';
+  }
+
+  @override
+  String suggestionDeload(String weight, int reps) {
+    return '$weight × $reps پر واپس آئیں';
+  }
+
+  @override
+  String suggestionRepsOnly(int reps) {
+    return '$reps ریپس کا ہدف';
+  }
+
+  @override
+  String get muscleMapTitle => 'اس ہفتے کے پٹھے';
+
+  @override
+  String get muscleMapHint => 'ہر پٹھے کے لیے سخت سیٹس (ثانوی پٹھے آدھے شمار ہوتے ہیں)۔ ہفتے میں تقریباً 10 سیٹ پٹھے بناتے ہیں۔';
+
+  @override
+  String undertrained(String muscles) {
+    return 'مزید توجہ درکار: $muscles';
+  }
+
+  @override
+  String setsCount(String count) {
+    return '$count سیٹ';
+  }
 }

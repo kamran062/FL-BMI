@@ -9,6 +9,7 @@ import 'package:bmi_health/shared/theme/text_tracking.dart';
 import 'package:provider/provider.dart';
 import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/core/notifications/reminder_service.dart';
+import 'package:bmi_health/features/movement/movement_provider.dart';
 
 /// Tab shell: floating pill nav bar + banner ad above it.
 /// Full-screen pages (result, goal, share) are pushed above this shell by the
@@ -37,6 +38,8 @@ class _AppShellState extends State<AppShell> {
     _reminderKey = key;
     ReminderService.instance
         .sync(daily: s.dailyReminder, weekly: s.weeklyCheckIn, l: l);
+    // Restart location tracking after a relaunch if the user left it on
+    context.read<MovementProvider>().resume(l);
   }
 
   // Order must match the router's StatefulShellRoute branches.

@@ -79,4 +79,28 @@ void main() {
     expect(app.workouts.active, isNull);
     expect(app.workouts.history, hasLength(1));
   });
+
+  testWidgets('second session suggests the next weight', (tester) async {
+    final app = await launchApp(tester);
+    final w = app.workouts;
+    // Session 1: bench 60 kg × 12, 12 (top of the range) — logged directly
+    await tester.runAsync(() async {
+      await w.start(name: 'A');
+      await w.addExercise('barbell_bench_press');
+      final s = w.setsFor('barbell_bench_press').single;
+      await w.updateSet(s.copyWith(weightKg: 60, reps: 12, done: true));
+      await w.addSet('barbell_bench_press');
+      final s2 = w.setsFor('barbell_bench_press').last;
+      await w.updateSet(s2.copyWith(weightKg: 60, reps: 12, done: true));
+      await w.finish();
+      await w.start(name: 'B');
+      await w.addExercise('barbell_bench_press');
+    });
+    await tester.tap(find.text('Train'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Resume workout'));
+    await settleIO(tester);
+    expect(find.text('Try 62.5 kg × 8'), findsOneWidget);
+  });
 }
+

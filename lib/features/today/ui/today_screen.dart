@@ -20,6 +20,8 @@ import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/features/movement/steps_provider.dart';
 import 'dart:io' show Platform;
+import 'package:bmi_health/features/movement/movement_provider.dart';
+import 'package:bmi_health/features/movement/ui/timeline_screen.dart';
 
 /// Home dashboard: the day at a glance with one-tap actions.
 class TodayScreen extends StatelessWidget {
@@ -28,6 +30,7 @@ class TodayScreen extends StatelessWidget {
   final VoidCallback onOpenBody;
   final VoidCallback onCalculateBmi;
   final VoidCallback onOpenTips;
+  final VoidCallback onOpenTimeline;
 
   const TodayScreen({
     super.key,
@@ -36,6 +39,7 @@ class TodayScreen extends StatelessWidget {
     required this.onOpenBody,
     required this.onCalculateBmi,
     required this.onOpenTips,
+    required this.onOpenTimeline,
   });
 
   @override
@@ -116,6 +120,7 @@ class TodayScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 const _StepsCard(),
+                _MovementCard(onOpen: onOpenTimeline),
                 // ── Fuel ───────────────────────────────────────────────
                 CaloriesCard(
                     eaten: fuel.kcal, target: targets.calories, onTap: onOpenFuel),
@@ -298,6 +303,64 @@ class _StepsCard extends StatelessWidget {
             ]),
             const SizedBox(height: 8),
             body,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MovementCard extends StatelessWidget {
+  final VoidCallback onOpen;
+  const _MovementCard({required this.onOpen});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final m = context.watch<MovementProvider>();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    const color = AppColors.bmiUnder;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: AppCard(
+        padding: 18,
+        onTap: onOpen,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              const Icon(Icons.route_rounded, color: color, size: 20),
+              const SizedBox(width: 6),
+              OverlineLabel(l.movementCardTitle),
+              const Spacer(),
+              Icon(Icons.chevron_right_rounded, color: fg3),
+            ]),
+            const SizedBox(height: 8),
+            if (!m.enabled) ...[
+              Text(l.trackingOff,
+                  style: GoogleFonts.inter(fontSize: 14, color: fg3, height: 1.45)),
+              const SizedBox(height: 10),
+              AppButton(
+                label: l.startTracking,
+                icon: Icons.my_location_rounded,
+                variant: AppButtonVariant.secondary,
+                fullWidth: true,
+                onPressed: () => startTracking(context),
+              ),
+            ] else ...[
+              Text(
+                '${l.placesVisited(m.visits.length)} · '
+                '${l.distanceKm((m.distanceM / 1000).toStringAsFixed(1))}',
+                style: GoogleFonts.inter(
+                    fontSize: 17, fontWeight: FontWeight.w600, color: fg1),
+              ),
+              if (m.gymTimeThisWeek > Duration.zero)
+                Text(l.gymTimeWeek(formatDuration(l, m.gymTimeThisWeek)),
+                    style: GoogleFonts.inter(fontSize: 13, color: fg3)),
+            ],
           ],
         ),
       ),

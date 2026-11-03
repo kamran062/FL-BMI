@@ -119,6 +119,30 @@ class ReminderService {
     }
   }
 
+  /// Shows a notification right away (e.g. gym check-in).
+  Future<void> showNow({
+    required int id,
+    required String title,
+    required String body,
+    required AppLocalizations l,
+  }) async {
+    try {
+      await _init();
+      await _plugin.show(
+        id,
+        title,
+        body,
+        NotificationDetails(
+          android: AndroidNotificationDetails('activity', l.activityChannel,
+              importance: Importance.high),
+          iOS: const DarwinNotificationDetails(),
+        ),
+      );
+    } catch (e, st) {
+      reportError(e, st, reason: 'notify-now');
+    }
+  }
+
   /// Next occurrence of [hour]:00 (optionally on [weekday]) after [now].
   @visibleForTesting
   static tz.TZDateTime nextAt(tz.TZDateTime now, {required int hour, int? weekday}) {

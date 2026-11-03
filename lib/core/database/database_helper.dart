@@ -5,6 +5,7 @@ import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
 import 'package:bmi_health/features/body/metrics/domain/body_metrics.dart';
 import 'package:bmi_health/features/fuel/domain/nutrition.dart';
+import 'package:bmi_health/features/movement/domain/timeline.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
 
@@ -12,7 +13,7 @@ class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 6;
+  static const schemaVersion = 7;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -123,6 +124,30 @@ class DatabaseHelper {
         )
       ''');
       await db.execute('CREATE INDEX idx_water_logs_date ON water_logs(date)');
+    },
+    // 6 → 7: movement timeline (location history stays on the device)
+    (db) async {
+      await db.execute('''
+        CREATE TABLE location_points (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          time INTEGER NOT NULL,
+          lat REAL NOT NULL,
+          lng REAL NOT NULL,
+          accuracy REAL NOT NULL DEFAULT 0
+        )
+      ''');
+      await db.execute(
+          'CREATE INDEX idx_location_points_time ON location_points(time)');
+      await db.execute('''
+        CREATE TABLE places (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          lat REAL NOT NULL,
+          lng REAL NOT NULL,
+          radius_m REAL NOT NULL DEFAULT 120,
+          is_gym INTEGER NOT NULL DEFAULT 0
+        )
+      ''');
     },
   ];
 
@@ -347,6 +372,34 @@ class DatabaseHelper {
 
   Future<void> insertWater(DateTime at, int ml) async => (await db)
       .insert('water_logs', {'date': at.millisecondsSinceEpoch, 'ml': ml});
+
+  // ── Movement ─────────────────────────────────────────────────
+
+  Future<void> insertPoint(LocationPoint p) async =>
+      (await db).insert('location_points', p.toMap());
+
+  Future<List<LocationPoint>> getPoints(DateTime from, DateTime to) async {
+    final rows = await (await db).query('location_points',
+        where: 'time >= ? AND time < ?',
+        whereArgs: [from.millisecondsSinceEpoch, to.millisecondsSinceEpoch],
+        orderBy: 'time ASC');
+    return rows.map(LocationPoint.fromMap).toList();
+  }
+
+  Future<void> deletePoints(DateTime from, DateTime to) async =>
+      (await db).delete('location_points',
+          where: 'time >= ? AND time < ?',
+          whereArgs: [from.millisecondsSinceEpoch, to.millisecondsSinceEpoch]);
+
+  Future<void> deleteAllPoints() async => (await db).delete('location_points');
+
+  Future<List<Place>> getPlaces() async =>
+      (await (await db).query('places', orderBy: 'name')).map(Place.fromMap).toList();
+
+  Future<int> insertPlace(Place p) async => (await db).insert('places', p.toMap());
+
+  Future<void> deletePlace(int id) async =>
+      (await db).delete('places', where: 'id = ?', whereArgs: [id]);
 
   // ── BMI Entries ──────────────────────────────────────────────
 

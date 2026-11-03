@@ -40,7 +40,14 @@ This information is collected and processed by Google according to their privacy
 ### 1.3 Step Count (Health Connect / Apple Health)
 If you choose to connect, the App reads your **daily step count** from Health Connect (Android) or Apple Health (iOS) to show it on your Today screen. The App only reads steps; it does not read any other health data and does not write to these services. Step data is **never** sent off your device, shared with advertisers, or used for advertising. You can revoke access at any time in Health Connect or the Health app.
 
-### 1.4 Crash Reports (via Sentry)
+### 1.4 Location Timeline (optional)
+If you turn on **Tracking** in the App, it records your phone's location about once a minute while tracking is on, to build your private daily timeline (places you stayed, routes, distance and gym visits). On Android a notification is shown the whole time tracking runs; the App never uses "all the time" background location.
+
+- Location history is stored **only on your device**. It is never uploaded, never sent to us, never shared with advertisers and never included in crash reports.
+- To draw maps, the App downloads map images (tiles) from OpenStreetMap; those requests reveal the map area being viewed, as with any map app, but not your location history.
+- You can stop tracking at any time, and delete a single day or all location history from the Timeline screen.
+
+### 1.5 Crash Reports (via Sentry)
 If the App crashes or hits a technical error, an anonymous crash report may be sent to Sentry, our crash-reporting service. A report contains:
 
 - Device model, operating system and version
@@ -79,7 +86,7 @@ You can opt out of personalized advertising by going to:
 **Settings → Google → Ads → Opt out of Ads Personalization** on your Android device.
 
 ### Sentry
-We use Sentry to receive anonymous crash reports (see section 1.4). Sentry processes this data under its own privacy policy:
+We use Sentry to receive anonymous crash reports (see section 1.5). Sentry processes this data under its own privacy policy:
 [https://sentry.io/privacy/](https://sentry.io/privacy/)
 
 ---

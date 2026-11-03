@@ -12,6 +12,7 @@ import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/units/units.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
+import 'package:bmi_health/features/train/programs/progression.dart';
 
 /// Logs the active workout: exercises, sets (weight × reps), rest timer.
 class ActiveWorkoutScreen extends StatefulWidget {
@@ -216,9 +217,20 @@ class _ExerciseBlock extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text(exercise?.nameIn(l.localeName) ?? exerciseId,
-                      style: GoogleFonts.inter(
-                          fontSize: 16, fontWeight: FontWeight.w700, color: brand)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(exercise?.nameIn(l.localeName) ?? exerciseId,
+                          style: GoogleFonts.inter(
+                              fontSize: 16, fontWeight: FontWeight.w700, color: brand)),
+                      if (exercise != null)
+                        _SuggestionText(
+                          suggestion: Progression.suggest(
+                              workouts.sessionsFor(exerciseId), exercise!.equipment),
+                          unit: unit,
+                        ),
+                    ],
+                  ),
                 ),
                 PopupMenuButton<String>(
                   onSelected: (_) => workouts.removeExercise(exerciseId),
@@ -467,3 +479,48 @@ class _SummaryDialogState extends State<_SummaryDialog> {
     );
   }
 }
+
+/// "Try 62.5 kg × 8" under the exercise name (ROADMAP 3.2).
+class _SuggestionText extends StatelessWidget {
+  final Suggestion suggestion;
+  final String unit;
+  const _SuggestionText({required this.suggestion, required this.unit});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final s = suggestion;
+    if (s.reason == SuggestionReason.firstTime) return const SizedBox.shrink();
+    final w = Units.weight(s.weightKg, unit);
+    final text = s.weightKg == 0
+        ? l.suggestionRepsOnly(s.reps)
+        : switch (s.reason) {
+            SuggestionReason.increase => l.suggestionIncrease(w, s.reps),
+            SuggestionReason.deload => l.suggestionDeload(w, s.reps),
+            _ => l.suggestionAddRep(w, s.reps),
+          };
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Padding(
+      padding: const EdgeInsets.only(top: 2),
+      child: Row(children: [
+        Icon(
+          s.reason == SuggestionReason.increase
+              ? Icons.trending_up_rounded
+              : s.reason == SuggestionReason.deload
+                  ? Icons.refresh_rounded
+                  : Icons.add_rounded,
+          size: 14,
+          color: isDark ? AppColors.darkFg3 : AppColors.fg3,
+        ),
+        const SizedBox(width: 4),
+        Flexible(
+          child: Text(text,
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  color: isDark ? AppColors.darkFg2 : AppColors.fg2)),
+        ),
+      ]),
+    );
+  }
+}
+

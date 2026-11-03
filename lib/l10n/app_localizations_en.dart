@@ -1175,4 +1175,167 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get stepsNeedsInstall => 'Step counting needs Google\'s Health Connect app.';
+
+  @override
+  String get activityChannel => 'Activity';
+
+  @override
+  String get movementTitle => 'Timeline';
+
+  @override
+  String get movementCardTitle => 'Your day';
+
+  @override
+  String get trackingOff => 'Turn on tracking to see where you went, how long you stayed and how far you walked. Your location never leaves this phone.';
+
+  @override
+  String get trackingOn => 'Tracking is on';
+
+  @override
+  String get startTracking => 'Start tracking';
+
+  @override
+  String get stopTracking => 'Stop tracking';
+
+  @override
+  String get trackingNotificationTitle => 'Tracking your day';
+
+  @override
+  String get trackingNotificationBody => 'Building your private timeline. Tap to open.';
+
+  @override
+  String get locationDenied => 'Location access is off. Allow it in your phone\'s settings to build your timeline.';
+
+  @override
+  String get locationServiceOff => 'Turn on location (GPS) on your phone to track your day.';
+
+  @override
+  String placesVisited(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count places',
+      one: '1 place',
+      zero: 'No places yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String distanceKm(String km) {
+    return '$km km';
+  }
+
+  @override
+  String durationHm(int hours, int minutes) {
+    return '$hours h $minutes min';
+  }
+
+  @override
+  String get unnamedPlace => 'Unnamed place';
+
+  @override
+  String get modeWalk => 'Walk';
+
+  @override
+  String get modeRun => 'Run / cycle';
+
+  @override
+  String get modeVehicle => 'Vehicle';
+
+  @override
+  String get namePlace => 'Name this place';
+
+  @override
+  String get placeName => 'Place name';
+
+  @override
+  String get thisIsMyGym => 'This is my gym';
+
+  @override
+  String get noTimelineYet => 'No movement recorded for this day.';
+
+  @override
+  String get deleteDay => 'Delete this day';
+
+  @override
+  String get deleteAllLocation => 'Delete all location history';
+
+  @override
+  String get deleteLocationConfirm => 'This permanently deletes the selected location history from this phone.';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String gymTimeWeek(String time) {
+    return 'Gym time this week: $time';
+  }
+
+  @override
+  String get gymCheckInTitle => 'You\'re at the gym 💪';
+
+  @override
+  String get gymCheckInBody => 'Start today\'s workout? Open the app to begin logging.';
+
+  @override
+  String get trackingLimitNote => 'Tracking pauses if you close the app from recent apps.';
+
+  @override
+  String get programs => 'Programs';
+
+  @override
+  String programDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days a week',
+      one: '1 day a week',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String startDay(String day) {
+    return 'Start $day';
+  }
+
+  @override
+  String get recommended => 'Recommended';
+
+  @override
+  String suggestionIncrease(String weight, int reps) {
+    return 'Try $weight × $reps';
+  }
+
+  @override
+  String suggestionAddRep(String weight, int reps) {
+    return 'Aim for $reps reps at $weight';
+  }
+
+  @override
+  String suggestionDeload(String weight, int reps) {
+    return 'Reset to $weight × $reps';
+  }
+
+  @override
+  String suggestionRepsOnly(int reps) {
+    return 'Aim for $reps reps';
+  }
+
+  @override
+  String get muscleMapTitle => 'Muscles this week';
+
+  @override
+  String get muscleMapHint => 'Hard sets per muscle (secondary muscles count half). About 10 a week builds muscle.';
+
+  @override
+  String undertrained(String muscles) {
+    return 'Needs more work: $muscles';
+  }
+
+  @override
+  String setsCount(String count) {
+    return '$count sets';
+  }
 }

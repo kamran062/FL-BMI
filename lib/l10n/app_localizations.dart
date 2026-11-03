@@ -2218,6 +2218,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Step counting needs Google\'s Health Connect app.'**
   String get stepsNeedsInstall;
+
+  /// Android notification channel for gym check-in and tracking
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get activityChannel;
+
+  /// Movement timeline screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get movementTitle;
+
+  /// Today card title for the timeline
+  ///
+  /// In en, this message translates to:
+  /// **'Your day'**
+  String get movementCardTitle;
+
+  /// Explains the timeline before it is turned on
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on tracking to see where you went, how long you stayed and how far you walked. Your location never leaves this phone.'**
+  String get trackingOff;
+
+  /// Status label
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking is on'**
+  String get trackingOn;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Start tracking'**
+  String get startTracking;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Stop tracking'**
+  String get stopTracking;
+
+  /// Ongoing notification while tracking
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking your day'**
+  String get trackingNotificationTitle;
+
+  /// Ongoing notification text
+  ///
+  /// In en, this message translates to:
+  /// **'Building your private timeline. Tap to open.'**
+  String get trackingNotificationBody;
+
+  /// Shown when location permission is denied
+  ///
+  /// In en, this message translates to:
+  /// **'Location access is off. Allow it in your phone\'s settings to build your timeline.'**
+  String get locationDenied;
+
+  /// Shown when GPS is off
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on location (GPS) on your phone to track your day.'**
+  String get locationServiceOff;
+
+  /// Number of places visited today
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No places yet} =1{1 place} other{{count} places}}'**
+  String placesVisited(int count);
+
+  /// Distance
+  ///
+  /// In en, this message translates to:
+  /// **'{km} km'**
+  String distanceKm(String km);
+
+  /// Duration over an hour
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} h {minutes} min'**
+  String durationHm(int hours, int minutes);
+
+  /// Visit with no label
+  ///
+  /// In en, this message translates to:
+  /// **'Unnamed place'**
+  String get unnamedPlace;
+
+  /// Travel mode
+  ///
+  /// In en, this message translates to:
+  /// **'Walk'**
+  String get modeWalk;
+
+  /// Travel mode
+  ///
+  /// In en, this message translates to:
+  /// **'Run / cycle'**
+  String get modeRun;
+
+  /// Travel mode
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle'**
+  String get modeVehicle;
+
+  /// Button and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Name this place'**
+  String get namePlace;
+
+  /// Text field label
+  ///
+  /// In en, this message translates to:
+  /// **'Place name'**
+  String get placeName;
+
+  /// Checkbox: mark the place as the user's gym
+  ///
+  /// In en, this message translates to:
+  /// **'This is my gym'**
+  String get thisIsMyGym;
+
+  /// Timeline empty state
+  ///
+  /// In en, this message translates to:
+  /// **'No movement recorded for this day.'**
+  String get noTimelineYet;
+
+  /// Menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this day'**
+  String get deleteDay;
+
+  /// Menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all location history'**
+  String get deleteAllLocation;
+
+  /// Confirmation
+  ///
+  /// In en, this message translates to:
+  /// **'This permanently deletes the selected location history from this phone.'**
+  String get deleteLocationConfirm;
+
+  /// Confirm button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// Weekly gym time
+  ///
+  /// In en, this message translates to:
+  /// **'Gym time this week: {time}'**
+  String gymTimeWeek(String time);
+
+  /// Gym check-in notification title
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re at the gym 💪'**
+  String get gymCheckInTitle;
+
+  /// Gym check-in notification text
+  ///
+  /// In en, this message translates to:
+  /// **'Start today\'s workout? Open the app to begin logging.'**
+  String get gymCheckInBody;
+
+  /// Explains the limitation of tracking
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking pauses if you close the app from recent apps.'**
+  String get trackingLimitNote;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Programs'**
+  String get programs;
+
+  /// Program frequency
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day a week} other{{count} days a week}}'**
+  String programDays(int count);
+
+  /// Starts a workout for one program day
+  ///
+  /// In en, this message translates to:
+  /// **'Start {day}'**
+  String startDay(String day);
+
+  /// Badge on the suggested program
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get recommended;
+
+  /// Next-session suggestion: heavier
+  ///
+  /// In en, this message translates to:
+  /// **'Try {weight} × {reps}'**
+  String suggestionIncrease(String weight, int reps);
+
+  /// Next-session suggestion: one more rep
+  ///
+  /// In en, this message translates to:
+  /// **'Aim for {reps} reps at {weight}'**
+  String suggestionAddRep(String weight, int reps);
+
+  /// Next-session suggestion: back off
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to {weight} × {reps}'**
+  String suggestionDeload(String weight, int reps);
+
+  /// Suggestion for bodyweight exercises
+  ///
+  /// In en, this message translates to:
+  /// **'Aim for {reps} reps'**
+  String suggestionRepsOnly(int reps);
+
+  /// Heatmap card title
+  ///
+  /// In en, this message translates to:
+  /// **'Muscles this week'**
+  String get muscleMapTitle;
+
+  /// Heatmap explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Hard sets per muscle (secondary muscles count half). About 10 a week builds muscle.'**
+  String get muscleMapHint;
+
+  /// Lists under-trained muscles
+  ///
+  /// In en, this message translates to:
+  /// **'Needs more work: {muscles}'**
+  String undertrained(String muscles);
+
+  /// Weekly sets for a muscle
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sets'**
+  String setsCount(String count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

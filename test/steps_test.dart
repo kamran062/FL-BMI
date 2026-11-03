@@ -48,9 +48,13 @@ void main() {
     expect(find.text('Connect'), findsOneWidget);
 
     await tester.ensureVisible(find.text('Connect'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Connect'));
     await settleIO(tester);
     expect(fake.requests, 1);
+    // The card gets shorter once connected; scroll it back into view
+    await tester.ensureVisible(find.text('5420 / 8000', skipOffstage: false));
+    await tester.pumpAndSettle();
     expect(find.text('5420 / 8000'), findsOneWidget);
   });
 

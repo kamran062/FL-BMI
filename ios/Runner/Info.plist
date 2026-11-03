@@ -52,6 +52,8 @@
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<!-- Shown by the iOS App Tracking Transparency prompt (via AdMob's
 	     Privacy & messaging IDFA message). -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location builds your private daily timeline (places, routes, gym visits). It never leaves your phone.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Your daily step count is shown on your Today screen. It stays on your device.</string>
 	<key>NSHealthUpdateUsageDescription</key>

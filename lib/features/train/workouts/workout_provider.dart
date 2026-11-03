@@ -43,6 +43,21 @@ class WorkoutProvider extends ChangeNotifier {
     return byWorkout.isEmpty ? const [] : byWorkout.values.last;
   }
 
+  /// Completed sets of [exerciseId], one list per past workout, oldest first.
+  List<List<WorkoutSet>> sessionsFor(String exerciseId) {
+    final byWorkout = <int, List<WorkoutSet>>{};
+    for (final s in _pastSets.where((s) => s.exerciseId == exerciseId)) {
+      byWorkout.putIfAbsent(s.workoutId, () => []).add(s);
+    }
+    return byWorkout.values.toList();
+  }
+
+  /// Completed sets from workouts started on or after [from].
+  List<WorkoutSet> setsSince(DateTime from) => [
+        for (final h in _history)
+          if (!h.workout.startedAt.isBefore(from)) ...h.doneSets
+      ];
+
   Future<void> load() async {
     _active = await _db.getActiveWorkout();
     _activeSets = _active == null ? [] : await _db.getSets(_active!.id!);

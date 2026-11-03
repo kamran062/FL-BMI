@@ -8,6 +8,7 @@ import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
 import 'package:bmi_health/features/fuel/fuel_provider.dart';
 import 'package:bmi_health/features/movement/steps_provider.dart';
+import 'package:bmi_health/features/movement/movement_provider.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/app/router.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
@@ -25,6 +26,7 @@ class BmiHealthProviders extends StatelessWidget {
     required this.workouts,
     required this.fuel,
     required this.steps,
+    required this.movement,
     required this.catalog,
     required this.child,
   });
@@ -36,6 +38,7 @@ class BmiHealthProviders extends StatelessWidget {
   final WorkoutProvider workouts;
   final FuelProvider fuel;
   final StepsProvider steps;
+  final MovementProvider movement;
   final ExerciseCatalog catalog;
   final Widget child;
 
@@ -49,6 +52,7 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: workouts),
           ChangeNotifierProvider.value(value: fuel),
           ChangeNotifierProvider.value(value: steps),
+          ChangeNotifierProvider.value(value: movement),
           Provider.value(value: catalog),
         ],
         child: child,
@@ -89,6 +93,7 @@ class _BmiHealthAppState extends State<BmiHealthApp>
     // Fresh step count and day rollover whenever the user comes back
     context.read<StepsProvider>().refresh();
     context.read<FuelProvider>().load();
+    context.read<MovementProvider>().refresh();
     final path = _router.routerDelegate.currentConfiguration.uri.path;
     if (path == Routes.splash || path == Routes.onboarding) return;
     AdService.instance.showAppOpenIfReady();
