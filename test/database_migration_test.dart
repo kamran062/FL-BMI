@@ -94,6 +94,17 @@ void main() {
     await helper.close();
   });
 
+  test('migration 3 adds the profile table', () async {
+    final path = await createV1Database();
+    final helper = DatabaseHelper.test(factory, path);
+    expect(await helper.getProfile(), isNull); // created empty; repo imports
+    final rows = await (await helper.db).rawQuery(
+      "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'profile'",
+    );
+    expect(rows, hasLength(1));
+    await helper.close();
+  });
+
   test('saving a goal leaves exactly one active goal', () async {
     final helper = DatabaseHelper.test(factory, p.join(tmp.path, 'goals.db'));
     Goal goal(double target) => Goal(

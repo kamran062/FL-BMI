@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
@@ -123,7 +123,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ? AppColors.bmiNormalTintDark
         : AppColors.bmiNormalTint;
 
-    return Consumer<AppProvider>(
+    return Consumer<BmiProvider>(
       builder: (context, provider, _) {
         final allEntries      = provider.entries;
         final filtered        = _applyFilter(allEntries);

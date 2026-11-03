@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
+import 'package:bmi_health/features/profile/domain/user_profile.dart';
 
 class BmiCategory {
   final String key;
@@ -17,6 +18,11 @@ class BmiCategory {
     required this.tintDark,
     required this.inkDark,
   });
+}
+
+extension ProfileBmi on UserProfile {
+  /// BMI from the profile's current height and weight (0 if height is 0).
+  double get bmi => BmiCalculator.calculate(weightInKg, heightInCm);
 }
 
 /// Which input is out of range. The UI turns this into a message.

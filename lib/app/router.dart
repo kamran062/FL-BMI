@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/app/app_shell.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
+import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
+import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
+import 'package:bmi_health/features/profile/domain/user_profile.dart';
+import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/body/bmi/ui/goal_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/history_screen.dart';
 import 'package:bmi_health/features/body/bmi/ui/home_screen.dart';
@@ -37,9 +41,9 @@ abstract final class Routes {
 
 final _rootKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
-GoRouter createRouter(AppProvider provider) {
-  // Redirects depend only on onboarding state. Listening to the whole provider
-  // would re-run routing on every keystroke in the calculator.
+GoRouter createRouter(SettingsProvider provider) {
+  // Redirects depend only on onboarding state, so routing re-runs only when
+  // that changes, not on every settings change.
   final onboardingDone = ValueNotifier(provider.onboardingDone);
   provider.addListener(() => onboardingDone.value = provider.onboardingDone);
 
@@ -123,7 +127,7 @@ GoRouter createRouter(AppProvider provider) {
         path: Routes.goal,
         parentNavigatorKey: _rootKey,
         builder: (context, _) => GoalScreen(
-          currentWeight: context.read<AppProvider>().profile.weightInKg,
+          currentWeight: context.read<ProfileProvider>().profile.weightInKg,
           onStart: () => context.go(Routes.history),
           onClose: () => context.pop(),
         ),
@@ -133,7 +137,7 @@ GoRouter createRouter(AppProvider provider) {
         parentNavigatorKey: _rootKey,
         builder: (context, state) => ShareScreen(
           bmi: double.tryParse(state.uri.queryParameters['bmi'] ?? '') ??
-              _currentBmiOrDefault(context.read<AppProvider>()),
+              _currentBmiOrDefault(context.read<ProfileProvider>().profile),
           onClose: () => context.pop(),
         ),
       ),
@@ -141,8 +145,7 @@ GoRouter createRouter(AppProvider provider) {
   );
 }
 
-double _currentBmiOrDefault(AppProvider p) =>
-    p.currentBmi > 0 ? p.currentBmi : 24.0;
+double _currentBmiOrDefault(UserProfile p) => p.bmi > 0 ? p.bmi : 24.0;
 
 /// Result page. [savedBmi] set → viewing a history entry (read-only);
 /// null → a fresh calculation from the current profile.
@@ -154,8 +157,8 @@ class _ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<AppProvider>();
-    final bmi = savedBmi ?? _currentBmiOrDefault(provider);
+    final profile = context.read<ProfileProvider>().profile;
+    final bmi = savedBmi ?? _currentBmiOrDefault(profile);
 
     // Leaving a fresh result (close button or system back) is a natural
     // break → interstitial. Viewing a history entry never shows an ad.
@@ -170,7 +173,7 @@ class _ResultPage extends StatelessWidget {
         onSave: _readOnly
             ? null
             : () async {
-                await provider.saveCurrentResult();
+                await context.read<BmiProvider>().saveResult(profile);
                 if (!context.mounted) return;
                 // go() replaces the stack, so PopScope does not fire —
                 // show the interstitial for this natural break here.

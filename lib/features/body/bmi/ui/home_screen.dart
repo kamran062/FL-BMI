@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/features/profile/profile_provider.dart';
+import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    final p = context.read<AppProvider>().profile;
+    final p = context.read<ProfileProvider>().profile;
     _heightCtrl = TextEditingController(text: p.height.toStringAsFixed(1));
     _weightCtrl = TextEditingController(text: p.weight.toStringAsFixed(1));
   }
@@ -47,14 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _syncToProvider() {
-    final provider = context.read<AppProvider>();
+    final provider = context.read<ProfileProvider>();
     final h = double.tryParse(_heightCtrl.text) ?? provider.profile.height;
     final w = double.tryParse(_weightCtrl.text) ?? provider.profile.weight;
-    provider.updateProfile(provider.profile.copyWith(height: h, weight: w));
+    provider.update(provider.profile.copyWith(height: h, weight: w));
   }
 
   void _onCalculatePressed() {
-    final provider = context.read<AppProvider>();
+    final provider = context.read<ProfileProvider>();
     final p = provider.profile;
     final h = double.tryParse(_heightCtrl.text.trim());
     final w = double.tryParse(_weightCtrl.text.trim());
@@ -82,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       return;
     }
-    provider.updateProfile(p.copyWith(height: h, weight: w));
+    provider.update(p.copyWith(height: h, weight: w));
     widget.onCalculate();
   }
 
@@ -97,10 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
     final bgSurface = isDark ? AppColors.darkBgSurface : AppColors.bgSurface;
     final brand     = isDark ? AppColors.darkBrand500  : AppColors.brand500;
 
-    return Consumer<AppProvider>(
-      builder: (context, provider, _) {
+    return Consumer2<ProfileProvider, BmiProvider>(
+      builder: (context, provider, bmi, _) {
         final profile = provider.profile;
-        final last    = provider.lastEntry;
+        final last    = bmi.lastEntry;
 
         return Scaffold(
           backgroundColor: bgCanvas,
@@ -188,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ? (profile.heightInCm / 2.54).roundToDouble()
                                   : profile.heightInCm.roundToDouble();
                               _heightCtrl.text = newH.toStringAsFixed(0);
-                              provider.updateProfile(profile.copyWith(
+                              provider.update(profile.copyWith(
                                   heightUnit: v, height: newH));
                             },
                           ),
@@ -217,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ? (profile.weight * 2.20462).roundToDouble()
                                   : (profile.weight * 0.453592).roundToDouble();
                               _weightCtrl.text = newW.toStringAsFixed(0);
-                              provider.updateProfile(profile.copyWith(
+                              provider.update(profile.copyWith(
                                   weightUnit: v, weight: newW));
                             },
                           ),
@@ -303,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Slider(
                               min: 14, max: 90,
                               value: profile.age.toDouble(),
-                              onChanged: (v) => provider.updateProfile(
+                              onChanged: (v) => provider.update(
                                   profile.copyWith(age: v.round())),
                             ),
                           ),
@@ -357,7 +358,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fit: BoxFit.scaleDown,
                                     child: _GenderPills(
                                       value: profile.gender,
-                                      onChanged: (v) => provider.updateProfile(
+                                      onChanged: (v) => provider.update(
                                           profile.copyWith(gender: v)),
                                       brand: brand,
                                       isDark: isDark,

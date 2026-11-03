@@ -1,11 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/app/settings_provider.dart';
+import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
+import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/app/router.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_theme.dart';
+
+/// Supplies the app-wide state objects. Used by main() and by tests.
+class BmiHealthProviders extends StatelessWidget {
+  const BmiHealthProviders({
+    super.key,
+    required this.settings,
+    required this.profile,
+    required this.bmi,
+    required this.child,
+  });
+
+  final SettingsProvider settings;
+  final ProfileProvider profile;
+  final BmiProvider bmi;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: settings),
+          ChangeNotifierProvider.value(value: profile),
+          ChangeNotifierProvider.value(value: bmi),
+        ],
+        child: child,
+      );
+}
 
 class BmiHealthApp extends StatefulWidget {
   const BmiHealthApp({super.key});
@@ -17,7 +45,7 @@ class BmiHealthApp extends StatefulWidget {
 class _BmiHealthAppState extends State<BmiHealthApp>
     with WidgetsBindingObserver {
   // Created once — rebuilding the router would reset navigation.
-  late final GoRouter _router = createRouter(context.read<AppProvider>());
+  late final GoRouter _router = createRouter(context.read<SettingsProvider>());
 
   @override
   void initState() {
@@ -44,8 +72,8 @@ class _BmiHealthAppState extends State<BmiHealthApp>
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = context.select<AppProvider, ThemeMode>((p) => p.themeMode);
-    final locale = context.select<AppProvider, Locale?>((p) => p.locale);
+    final themeMode = context.select<SettingsProvider, ThemeMode>((p) => p.themeMode);
+    final locale = context.select<SettingsProvider, Locale?>((p) => p.locale);
     return MaterialApp.router(
       onGenerateTitle: (context) => context.l10n.appTitle,
       debugShowCheckedModeBanner: false,

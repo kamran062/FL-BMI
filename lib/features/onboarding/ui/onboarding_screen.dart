@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
@@ -42,7 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (_index < _stepCount - 1) {
       setState(() => _index++);
     } else {
-      context.read<AppProvider>().completeOnboarding();
+      context.read<SettingsProvider>().completeOnboarding();
     }
   }
 
@@ -71,7 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   const Spacer(),
                   if (!isLast)
                     GestureDetector(
-                      onTap: () => context.read<AppProvider>().completeOnboarding(),
+                      onTap: () => context.read<SettingsProvider>().completeOnboarding(),
                       child: Text(
                         l.skip,
                         style: GoogleFonts.inter(

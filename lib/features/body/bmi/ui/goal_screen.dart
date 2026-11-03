@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
@@ -351,7 +351,7 @@ class _GoalScreenState extends State<GoalScreen> {
                         weeks: _weeks,
                         startDate: DateTime.now(),
                       );
-                      await context.read<AppProvider>().saveGoal(goal);
+                      await context.read<BmiProvider>().saveGoal(goal);
                       widget.onStart();
                     },
                   ),

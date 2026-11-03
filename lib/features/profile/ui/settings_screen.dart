@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/app/settings_provider.dart';
+import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
@@ -24,8 +25,8 @@ class SettingsScreen extends StatelessWidget {
 
     return ValueListenableBuilder<bool>(
       valueListenable: AdService.instance.privacyOptionsRequired,
-      builder: (context, showAdPrivacy, _) => Consumer<AppProvider>(
-      builder: (context, provider, _) {
+      builder: (context, showAdPrivacy, _) => Consumer2<SettingsProvider, ProfileProvider>(
+      builder: (context, provider, profileProvider, _) {
         final l = context.l10n;
         final sections = [
           _Section(
@@ -62,13 +63,13 @@ class SettingsScreen extends StatelessWidget {
                 icon: Icons.straighten_rounded,
                 label: l.fieldHeight,
                 kind: _RowKind.meta,
-                meta: provider.profile.heightUnit == 'cm' ? 'cm' : 'ft / in',
+                meta: profileProvider.profile.heightUnit == 'cm' ? 'cm' : 'ft / in',
               ),
               _Row(
                 icon: Icons.monitor_weight_outlined,
                 label: l.fieldWeight,
                 kind: _RowKind.meta,
-                meta: provider.profile.weightUnit == 'kg' ? 'kg' : 'lbs',
+                meta: profileProvider.profile.weightUnit == 'kg' ? 'kg' : 'lbs',
               ),
             ],
           ),
@@ -190,7 +191,7 @@ class SettingsScreen extends StatelessWidget {
         _ => l.languageSystem,
       };
 
-  void _showLanguagePicker(BuildContext context, AppProvider provider) {
+  void _showLanguagePicker(BuildContext context, SettingsProvider provider) {
     final l = context.l10n;
     showDialog<void>(
       context: context,

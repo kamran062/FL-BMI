@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:bmi_health/app/app.dart';
-import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/app/settings_provider.dart';
+import 'package:bmi_health/core/database/database_helper.dart';
+import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
+import 'package:bmi_health/features/profile/data/profile_repository.dart';
+import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -31,14 +36,22 @@ Future<void> launchApp(
     appName: 'BMI Health', packageName: 'com.bmihealth.bmi_health',
     version: '1.0.1', buildNumber: '3', buildSignature: '',
   );
-  final provider = AppProvider();
-  await tester.runAsync(provider.init);
-  await tester.pumpWidget(
-    ChangeNotifierProvider<AppProvider>.value(
-      value: provider,
-      child: const BmiHealthApp(),
-    ),
-  );
+  // Fresh database per launch, so no test sees another test's data
+  final dir = Directory.systemTemp.createTempSync('bmi_app_test');
+  addTearDown(() => dir.deleteSync(recursive: true));
+  final db = DatabaseHelper.test(databaseFactoryFfi, '${dir.path}/app.db');
+  addTearDown(db.close);
+  final settings = SettingsProvider();
+  final profile = ProfileProvider(ProfileRepository(db));
+  final bmi = BmiProvider(db);
+  await tester.runAsync(
+      () => Future.wait([settings.load(), profile.load(), bmi.load()]));
+  await tester.pumpWidget(BmiHealthProviders(
+    settings: settings,
+    profile: profile,
+    bmi: bmi,
+    child: const BmiHealthApp(),
+  ));
   // Splash hands off after 2.6 s
   await tester.pump(const Duration(seconds: 3));
   await tester.pumpAndSettle();

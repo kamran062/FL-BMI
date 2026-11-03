@@ -3,12 +3,13 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
+import 'package:bmi_health/features/profile/domain/user_profile.dart';
 
 class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 2;
+  static const schemaVersion = 3;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -20,6 +21,28 @@ class DatabaseHelper {
     // 1 → 2: history is always read ordered by date
     (db) => db.execute(
         'CREATE INDEX IF NOT EXISTS idx_bmi_entries_date ON bmi_entries(date)'),
+    // 2 → 3: profile moves from SharedPreferences into the database
+    // (single row, id = 1); ProfileRepository imports the old values.
+    (db) => db.execute('''
+      CREATE TABLE profile (
+        id INTEGER PRIMARY KEY CHECK (id = 1),
+        name TEXT NOT NULL DEFAULT '',
+        height REAL NOT NULL,
+        height_unit TEXT NOT NULL,
+        weight REAL NOT NULL,
+        weight_unit TEXT NOT NULL,
+        age INTEGER NOT NULL,
+        gender TEXT NOT NULL,
+        demonstrator_pref TEXT NOT NULL DEFAULT 'auto',
+        formula_basis TEXT NOT NULL DEFAULT 'female',
+        goal TEXT,
+        experience TEXT,
+        equipment TEXT,
+        days_per_week INTEGER NOT NULL DEFAULT 3,
+        cycle_tracking INTEGER NOT NULL DEFAULT 0,
+        completed INTEGER NOT NULL DEFAULT 0
+      )
+    '''),
   ];
 
   DatabaseHelper._(this._factory, this._path);
@@ -98,6 +121,20 @@ class DatabaseHelper {
         active INTEGER NOT NULL DEFAULT 1
       )
     ''');
+  }
+
+  // ── Profile ──────────────────────────────────────────────────
+
+  Future<UserProfile?> getProfile() async {
+    final database = await db;
+    final rows = await database.query('profile', where: 'id = 1');
+    return rows.isEmpty ? null : UserProfile.fromMap(rows.first);
+  }
+
+  Future<void> saveProfile(UserProfile profile) async {
+    final database = await db;
+    await database.insert('profile', {'id': 1, ...profile.toMap()},
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   // ── BMI Entries ──────────────────────────────────────────────

@@ -49,4 +49,42 @@ void main() {
     expect(back.age, p.age);
     expect(back.gender, p.gender);
   });
+
+  group('gender-specific behaviour', () {
+    test('formula sex follows gender, or the chosen basis for "other"', () {
+      expect(const UserProfile(gender: 'm').formulaSex, Sex.male);
+      expect(const UserProfile(gender: 'f').formulaSex, Sex.female);
+      expect(const UserProfile(gender: 'o', formulaBasis: Sex.male).formulaSex,
+          Sex.male);
+      // The basis is ignored when gender is male/female
+      expect(const UserProfile(gender: 'f', formulaBasis: Sex.male).formulaSex,
+          Sex.female);
+    });
+
+    test('demonstrator follows the profile unless overridden', () {
+      expect(const UserProfile(gender: 'm').demonstrator, Sex.male);
+      expect(const UserProfile(gender: 'f').demonstrator, Sex.female);
+      expect(
+          const UserProfile(gender: 'm', demonstratorPref: DemonstratorPref.female)
+              .demonstrator,
+          Sex.female);
+      expect(const UserProfile(gender: 'o', formulaBasis: Sex.male).demonstrator,
+          Sex.male);
+    });
+
+    test('cycle tracking is offered to female and other profiles only', () {
+      expect(const UserProfile(gender: 'f').cycleTrackingOffered, isTrue);
+      expect(const UserProfile(gender: 'o').cycleTrackingOffered, isTrue);
+      expect(const UserProfile(gender: 'm').cycleTrackingOffered, isFalse);
+    });
+  });
+
+  test('unknown enum values from a newer app version read as defaults', () {
+    final p = UserProfile.fromMap({
+      'goal': 'flyToTheMoon', 'demonstrator_pref': 'robot', 'days_per_week': 99,
+    });
+    expect(p.goal, isNull);
+    expect(p.demonstratorPref, DemonstratorPref.auto);
+    expect(p.daysPerWeek, UserProfile.maxDaysPerWeek);
+  });
 }
