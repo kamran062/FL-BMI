@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class TipsScreen extends StatefulWidget {
   const TipsScreen({super.key});
@@ -16,57 +18,69 @@ class _TipsScreenState extends State<TipsScreen> {
 
   static const _tips = [
     (
-      cat: 'diet', icon: Icons.eco_outlined, title: 'Half your plate, vegetables',
-      copy: 'A simple visual rule that crowds out higher-calorie foods without counting.',
+      cat: 'diet', icon: Icons.eco_outlined, id: 1,
       color: Color(0xFF16A34A), tint: Color(0xFFE6F7EC),
     ),
     (
-      cat: 'hydration', icon: Icons.water_drop_outlined, title: 'Water before coffee',
-      copy: 'Drink 200 ml of water before your first coffee to reset overnight dehydration.',
+      cat: 'hydration', icon: Icons.water_drop_outlined, id: 2,
       color: Color(0xFF3B82F6), tint: Color(0xFFEAF1FE),
     ),
     (
-      cat: 'exercise', icon: Icons.directions_walk_rounded, title: 'A 10-min walk after meals',
-      copy: 'Studies show short post-meal walks meaningfully lower blood-glucose spikes.',
+      cat: 'exercise', icon: Icons.directions_walk_rounded, id: 3,
       color: Color(0xFFF59E0B), tint: Color(0xFFFEF4E2),
     ),
     (
-      cat: 'lifestyle', icon: Icons.bedtime_outlined, title: 'Sleep is the multiplier',
-      copy: 'Under 7 hours raises hunger hormones the next day. Protect a wind-down ritual.',
+      cat: 'lifestyle', icon: Icons.bedtime_outlined, id: 4,
       color: Color(0xFF8B5CF6), tint: Color(0xFFF0EBFE),
     ),
     (
-      cat: 'diet', icon: Icons.lunch_dining_outlined, title: 'Protein first, every meal',
-      copy: 'Eat the protein on your plate before carbs — satiety lasts longer.',
+      cat: 'diet', icon: Icons.lunch_dining_outlined, id: 5,
       color: Color(0xFF16A34A), tint: Color(0xFFE6F7EC),
     ),
     (
-      cat: 'exercise', icon: Icons.fitness_center_outlined, title: 'Strength training twice a week',
-      copy: 'Two sessions of resistance training weekly significantly improves metabolic health.',
+      cat: 'exercise', icon: Icons.fitness_center_outlined, id: 6,
       color: Color(0xFFF59E0B), tint: Color(0xFFFEF4E2),
     ),
     (
-      cat: 'hydration', icon: Icons.local_drink_outlined, title: 'Hydrate with meals too',
-      copy: 'Sipping water during meals helps digestion and reduces overeating.',
+      cat: 'hydration', icon: Icons.local_drink_outlined, id: 7,
       color: Color(0xFF3B82F6), tint: Color(0xFFEAF1FE),
     ),
     (
-      cat: 'lifestyle', icon: Icons.self_improvement_outlined, title: 'Stress fuels hunger',
-      copy: 'Cortisol spikes increase appetite. Try 5 minutes of deep breathing before eating.',
+      cat: 'lifestyle', icon: Icons.self_improvement_outlined, id: 8,
       color: Color(0xFF8B5CF6), tint: Color(0xFFF0EBFE),
     ),
   ];
 
+  static String _catLabel(AppLocalizations l, String cat) => switch (cat) {
+        'diet' => l.tipCatDiet,
+        'exercise' => l.tipCatExercise,
+        'hydration' => l.tipCatHydration,
+        'lifestyle' => l.tipCatLifestyle,
+        _ => l.categoryAll,
+      };
+
+  static String _tipTitle(AppLocalizations l, int id) => switch (id) {
+        1 => l.tip1Title, 2 => l.tip2Title, 3 => l.tip3Title, 4 => l.tip4Title,
+        5 => l.tip5Title, 6 => l.tip6Title, 7 => l.tip7Title, _ => l.tip8Title,
+      };
+
+  static String _tipBody(AppLocalizations l, int id) => switch (id) {
+        1 => l.tip1Body, 2 => l.tip2Body, 3 => l.tip3Body, 4 => l.tip4Body,
+        5 => l.tip5Body, 6 => l.tip6Body, 7 => l.tip7Body, _ => l.tip8Body,
+      };
+
+  // (key, icon, color, tint); labels come from _catLabel.
   static const _cats = [
-    ('all',       'All',        Icons.apps_rounded,                Color(0xFF1FB573), Color(0xFFE8F7EF)),
-    ('diet',      'Diet',       Icons.eco_outlined,                Color(0xFF16A34A), Color(0xFFE6F7EC)),
-    ('exercise',  'Exercise',   Icons.fitness_center_outlined,     Color(0xFFF59E0B), Color(0xFFFEF4E2)),
-    ('hydration', 'Hydration',  Icons.water_drop_outlined,         Color(0xFF3B82F6), Color(0xFFEAF1FE)),
-    ('lifestyle', 'Lifestyle',  Icons.self_improvement_outlined,   Color(0xFF8B5CF6), Color(0xFFF0EBFE)),
+    ('all',       Icons.apps_rounded,                Color(0xFF1FB573), Color(0xFFE8F7EF)),
+    ('diet',      Icons.eco_outlined,                Color(0xFF16A34A), Color(0xFFE6F7EC)),
+    ('exercise',  Icons.fitness_center_outlined,     Color(0xFFF59E0B), Color(0xFFFEF4E2)),
+    ('hydration', Icons.water_drop_outlined,         Color(0xFF3B82F6), Color(0xFFEAF1FE)),
+    ('lifestyle', Icons.self_improvement_outlined,   Color(0xFF8B5CF6), Color(0xFFF0EBFE)),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgCanvas = isDark ? AppColors.darkBgCanvas : AppColors.bgCanvas;
     final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
@@ -85,7 +99,7 @@ class _TipsScreenState extends State<TipsScreen> {
           slivers: [
             SliverToBoxAdapter(
               child: ScreenHeader(
-                title: 'Daily tips',
+                title: l.tipsTitle,
                 large: true,
               ),
             ),
@@ -98,15 +112,16 @@ class _TipsScreenState extends State<TipsScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   scrollDirection: Axis.horizontal,
                   children: _cats.map((c) {
+                    final label = _catLabel(l, c.$1);
                     final active = c.$1 == _cat;
-                    final catColor = c.$4;
-                    final catTint  = c.$5;
+                    final catColor = c.$3;
+                    final catTint  = c.$4;
                     return GestureDetector(
                       onTap: () => setState(() => _cat = c.$1),
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 180),
                         curve: Curves.easeOut,
-                        margin: const EdgeInsets.only(right: 10),
+                        margin: const EdgeInsetsDirectional.only(end: 10),
                         width: 80,
                         decoration: BoxDecoration(
                           color: active ? catColor : surfaceBg,
@@ -140,14 +155,14 @@ class _TipsScreenState extends State<TipsScreen> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Icon(
-                                c.$3,
+                                c.$2,
                                 size: 20,
                                 color: active ? Colors.white : catColor,
                               ),
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              c.$2,
+                              label,
                               style: GoogleFonts.inter(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
@@ -193,11 +208,11 @@ class _TipsScreenState extends State<TipsScreen> {
                               ),
                               const SizedBox(width: 10),
                               Text(
-                                'Today · ${featured.cat}'.toUpperCase(),
+                                l.tipToday(_catLabel(l, featured.cat)).toUpperCase(),
                                 style: GoogleFonts.inter(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
-                                  letterSpacing: 0.08 * 11,
+                                  letterSpacing: tracking(context, 0.08 * 11),
                                   color: featured.color,
                                 ),
                               ),
@@ -205,7 +220,7 @@ class _TipsScreenState extends State<TipsScreen> {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            featured.title,
+                            _tipTitle(l, featured.id),
                             style: GoogleFonts.inter(
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
@@ -216,7 +231,7 @@ class _TipsScreenState extends State<TipsScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            featured.copy,
+                            _tipBody(l, featured.id),
                             style: GoogleFonts.inter(
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
@@ -252,7 +267,7 @@ class _TipsScreenState extends State<TipsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  t.title,
+                                  _tipTitle(l, t.id),
                                   style: GoogleFonts.inter(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
@@ -261,7 +276,7 @@ class _TipsScreenState extends State<TipsScreen> {
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  t.copy,
+                                  _tipBody(l, t.id),
                                   style: GoogleFonts.inter(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,

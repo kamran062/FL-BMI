@@ -23,14 +23,6 @@ void main() {
       expect(BmiCalculator.category(29.99).key, 'over');
       expect(BmiCalculator.category(30.0).key, 'obese');
     });
-
-    test('every category has advice', () {
-      for (final key in ['under', 'normal', 'over', 'obese']) {
-        final advice = BmiCalculator.advice(key);
-        expect(advice['headline'], isNotEmpty);
-        expect(advice['steps'], isNotEmpty);
-      }
-    });
   });
 
   group('BmiCalculator.validate', () {
@@ -44,14 +36,14 @@ void main() {
     });
 
     test('rejects heights outside the range', () {
-      expect(BmiCalculator.validate(heightCm: 1, weightKg: 70), contains('height'));
-      expect(BmiCalculator.validate(heightCm: 300, weightKg: 70), contains('height'));
-      expect(BmiCalculator.validate(heightCm: double.nan, weightKg: 70), contains('height'));
+      expect(BmiCalculator.validate(heightCm: 1, weightKg: 70), BmiInputError.height);
+      expect(BmiCalculator.validate(heightCm: 300, weightKg: 70), BmiInputError.height);
+      expect(BmiCalculator.validate(heightCm: double.nan, weightKg: 70), BmiInputError.height);
     });
 
     test('rejects weights outside the range', () {
-      expect(BmiCalculator.validate(heightCm: 172, weightKg: 0), contains('weight'));
-      expect(BmiCalculator.validate(heightCm: 172, weightKg: 1000), contains('weight'));
+      expect(BmiCalculator.validate(heightCm: 172, weightKg: 0), BmiInputError.weight);
+      expect(BmiCalculator.validate(heightCm: 172, weightKg: 1000), BmiInputError.weight);
     });
   });
 }

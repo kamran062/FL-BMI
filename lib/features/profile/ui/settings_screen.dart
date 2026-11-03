@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:bmi_health/app/app_provider.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
+import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/app_toggle.dart';
@@ -25,13 +26,14 @@ class SettingsScreen extends StatelessWidget {
       valueListenable: AdService.instance.privacyOptionsRequired,
       builder: (context, showAdPrivacy, _) => Consumer<AppProvider>(
       builder: (context, provider, _) {
+        final l = context.l10n;
         final sections = [
           _Section(
-            title: 'Appearance',
+            title: l.sectionAppearance,
             rows: [
               _Row(
                 icon: Icons.dark_mode_outlined,
-                label: 'Dark mode',
+                label: l.darkMode,
                 kind: _RowKind.toggle,
                 toggleValue: provider.isDark,
                 onToggle: (v) => provider.setTheme(
@@ -39,36 +41,50 @@ class SettingsScreen extends StatelessWidget {
               ),
             ],
           ),
+          // Hidden in release builds until Urdu is fully translated
+          if (urduEnabled)
+            _Section(
+              title: l.sectionLanguage,
+              rows: [
+                _Row(
+                  icon: Icons.translate_rounded,
+                  label: l.appLanguage,
+                  kind: _RowKind.nav,
+                  meta: _languageName(l, provider.language),
+                  onTap: () => _showLanguagePicker(context, provider),
+                ),
+              ],
+            ),
           _Section(
-            title: 'Units',
+            title: l.sectionUnits,
             rows: [
               _Row(
                 icon: Icons.straighten_rounded,
-                label: 'Height',
+                label: l.fieldHeight,
                 kind: _RowKind.meta,
                 meta: provider.profile.heightUnit == 'cm' ? 'cm' : 'ft / in',
               ),
               _Row(
                 icon: Icons.monitor_weight_outlined,
-                label: 'Weight',
+                label: l.fieldWeight,
                 kind: _RowKind.meta,
                 meta: provider.profile.weightUnit == 'kg' ? 'kg' : 'lbs',
               ),
             ],
           ),
           _Section(
-            title: 'Notifications',
+            title: l.sectionNotifications,
             rows: [
               _Row(
                 icon: Icons.notifications_outlined,
-                label: 'Daily reminders',
+                label: l.dailyReminders,
                 kind: _RowKind.toggle,
                 toggleValue: provider.dailyReminder,
                 onToggle: provider.setDailyReminder,
               ),
               _Row(
                 icon: Icons.calendar_today_outlined,
-                label: 'Weekly check-in',
+                label: l.weeklyCheckIn,
                 kind: _RowKind.toggle,
                 toggleValue: provider.weeklyCheckIn,
                 onToggle: provider.setWeeklyCheckIn,
@@ -76,26 +92,26 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
           _Section(
-            title: 'About',
+            title: l.sectionAbout,
             rows: [
               _Row(
                 icon: Icons.privacy_tip_outlined,
-                label: 'Privacy',
+                label: l.privacy,
                 kind: _RowKind.nav,
-                meta: 'On-device',
+                meta: l.onDevice,
                 onTap: () => _showPrivacyDialog(context, isDark, fg1, fg3, brand),
               ),
               // Required by Google's consent policy in regions like the EEA/UK
               if (showAdPrivacy)
                 _Row(
                   icon: Icons.ads_click_rounded,
-                  label: 'Ad privacy choices',
+                  label: l.adPrivacyChoices,
                   kind: _RowKind.nav,
                   onTap: AdService.instance.showPrivacyOptions,
                 ),
               _Row(
                 icon: Icons.info_outline_rounded,
-                label: 'Version',
+                label: l.version,
                 kind: _RowKind.meta,
                 meta: provider.appVersion,
               ),
@@ -108,8 +124,8 @@ class SettingsScreen extends StatelessWidget {
           body: SafeArea(
             child: CustomScrollView(
               slivers: [
-                const SliverToBoxAdapter(
-                  child: ScreenHeader(title: 'Settings', large: true),
+                SliverToBoxAdapter(
+                  child: ScreenHeader(title: l.settingsTitle, large: true),
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
@@ -146,7 +162,7 @@ class SettingsScreen extends StatelessWidget {
 
                       const SizedBox(height: 24),
                       Text(
-                        'Made with care.  ·  No account required.',
+                        l.settingsFooter,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           fontSize: 12,
@@ -167,6 +183,46 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  // ── Language ───────────────────────────────────────────────────────────────
+  static String _languageName(AppLocalizations l, String code) => switch (code) {
+        'en' => l.languageEnglish,
+        'ur' => l.languageUrdu,
+        _ => l.languageSystem,
+      };
+
+  void _showLanguagePicker(BuildContext context, AppProvider provider) {
+    final l = context.l10n;
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => SimpleDialog(
+        title: Text(l.appLanguage),
+        children: [
+          // SimpleDialog sizes to its children's intrinsic width, which is
+          // tiny for ListTiles — give the options a comfortable fixed width.
+          SizedBox(
+            width: 300,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final code in const ['system', 'en', 'ur'])
+                  ListTile(
+                    leading: Icon(provider.language == code
+                        ? Icons.radio_button_checked_rounded
+                        : Icons.radio_button_off_rounded),
+                    title: Text(_languageName(l, code)),
+                    onTap: () {
+                      provider.setLanguage(code);
+                      Navigator.pop(dialogContext);
+                    },
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   // ── Privacy dialog ─────────────────────────────────────────────────────────
   void _showPrivacyDialog(BuildContext context, bool isDark,
       Color fg1, Color fg3, Color brand) {
@@ -181,7 +237,7 @@ class SettingsScreen extends StatelessWidget {
             Icon(Icons.privacy_tip_outlined, color: brand, size: 20),
             const SizedBox(width: 10),
             Text(
-              'Privacy Policy',
+              context.l10n.privacyPolicy,
               style: GoogleFonts.inter(
                 fontSize: 17, fontWeight: FontWeight.w700, color: fg1,
               ),
@@ -193,37 +249,28 @@ class SettingsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _privacySection(
-                '🔒 Data stays on your device',
-                'BMI Calculator & Health stores all your data — weight entries, goals, and profile — '
-                'locally on your device using SQLite. Nothing is sent to any server.',
+                context.l10n.privacyDataTitle,
+                context.l10n.privacyDataBody,
                 fg1, fg3,
               ),
               _privacySection(
-                '📊 No analytics or tracking',
-                'We do not use any analytics SDKs, crash reporters, or user-tracking tools. '
-                'We have no idea who you are, and we prefer it that way.',
+                context.l10n.privacyAnalyticsTitle,
+                context.l10n.privacyAnalyticsBody,
                 fg1, fg3,
               ),
               _privacySection(
-                '📢 Ads',
-                'BMI Calculator & Health is free and supported by ads powered by Google AdMob. '
-                'AdMob may use your device\'s advertising ID to show relevant ads. '
-                'You can opt out of personalised ads at any time in your device settings '
-                'under Google → Ads → Delete advertising ID.',
+                context.l10n.privacyAdsTitle,
+                context.l10n.privacyAdsBody,
                 fg1, fg3,
               ),
               _privacySection(
-                '🔗 Third-party ad services',
-                'Google AdMob may collect certain device information (such as IP address, '
-                'device identifiers, and general location) to serve ads. This data is '
-                'governed by Google\'s Privacy Policy. BMI Calculator & Health does not have access '
-                'to this data.',
+                context.l10n.privacyThirdPartyTitle,
+                context.l10n.privacyThirdPartyBody,
                 fg1, fg3,
               ),
               _privacySection(
-                '🗑 Deleting your data',
-                'Uninstalling the app permanently deletes all your health data from the '
-                'device. There is no cloud backup — your data never leaves your phone.',
+                context.l10n.privacyDeleteTitle,
+                context.l10n.privacyDeleteBody,
                 fg1, fg3,
               ),
             ],
@@ -233,7 +280,7 @@ class SettingsScreen extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Got it',
+              context.l10n.gotIt,
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w600, color: brand,
               ),

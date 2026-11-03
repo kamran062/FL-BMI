@@ -1,0 +1,8 @@
+# Generates lib/l10n/app_localizations*.dart from the .arb files on `flutter pub get`.
+# Add every new user-facing string to app_en.arb (with an @description) and app_ur.arb.
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+synthetic-package: false
+nullable-getter: false
+required-resource-attributes: true

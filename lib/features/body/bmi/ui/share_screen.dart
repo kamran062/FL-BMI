@@ -7,6 +7,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class ShareScreen extends StatefulWidget {
   final double bmi;
@@ -23,6 +25,7 @@ class _ShareScreenState extends State<ShareScreen> {
   bool _saving = false;
 
   Future<void> _share() async {
+    final l = context.l10n; // read before any await
     setState(() => _saving = true);
     try {
       final bytes = await _screenshotCtrl.capture(pixelRatio: 3);
@@ -34,7 +37,7 @@ class _ShareScreenState extends State<ShareScreen> {
       AdService.instance.beginExternalUi();
       try {
         await Share.shareXFiles([XFile(file.path)],
-            text: 'My BMI is ${widget.bmi.toStringAsFixed(1)} — tracked with BMI Calculator & Health');
+            text: l.shareText(widget.bmi.toStringAsFixed(1)));
       } finally {
         AdService.instance.endExternalUi();
       }
@@ -42,7 +45,7 @@ class _ShareScreenState extends State<ShareScreen> {
       debugPrint('Share failed: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not share right now. Please try again.')),
+          SnackBar(content: Text(l.shareError)),
         );
       }
     } finally {
@@ -78,7 +81,7 @@ class _ShareScreenState extends State<ShareScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      'Share',
+                      context.l10n.shareTitle,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         fontSize: 17, fontWeight: FontWeight.w600,
@@ -108,7 +111,7 @@ class _ShareScreenState extends State<ShareScreen> {
                 children: [
                   Expanded(
                     child: AppButton(
-                      label: 'Save image',
+                      label: context.l10n.saveImage,
                       variant: AppButtonVariant.light,
                       icon: Icons.download_rounded,
                       fullWidth: true,
@@ -118,7 +121,7 @@ class _ShareScreenState extends State<ShareScreen> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: AppButton(
-                      label: _saving ? 'Sharing…' : 'Share',
+                      label: _saving ? context.l10n.sharing : context.l10n.shareTitle,
                       variant: AppButtonVariant.primary,
                       icon: Icons.share_outlined,
                       fullWidth: true,
@@ -182,7 +185,7 @@ class _ShareCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'BMI Calculator & Health',
+                context.l10n.appTitle,
                 style: GoogleFonts.inter(
                   fontSize: 13, fontWeight: FontWeight.w600,
                   color: Colors.white, letterSpacing: -0.005 * 13,
@@ -195,10 +198,10 @@ class _ShareCard extends StatelessWidget {
 
           // Hero number
           Text(
-            cat.label.toUpperCase(),
+            context.l10n.bmiCategory(cat.key).toUpperCase(),
             style: GoogleFonts.inter(
               fontSize: 11, fontWeight: FontWeight.w600,
-              letterSpacing: 0.12 * 11,
+              letterSpacing: tracking(context, 0.12 * 11),
               color: Colors.white.withOpacity(0.7),
             ),
           ),
@@ -214,7 +217,7 @@ class _ShareCard extends StatelessWidget {
             ),
           ),
           Text(
-            'kg/m²  ·  today',
+            'kg/m²  ·  ${context.l10n.shareCardToday}',
             style: GoogleFonts.inter(
               fontSize: 13, fontWeight: FontWeight.w500,
               color: Colors.white.withOpacity(0.7),
@@ -226,8 +229,8 @@ class _ShareCard extends StatelessWidget {
           // Footer
           Text(
             cat.key == 'normal'
-                ? 'Within the healthy range — keeping it up.'
-                : 'Tracking my body, one week at a time.',
+                ? context.l10n.shareCardHealthy
+                : context.l10n.shareCardTracking,
             style: GoogleFonts.inter(
               fontSize: 14, fontWeight: FontWeight.w500,
               color: Colors.white.withOpacity(0.9),

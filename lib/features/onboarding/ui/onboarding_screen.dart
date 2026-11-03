@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:bmi_health/app/app_provider.dart';
+import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 
@@ -16,26 +17,29 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int _index = 0;
 
-  static const _steps = [
-    (
-      icon: Icons.calculate_outlined,
-      title: 'Track your health easily',
-      subtitle: 'Calculate your BMI in seconds, no account needed.',
-    ),
-    (
-      icon: Icons.lightbulb_outline,
-      title: 'Get smart recommendations',
-      subtitle: 'Personalized advice based on your body and goals.',
-    ),
-    (
-      icon: Icons.show_chart_rounded,
-      title: 'Track progress over time',
-      subtitle: 'See your weight journey visually, week by week.',
-    ),
-  ];
+  static List<({IconData icon, String title, String subtitle})> _stepsFor(
+          AppLocalizations l) =>
+      [
+        (
+          icon: Icons.calculate_outlined,
+          title: l.onboardTitle1,
+          subtitle: l.onboardBody1,
+        ),
+        (
+          icon: Icons.lightbulb_outline,
+          title: l.onboardTitle2,
+          subtitle: l.onboardBody2,
+        ),
+        (
+          icon: Icons.show_chart_rounded,
+          title: l.onboardTitle3,
+          subtitle: l.onboardBody3,
+        ),
+      ];
+  static const _stepCount = 3;
 
   void _next() {
-    if (_index < _steps.length - 1) {
+    if (_index < _stepCount - 1) {
       setState(() => _index++);
     } else {
       context.read<AppProvider>().completeOnboarding();
@@ -44,8 +48,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final step = _steps[_index];
-    final isLast = _index == _steps.length - 1;
+    final l = context.l10n;
+    final steps = _stepsFor(l);
+    final step = steps[_index];
+    final isLast = _index == steps.length - 1;
 
     return Scaffold(
       backgroundColor: AppColors.bgCanvas,
@@ -67,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     GestureDetector(
                       onTap: () => context.read<AppProvider>().completeOnboarding(),
                       child: Text(
-                        'Skip',
+                        l.skip,
                         style: GoogleFonts.inter(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -105,7 +111,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             // Dots
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(_steps.length, (i) {
+              children: List.generate(steps.length, (i) {
                 final active = i == _index;
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 240),
@@ -127,7 +133,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 48),
               child: AppButton(
-                label: isLast ? 'Get started' : 'Continue',
+                label: isLast ? l.getStarted : l.continueLabel,
                 variant: AppButtonVariant.primary,
                 size: AppButtonSize.lg,
                 fullWidth: true,
@@ -177,7 +183,11 @@ class _StepContent extends StatelessWidget {
                 ),
               ],
             ),
-            child: Icon(icon, size: 80, color: AppColors.bmiNormalInk),
+            // Illustrations (e.g. the trend chart) must not mirror in Urdu
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Icon(icon, size: 80, color: AppColors.bmiNormalInk),
+            ),
           ),
           const SizedBox(height: 40),
           Text(

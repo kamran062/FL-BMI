@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:bmi_health/app/app_provider.dart';
 import 'package:bmi_health/app/router.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
+import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_theme.dart';
 
 class BmiHealthApp extends StatefulWidget {
@@ -44,9 +45,14 @@ class _BmiHealthAppState extends State<BmiHealthApp>
   @override
   Widget build(BuildContext context) {
     final themeMode = context.select<AppProvider, ThemeMode>((p) => p.themeMode);
+    final locale = context.select<AppProvider, Locale?>((p) => p.locale);
     return MaterialApp.router(
-      title: 'BMI Calculator & Health',
+      onGenerateTitle: (context) => context.l10n.appTitle,
       debugShowCheckedModeBanner: false,
+      // A saved 'ur' choice is ignored in builds where Urdu is not enabled yet.
+      locale: appSupportedLocales.contains(locale) ? locale : null,
+      supportedLocales: appSupportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,

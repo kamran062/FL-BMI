@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 enum PillSize { sm, md, lg }
 
@@ -51,12 +53,12 @@ class StatusPill extends StatelessWidget {
           ),
           const SizedBox(width: 6),
           Text(
-            category.label,
+            context.l10n.bmiCategory(category.key),
             style: GoogleFonts.inter(
               fontSize: fontSize,
               fontWeight: FontWeight.w600,
               color: fg,
-              letterSpacing: 0.3,
+              letterSpacing: tracking(context, 0.3),
               height: 1,
             ),
           ),

@@ -1,0 +1,799 @@
+{
+  "@@locale": "en",
+  "appTitle": "BMI Calculator & Health",
+  "@appTitle": {
+    "description": "App name"
+  },
+  "appTagline": "Know Your Body. Improve Your Health.",
+  "@appTagline": {
+    "description": "Tagline on the splash screen"
+  },
+  "navCalculate": "Calculate",
+  "@navCalculate": {
+    "description": "Bottom nav tab: BMI calculator"
+  },
+  "navHistory": "History",
+  "@navHistory": {
+    "description": "Bottom nav tab: saved BMI history"
+  },
+  "navTips": "Tips",
+  "@navTips": {
+    "description": "Bottom nav tab: health tips"
+  },
+  "navSettings": "Settings",
+  "@navSettings": {
+    "description": "Bottom nav tab: settings"
+  },
+  "categoryUnder": "Underweight",
+  "@categoryUnder": {
+    "description": "BMI category below 18.5"
+  },
+  "categoryNormal": "Normal",
+  "@categoryNormal": {
+    "description": "BMI category 18.5–24.9"
+  },
+  "categoryOver": "Overweight",
+  "@categoryOver": {
+    "description": "BMI category 25–29.9"
+  },
+  "categoryObese": "Obese",
+  "@categoryObese": {
+    "description": "BMI category 30 and above"
+  },
+  "genderFemale": "Female",
+  "@genderFemale": {
+    "description": "Gender option"
+  },
+  "genderMale": "Male",
+  "@genderMale": {
+    "description": "Gender option"
+  },
+  "genderOther": "Other",
+  "@genderOther": {
+    "description": "Gender option"
+  },
+  "homeTitle": "BMI Calculator",
+  "@homeTitle": {
+    "description": "Calculate screen title"
+  },
+  "homeSubtitle": "Know your body. Track your health.",
+  "@homeSubtitle": {
+    "description": "Calculate screen subtitle"
+  },
+  "fieldHeight": "Height",
+  "@fieldHeight": {
+    "description": "Input label"
+  },
+  "fieldWeight": "Weight",
+  "@fieldWeight": {
+    "description": "Input label"
+  },
+  "fieldAge": "Age",
+  "@fieldAge": {
+    "description": "Input label"
+  },
+  "fieldGender": "Gender",
+  "@fieldGender": {
+    "description": "Input label"
+  },
+  "yearsShort": "yrs",
+  "@yearsShort": {
+    "description": "Short unit after the age number, e.g. 30 yrs"
+  },
+  "calculateBmi": "Calculate BMI",
+  "@calculateBmi": {
+    "description": "Main calculate button"
+  },
+  "lastResult": "Last result · {date}",
+  "@lastResult": {
+    "description": "Card showing the most recent saved result",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "1 Nov"
+      }
+    }
+  },
+  "bmiValue": "BMI {value}",
+  "@bmiValue": {
+    "description": "A BMI number with label",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "23.7"
+      }
+    }
+  },
+  "errorEnterHeightWeight": "Enter your height and weight to calculate.",
+  "@errorEnterHeightWeight": {
+    "description": "Shown when a field is empty"
+  },
+  "errorHeightRange": "Enter a height between 50 and 272 cm (20–107 in).",
+  "@errorHeightRange": {
+    "description": "Shown when height is outside the accepted range"
+  },
+  "errorWeightRange": "Enter a weight between 2 and 635 kg (5–1400 lbs).",
+  "@errorWeightRange": {
+    "description": "Shown when weight is outside the accepted range"
+  },
+  "resultTitle": "Your result",
+  "@resultTitle": {
+    "description": "Result screen title"
+  },
+  "recommendation": "Recommendation",
+  "@recommendation": {
+    "description": "Section label above advice"
+  },
+  "healthyRange": "Healthy range",
+  "@healthyRange": {
+    "description": "Section label above the BMI range bar"
+  },
+  "saveResult": "Save result",
+  "@saveResult": {
+    "description": "Button"
+  },
+  "setGoal": "Set goal",
+  "@setGoal": {
+    "description": "Button"
+  },
+  "shareResult": "Share result",
+  "@shareResult": {
+    "description": "Button"
+  },
+  "shareTitle": "Share",
+  "@shareTitle": {
+    "description": "Share screen title"
+  },
+  "saveImage": "Save image",
+  "@saveImage": {
+    "description": "Button"
+  },
+  "sharing": "Sharing…",
+  "@sharing": {
+    "description": "Button label while the share sheet is opening"
+  },
+  "shareText": "My BMI is {value} — tracked with BMI Calculator & Health",
+  "@shareText": {
+    "description": "Text sent with the shared image",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "23.7"
+      }
+    }
+  },
+  "shareError": "Could not share right now. Please try again.",
+  "@shareError": {
+    "description": "Error message"
+  },
+  "shareCardToday": "today",
+  "@shareCardToday": {
+    "description": "Date label on the share card"
+  },
+  "shareCardHealthy": "Within the healthy range — keeping it up.",
+  "@shareCardHealthy": {
+    "description": "Share card line for a normal BMI"
+  },
+  "shareCardTracking": "Tracking my body, one week at a time.",
+  "@shareCardTracking": {
+    "description": "Share card line for other BMIs"
+  },
+  "onboardTitle1": "Track your health easily",
+  "@onboardTitle1": {
+    "description": "Onboarding page 1 title"
+  },
+  "onboardBody1": "Calculate your BMI in seconds, no account needed.",
+  "@onboardBody1": {
+    "description": "Onboarding page 1 text"
+  },
+  "onboardTitle2": "Get smart recommendations",
+  "@onboardTitle2": {
+    "description": "Onboarding page 2 title"
+  },
+  "onboardBody2": "Personalized advice based on your body and goals.",
+  "@onboardBody2": {
+    "description": "Onboarding page 2 text"
+  },
+  "onboardTitle3": "Track progress over time",
+  "@onboardTitle3": {
+    "description": "Onboarding page 3 title"
+  },
+  "onboardBody3": "See your weight journey visually, week by week.",
+  "@onboardBody3": {
+    "description": "Onboarding page 3 text"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Onboarding skip button"
+  },
+  "getStarted": "Get started",
+  "@getStarted": {
+    "description": "Last onboarding page button"
+  },
+  "continueLabel": "Continue",
+  "@continueLabel": {
+    "description": "Onboarding next button"
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Settings screen title"
+  },
+  "sectionAppearance": "Appearance",
+  "@sectionAppearance": {
+    "description": "Settings section"
+  },
+  "darkMode": "Dark mode",
+  "@darkMode": {
+    "description": "Settings toggle"
+  },
+  "sectionLanguage": "Language",
+  "@sectionLanguage": {
+    "description": "Settings section"
+  },
+  "appLanguage": "App language",
+  "@appLanguage": {
+    "description": "Settings row that opens the language picker"
+  },
+  "languageSystem": "System default",
+  "@languageSystem": {
+    "description": "Language option: follow the phone's language"
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "Language option, always written in English"
+  },
+  "languageUrdu": "اردو",
+  "@languageUrdu": {
+    "description": "Language option, always written in Urdu"
+  },
+  "sectionUnits": "Units",
+  "@sectionUnits": {
+    "description": "Settings section"
+  },
+  "sectionNotifications": "Notifications",
+  "@sectionNotifications": {
+    "description": "Settings section"
+  },
+  "dailyReminders": "Daily reminders",
+  "@dailyReminders": {
+    "description": "Settings toggle"
+  },
+  "weeklyCheckIn": "Weekly check-in",
+  "@weeklyCheckIn": {
+    "description": "Settings toggle"
+  },
+  "sectionAbout": "About",
+  "@sectionAbout": {
+    "description": "Settings section"
+  },
+  "privacy": "Privacy",
+  "@privacy": {
+    "description": "Settings row"
+  },
+  "onDevice": "On-device",
+  "@onDevice": {
+    "description": "Short note next to Privacy: data stays on the phone"
+  },
+  "adPrivacyChoices": "Ad privacy choices",
+  "@adPrivacyChoices": {
+    "description": "Settings row that opens Google's consent form"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Settings row"
+  },
+  "settingsFooter": "Made with care.  ·  No account required.",
+  "@settingsFooter": {
+    "description": "Footer at the bottom of Settings"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy dialog title"
+  },
+  "privacyDataTitle": "🔒 Data stays on your device",
+  "@privacyDataTitle": {
+    "description": "Privacy dialog section"
+  },
+  "privacyDataBody": "BMI Calculator & Health stores all your data — weight entries, goals, and profile — locally on your device using SQLite. Nothing is sent to any server.",
+  "@privacyDataBody": {
+    "description": "Privacy dialog text"
+  },
+  "privacyAnalyticsTitle": "📊 No analytics or tracking",
+  "@privacyAnalyticsTitle": {
+    "description": "Privacy dialog section"
+  },
+  "privacyAnalyticsBody": "We do not use any analytics SDKs, crash reporters, or user-tracking tools. We have no idea who you are, and we prefer it that way.",
+  "@privacyAnalyticsBody": {
+    "description": "Privacy dialog text. Must be updated if crash reporting is added."
+  },
+  "privacyAdsTitle": "📢 Ads",
+  "@privacyAdsTitle": {
+    "description": "Privacy dialog section"
+  },
+  "privacyAdsBody": "BMI Calculator & Health is free and supported by ads powered by Google AdMob. AdMob may use your device's advertising ID to show relevant ads. You can opt out of personalised ads at any time in your device settings under Google → Ads → Delete advertising ID.",
+  "@privacyAdsBody": {
+    "description": "Privacy dialog text"
+  },
+  "privacyThirdPartyTitle": "🔗 Third-party ad services",
+  "@privacyThirdPartyTitle": {
+    "description": "Privacy dialog section"
+  },
+  "privacyThirdPartyBody": "Google AdMob may collect certain device information (such as IP address, device identifiers, and general location) to serve ads. This data is governed by Google's Privacy Policy. BMI Calculator & Health does not have access to this data.",
+  "@privacyThirdPartyBody": {
+    "description": "Privacy dialog text"
+  },
+  "privacyDeleteTitle": "🗑 Deleting your data",
+  "@privacyDeleteTitle": {
+    "description": "Privacy dialog section"
+  },
+  "privacyDeleteBody": "Uninstalling the app permanently deletes all your health data from the device. There is no cloud backup — your data never leaves your phone.",
+  "@privacyDeleteBody": {
+    "description": "Privacy dialog text"
+  },
+  "gotIt": "Got it",
+  "@gotIt": {
+    "description": "Dialog close button"
+  },
+  "historyTitle": "History",
+  "@historyTitle": {
+    "description": "History screen title"
+  },
+  "periodAll": "All time",
+  "@periodAll": {
+    "description": "History filter period"
+  },
+  "period7d": "Last 7 days",
+  "@period7d": {
+    "description": "History filter period"
+  },
+  "period30d": "Last 30 days",
+  "@period30d": {
+    "description": "History filter period"
+  },
+  "period3m": "Last 3 months",
+  "@period3m": {
+    "description": "History filter period"
+  },
+  "period1y": "Last year",
+  "@period1y": {
+    "description": "History filter period"
+  },
+  "categoryAll": "All",
+  "@categoryAll": {
+    "description": "Filter option meaning no category filter"
+  },
+  "clearAll": "Clear all",
+  "@clearAll": {
+    "description": "Removes all history filters"
+  },
+  "noEntriesMatch": "No entries match your filter",
+  "@noEntriesMatch": {
+    "description": "Empty state when filters hide every entry"
+  },
+  "clearFilters": "Clear filters",
+  "@clearFilters": {
+    "description": "Button"
+  },
+  "entriesCount": "Entries  ·  {count}",
+  "@entriesCount": {
+    "description": "Overline above the entry list",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "entriesCountOf": "Entries  ·  {count} of {total}",
+  "@entriesCountOf": {
+    "description": "Overline above a filtered entry list",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      },
+      "total": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "filterEntries": "Filter entries",
+  "@filterEntries": {
+    "description": "Filter sheet title"
+  },
+  "timePeriod": "Time period",
+  "@timePeriod": {
+    "description": "Filter sheet section"
+  },
+  "bmiCategoryLabel": "BMI category",
+  "@bmiCategoryLabel": {
+    "description": "Filter sheet section"
+  },
+  "applyFilter": "Apply filter",
+  "@applyFilter": {
+    "description": "Button"
+  },
+  "noHistoryYet": "No history yet",
+  "@noHistoryYet": {
+    "description": "Empty history title"
+  },
+  "noHistoryBody": "Start tracking today — every entry shapes your trend.",
+  "@noHistoryBody": {
+    "description": "Empty history text"
+  },
+  "addFirstEntry": "Add first entry",
+  "@addFirstEntry": {
+    "description": "Button"
+  },
+  "bmiTrend": "BMI Trend",
+  "@bmiTrend": {
+    "description": "Chart card label"
+  },
+  "entryCount": "{count, plural, =1{1 entry} other{{count} entries}}",
+  "@entryCount": {
+    "description": "Number of entries in the chart",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "bmiDelta": "{delta} BMI",
+  "@bmiDelta": {
+    "description": "Change in BMI, e.g. +6.8 BMI",
+    "placeholders": {
+      "delta": {
+        "type": "String",
+        "example": "+6.8"
+      }
+    }
+  },
+  "goalTitle": "Set a goal",
+  "@goalTitle": {
+    "description": "Goal screen title"
+  },
+  "goalCurrent": "Current",
+  "@goalCurrent": {
+    "description": "Current weight label"
+  },
+  "goalTarget": "Target",
+  "@goalTarget": {
+    "description": "Target weight label"
+  },
+  "goalTargetWeight": "Target weight",
+  "@goalTargetWeight": {
+    "description": "Slider label"
+  },
+  "goalTimeline": "Timeline",
+  "@goalTimeline": {
+    "description": "Section label"
+  },
+  "weeksCount": "{count, plural, =1{1 week} other{{count} weeks}}",
+  "@weeksCount": {
+    "description": "Timeline option",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "goalYourPlan": "Your plan",
+  "@goalYourPlan": {
+    "description": "Section label"
+  },
+  "goalMaintain": "Maintain your current weight",
+  "@goalMaintain": {
+    "description": "Plan when target equals current weight"
+  },
+  "goalLose": "Lose {amount} in {weeks} weeks",
+  "@goalLose": {
+    "description": "Plan sentence; {amount} is highlighted",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5.0 kg"
+      },
+      "weeks": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "goalGain": "Gain {amount} in {weeks} weeks",
+  "@goalGain": {
+    "description": "Plan sentence; {amount} is highlighted",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "3.0 kg"
+      },
+      "weeks": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "goalRate": "{value} kg / week",
+  "@goalRate": {
+    "description": "Weekly rate of change",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "0.63"
+      }
+    }
+  },
+  "goalPaceSafe": "That's {rate} — a safe, sustainable pace.",
+  "@goalPaceSafe": {
+    "description": "Pace sentence; {rate} is bold",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "0.63 kg / week"
+      }
+    }
+  },
+  "goalPaceFast": "That's {rate} — faster than recommended. Try a longer timeline.",
+  "@goalPaceFast": {
+    "description": "Pace sentence; {rate} is bold",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "1.25 kg / week"
+      }
+    }
+  },
+  "goalReachBy": "Reach by",
+  "@goalReachBy": {
+    "description": "Label above the target date"
+  },
+  "goalDailyCalories": "Daily calories",
+  "@goalDailyCalories": {
+    "description": "Label above the calorie change"
+  },
+  "goalStart": "Start tracking goal",
+  "@goalStart": {
+    "description": "Button"
+  },
+  "tipsTitle": "Daily tips",
+  "@tipsTitle": {
+    "description": "Tips screen title"
+  },
+  "tipCatDiet": "Diet",
+  "@tipCatDiet": {
+    "description": "Tip category"
+  },
+  "tipCatExercise": "Exercise",
+  "@tipCatExercise": {
+    "description": "Tip category"
+  },
+  "tipCatHydration": "Hydration",
+  "@tipCatHydration": {
+    "description": "Tip category"
+  },
+  "tipCatLifestyle": "Lifestyle",
+  "@tipCatLifestyle": {
+    "description": "Tip category"
+  },
+  "tipToday": "Today · {category}",
+  "@tipToday": {
+    "description": "Label on the featured tip",
+    "placeholders": {
+      "category": {
+        "type": "String",
+        "example": "Diet"
+      }
+    }
+  },
+  "tip1Title": "Half your plate, vegetables",
+  "@tip1Title": {
+    "description": "Tip title"
+  },
+  "tip1Body": "A simple visual rule that crowds out higher-calorie foods without counting.",
+  "@tip1Body": {
+    "description": "Tip text"
+  },
+  "tip2Title": "Water before coffee",
+  "@tip2Title": {
+    "description": "Tip title"
+  },
+  "tip2Body": "Drink 200 ml of water before your first coffee to reset overnight dehydration.",
+  "@tip2Body": {
+    "description": "Tip text"
+  },
+  "tip3Title": "A 10-min walk after meals",
+  "@tip3Title": {
+    "description": "Tip title"
+  },
+  "tip3Body": "Studies show short post-meal walks meaningfully lower blood-glucose spikes.",
+  "@tip3Body": {
+    "description": "Tip text"
+  },
+  "tip4Title": "Sleep is the multiplier",
+  "@tip4Title": {
+    "description": "Tip title"
+  },
+  "tip4Body": "Under 7 hours raises hunger hormones the next day. Protect a wind-down ritual.",
+  "@tip4Body": {
+    "description": "Tip text"
+  },
+  "tip5Title": "Protein first, every meal",
+  "@tip5Title": {
+    "description": "Tip title"
+  },
+  "tip5Body": "Eat the protein on your plate before carbs — satiety lasts longer.",
+  "@tip5Body": {
+    "description": "Tip text"
+  },
+  "tip6Title": "Strength training twice a week",
+  "@tip6Title": {
+    "description": "Tip title"
+  },
+  "tip6Body": "Two sessions of resistance training weekly significantly improves metabolic health.",
+  "@tip6Body": {
+    "description": "Tip text"
+  },
+  "tip7Title": "Hydrate with meals too",
+  "@tip7Title": {
+    "description": "Tip title"
+  },
+  "tip7Body": "Sipping water during meals helps digestion and reduces overeating.",
+  "@tip7Body": {
+    "description": "Tip text"
+  },
+  "tip8Title": "Stress fuels hunger",
+  "@tip8Title": {
+    "description": "Tip title"
+  },
+  "tip8Body": "Cortisol spikes increase appetite. Try 5 minutes of deep breathing before eating.",
+  "@tip8Body": {
+    "description": "Tip text"
+  },
+  "adviceUnderHeadline": "Your weight is below the healthy range",
+  "@adviceUnderHeadline": {
+    "description": "Result headline for BMI category 'under'"
+  },
+  "adviceUnderCopy": "Being underweight can weaken immunity, reduce bone density, and affect energy levels. The goal is gradual, quality weight gain — not just eating more junk food.",
+  "@adviceUnderCopy": {
+    "description": "Result intro for BMI category 'under'"
+  },
+  "adviceUnderStep1": "Eat calorie-dense whole foods: nuts, nut butter, avocado, eggs, whole milk, oats, and brown rice",
+  "@adviceUnderStep1": {
+    "description": "Action step 1 for BMI category 'under'"
+  },
+  "adviceUnderStep2": "Add 300–500 extra kcal per day — enough to gain ~0.3–0.5 kg per week sustainably",
+  "@adviceUnderStep2": {
+    "description": "Action step 2 for BMI category 'under'"
+  },
+  "adviceUnderStep3": "Eat 3 main meals + 2–3 snacks daily; never skip breakfast",
+  "@adviceUnderStep3": {
+    "description": "Action step 3 for BMI category 'under'"
+  },
+  "adviceUnderStep4": "Include protein at every meal — aim for 1.2–1.6 g per kg of body weight to build muscle",
+  "@adviceUnderStep4": {
+    "description": "Action step 4 for BMI category 'under'"
+  },
+  "adviceUnderStep5": "Do resistance training 2–3× per week (squats, push-ups, rows) so gained weight becomes muscle, not just fat",
+  "@adviceUnderStep5": {
+    "description": "Action step 5 for BMI category 'under'"
+  },
+  "adviceUnderStep6": "If weight loss is unexplained or rapid, see a doctor — it may signal an underlying condition",
+  "@adviceUnderStep6": {
+    "description": "Action step 6 for BMI category 'under'"
+  },
+  "adviceUnderNote": "If you have been underweight for a long time, consult a doctor or registered dietitian for personalised support.",
+  "@adviceUnderNote": {
+    "description": "Medical note for BMI category 'under'"
+  },
+  "adviceNormalHeadline": "You are in the healthy weight range",
+  "@adviceNormalHeadline": {
+    "description": "Result headline for BMI category 'normal'"
+  },
+  "adviceNormalCopy": "A healthy BMI is a great foundation. The priority now is maintaining it through consistent habits — movement, quality nutrition, sleep, and stress management all matter.",
+  "@adviceNormalCopy": {
+    "description": "Result intro for BMI category 'normal'"
+  },
+  "adviceNormalStep1": "Get 150–300 min of moderate aerobic activity per week: brisk walking, cycling, or swimming",
+  "@adviceNormalStep1": {
+    "description": "Action step 1 for BMI category 'normal'"
+  },
+  "adviceNormalStep2": "Add 2–3 strength training sessions per week to preserve muscle mass as you age",
+  "@adviceNormalStep2": {
+    "description": "Action step 2 for BMI category 'normal'"
+  },
+  "adviceNormalStep3": "Fill half your plate with vegetables and fruit at every main meal",
+  "@adviceNormalStep3": {
+    "description": "Action step 3 for BMI category 'normal'"
+  },
+  "adviceNormalStep4": "Limit ultra-processed foods, added sugars, and alcohol — they add calories with little nutrition",
+  "@adviceNormalStep4": {
+    "description": "Action step 4 for BMI category 'normal'"
+  },
+  "adviceNormalStep5": "Sleep 7–9 hours per night; poor sleep raises ghrelin (hunger hormone) and leads to overeating",
+  "@adviceNormalStep5": {
+    "description": "Action step 5 for BMI category 'normal'"
+  },
+  "adviceNormalStep6": "Re-check your BMI every 4–6 weeks to catch any drift early",
+  "@adviceNormalStep6": {
+    "description": "Action step 6 for BMI category 'normal'"
+  },
+  "adviceNormalNote": "BMI is a screening tool, not a full health picture. Body composition, blood pressure, and blood sugar also matter.",
+  "@adviceNormalNote": {
+    "description": "Medical note for BMI category 'normal'"
+  },
+  "adviceOverHeadline": "Your weight is slightly above the healthy range",
+  "@adviceOverHeadline": {
+    "description": "Result headline for BMI category 'over'"
+  },
+  "adviceOverCopy": "Overweight raises the risk of type 2 diabetes, high blood pressure, and joint problems over time. Even a 5–10% reduction in body weight significantly lowers these risks.",
+  "@adviceOverCopy": {
+    "description": "Result intro for BMI category 'over'"
+  },
+  "adviceOverStep1": "Create a moderate calorie deficit of 300–500 kcal/day — target 0.3–0.5 kg loss per week (sustainable pace)",
+  "@adviceOverStep1": {
+    "description": "Action step 1 for BMI category 'over'"
+  },
+  "adviceOverStep2": "Walk 8,000–10,000 steps daily; start with 30 min brisk walks and build from there",
+  "@adviceOverStep2": {
+    "description": "Action step 2 for BMI category 'over'"
+  },
+  "adviceOverStep3": "Swap sugary drinks (soda, juice, energy drinks) for water, sparkling water, or unsweetened tea",
+  "@adviceOverStep3": {
+    "description": "Action step 3 for BMI category 'over'"
+  },
+  "adviceOverStep4": "Eat protein first at each meal — it increases satiety and reduces overall calorie intake",
+  "@adviceOverStep4": {
+    "description": "Action step 4 for BMI category 'over'"
+  },
+  "adviceOverStep5": "Fill half your plate with non-starchy vegetables (broccoli, spinach, cucumber, peppers) at lunch and dinner",
+  "@adviceOverStep5": {
+    "description": "Action step 5 for BMI category 'over'"
+  },
+  "adviceOverStep6": "Avoid eating within 2–3 hours of bedtime — late-night eating promotes fat storage",
+  "@adviceOverStep6": {
+    "description": "Action step 6 for BMI category 'over'"
+  },
+  "adviceOverNote": "Crash diets backfire. A 300–500 kcal deficit is enough — losing weight slowly preserves muscle and is easier to maintain.",
+  "@adviceOverNote": {
+    "description": "Medical note for BMI category 'over'"
+  },
+  "adviceObeseHeadline": "Your weight is in the obese range",
+  "@adviceObeseHeadline": {
+    "description": "Result headline for BMI category 'obese'"
+  },
+  "adviceObeseCopy": "Obesity is associated with increased risk of heart disease, type 2 diabetes, sleep apnea, and joint pain. The good news: even modest weight loss of 5–10% of your body weight produces meaningful health improvements.",
+  "@adviceObeseCopy": {
+    "description": "Result intro for BMI category 'obese'"
+  },
+  "adviceObeseStep1": "Set your first target at 5–10% of current weight — for an 100 kg person, that is just 5–10 kg",
+  "@adviceObeseStep1": {
+    "description": "Action step 1 for BMI category 'obese'"
+  },
+  "adviceObeseStep2": "Aim for 0.5–1.0 kg loss per week; faster rates typically cause muscle loss and a rebound",
+  "@adviceObeseStep2": {
+    "description": "Action step 2 for BMI category 'obese'"
+  },
+  "adviceObeseStep3": "Start with low-impact daily movement: 30 min walking, swimming, or stationary cycling — knees and joints will thank you",
+  "@adviceObeseStep3": {
+    "description": "Action step 3 for BMI category 'obese'"
+  },
+  "adviceObeseStep4": "Cut out ultra-processed foods, fried food, and added sugars first — these alone can reduce 500+ kcal/day",
+  "@adviceObeseStep4": {
+    "description": "Action step 4 for BMI category 'obese'"
+  },
+  "adviceObeseStep5": "Build meals around protein (chicken, fish, legumes, eggs) and vegetables; they keep you full longer",
+  "@adviceObeseStep5": {
+    "description": "Action step 5 for BMI category 'obese'"
+  },
+  "adviceObeseStep6": "See your doctor for a baseline check — blood pressure, blood sugar, and cholesterol — and ask about structured support programs",
+  "@adviceObeseStep6": {
+    "description": "Action step 6 for BMI category 'obese'"
+  },
+  "adviceObeseNote": "BMI alone does not diagnose health. Speak with a doctor or registered dietitian for a plan tailored to your medical history.",
+  "@adviceObeseNote": {
+    "description": "Medical note for BMI category 'obese'"
+  }
+}

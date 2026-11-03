@@ -2,7 +2,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:bmi_health/app/app_provider.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onDone;
@@ -105,6 +109,10 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        // Without an explicit size the gradient shrinks to the widest child
+        // and only covers part of the screen.
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -226,20 +234,26 @@ class _SplashScreenState extends State<SplashScreen>
                     position: _wordmarkSlide,
                     child: Column(
                       children: [
-                        SvgPicture.asset(
-                          'assets/logo.svg',
-                          height: 34,
+                        // The wordmark is text inside the SVG; it is a brand
+                        // mark, so it always renders LTR (in RTL it would be
+                        // laid out off the left edge of the image).
+                        Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: SvgPicture.asset(
+                            'assets/logo.svg',
+                            height: 34,
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Opacity(
                           opacity: _taglineFade.value,
                           child: Text(
-                            'Know Your Body. Improve Your Health.',
+                            context.l10n.appTagline,
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: AppColors.fg2,
-                              letterSpacing: 0.1,
+                              letterSpacing: tracking(context, 0.1),
                             ),
                           ),
                         ),
@@ -255,7 +269,7 @@ class _SplashScreenState extends State<SplashScreen>
               Padding(
                 padding: const EdgeInsets.only(bottom: 28),
                 child: Text(
-                  'v 1.0',
+                  'v ${context.read<AppProvider>().versionName}',
                   style: GoogleFonts.inter(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,

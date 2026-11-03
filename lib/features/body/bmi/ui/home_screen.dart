@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 import 'package:bmi_health/app/app_provider.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/segmented_control.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback onCalculate;
@@ -55,12 +58,18 @@ class _HomeScreenState extends State<HomeScreen> {
     final p = provider.profile;
     final h = double.tryParse(_heightCtrl.text.trim());
     final w = double.tryParse(_weightCtrl.text.trim());
-    final error = (h == null || w == null)
-        ? 'Enter your height and weight to calculate.'
+    final l = context.l10n;
+    final inputError = (h == null || w == null)
+        ? null
         : BmiCalculator.validate(
             heightCm: p.copyWith(height: h).heightInCm,
             weightKg: p.copyWith(weight: w).weightInKg,
           );
+    final error = (h == null || w == null)
+        ? l.errorEnterHeightWeight
+        : inputError == null
+            ? null
+            : l.bmiInputError(inputError);
     if (error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -79,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final fg1   = isDark ? AppColors.darkFg1   : AppColors.fg1;
     final fg2   = isDark ? AppColors.darkFg2   : AppColors.fg2;
@@ -110,15 +120,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'BMI Calculator',
+                                l.homeTitle,
                                 style: GoogleFonts.inter(
                                   fontSize: 28, fontWeight: FontWeight.w700,
-                                  letterSpacing: -0.03 * 28, color: fg1, height: 1.1,
+                                  letterSpacing: tracking(context, -0.03 * 28), color: fg1, height: 1.1,
                                 ),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                'Know your body. Track your health.',
+                                l.homeSubtitle,
                                 style: GoogleFonts.inter(
                                   fontSize: 14, fontWeight: FontWeight.w400,
                                   color: fg3, height: 1.4,
@@ -162,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: Icons.height_rounded,
                             iconColor: const Color(0xFF3B82F6),
                             iconTint: const Color(0xFFEAF1FE),
-                            label: 'Height',
+                            label: l.fieldHeight,
                             controller: _heightCtrl,
                             unit: profile.heightUnit == 'cm' ? 'cm' : 'in',
                             hint: profile.heightUnit == 'cm' ? '172' : '70',
@@ -191,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             iconTint: isDark
                                 ? AppColors.darkBrand500.withAlpha(35)
                                 : AppColors.brand100,
-                            label: 'Weight',
+                            label: l.fieldWeight,
                             controller: _weightCtrl,
                             unit: profile.weightUnit,
                             hint: profile.weightUnit == 'kg' ? '70' : '154',
@@ -241,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               const SizedBox(width: 12),
                               Text(
-                                'Age',
+                                l.fieldAge,
                                 style: GoogleFonts.inter(
                                   fontSize: 14, fontWeight: FontWeight.w600,
                                   color: fg2,
@@ -261,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: ' yrs',
+                                      text: ' ${l.yearsShort}',
                                       style: GoogleFonts.inter(
                                         fontSize: 13, fontWeight: FontWeight.w500,
                                         color: fg3,
@@ -331,7 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               const SizedBox(width: 12),
                               Text(
-                                'Gender',
+                                l.fieldGender,
                                 style: GoogleFonts.inter(
                                   fontSize: 14, fontWeight: FontWeight.w600,
                                   color: fg2,
@@ -368,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     child: _GradientButton(
-                      label: 'Calculate BMI',
+                      label: l.calculateBmi,
                       icon: Icons.calculate_rounded,
                       onTap: _onCalculatePressed,
                     ),
@@ -619,11 +629,7 @@ class _GenderPills extends StatelessWidget {
     required this.isDark,
   });
 
-  static const _options = [
-    ('f', 'Female'),
-    ('m', 'Male'),
-    ('o', 'Other'),
-  ];
+  static const _options = ['f', 'm', 'o'];
 
   @override
   Widget build(BuildContext context) {
@@ -632,19 +638,19 @@ class _GenderPills extends StatelessWidget {
 
     return Row(
       children: _options.map((opt) {
-        final selected = opt.$1 == value;
+        final selected = opt == value;
         return GestureDetector(
-          onTap: () => onChanged(opt.$1),
+          onTap: () => onChanged(opt),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 150),
-            margin: const EdgeInsets.only(left: 6),
+            margin: const EdgeInsetsDirectional.only(start: 6),
             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
             decoration: BoxDecoration(
               color: selected ? brand : bgSunken,
               borderRadius: BorderRadius.circular(999),
             ),
             child: Text(
-              opt.$2,
+              context.l10n.gender(opt),
               style: GoogleFonts.inter(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -737,14 +743,19 @@ class _GradientButtonState extends State<_GradientButton>
             children: [
               Icon(widget.icon, size: 22, color: Colors.white),
               const SizedBox(width: 10),
-              Text(
-                widget.label,
-                style: GoogleFonts.inter(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                  letterSpacing: -0.01 * 17,
-                  height: 1,
+              // Flexible so long translations or large system fonts wrap
+              // instead of overflowing the button.
+              Flexible(
+                child: Text(
+                  widget.label,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    letterSpacing: -0.01 * 17,
+                    height: 1.2,
+                  ),
                 ),
               ),
             ],
@@ -773,10 +784,9 @@ class _LastResultCard extends StatelessWidget {
     final fg3   = isDark ? AppColors.darkFg3   : AppColors.fg3;
     final surface = isDark ? AppColors.darkBgSurface : AppColors.bgSurface;
 
-    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final l = context.l10n;
     final d = entry.date as DateTime;
-    final dateStr = '${d.day} ${months[d.month]}';
+    final dateStr = DateFormat('d MMM', l.localeName).format(d);
 
     return GestureDetector(
       onTap: onTap,
@@ -822,7 +832,7 @@ class _LastResultCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Last result · $dateStr',
+                          l.lastResult(dateStr),
                           style: GoogleFonts.inter(
                             fontSize: 12, fontWeight: FontWeight.w500,
                             color: fg3,
@@ -832,7 +842,7 @@ class _LastResultCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'BMI ${(entry.bmi as double).toStringAsFixed(1)}',
+                              l.bmiValue((entry.bmi as double).toStringAsFixed(1)),
                               style: GoogleFonts.inter(
                                 fontSize: 16, fontWeight: FontWeight.w700,
                                 color: fg1,
@@ -849,7 +859,7 @@ class _LastResultCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(999),
                               ),
                               child: Text(
-                                cat.label,
+                                l.bmiCategory(cat.key),
                                 style: GoogleFonts.inter(
                                   fontSize: 11, fontWeight: FontWeight.w600,
                                   color: catInk,

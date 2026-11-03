@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
 import 'package:bmi_health/app/app_provider.dart';
@@ -10,6 +11,8 @@ import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 // ── Filter state enums ────────────────────────────────────────────────────────
 
@@ -17,12 +20,12 @@ enum _Period { all, d7, d30, m3, y1 }
 enum _Category { all, under, normal, over, obese }
 
 extension _PeriodExt on _Period {
-  String get label => switch (this) {
-        _Period.all => 'All time',
-        _Period.d7  => 'Last 7 days',
-        _Period.d30 => 'Last 30 days',
-        _Period.m3  => 'Last 3 months',
-        _Period.y1  => 'Last year',
+  String label(AppLocalizations l) => switch (this) {
+        _Period.all => l.periodAll,
+        _Period.d7  => l.period7d,
+        _Period.d30 => l.period30d,
+        _Period.m3  => l.period3m,
+        _Period.y1  => l.period1y,
       };
 
   DateTime? get cutoff {
@@ -38,12 +41,12 @@ extension _PeriodExt on _Period {
 }
 
 extension _CategoryExt on _Category {
-  String get label => switch (this) {
-        _Category.all    => 'All',
-        _Category.under  => 'Underweight',
-        _Category.normal => 'Normal',
-        _Category.over   => 'Overweight',
-        _Category.obese  => 'Obese',
+  String label(AppLocalizations l) => switch (this) {
+        _Category.all    => l.categoryAll,
+        _Category.under  => l.categoryUnder,
+        _Category.normal => l.categoryNormal,
+        _Category.over   => l.categoryOver,
+        _Category.obese  => l.categoryObese,
       };
 
   String? get key => switch (this) {
@@ -138,7 +141,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               slivers: [
                 SliverToBoxAdapter(
                   child: ScreenHeader(
-                    title: 'History',
+                    title: context.l10n.historyTitle,
                     large: true,
                     trailing: GestureDetector(
                       onTap: () => _openFilter(context, brand, isDark),
@@ -174,7 +177,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         children: [
                           if (_period != _Period.all)
                             _FilterChip(
-                              label: _period.label,
+                              label: _period.label(context.l10n),
                               brand: brand,
                               isDark: isDark,
                               onRemove: () =>
@@ -182,7 +185,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             ),
                           if (_category != _Category.all)
                             _FilterChip(
-                              label: _category.label,
+                              label: _category.label(context.l10n),
                               brand: brand,
                               isDark: isDark,
                               onRemove: () =>
@@ -196,7 +199,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: Text(
-                                'Clear all',
+                                context.l10n.clearAll,
                                 style: GoogleFonts.inter(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
@@ -224,7 +227,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   size: 40, color: fg3),
                               const SizedBox(height: 12),
                               Text(
-                                'No entries match your filter',
+                                context.l10n.noEntriesMatch,
                                 style: GoogleFonts.inter(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
@@ -238,7 +241,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   _category = _Category.all;
                                 }),
                                 child: Text(
-                                  'Clear filters',
+                                  context.l10n.clearFilters,
                                   style: GoogleFonts.inter(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
@@ -273,8 +276,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 child: Row(
                                   children: [
                                     OverlineLabel(
-                                      'Entries  ·  ${filtered.length}'
-                                      '${_hasFilter ? ' of ${allEntries.length}' : ''}',
+                                      _hasFilter
+                                          ? context.l10n.entriesCountOf(
+                                              filtered.length, allEntries.length)
+                                          : context.l10n.entriesCount(filtered.length),
                                     ),
                                   ],
                                 ),
@@ -431,7 +436,7 @@ class _FilterSheetState extends State<_FilterSheet> {
           Row(
             children: [
               Text(
-                'Filter entries',
+                context.l10n.filterEntries,
                 style: GoogleFonts.inter(
                   fontSize: 17, fontWeight: FontWeight.w700, color: fg1,
                 ),
@@ -440,7 +445,7 @@ class _FilterSheetState extends State<_FilterSheet> {
               GestureDetector(
                 onTap: widget.onClear,
                 child: Text(
-                  'Clear all',
+                  context.l10n.clearAll,
                   style: GoogleFonts.inter(
                     fontSize: 14, fontWeight: FontWeight.w600, color: brand,
                   ),
@@ -452,17 +457,17 @@ class _FilterSheetState extends State<_FilterSheet> {
 
           // Period section
           Text(
-            'TIME PERIOD',
+            context.l10n.timePeriod.toUpperCase(),
             style: GoogleFonts.inter(
               fontSize: 11, fontWeight: FontWeight.w600,
-              letterSpacing: 0.8, color: fg3,
+              letterSpacing: tracking(context, 0.8), color: fg3,
             ),
           ),
           const SizedBox(height: 10),
           Wrap(
             spacing: 8, runSpacing: 8,
             children: _Period.values.map((p) => _OptionChip(
-              label: p.label,
+              label: p.label(context.l10n),
               selected: _period == p,
               brand: brand,
               isDark: isDark,
@@ -473,17 +478,17 @@ class _FilterSheetState extends State<_FilterSheet> {
 
           // Category section
           Text(
-            'BMI CATEGORY',
+            context.l10n.bmiCategoryLabel.toUpperCase(),
             style: GoogleFonts.inter(
               fontSize: 11, fontWeight: FontWeight.w600,
-              letterSpacing: 0.8, color: fg3,
+              letterSpacing: tracking(context, 0.8), color: fg3,
             ),
           ),
           const SizedBox(height: 10),
           Wrap(
             spacing: 8, runSpacing: 8,
             children: _Category.values.map((c) => _OptionChip(
-              label: c.label,
+              label: c.label(context.l10n),
               selected: _category == c,
               brand: brand,
               isDark: isDark,
@@ -496,7 +501,7 @@ class _FilterSheetState extends State<_FilterSheet> {
           SizedBox(
             width: double.infinity,
             child: AppButton(
-              label: 'Apply filter',
+              label: context.l10n.applyFilter,
               variant: AppButtonVariant.primary,
               size: AppButtonSize.lg,
               fullWidth: true,
@@ -572,7 +577,7 @@ class _EmptyState extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const ScreenHeader(title: 'History', large: true),
+            ScreenHeader(title: context.l10n.historyTitle, large: true),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -580,10 +585,14 @@ class _EmptyState extends StatelessWidget {
                   Container(
                     width: 88, height: 88,
                     decoration: BoxDecoration(color: bgTint, shape: BoxShape.circle),
-                    child: Icon(Icons.show_chart_rounded, size: 36, color: brand),
+                    // A trend line must not mirror in Urdu
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Icon(Icons.show_chart_rounded, size: 36, color: brand),
+                    ),
                   ),
                   const SizedBox(height: 18),
-                  Text('No history yet',
+                  Text(context.l10n.noHistoryYet,
                     style: GoogleFonts.inter(
                       fontSize: 19, fontWeight: FontWeight.w600,
                       color: fg1, height: 1.3,
@@ -591,7 +600,7 @@ class _EmptyState extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Start tracking today — every entry shapes your trend.',
+                    context.l10n.noHistoryBody,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
                       fontSize: 15, fontWeight: FontWeight.w400,
@@ -600,7 +609,7 @@ class _EmptyState extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   AppButton(
-                    label: 'Add first entry',
+                    label: context.l10n.addFirstEntry,
                     variant: AppButtonVariant.primary,
                     icon: Icons.add_rounded,
                     onPressed: onAddEntry,
@@ -655,7 +664,7 @@ class _TrendCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const OverlineLabel('BMI Trend'),
+                  OverlineLabel(context.l10n.bmiTrend),
                   const SizedBox(height: 6),
                   Text(
                     lastBmi.toStringAsFixed(1),
@@ -666,7 +675,7 @@ class _TrendCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${pts.length} ${pts.length == 1 ? 'entry' : 'entries'}',
+                    context.l10n.entryCount(pts.length),
                     style: GoogleFonts.inter(
                       fontSize: 13, fontWeight: FontWeight.w500, color: fg3,
                     ),
@@ -695,7 +704,7 @@ class _TrendCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      '${delta >= 0 ? '+' : ''}${delta.toStringAsFixed(1)} BMI',
+                      context.l10n.bmiDelta('${delta >= 0 ? '+' : ''}${delta.toStringAsFixed(1)}'),
                       style: GoogleFonts.inter(
                         fontSize: 12, fontWeight: FontWeight.w600,
                         color: delta <= 0
@@ -778,7 +787,11 @@ class _TrendCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          Row(
+          // The chart runs oldest→newest left→right in every language, so
+          // its date labels stay LTR under Urdu to line up with the points.
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: pts.map((e) {
               return Text(
@@ -789,6 +802,7 @@ class _TrendCard extends StatelessWidget {
                 ),
               );
             }).toList(),
+          ),
           ),
         ],
       ),
@@ -823,9 +837,8 @@ class _EntryRow extends StatelessWidget {
     final border = isDark ? AppColors.darkBorderFaint : AppColors.borderFaint;
     final delta  = prev != null ? entry.weight - prev!.weight : 0.0;
 
-    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    final dateStr = '${entry.date.day} ${months[entry.date.month]}';
+    final l = context.l10n;
+    final dateStr = DateFormat('d MMM', l.localeName).format(entry.date);
 
     return Dismissible(
       key: Key('entry_${entry.id}'),
@@ -878,7 +891,7 @@ class _EntryRow extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '$dateStr · BMI ${entry.bmi.toStringAsFixed(1)}',
+                      '$dateStr · ${l.bmiValue(entry.bmi.toStringAsFixed(1))}',
                       style: GoogleFonts.inter(
                         fontSize: 13, fontWeight: FontWeight.w500,
                         color: fg3,
@@ -890,7 +903,7 @@ class _EntryRow extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                cat.label,
+                context.l10n.bmiCategory(cat.key),
                 style: GoogleFonts.inter(
                   fontSize: 12, fontWeight: FontWeight.w600,
                   color: catInk,

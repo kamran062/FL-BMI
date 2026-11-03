@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
 import 'package:bmi_health/app/app_provider.dart';
@@ -8,6 +9,8 @@ import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/segmented_control.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class GoalScreen extends StatefulWidget {
   final double currentWeight;
@@ -47,6 +50,7 @@ class _GoalScreenState extends State<GoalScreen> {
     final fg2 = isDark ? AppColors.darkFg2 : AppColors.fg2;
     final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
     final brand = isDark ? AppColors.darkBrand500 : AppColors.brand500;
+    final l = context.l10n;
 
     final diff = widget.currentWeight - _target;
     final direction = diff.abs() < 0.05
@@ -57,10 +61,9 @@ class _GoalScreenState extends State<GoalScreen> {
     final perWeek = _weeks > 0 ? diff.abs() / _weeks : 0.0;
     final safe = perWeek <= 1.0;
     final targetDate = DateTime.now().add(Duration(days: _weeks * 7));
-    const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    final targetDateStr =
-        '${targetDate.day} ${months[targetDate.month]} ${targetDate.year}';
+    final targetDateStr = DateFormat('d MMM y', l.localeName).format(targetDate);
+    final amount = '${diff.abs().toStringAsFixed(1)} kg';
+    final rate = l.goalRate(perWeek.toStringAsFixed(2));
 
     return Scaffold(
       backgroundColor: bgCanvas,
@@ -89,11 +92,11 @@ class _GoalScreenState extends State<GoalScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Set a goal',
+                        l.goalTitle,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           fontSize: 17, fontWeight: FontWeight.w600,
-                          color: fg1, letterSpacing: -0.015 * 17,
+                          color: fg1, letterSpacing: tracking(context, -0.015 * 17),
                         ),
                       ),
                     ),
@@ -116,7 +119,7 @@ class _GoalScreenState extends State<GoalScreen> {
                         Expanded(
                           child: Column(
                             children: [
-                              const OverlineLabel('Current'),
+                              OverlineLabel(l.goalCurrent),
                               const SizedBox(height: 4),
                               Text(
                                 widget.currentWeight.toStringAsFixed(1),
@@ -136,7 +139,7 @@ class _GoalScreenState extends State<GoalScreen> {
                         Expanded(
                           child: Column(
                             children: [
-                              OverlineLabel('Target', color: brand),
+                              OverlineLabel(l.goalTarget, color: brand),
                               const SizedBox(height: 4),
                               Text(
                                 _target.toStringAsFixed(1),
@@ -164,7 +167,7 @@ class _GoalScreenState extends State<GoalScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const OverlineLabel('Target weight'),
+                            OverlineLabel(l.goalTargetWeight),
                             Text(
                               '${_target.toStringAsFixed(1)} kg',
                               style: GoogleFonts.inter(
@@ -211,14 +214,12 @@ class _GoalScreenState extends State<GoalScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const OverlineLabel('Timeline'),
+                        OverlineLabel(l.goalTimeline),
                         const SizedBox(height: 12),
                         AppSegmentedControl<int>(
-                          options: const [
-                            SegmentedOption(value: 4, label: '4 weeks'),
-                            SegmentedOption(value: 8, label: '8 weeks'),
-                            SegmentedOption(value: 12, label: '12 weeks'),
-                            SegmentedOption(value: 24, label: '24 weeks'),
+                          options: [
+                            for (final w in const [4, 8, 12, 24])
+                              SegmentedOption(value: w, label: l.weeksCount(w)),
                           ],
                           value: _weeks,
                           onChanged: (v) => setState(() => _weeks = v),
@@ -238,11 +239,11 @@ class _GoalScreenState extends State<GoalScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const OverlineLabel('Your plan'),
+                        OverlineLabel(l.goalYourPlan),
                         const SizedBox(height: 6),
                         if (direction == 'maintain')
                           Text(
-                            'Maintain your current weight',
+                            l.goalMaintain,
                             style: GoogleFonts.inter(
                               fontSize: 20, fontWeight: FontWeight.w600,
                               letterSpacing: -0.015 * 20,
@@ -257,16 +258,13 @@ class _GoalScreenState extends State<GoalScreen> {
                                 letterSpacing: -0.015 * 20,
                                 color: fg1, height: 1.3,
                               ),
-                              children: [
-                                TextSpan(
-                                    text: direction == 'lose' ? 'Lose ' : 'Gain '),
-                                TextSpan(
-                                  text:
-                                      '${diff.abs().toStringAsFixed(1)} kg',
-                                  style: TextStyle(color: brand),
-                                ),
-                                TextSpan(text: ' in $_weeks weeks'),
-                              ],
+                              children: _emphasise(
+                                direction == 'lose'
+                                    ? l.goalLose(amount, _weeks)
+                                    : l.goalGain(amount, _weeks),
+                                amount,
+                                TextStyle(color: brand),
+                              ),
                             ),
                           ),
                         const SizedBox(height: 4),
@@ -276,21 +274,14 @@ class _GoalScreenState extends State<GoalScreen> {
                               fontSize: 14, fontWeight: FontWeight.w400,
                               color: fg2, height: 1.5,
                             ),
-                            children: [
-                              const TextSpan(text: "That's "),
-                              TextSpan(
-                                text: '${perWeek.toStringAsFixed(2)} kg / week',
-                                style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, color: fg1,
-                                  fontFeatures: const [FontFeature.tabularFigures()],
-                                ),
+                            children: _emphasise(
+                              safe ? l.goalPaceSafe(rate) : l.goalPaceFast(rate),
+                              rate,
+                              GoogleFonts.inter(
+                                fontWeight: FontWeight.w600, color: fg1,
+                                fontFeatures: const [FontFeature.tabularFigures()],
                               ),
-                              TextSpan(
-                                text: safe
-                                    ? ' — a safe, sustainable pace.'
-                                    : ' — faster than recommended. Try a longer timeline.',
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -300,11 +291,11 @@ class _GoalScreenState extends State<GoalScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('REACH BY',
+                                  Text(l.goalReachBy.toUpperCase(),
                                       style: GoogleFonts.inter(
                                         fontSize: 11, color: fg3,
                                         fontWeight: FontWeight.w500,
-                                        letterSpacing: 0.06 * 11,
+                                        letterSpacing: tracking(context, 0.06 * 11),
                                       )),
                                   const SizedBox(height: 4),
                                   Text(
@@ -322,11 +313,11 @@ class _GoalScreenState extends State<GoalScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('DAILY CALORIES',
+                                  Text(l.goalDailyCalories.toUpperCase(),
                                       style: GoogleFonts.inter(
                                         fontSize: 11, color: fg3,
                                         fontWeight: FontWeight.w500,
-                                        letterSpacing: 0.06 * 11,
+                                        letterSpacing: tracking(context, 0.06 * 11),
                                       )),
                                   const SizedBox(height: 4),
                                   Text(
@@ -348,7 +339,7 @@ class _GoalScreenState extends State<GoalScreen> {
                   const SizedBox(height: 20),
 
                   AppButton(
-                    label: 'Start tracking goal',
+                    label: l.goalStart,
                     variant: AppButtonVariant.primary,
                     size: AppButtonSize.lg,
                     icon: Icons.track_changes_rounded,
@@ -373,4 +364,16 @@ class _GoalScreenState extends State<GoalScreen> {
       ),
     );
   }
+}
+
+/// Splits [sentence] around [part] so [part] can be styled on its own,
+/// whatever word order the translation uses.
+List<TextSpan> _emphasise(String sentence, String part, TextStyle style) {
+  final i = sentence.indexOf(part);
+  if (i < 0) return [TextSpan(text: sentence)];
+  return [
+    TextSpan(text: sentence.substring(0, i)),
+    TextSpan(text: part, style: style),
+    TextSpan(text: sentence.substring(i + part.length)),
+  ];
 }

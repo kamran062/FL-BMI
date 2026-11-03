@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class BmiGauge extends StatefulWidget {
   final double value;
@@ -72,11 +74,11 @@ class _BmiGaugeState extends State<BmiGauge>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    cat.label.toUpperCase(),
+                    context.l10n.bmiCategory(cat.key).toUpperCase(),
                     style: GoogleFonts.inter(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      letterSpacing: 0.08 * 11,
+                      letterSpacing: tracking(context, 0.08 * 11),
                       color: cat.color,
                       height: 1,
                     ),

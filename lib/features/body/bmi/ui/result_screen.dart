@@ -7,6 +7,8 @@ import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/features/body/bmi/ui/widgets/bmi_gauge.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/features/body/bmi/ui/widgets/status_pill.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class ResultScreen extends StatelessWidget {
   final double bmi;
@@ -39,7 +41,8 @@ class ResultScreen extends StatelessWidget {
     final cat = BmiCalculator.category(bmi);
     final catTint = isDark ? cat.tintDark : cat.tint;
     final catInk  = isDark ? cat.inkDark  : cat.ink;
-    final advice = BmiCalculator.advice(cat.key);
+    final l = context.l10n;
+    final advice = l.bmiAdvice(cat.key);
 
     return Scaffold(
       backgroundColor: bgCanvas,
@@ -66,11 +69,11 @@ class ResultScreen extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Your result',
+                        l.resultTitle,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           fontSize: 17, fontWeight: FontWeight.w600,
-                          color: fg1, letterSpacing: -0.015 * 17,
+                          color: fg1, letterSpacing: tracking(context, -0.015 * 17),
                         ),
                       ),
                     ),
@@ -113,14 +116,14 @@ class ResultScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const OverlineLabel('Recommendation'),
+                            OverlineLabel(l.recommendation),
                             const Spacer(),
                             StatusPill(category: cat, solid: true),
                           ],
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          advice['headline'] as String,
+                          advice.headline,
                           style: GoogleFonts.inter(
                             fontSize: 19,
                             fontWeight: FontWeight.w600,
@@ -131,14 +134,14 @@ class ResultScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          advice['copy'] as String,
+                          advice.copy,
                           style: GoogleFonts.inter(
                             fontSize: 15, fontWeight: FontWeight.w400,
                             color: fg2, height: 1.5,
                           ),
                         ),
                         const SizedBox(height: 14),
-                        ...((advice['steps'] as List<String>).asMap().entries.map(
+                        ...(advice.steps.asMap().entries.map(
                           (e) => Padding(
                             padding: const EdgeInsets.only(bottom: 12),
                             child: Row(
@@ -175,7 +178,7 @@ class ResultScreen extends StatelessWidget {
                             ),
                           ),
                         )),
-                        if (advice['note'] != null) ...[
+                        ...[
                           const SizedBox(height: 4),
                           Container(
                             padding: const EdgeInsets.all(12),
@@ -193,7 +196,7 @@ class ResultScreen extends StatelessWidget {
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    advice['note'] as String,
+                                    advice.note,
                                     style: GoogleFonts.inter(
                                       fontSize: 12, fontWeight: FontWeight.w400,
                                       color: fg3, height: 1.5,
@@ -218,9 +221,11 @@ class ResultScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const OverlineLabel('Healthy range'),
+                            OverlineLabel(l.healthyRange),
                             Text(
                               '18.5 – 24.9',
+                              // Matches the LTR bar below it in every language
+                              textDirection: TextDirection.ltr,
                               style: GoogleFonts.inter(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
@@ -231,6 +236,11 @@ class ResultScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 12),
+                        // A number scale reads left→right in every language,
+                        // so the bar and its tick labels stay LTR under Urdu.
+                        Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: Column(children: [
                         _RangeBar(bmi: bmi, catColor: cat.color,
                             normalColor: normal, trackColor: bgSurface),
                         const SizedBox(height: 8),
@@ -244,6 +254,8 @@ class ResultScreen extends StatelessWidget {
                             )),
                           ).toList(),
                         ),
+                          ]),
+                        ),
                       ],
                     ),
                   ),
@@ -255,7 +267,7 @@ class ResultScreen extends StatelessWidget {
                       if (!readOnly) ...[
                         Expanded(
                           child: AppButton(
-                            label: 'Save result',
+                            label: l.saveResult,
                             variant: AppButtonVariant.secondary,
                             icon: Icons.bookmark_border_rounded,
                             onPressed: onSave,
@@ -266,7 +278,7 @@ class ResultScreen extends StatelessWidget {
                       ],
                       Expanded(
                         child: AppButton(
-                          label: 'Set goal',
+                          label: l.setGoal,
                           variant: AppButtonVariant.secondary,
                           icon: Icons.track_changes_rounded,
                           onPressed: onSetGoal,
@@ -277,7 +289,7 @@ class ResultScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   AppButton(
-                    label: 'Share result',
+                    label: l.shareResult,
                     variant: AppButtonVariant.primary,
                     size: AppButtonSize.lg,
                     icon: Icons.share_outlined,

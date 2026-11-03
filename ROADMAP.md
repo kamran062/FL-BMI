@@ -245,7 +245,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 - [x] Numbered schema migrations on the existing `sqflite` database (`DatabaseHelper._migrations`), v1 → v2 adds a history date index. Kept `sqflite` instead of moving to drift: no code generation, zero change to how existing users' data is stored. Revisit drift in Phase 1 if the number of tables makes raw SQL painful.
 - [ ] Split `AppProvider` into feature providers. Deferred to Phase 1.1, where the profile is rebuilt anyway.
 - [ ] Add a logger, a global error handler and a crash reporting SDK (needs a Firebase or Sentry project)
-- [ ] Add the l10n setup (English + Urdu, RTL layout check for Urdu)
+- [x] English + Urdu localization (`lib/l10n/*.arb`, `tool/gen_arb.py`): all 175 user-facing strings, plurals, Urdu dates, RTL layout checked on an emulator. Language picker in Settings. Urdu stays hidden in release builds (`urduReady = false` in `lib/l10n/l10n.dart`) until a native speaker reviews the translations. Paywall strings are left for Phase 3.5 (premium launch).
 
 **Testing**
 - [x] Migration tests (`test/database_migration_test.dart`): a v1 database with real BMI history upgrades with zero data loss; fresh and upgraded installs end with identical schemas

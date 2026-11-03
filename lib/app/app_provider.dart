@@ -13,9 +13,11 @@ class AppProvider extends ChangeNotifier {
   List<BmiEntry> _entries = [];
   Goal? _activeGoal;
   ThemeMode _themeMode = ThemeMode.light;
+  String _language = 'system'; // 'system' | 'en' | 'ur'
   bool _onboardingDone = false;
   bool _loading = true;
   String _appVersion = '';
+  String _versionName = '';
 
   // ── Notification prefs (stored in SharedPreferences) ─────────
   bool _dailyReminder = true;
@@ -26,10 +28,15 @@ class AppProvider extends ChangeNotifier {
   List<BmiEntry> get entries => _entries;
   Goal? get activeGoal => _activeGoal;
   ThemeMode get themeMode => _themeMode;
+  String get language => _language;
+
+  /// null → follow the phone's language.
+  Locale? get locale => _language == 'system' ? null : Locale(_language);
   bool get isDark => _themeMode == ThemeMode.dark;
   bool get onboardingDone => _onboardingDone;
   bool get loading => _loading;
-  String get appVersion => _appVersion;
+  String get appVersion => _appVersion; // e.g. 1.0.1 (build 3)
+  String get versionName => _versionName; // e.g. 1.0.1
   bool get dailyReminder => _dailyReminder;
   bool get weeklyCheckIn => _weeklyCheckIn;
 
@@ -47,10 +54,12 @@ class AppProvider extends ChangeNotifier {
     _themeMode = (prefs.getString('theme') == 'dark')
         ? ThemeMode.dark
         : ThemeMode.light;
+    _language = prefs.getString('language') ?? 'system';
     _dailyReminder = prefs.getBool('daily_reminder') ?? true;
     _weeklyCheckIn = prefs.getBool('weekly_check_in') ?? false;
 
     final info = await PackageInfo.fromPlatform();
+    _versionName = info.version;
     _appVersion = '${info.version} (build ${info.buildNumber})';
 
     // Restore profile from prefs
@@ -124,6 +133,14 @@ class AppProvider extends ChangeNotifier {
     _themeMode = mode;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('theme', mode == ThemeMode.dark ? 'dark' : 'light');
+    notifyListeners();
+  }
+
+  // ── Language ─────────────────────────────────────────────────
+  Future<void> setLanguage(String language) async {
+    _language = language;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('language', language);
     notifyListeners();
   }
 

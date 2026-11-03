@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/features/ads/banner_ad_widget.dart';
+import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 /// Tab shell: floating pill nav bar + banner ad above it.
 /// Full-screen pages (result, goal, share) are pushed above this shell by the
@@ -19,11 +21,12 @@ class AppShell extends StatefulWidget {
 class _AppShellState extends State<AppShell> {
   double _bannerH = 0.0; // set by BannerAdWidget once an ad has loaded
 
+  // Order must match the router's StatefulShellRoute branches.
   static const _tabs = [
-    (icon: Icons.calculate_outlined,  iconActive: Icons.calculate_rounded,   label: 'Calculate'),
-    (icon: Icons.show_chart_rounded,   iconActive: Icons.show_chart_rounded,  label: 'History'),
-    (icon: Icons.lightbulb_outline,   iconActive: Icons.lightbulb_rounded,   label: 'Tips'),
-    (icon: Icons.settings_outlined,   iconActive: Icons.settings_rounded,    label: 'Settings'),
+    (icon: Icons.calculate_outlined,  iconActive: Icons.calculate_rounded),
+    (icon: Icons.show_chart_rounded,   iconActive: Icons.show_chart_rounded),
+    (icon: Icons.lightbulb_outline,   iconActive: Icons.lightbulb_rounded),
+    (icon: Icons.settings_outlined,   iconActive: Icons.settings_rounded),
   ];
 
   void _goTab(int i) {
@@ -41,6 +44,8 @@ class _AppShellState extends State<AppShell> {
     final navBg = (isDark ? AppColors.darkBgSurface : AppColors.bgSurface)
         .withOpacity(0.85);
     final current = widget.navigationShell.currentIndex;
+    final l = context.l10n;
+    final labels = [l.navCalculate, l.navHistory, l.navTips, l.navSettings];
 
     final bottomPad = MediaQuery.of(context).padding.bottom;
     // Nav bar: 64px height + 12px bottom margin + safe area
@@ -110,7 +115,8 @@ class _AppShellState extends State<AppShell> {
                               child: Semantics(
                                 button: true,
                                 selected: on,
-                                label: t.label,
+                                label: labels[i],
+                                excludeSemantics: true, // the visible text would repeat the label
                                 child: GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () => _goTab(i),
@@ -133,23 +139,29 @@ class _AppShellState extends State<AppShell> {
                                             duration: const Duration(milliseconds: 200),
                                             transitionBuilder: (child, anim) =>
                                                 ScaleTransition(scale: anim, child: child),
-                                            child: Icon(
-                                              on ? t.iconActive : t.icon,
-                                              key: ValueKey('nav_${t.label}_$on'),
-                                              size: 20,
-                                              color: on ? brand : fg3,
+                                            // Icons such as the trend chart must
+                                            // not mirror in Urdu (a rising line
+                                            // would read as falling).
+                                            child: Directionality(
+                                              key: ValueKey('nav_${i}_$on'),
+                                              textDirection: TextDirection.ltr,
+                                              child: Icon(
+                                                on ? t.iconActive : t.icon,
+                                                size: 20,
+                                                color: on ? brand : fg3,
+                                              ),
                                             ),
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
-                                            t.label,
+                                            labels[i],
                                             style: GoogleFonts.inter(
                                               fontSize: 10,
                                               fontWeight: on
                                                   ? FontWeight.w700
                                                   : FontWeight.w500,
                                               color: on ? brand : fg3,
-                                              letterSpacing: -0.01 * 10,
+                                              letterSpacing: tracking(context, -0.01 * 10),
                                               height: 1,
                                             ),
                                           ),

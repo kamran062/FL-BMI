@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
+import 'package:bmi_health/shared/theme/text_tracking.dart';
 
 class ScreenHeader extends StatelessWidget {
   final String title;
@@ -31,11 +32,11 @@ class ScreenHeader extends StatelessWidget {
               title,
               textAlign: (leading != null || trailing != null) && !large
                   ? TextAlign.center
-                  : TextAlign.left,
+                  : TextAlign.start, // right-aligned in Urdu
               style: GoogleFonts.inter(
                 fontSize: large ? 28 : 17,
                 fontWeight: large ? FontWeight.w700 : FontWeight.w600,
-                letterSpacing: -0.015 * (large ? 28 : 17),
+                letterSpacing: tracking(context, -0.015 * (large ? 28 : 17)),
                 color: fg1,
                 height: large ? 1.2 : 1.2,
               ),
