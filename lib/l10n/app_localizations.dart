@@ -2128,6 +2128,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calculate BMI'**
   String get calculateBmiShort;
+
+  /// Android notification channel name
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get reminderChannel;
+
+  /// Daily reminder notification title
+  ///
+  /// In en, this message translates to:
+  /// **'Time for a quick check-in'**
+  String get dailyReminderTitle;
+
+  /// Daily reminder notification text
+  ///
+  /// In en, this message translates to:
+  /// **'Log today\'s weight, water and meals to keep your trend accurate.'**
+  String get dailyReminderBody;
+
+  /// Weekly reminder notification title
+  ///
+  /// In en, this message translates to:
+  /// **'Your weekly check-in'**
+  String get weeklyReminderTitle;
+
+  /// Weekly reminder notification text
+  ///
+  /// In en, this message translates to:
+  /// **'See how your week went and plan your next workouts.'**
+  String get weeklyReminderBody;
+
+  /// When the daily reminder fires
+  ///
+  /// In en, this message translates to:
+  /// **'Every day at 8:00 PM'**
+  String get dailyReminderAt;
+
+  /// When the weekly reminder fires
+  ///
+  /// In en, this message translates to:
+  /// **'Sundays at 10:00 AM'**
+  String get weeklyReminderAt;
+
+  /// Shown when the user denies notification permission
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are turned off for this app. Turn them on in your phone\'s settings to get reminders.'**
+  String get notificationsDenied;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

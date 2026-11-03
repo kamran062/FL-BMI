@@ -8,7 +8,7 @@ class SettingsProvider extends ChangeNotifier {
   String _language = 'system'; // 'system' | 'en' | 'ur'
   bool _onboardingDone = false;
   bool _profileSetupDismissed = false;
-  bool _dailyReminder = true;
+  bool _dailyReminder = false;
   bool _weeklyCheckIn = false;
   String _appVersion = '';
   String _versionName = '';
@@ -38,7 +38,8 @@ class SettingsProvider extends ChangeNotifier {
         ? ThemeMode.dark
         : ThemeMode.light;
     _language = prefs.getString('language') ?? 'system';
-    _dailyReminder = prefs.getBool('daily_reminder') ?? true;
+    // Off until the user turns it on (and grants notification permission)
+    _dailyReminder = prefs.getBool('daily_reminder') ?? false;
     _weeklyCheckIn = prefs.getBool('weekly_check_in') ?? false;
 
     final info = await PackageInfo.fromPlatform();

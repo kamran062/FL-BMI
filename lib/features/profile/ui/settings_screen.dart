@@ -10,6 +10,7 @@ import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/app_toggle.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
+import 'package:bmi_health/core/notifications/reminder_service.dart';
 
 class SettingsScreen extends StatelessWidget {
   final VoidCallback onOpenProfile;
@@ -95,14 +96,14 @@ class SettingsScreen extends StatelessWidget {
                 label: l.dailyReminders,
                 kind: _RowKind.toggle,
                 toggleValue: provider.dailyReminder,
-                onToggle: provider.setDailyReminder,
+                onToggle: (v) => _setReminder(context, v, provider.setDailyReminder),
               ),
               _Row(
                 icon: Icons.calendar_today_outlined,
                 label: l.weeklyCheckIn,
                 kind: _RowKind.toggle,
                 toggleValue: provider.weeklyCheckIn,
-                onToggle: provider.setWeeklyCheckIn,
+                onToggle: (v) => _setReminder(context, v, provider.setWeeklyCheckIn),
               ),
             ],
           ),
@@ -196,6 +197,22 @@ class SettingsScreen extends StatelessWidget {
       },
       ),
     );
+  }
+
+  // ── Reminders ──────────────────────────────────────────────────────────────
+  /// Turning a reminder on asks for notification permission first; if the
+  /// user declines, the toggle stays off and we explain why. The shell
+  /// re-schedules reminders whenever these settings change.
+  static Future<void> _setReminder(BuildContext context, bool on,
+      Future<void> Function(bool) save) async {
+    if (on && !await ReminderService.instance.requestPermission()) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(context.l10n.notificationsDenied)));
+      }
+      return;
+    }
+    await save(on);
   }
 
   // ── Language ───────────────────────────────────────────────────────────────

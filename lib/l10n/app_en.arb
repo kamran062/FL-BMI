@@ -1591,5 +1591,37 @@
   "calculateBmiShort": "Calculate BMI",
   "@calculateBmiShort": {
     "description": "Quick action"
+  },
+  "reminderChannel": "Reminders",
+  "@reminderChannel": {
+    "description": "Android notification channel name"
+  },
+  "dailyReminderTitle": "Time for a quick check-in",
+  "@dailyReminderTitle": {
+    "description": "Daily reminder notification title"
+  },
+  "dailyReminderBody": "Log today's weight, water and meals to keep your trend accurate.",
+  "@dailyReminderBody": {
+    "description": "Daily reminder notification text"
+  },
+  "weeklyReminderTitle": "Your weekly check-in",
+  "@weeklyReminderTitle": {
+    "description": "Weekly reminder notification title"
+  },
+  "weeklyReminderBody": "See how your week went and plan your next workouts.",
+  "@weeklyReminderBody": {
+    "description": "Weekly reminder notification text"
+  },
+  "dailyReminderAt": "Every day at 8:00 PM",
+  "@dailyReminderAt": {
+    "description": "When the daily reminder fires"
+  },
+  "weeklyReminderAt": "Sundays at 10:00 AM",
+  "@weeklyReminderAt": {
+    "description": "When the weekly reminder fires"
+  },
+  "notificationsDenied": "Notifications are turned off for this app. Turn them on in your phone's settings to get reminders.",
+  "@notificationsDenied": {
+    "description": "Shown when the user denies notification permission"
   }
 }

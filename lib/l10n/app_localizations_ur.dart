@@ -1124,4 +1124,28 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get calculateBmiShort => 'بی ایم آئی معلوم کریں';
+
+  @override
+  String get reminderChannel => 'یاد دہانیاں';
+
+  @override
+  String get dailyReminderTitle => 'فوری جائزے کا وقت';
+
+  @override
+  String get dailyReminderBody => 'آج کا وزن، پانی اور کھانا درج کریں تاکہ آپ کا رجحان درست رہے۔';
+
+  @override
+  String get weeklyReminderTitle => 'آپ کا ہفتہ وار جائزہ';
+
+  @override
+  String get weeklyReminderBody => 'دیکھیں آپ کا ہفتہ کیسا رہا اور اگلی ورزشوں کی منصوبہ بندی کریں۔';
+
+  @override
+  String get dailyReminderAt => 'ہر روز رات 8 بجے';
+
+  @override
+  String get weeklyReminderAt => 'اتوار صبح 10 بجے';
+
+  @override
+  String get notificationsDenied => 'اس ایپ کی اطلاعات بند ہیں۔ یاد دہانیاں حاصل کرنے کے لیے فون کی ترتیبات میں انہیں آن کریں۔';
 }

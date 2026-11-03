@@ -465,6 +465,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 2.5 Sitting alerts & reminders
 
+> **Status: reminders done.** Daily (8 PM) and weekly (Sunday 10 AM) local notifications from the Settings toggles; permission asked on first enable (declined → toggle stays off with an explanation); localised text; inexact scheduling (no exact-alarm permission); survive reboot; App Open ad suppressed around the permission prompt. Not yet: custom times, workout/water/weigh-in specific reminders, sitting alerts (needs activity data, Phase 2.1).
+
 **Features**
 - "You've been still for 2 hours": walk reminder (respects quiet hours and sleep)
 - Workout, water and weigh-in reminders (makes the existing notification toggles real)

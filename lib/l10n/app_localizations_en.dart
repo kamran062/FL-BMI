@@ -1128,4 +1128,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calculateBmiShort => 'Calculate BMI';
+
+  @override
+  String get reminderChannel => 'Reminders';
+
+  @override
+  String get dailyReminderTitle => 'Time for a quick check-in';
+
+  @override
+  String get dailyReminderBody => 'Log today\'s weight, water and meals to keep your trend accurate.';
+
+  @override
+  String get weeklyReminderTitle => 'Your weekly check-in';
+
+  @override
+  String get weeklyReminderBody => 'See how your week went and plan your next workouts.';
+
+  @override
+  String get dailyReminderAt => 'Every day at 8:00 PM';
+
+  @override
+  String get weeklyReminderAt => 'Sundays at 10:00 AM';
+
+  @override
+  String get notificationsDenied => 'Notifications are turned off for this app. Turn them on in your phone\'s settings to get reminders.';
 }

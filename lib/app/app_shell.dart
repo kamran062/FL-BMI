@@ -6,6 +6,9 @@ import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/features/ads/banner_ad_widget.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/text_tracking.dart';
+import 'package:provider/provider.dart';
+import 'package:bmi_health/app/settings_provider.dart';
+import 'package:bmi_health/core/notifications/reminder_service.dart';
 
 /// Tab shell: floating pill nav bar + banner ad above it.
 /// Full-screen pages (result, goal, share) are pushed above this shell by the
@@ -20,6 +23,21 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   double _bannerH = 0.0; // set by BannerAdWidget once an ad has loaded
+  Object? _reminderKey;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Keep scheduled reminders in step with the settings and the language
+    // (notification text is localised when it is scheduled).
+    final s = context.watch<SettingsProvider>();
+    final l = context.l10n;
+    final key = (s.dailyReminder, s.weeklyCheckIn, l.localeName);
+    if (key == _reminderKey) return;
+    _reminderKey = key;
+    ReminderService.instance
+        .sync(daily: s.dailyReminder, weekly: s.weeklyCheckIn, l: l);
+  }
 
   // Order must match the router's StatefulShellRoute branches.
   static const _tabs = [
