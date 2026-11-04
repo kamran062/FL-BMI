@@ -13,6 +13,7 @@ import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/core/notifications/reminder_service.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
+import 'package:bmi_health/features/backup/backup_ui.dart';
 
 class SettingsScreen extends StatelessWidget {
   final VoidCallback onOpenProfile;
@@ -136,6 +137,29 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ],
             ),
+          _Section(
+            title: l.sectionBackup,
+            rows: [
+              _Row(
+                icon: Icons.lock_outline_rounded,
+                label: l.createBackup,
+                kind: _RowKind.nav,
+                onTap: () => BackupActions.create(context),
+              ),
+              _Row(
+                icon: Icons.restore_rounded,
+                label: l.restoreBackup,
+                kind: _RowKind.nav,
+                onTap: () => BackupActions.restore(context),
+              ),
+              _Row(
+                icon: Icons.table_chart_outlined,
+                label: l.exportCsv,
+                kind: _RowKind.nav,
+                onTap: () => BackupActions.exportCsv(context),
+              ),
+            ],
+          ),
           _Section(
             title: l.sectionNotifications,
             rows: [

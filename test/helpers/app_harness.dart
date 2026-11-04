@@ -112,6 +112,7 @@ Future<AppState> launchApp(
     photos: photos,
     // Unconfigured by default: AI features hidden, as in builds without URLs
     ai: ai ?? AiClient(coachUrl: '', foodUrl: ''),
+    db: db,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));

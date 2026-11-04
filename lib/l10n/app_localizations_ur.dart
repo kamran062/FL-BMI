@@ -159,7 +159,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get getStarted => 'شروع کریں';
 
   @override
-  String get continueLabel => 'آگے بڑھیں';
+  String get continueLabel => 'جاری رکھیں';
 
   @override
   String get settingsTitle => 'ترتیبات';
@@ -1938,4 +1938,60 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get appName => 'بی ایم آئی ہیلتھ';
+
+  @override
+  String get sectionBackup => 'بیک اپ اور ایکسپورٹ';
+
+  @override
+  String get createBackup => 'بیک اپ بنائیں';
+
+  @override
+  String get restoreBackup => 'بیک اپ سے بحال کریں';
+
+  @override
+  String get exportCsv => 'اسپریڈشیٹ (CSV) کے طور پر ایکسپورٹ کریں';
+
+  @override
+  String get backupBody => 'آپ کا ڈیٹا کلاؤڈ بیک اپ میں نہیں جاتا۔ ایک خفیہ بیک اپ فائل بنائیں اور گوگل ڈرائیو، آئی کلاؤڈ یا کہیں بھی محفوظ کریں۔ صرف آپ کا پاس فریز اسے کھول سکتا ہے — اگر یہ گم ہو جائے تو بیک اپ بحال نہیں ہو سکتا۔';
+
+  @override
+  String get passphrase => 'پاس فریز';
+
+  @override
+  String get passphraseRepeat => 'پاس فریز دوبارہ';
+
+  @override
+  String passphraseTooShort(int count) {
+    return 'کم از کم $count حروف استعمال کریں۔';
+  }
+
+  @override
+  String get passphraseMismatch => 'پاس فریز مماثل نہیں۔';
+
+  @override
+  String get includeCycle => 'سائیکل ڈیٹا شامل کریں';
+
+  @override
+  String get includePhotos => 'پیش رفت کی تصاویر شامل کریں';
+
+  @override
+  String get working => 'کام جاری ہے…';
+
+  @override
+  String get restoreWarning => 'بحالی اس فون کا ڈیٹا بیک اپ کے ڈیٹا سے بدل دے گی۔ اسے واپس نہیں کیا جا سکتا۔';
+
+  @override
+  String get restoreDone => 'بیک اپ بحال ہو گیا۔';
+
+  @override
+  String get restoreWrongPassphrase => 'غلط پاس فریز، یا فائل خراب ہے۔';
+
+  @override
+  String get restoreNotBackup => 'یہ بی ایم آئی ہیلتھ کی بیک اپ فائل نہیں ہے۔';
+
+  @override
+  String get restoreNewer => 'یہ بیک اپ ایپ کے نئے ورژن کا ہے۔ پہلے ایپ اپ ڈیٹ کریں۔';
+
+  @override
+  String get csvWarning => 'اسپریڈشیٹ فائلیں خفیہ نہیں ہوتیں۔ جس کے ساتھ آپ شیئر کریں وہ انہیں پڑھ سکتا ہے۔';
 }

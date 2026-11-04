@@ -54,7 +54,7 @@ If you turn on cycle tracking, the period dates and symptoms you enter are store
 Progress photos you add are encrypted and stored in the App's private storage on your device. They are not added to your photo gallery, never uploaded, and deleting a photo removes it from the device.
 
 ### 1.7 Device Backups
-To keep your health data on your device, the App opts out of Android cloud backup and device-to-device transfer, and excludes its data from iCloud device backups. This means your App data is not restored when you move to a new phone.
+To keep your health data on your device, the App opts out of Android cloud backup and device-to-device transfer, and excludes its data from iCloud device backups. This means your App data is not restored automatically when you move to a new phone. Instead, you can create an encrypted backup file in Settings, protected by a passphrase only you know, and save it wherever you choose; we cannot open it. Spreadsheet (CSV) exports are not encrypted.
 
 ### 1.8 AI Coach and Food-Photo Estimates (optional)
 If you use the AI coach or a food-photo estimate, the App first asks for your agreement. It then sends your question (and the conversation so far in that screen) or the meal photo, together with a short profile summary — age, sex, weight, goal, experience and training days, but not your name — to our server, which forwards it to Anthropic's Claude AI to produce the answer. A random app-install ID is sent to apply daily usage limits. We do not store your questions, answers or photos, and Anthropic processes them under its commercial terms (it does not use them to train its models). Answers are general wellness guidance, not medical advice.

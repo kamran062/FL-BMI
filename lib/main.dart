@@ -76,6 +76,7 @@ void main() async {
       cycle: cycle,
       photos: photos,
       ai: AiClient(),
+      db: db,
       catalog: catalog,
       child: const BmiHealthApp(),
     ));

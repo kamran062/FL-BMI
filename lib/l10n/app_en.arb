@@ -212,7 +212,7 @@
   },
   "continueLabel": "Continue",
   "@continueLabel": {
-    "description": "Onboarding next button"
+    "description": "Button"
   },
   "settingsTitle": "Settings",
   "@settingsTitle": {
@@ -2807,5 +2807,83 @@
   "appName": "BMI Health",
   "@appName": {
     "description": "App name shown on shared cards"
+  },
+  "sectionBackup": "Backup & export",
+  "@sectionBackup": {
+    "description": "Settings section"
+  },
+  "createBackup": "Create backup",
+  "@createBackup": {
+    "description": "Settings row / dialog title"
+  },
+  "restoreBackup": "Restore from backup",
+  "@restoreBackup": {
+    "description": "Settings row / dialog title"
+  },
+  "exportCsv": "Export as spreadsheet (CSV)",
+  "@exportCsv": {
+    "description": "Settings row"
+  },
+  "backupBody": "Your data stays off cloud backups. Create an encrypted backup file and save it to Google Drive, iCloud or anywhere you like. Only your passphrase can open it — if you lose it, the backup can't be recovered.",
+  "@backupBody": {
+    "description": "Backup dialog explanation"
+  },
+  "passphrase": "Passphrase",
+  "@passphrase": {
+    "description": "Text field"
+  },
+  "passphraseRepeat": "Repeat passphrase",
+  "@passphraseRepeat": {
+    "description": "Text field"
+  },
+  "passphraseTooShort": "Use at least {count} characters.",
+  "@passphraseTooShort": {
+    "description": "Validation",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "passphraseMismatch": "Passphrases don't match.",
+  "@passphraseMismatch": {
+    "description": "Validation"
+  },
+  "includeCycle": "Include cycle data",
+  "@includeCycle": {
+    "description": "Checkbox"
+  },
+  "includePhotos": "Include progress photos",
+  "@includePhotos": {
+    "description": "Checkbox"
+  },
+  "working": "Working…",
+  "@working": {
+    "description": "Progress"
+  },
+  "restoreWarning": "Restoring replaces the data on this phone with the backup's. This can't be undone.",
+  "@restoreWarning": {
+    "description": "Restore warning"
+  },
+  "restoreDone": "Backup restored.",
+  "@restoreDone": {
+    "description": "Snack bar"
+  },
+  "restoreWrongPassphrase": "Wrong passphrase, or the file is damaged.",
+  "@restoreWrongPassphrase": {
+    "description": "Restore error"
+  },
+  "restoreNotBackup": "This isn't a BMI Health backup file.",
+  "@restoreNotBackup": {
+    "description": "Restore error"
+  },
+  "restoreNewer": "This backup is from a newer version of the app. Update the app first.",
+  "@restoreNewer": {
+    "description": "Restore error"
+  },
+  "csvWarning": "Spreadsheet files are not encrypted. Anyone you share them with can read them.",
+  "@csvWarning": {
+    "description": "CSV warning"
   }
 }

@@ -23,6 +23,9 @@ class PhotosProvider extends ChangeNotifier {
   /// Created on first use (needs the app folder, and the key store only
   /// when a photo is actually saved or opened).
   Future<PhotoVault> get _vault => _vaultFuture ??= _makeVault();
+
+  /// For backup and restore.
+  Future<PhotoVault> get vault => _vault;
   List<ProgressPhoto> _photos = [];
   final _cache = <String, Uint8List>{};
 

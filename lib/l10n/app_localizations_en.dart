@@ -1949,4 +1949,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appName => 'BMI Health';
+
+  @override
+  String get sectionBackup => 'Backup & export';
+
+  @override
+  String get createBackup => 'Create backup';
+
+  @override
+  String get restoreBackup => 'Restore from backup';
+
+  @override
+  String get exportCsv => 'Export as spreadsheet (CSV)';
+
+  @override
+  String get backupBody => 'Your data stays off cloud backups. Create an encrypted backup file and save it to Google Drive, iCloud or anywhere you like. Only your passphrase can open it — if you lose it, the backup can\'t be recovered.';
+
+  @override
+  String get passphrase => 'Passphrase';
+
+  @override
+  String get passphraseRepeat => 'Repeat passphrase';
+
+  @override
+  String passphraseTooShort(int count) {
+    return 'Use at least $count characters.';
+  }
+
+  @override
+  String get passphraseMismatch => 'Passphrases don\'t match.';
+
+  @override
+  String get includeCycle => 'Include cycle data';
+
+  @override
+  String get includePhotos => 'Include progress photos';
+
+  @override
+  String get working => 'Working…';
+
+  @override
+  String get restoreWarning => 'Restoring replaces the data on this phone with the backup\'s. This can\'t be undone.';
+
+  @override
+  String get restoreDone => 'Backup restored.';
+
+  @override
+  String get restoreWrongPassphrase => 'Wrong passphrase, or the file is damaged.';
+
+  @override
+  String get restoreNotBackup => 'This isn\'t a BMI Health backup file.';
+
+  @override
+  String get restoreNewer => 'This backup is from a newer version of the app. Update the app first.';
+
+  @override
+  String get csvWarning => 'Spreadsheet files are not encrypted. Anyone you share them with can read them.';
 }

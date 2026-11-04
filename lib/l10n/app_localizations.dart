@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// **'Get started'**
   String get getStarted;
 
-  /// Onboarding next button
+  /// Button
   ///
   /// In en, this message translates to:
   /// **'Continue'**
@@ -3514,6 +3514,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'BMI Health'**
   String get appName;
+
+  /// Settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & export'**
+  String get sectionBackup;
+
+  /// Settings row / dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Create backup'**
+  String get createBackup;
+
+  /// Settings row / dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Restore from backup'**
+  String get restoreBackup;
+
+  /// Settings row
+  ///
+  /// In en, this message translates to:
+  /// **'Export as spreadsheet (CSV)'**
+  String get exportCsv;
+
+  /// Backup dialog explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Your data stays off cloud backups. Create an encrypted backup file and save it to Google Drive, iCloud or anywhere you like. Only your passphrase can open it — if you lose it, the backup can\'t be recovered.'**
+  String get backupBody;
+
+  /// Text field
+  ///
+  /// In en, this message translates to:
+  /// **'Passphrase'**
+  String get passphrase;
+
+  /// Text field
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat passphrase'**
+  String get passphraseRepeat;
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'Use at least {count} characters.'**
+  String passphraseTooShort(int count);
+
+  /// Validation
+  ///
+  /// In en, this message translates to:
+  /// **'Passphrases don\'t match.'**
+  String get passphraseMismatch;
+
+  /// Checkbox
+  ///
+  /// In en, this message translates to:
+  /// **'Include cycle data'**
+  String get includeCycle;
+
+  /// Checkbox
+  ///
+  /// In en, this message translates to:
+  /// **'Include progress photos'**
+  String get includePhotos;
+
+  /// Progress
+  ///
+  /// In en, this message translates to:
+  /// **'Working…'**
+  String get working;
+
+  /// Restore warning
+  ///
+  /// In en, this message translates to:
+  /// **'Restoring replaces the data on this phone with the backup\'s. This can\'t be undone.'**
+  String get restoreWarning;
+
+  /// Snack bar
+  ///
+  /// In en, this message translates to:
+  /// **'Backup restored.'**
+  String get restoreDone;
+
+  /// Restore error
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong passphrase, or the file is damaged.'**
+  String get restoreWrongPassphrase;
+
+  /// Restore error
+  ///
+  /// In en, this message translates to:
+  /// **'This isn\'t a BMI Health backup file.'**
+  String get restoreNotBackup;
+
+  /// Restore error
+  ///
+  /// In en, this message translates to:
+  /// **'This backup is from a newer version of the app. Update the app first.'**
+  String get restoreNewer;
+
+  /// CSV warning
+  ///
+  /// In en, this message translates to:
+  /// **'Spreadsheet files are not encrypted. Anyone you share them with can read them.'**
+  String get csvWarning;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

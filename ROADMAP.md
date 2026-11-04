@@ -604,6 +604,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - Workout streaks, step challenges, PR badges; optional challenges with friends
 
 ### 5.3 Backup & sync (opt-in)
+
+> **Status: backup/restore/export done; live sync not built.** Passphrase-encrypted backup file (PBKDF2-SHA256 200k → AES-256-GCM over gzipped JSON of all tables + prefs), saved anywhere via the share sheet; cycle data and photos only if ticked (photos re-encrypted with the new phone's key on restore); device-specific prefs not copied; wrong passphrase / damaged / foreign / newer-version files refused without touching data; restore replaces data in one transaction and reloads the app live. CSV export of weights, workout sets and food (warns it is unencrypted). Tested: 730 weights + 4,500 sets + 1,440 location points round-trip. **Not built:** automatic background sync between devices (needs accounts + a backend).
 - End-to-end encrypted backup (e.g. to the user's Google Drive / iCloud, or your own backend)
 - Restore on a new phone; data export as CSV / JSON
 - **Testing:** backup → wipe → restore with large datasets; corrupted backup handling; encryption audit
