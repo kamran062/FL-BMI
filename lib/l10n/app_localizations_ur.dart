@@ -1543,4 +1543,134 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get sleepIrregular => 'سونے کے اوقات میں بہت فرق ہے۔ ایک مقررہ وقت عموماً نیند بہتر بناتا ہے۔';
+
+  @override
+  String get cycleTitle => 'سائیکل';
+
+  @override
+  String get cycleTracking => 'ماہواری ٹریکنگ';
+
+  @override
+  String get cycleOptInBody => 'اپنی ماہواری اور علامات ٹریک کریں اور ہر مرحلے کے لیے ورزش اور غذائیت کے مشورے حاصل کریں۔ صرف اسی فون پر محفوظ۔ آپ کسی بھی وقت سب حذف کر سکتے ہیں۔';
+
+  @override
+  String get cycleLock => 'فنگر پرنٹ یا پن سے لاک کریں';
+
+  @override
+  String get cycleUnlockReason => 'اپنا سائیکل ڈیٹا کھولیں';
+
+  @override
+  String get cycleUnlock => 'کھولیں';
+
+  @override
+  String get cycleLocked => 'سائیکل ڈیٹا لاک ہے۔';
+
+  @override
+  String get cycleDeleteAll => 'تمام سائیکل ڈیٹا حذف کریں';
+
+  @override
+  String get cycleDeleteConfirm => 'یہ تمام ماہواری اور علامات اس فون سے مستقل طور پر حذف کر دے گا اور ٹریکنگ بند کر دے گا۔';
+
+  @override
+  String cycleDay(int day) {
+    return 'دن $day';
+  }
+
+  @override
+  String get periodStartedToday => 'میری ماہواری آج شروع ہوئی';
+
+  @override
+  String get periodEndedToday => 'میری ماہواری آج ختم ہوئی';
+
+  @override
+  String get periodStartedOn => 'پچھلی ماہواری درج کریں';
+
+  @override
+  String nextPeriodIn(int days) {
+    return 'اگلی ماہواری تقریباً $days دن میں';
+  }
+
+  @override
+  String get nextPeriodToday => 'اگلی ماہواری تقریباً آج متوقع';
+
+  @override
+  String nextPeriodWindow(String from, String to) {
+    return 'ممکنہ طور پر $from اور $to کے درمیان';
+  }
+
+  @override
+  String get periodLate => 'آپ کی ماہواری معمول سے دیر سے ہے۔ سائیکل اکثر بدلتے ہیں؛ اگر فکر ہو تو ڈاکٹر سے بات کریں۔';
+
+  @override
+  String get cycleIrregular => 'آپ کے سائیکل کی لمبائی بدلتی رہتی ہے، اس لیے اندازے وسیع ہیں۔';
+
+  @override
+  String get cycleNoData => 'اندازے حاصل کرنے کے لیے اپنی ماہواری درج کریں۔';
+
+  @override
+  String get phaseMenstrual => 'ماہواری';
+
+  @override
+  String get phaseFollicular => 'فولیکولر مرحلہ';
+
+  @override
+  String get phaseOvulation => 'بیضہ ریزی کے قریب';
+
+  @override
+  String get phaseLuteal => 'لیوٹیل مرحلہ';
+
+  @override
+  String get tipMenstrual => 'اپنی کیفیت کے مطابق ورزش کریں: ہلکے سیشن، چہل قدمی اور اسٹریچنگ ٹھیک ہیں۔ آئرن والی غذائیں (دالیں، پالک، گوشت) کمی پوری کرتی ہیں۔';
+
+  @override
+  String get tipFollicular => 'توانائی اکثر بڑھتی ہے: بھاری وزن اور نئے ریکارڈ آزمانے کا اچھا وقت۔';
+
+  @override
+  String get tipOvulation => 'طاقت زیادہ محسوس ہو سکتی ہے۔ اچھی طرح وارم اپ کریں اور چھلانگ اور تیز موڑ پر درست انداز رکھیں۔';
+
+  @override
+  String get tipLuteal => 'آپ کو زیادہ گرمی اور بھوک لگ سکتی ہے۔ پروٹین برقرار رکھیں، پانی پیتے رہیں، اور اس مرحلے کے آخر میں زیادہ سے زیادہ کوشش کے بجائے مستقل ورزش کریں۔';
+
+  @override
+  String get cycleTipNote => 'عمومی رہنمائی؛ ہر کسی کا سائیکل مختلف محسوس ہوتا ہے۔';
+
+  @override
+  String get symptomsToday => 'آج کی علامات';
+
+  @override
+  String get symptomCramps => 'مروڑ';
+
+  @override
+  String get symptomHeadache => 'سر درد';
+
+  @override
+  String get symptomBloating => 'پیٹ پھولنا';
+
+  @override
+  String get symptomFatigue => 'تھکاوٹ';
+
+  @override
+  String get symptomLowMood => 'اداسی';
+
+  @override
+  String get symptomAcne => 'مہاسے';
+
+  @override
+  String get symptomCravings => 'کھانے کی خواہش';
+
+  @override
+  String get symptomTenderBreasts => 'چھاتی میں درد';
+
+  @override
+  String get pastPeriods => 'پچھلی ماہواریاں';
+
+  @override
+  String periodRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String periodOngoing(String from) {
+    return '$from – جاری';
+  }
 }

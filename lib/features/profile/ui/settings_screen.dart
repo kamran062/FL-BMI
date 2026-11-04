@@ -12,6 +12,7 @@ import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/core/notifications/reminder_service.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
+import 'package:bmi_health/features/cycle/cycle_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   final VoidCallback onOpenProfile;
@@ -35,6 +36,7 @@ class SettingsScreen extends StatelessWidget {
         final l = context.l10n;
         final name = profileProvider.profile.name;
         final purchases = context.watch<PurchaseService>();
+        final cycle = context.watch<CycleProvider>();
         final sections = [
           // Hidden until premium is configured for this build
           if (purchases.configured)
@@ -105,6 +107,35 @@ class SettingsScreen extends StatelessWidget {
               ),
             ],
           ),
+          // Cycle tracking: offered by profile, opt-in, separate lock & delete
+          if (profileProvider.profile.cycleTrackingOffered)
+            _Section(
+              title: l.cycleTitle,
+              rows: [
+                _Row(
+                  icon: Icons.water_drop_outlined,
+                  label: l.cycleTracking,
+                  kind: _RowKind.toggle,
+                  toggleValue: cycle.enabled,
+                  onToggle: (v) => v ? _enableCycle(context, cycle) : cycle.setEnabled(false),
+                ),
+                if (cycle.enabled) ...[
+                  _Row(
+                    icon: Icons.fingerprint_rounded,
+                    label: l.cycleLock,
+                    kind: _RowKind.toggle,
+                    toggleValue: cycle.lockEnabled,
+                    onToggle: (v) => cycle.setLock(v, l.cycleUnlockReason),
+                  ),
+                  _Row(
+                    icon: Icons.delete_outline_rounded,
+                    label: l.cycleDeleteAll,
+                    kind: _RowKind.nav,
+                    onTap: () => _deleteCycle(context, cycle),
+                  ),
+                ],
+              ],
+            ),
           _Section(
             title: l.sectionNotifications,
             rows: [
@@ -220,6 +251,47 @@ class SettingsScreen extends StatelessWidget {
   /// Turning a reminder on asks for notification permission first; if the
   /// user declines, the toggle stays off and we explain why. The shell
   /// re-schedules reminders whenever these settings change.
+  /// Explains what is stored before turning cycle tracking on.
+  static Future<void> _enableCycle(BuildContext context, CycleProvider c) async {
+    final l = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (d) => AlertDialog(
+        title: Text(l.cycleTracking),
+        content: Text(l.cycleOptInBody),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(d, false),
+              child: Text(MaterialLocalizations.of(d).cancelButtonLabel)),
+          TextButton(
+              onPressed: () => Navigator.pop(d, true),
+              child: Text(MaterialLocalizations.of(d).okButtonLabel)),
+        ],
+      ),
+    );
+    if (ok == true) await c.setEnabled(true);
+  }
+
+  static Future<void> _deleteCycle(BuildContext context, CycleProvider c) async {
+    final l = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (d) => AlertDialog(
+        title: Text(l.cycleDeleteAll),
+        content: Text(l.cycleDeleteConfirm),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(d, false),
+              child: Text(MaterialLocalizations.of(d).cancelButtonLabel)),
+          TextButton(
+              onPressed: () => Navigator.pop(d, true),
+              child: Text(l.delete, style: const TextStyle(color: AppColors.bmiObese))),
+        ],
+      ),
+    );
+    if (ok == true) await c.deleteAll();
+  }
+
   static Future<void> _setReminder(BuildContext context, bool on,
       Future<void> Function(bool) save) async {
     if (on && !await ReminderService.instance.requestPermission()) {

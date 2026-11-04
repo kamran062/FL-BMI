@@ -556,6 +556,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - Sleep duration and consistency from Health Connect / HealthKit, and bedtime reminders
 
 ### 4.3 Cycle tracking & cycle-aware training (opt-in, for female / other profiles)
+
+> **Status: done.** Settings opt-in (only for profiles that offer it; explanation dialog first), period start/end + past periods, 8 symptoms per day, prediction from the median of the last 6 cycles with a window that widens for irregular cycles, missed-log gaps ignored, late notice, phase (period / follicular / ovulation / luteal) with training & nutrition tips. Optional fingerprint/PIN lock (needs one successful unlock to enable; re-locks when the app is backgrounded; Today hides details while locked). One-tap delete. Schema v8. No backup exists yet, so nothing leaves the phone. Tips need a review by a women's-health professional before release.
 - Period and symptom log, phase prediction, training and nutrition tips per phase
 - **Extra privacy:** separate opt-in, optional app lock (biometric), never included in backup unless the user chooses it, one-tap delete
 - **Testing:** unit tests for prediction with irregular cycles; privacy review

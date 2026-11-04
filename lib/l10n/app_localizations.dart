@@ -2854,6 +2854,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Bedtimes vary a lot. A steadier bedtime usually improves sleep.'**
   String get sleepIrregular;
+
+  /// Cycle tracking title
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle'**
+  String get cycleTitle;
+
+  /// Settings toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle tracking'**
+  String get cycleTracking;
+
+  /// Opt-in explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Track your period and symptoms and get training and nutrition tips for each phase. Stored only on this phone. You can delete it all at any time.'**
+  String get cycleOptInBody;
+
+  /// Settings toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Lock with fingerprint or PIN'**
+  String get cycleLock;
+
+  /// Biometric prompt
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock your cycle data'**
+  String get cycleUnlockReason;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get cycleUnlock;
+
+  /// Locked state
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle data is locked.'**
+  String get cycleLocked;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all cycle data'**
+  String get cycleDeleteAll;
+
+  /// Confirmation
+  ///
+  /// In en, this message translates to:
+  /// **'This permanently deletes all periods and symptoms from this phone and turns cycle tracking off.'**
+  String get cycleDeleteConfirm;
+
+  /// Cycle day
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day}'**
+  String cycleDay(int day);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'My period started today'**
+  String get periodStartedToday;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'My period ended today'**
+  String get periodEndedToday;
+
+  /// Button that opens a date picker
+  ///
+  /// In en, this message translates to:
+  /// **'Log a past period'**
+  String get periodStartedOn;
+
+  /// Prediction
+  ///
+  /// In en, this message translates to:
+  /// **'Next period in about {days} days'**
+  String nextPeriodIn(int days);
+
+  /// Prediction
+  ///
+  /// In en, this message translates to:
+  /// **'Next period expected about today'**
+  String get nextPeriodToday;
+
+  /// Prediction window
+  ///
+  /// In en, this message translates to:
+  /// **'Likely between {from} and {to}'**
+  String nextPeriodWindow(String from, String to);
+
+  /// Late notice
+  ///
+  /// In en, this message translates to:
+  /// **'Your period is later than usual. Cycles often vary; if you\'re worried, talk to a doctor.'**
+  String get periodLate;
+
+  /// Irregular note
+  ///
+  /// In en, this message translates to:
+  /// **'Your cycles vary in length, so predictions are wider.'**
+  String get cycleIrregular;
+
+  /// Empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Log your period to start getting predictions.'**
+  String get cycleNoData;
+
+  /// Cycle phase
+  ///
+  /// In en, this message translates to:
+  /// **'Period'**
+  String get phaseMenstrual;
+
+  /// Cycle phase
+  ///
+  /// In en, this message translates to:
+  /// **'Follicular phase'**
+  String get phaseFollicular;
+
+  /// Cycle phase
+  ///
+  /// In en, this message translates to:
+  /// **'Around ovulation'**
+  String get phaseOvulation;
+
+  /// Cycle phase
+  ///
+  /// In en, this message translates to:
+  /// **'Luteal phase'**
+  String get phaseLuteal;
+
+  /// Phase tip
+  ///
+  /// In en, this message translates to:
+  /// **'Train by feel: lighter sessions, walking and mobility are fine. Iron-rich foods (lentils, spinach, meat) help replace losses.'**
+  String get tipMenstrual;
+
+  /// Phase tip
+  ///
+  /// In en, this message translates to:
+  /// **'Energy often rises: a good time for heavier lifts and trying new personal bests.'**
+  String get tipFollicular;
+
+  /// Phase tip
+  ///
+  /// In en, this message translates to:
+  /// **'Strength can feel high. Warm up well and keep good form on jumps and quick changes of direction.'**
+  String get tipOvulation;
+
+  /// Phase tip
+  ///
+  /// In en, this message translates to:
+  /// **'You may feel warmer and hungrier. Keep protein up, stay hydrated, and favour steady training over max efforts late in this phase.'**
+  String get tipLuteal;
+
+  /// Disclaimer under tips
+  ///
+  /// In en, this message translates to:
+  /// **'General guidance; everyone\'s cycle feels different.'**
+  String get cycleTipNote;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms today'**
+  String get symptomsToday;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Cramps'**
+  String get symptomCramps;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Headache'**
+  String get symptomHeadache;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Bloating'**
+  String get symptomBloating;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Tired'**
+  String get symptomFatigue;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Low mood'**
+  String get symptomLowMood;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Acne'**
+  String get symptomAcne;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Cravings'**
+  String get symptomCravings;
+
+  /// Symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Tender breasts'**
+  String get symptomTenderBreasts;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Past periods'**
+  String get pastPeriods;
+
+  /// Period date range
+  ///
+  /// In en, this message translates to:
+  /// **'{from} – {to}'**
+  String periodRange(String from, String to);
+
+  /// Ongoing period
+  ///
+  /// In en, this message translates to:
+  /// **'{from} – ongoing'**
+  String periodOngoing(String from);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

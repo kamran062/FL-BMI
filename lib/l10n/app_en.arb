@@ -2215,5 +2215,203 @@
   "sleepIrregular": "Bedtimes vary a lot. A steadier bedtime usually improves sleep.",
   "@sleepIrregular": {
     "description": "Sleep insight"
+  },
+  "cycleTitle": "Cycle",
+  "@cycleTitle": {
+    "description": "Cycle tracking title"
+  },
+  "cycleTracking": "Cycle tracking",
+  "@cycleTracking": {
+    "description": "Settings toggle"
+  },
+  "cycleOptInBody": "Track your period and symptoms and get training and nutrition tips for each phase. Stored only on this phone. You can delete it all at any time.",
+  "@cycleOptInBody": {
+    "description": "Opt-in explanation"
+  },
+  "cycleLock": "Lock with fingerprint or PIN",
+  "@cycleLock": {
+    "description": "Settings toggle"
+  },
+  "cycleUnlockReason": "Unlock your cycle data",
+  "@cycleUnlockReason": {
+    "description": "Biometric prompt"
+  },
+  "cycleUnlock": "Unlock",
+  "@cycleUnlock": {
+    "description": "Button"
+  },
+  "cycleLocked": "Cycle data is locked.",
+  "@cycleLocked": {
+    "description": "Locked state"
+  },
+  "cycleDeleteAll": "Delete all cycle data",
+  "@cycleDeleteAll": {
+    "description": "Button"
+  },
+  "cycleDeleteConfirm": "This permanently deletes all periods and symptoms from this phone and turns cycle tracking off.",
+  "@cycleDeleteConfirm": {
+    "description": "Confirmation"
+  },
+  "cycleDay": "Day {day}",
+  "@cycleDay": {
+    "description": "Cycle day",
+    "placeholders": {
+      "day": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "periodStartedToday": "My period started today",
+  "@periodStartedToday": {
+    "description": "Button"
+  },
+  "periodEndedToday": "My period ended today",
+  "@periodEndedToday": {
+    "description": "Button"
+  },
+  "periodStartedOn": "Log a past period",
+  "@periodStartedOn": {
+    "description": "Button that opens a date picker"
+  },
+  "nextPeriodIn": "Next period in about {days} days",
+  "@nextPeriodIn": {
+    "description": "Prediction",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "9"
+      }
+    }
+  },
+  "nextPeriodToday": "Next period expected about today",
+  "@nextPeriodToday": {
+    "description": "Prediction"
+  },
+  "nextPeriodWindow": "Likely between {from} and {to}",
+  "@nextPeriodWindow": {
+    "description": "Prediction window",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Nov 26"
+      },
+      "to": {
+        "type": "String",
+        "example": "Dec 2"
+      }
+    }
+  },
+  "periodLate": "Your period is later than usual. Cycles often vary; if you're worried, talk to a doctor.",
+  "@periodLate": {
+    "description": "Late notice"
+  },
+  "cycleIrregular": "Your cycles vary in length, so predictions are wider.",
+  "@cycleIrregular": {
+    "description": "Irregular note"
+  },
+  "cycleNoData": "Log your period to start getting predictions.",
+  "@cycleNoData": {
+    "description": "Empty state"
+  },
+  "phaseMenstrual": "Period",
+  "@phaseMenstrual": {
+    "description": "Cycle phase"
+  },
+  "phaseFollicular": "Follicular phase",
+  "@phaseFollicular": {
+    "description": "Cycle phase"
+  },
+  "phaseOvulation": "Around ovulation",
+  "@phaseOvulation": {
+    "description": "Cycle phase"
+  },
+  "phaseLuteal": "Luteal phase",
+  "@phaseLuteal": {
+    "description": "Cycle phase"
+  },
+  "tipMenstrual": "Train by feel: lighter sessions, walking and mobility are fine. Iron-rich foods (lentils, spinach, meat) help replace losses.",
+  "@tipMenstrual": {
+    "description": "Phase tip"
+  },
+  "tipFollicular": "Energy often rises: a good time for heavier lifts and trying new personal bests.",
+  "@tipFollicular": {
+    "description": "Phase tip"
+  },
+  "tipOvulation": "Strength can feel high. Warm up well and keep good form on jumps and quick changes of direction.",
+  "@tipOvulation": {
+    "description": "Phase tip"
+  },
+  "tipLuteal": "You may feel warmer and hungrier. Keep protein up, stay hydrated, and favour steady training over max efforts late in this phase.",
+  "@tipLuteal": {
+    "description": "Phase tip"
+  },
+  "cycleTipNote": "General guidance; everyone's cycle feels different.",
+  "@cycleTipNote": {
+    "description": "Disclaimer under tips"
+  },
+  "symptomsToday": "Symptoms today",
+  "@symptomsToday": {
+    "description": "Section title"
+  },
+  "symptomCramps": "Cramps",
+  "@symptomCramps": {
+    "description": "Symptom"
+  },
+  "symptomHeadache": "Headache",
+  "@symptomHeadache": {
+    "description": "Symptom"
+  },
+  "symptomBloating": "Bloating",
+  "@symptomBloating": {
+    "description": "Symptom"
+  },
+  "symptomFatigue": "Tired",
+  "@symptomFatigue": {
+    "description": "Symptom"
+  },
+  "symptomLowMood": "Low mood",
+  "@symptomLowMood": {
+    "description": "Symptom"
+  },
+  "symptomAcne": "Acne",
+  "@symptomAcne": {
+    "description": "Symptom"
+  },
+  "symptomCravings": "Cravings",
+  "@symptomCravings": {
+    "description": "Symptom"
+  },
+  "symptomTenderBreasts": "Tender breasts",
+  "@symptomTenderBreasts": {
+    "description": "Symptom"
+  },
+  "pastPeriods": "Past periods",
+  "@pastPeriods": {
+    "description": "Section title"
+  },
+  "periodRange": "{from} – {to}",
+  "@periodRange": {
+    "description": "Period date range",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Nov 1"
+      },
+      "to": {
+        "type": "String",
+        "example": "Nov 5"
+      }
+    }
+  },
+  "periodOngoing": "{from} – ongoing",
+  "@periodOngoing": {
+    "description": "Ongoing period",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "Nov 1"
+      }
+    }
   }
 }

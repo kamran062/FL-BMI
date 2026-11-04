@@ -20,6 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
+import 'package:bmi_health/features/cycle/cycle_provider.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -37,6 +38,7 @@ typedef AppState = ({
   FuelProvider fuel,
   StepsProvider steps,
   MovementProvider movement,
+  CycleProvider cycle,
 });
 
 /// Launches the real app as a returning user who has already answered (or
@@ -47,6 +49,7 @@ Future<AppState> launchApp(
   Map<String, Object> prefs = const {},
   StepsSource? steps,
   RecoverySource? recovery,
+  AppLock? lock,
 }) async {
   // iPhone 14-sized screen instead of the default 800×600 test surface
   tester.view.physicalSize = const Size(1170, 2532);
@@ -78,11 +81,12 @@ Future<AppState> launchApp(
   // Unconfigured: premium hidden, as in builds without the server URL
   final purchases = PurchaseService(publicKey: '');
   final recoveryProvider = RecoveryProvider(source: recovery);
+  final cycle = CycleProvider(db, lock: lock);
   final catalog = ExerciseCatalog.parse(
       File('assets/exercises/catalog.json').readAsStringSync());
   await tester.runAsync(() => Future.wait([
         settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-        fuel.load(), stepsProvider.load(), movement.load(), recoveryProvider.load(),
+        fuel.load(), stepsProvider.load(), movement.load(), recoveryProvider.load(), cycle.load(),
       ]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
@@ -95,6 +99,7 @@ Future<AppState> launchApp(
     movement: movement,
     purchases: purchases,
     recovery: recoveryProvider,
+    cycle: cycle,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));
@@ -105,6 +110,7 @@ Future<AppState> launchApp(
     settings: settings, profile: profile, bmi: bmi, body: body,
     workouts: workouts, fuel: fuel, steps: stepsProvider,
     movement: movement,
+    cycle: cycle,
   );
 }
 

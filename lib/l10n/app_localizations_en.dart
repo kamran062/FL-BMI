@@ -1550,4 +1550,134 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sleepIrregular => 'Bedtimes vary a lot. A steadier bedtime usually improves sleep.';
+
+  @override
+  String get cycleTitle => 'Cycle';
+
+  @override
+  String get cycleTracking => 'Cycle tracking';
+
+  @override
+  String get cycleOptInBody => 'Track your period and symptoms and get training and nutrition tips for each phase. Stored only on this phone. You can delete it all at any time.';
+
+  @override
+  String get cycleLock => 'Lock with fingerprint or PIN';
+
+  @override
+  String get cycleUnlockReason => 'Unlock your cycle data';
+
+  @override
+  String get cycleUnlock => 'Unlock';
+
+  @override
+  String get cycleLocked => 'Cycle data is locked.';
+
+  @override
+  String get cycleDeleteAll => 'Delete all cycle data';
+
+  @override
+  String get cycleDeleteConfirm => 'This permanently deletes all periods and symptoms from this phone and turns cycle tracking off.';
+
+  @override
+  String cycleDay(int day) {
+    return 'Day $day';
+  }
+
+  @override
+  String get periodStartedToday => 'My period started today';
+
+  @override
+  String get periodEndedToday => 'My period ended today';
+
+  @override
+  String get periodStartedOn => 'Log a past period';
+
+  @override
+  String nextPeriodIn(int days) {
+    return 'Next period in about $days days';
+  }
+
+  @override
+  String get nextPeriodToday => 'Next period expected about today';
+
+  @override
+  String nextPeriodWindow(String from, String to) {
+    return 'Likely between $from and $to';
+  }
+
+  @override
+  String get periodLate => 'Your period is later than usual. Cycles often vary; if you\'re worried, talk to a doctor.';
+
+  @override
+  String get cycleIrregular => 'Your cycles vary in length, so predictions are wider.';
+
+  @override
+  String get cycleNoData => 'Log your period to start getting predictions.';
+
+  @override
+  String get phaseMenstrual => 'Period';
+
+  @override
+  String get phaseFollicular => 'Follicular phase';
+
+  @override
+  String get phaseOvulation => 'Around ovulation';
+
+  @override
+  String get phaseLuteal => 'Luteal phase';
+
+  @override
+  String get tipMenstrual => 'Train by feel: lighter sessions, walking and mobility are fine. Iron-rich foods (lentils, spinach, meat) help replace losses.';
+
+  @override
+  String get tipFollicular => 'Energy often rises: a good time for heavier lifts and trying new personal bests.';
+
+  @override
+  String get tipOvulation => 'Strength can feel high. Warm up well and keep good form on jumps and quick changes of direction.';
+
+  @override
+  String get tipLuteal => 'You may feel warmer and hungrier. Keep protein up, stay hydrated, and favour steady training over max efforts late in this phase.';
+
+  @override
+  String get cycleTipNote => 'General guidance; everyone\'s cycle feels different.';
+
+  @override
+  String get symptomsToday => 'Symptoms today';
+
+  @override
+  String get symptomCramps => 'Cramps';
+
+  @override
+  String get symptomHeadache => 'Headache';
+
+  @override
+  String get symptomBloating => 'Bloating';
+
+  @override
+  String get symptomFatigue => 'Tired';
+
+  @override
+  String get symptomLowMood => 'Low mood';
+
+  @override
+  String get symptomAcne => 'Acne';
+
+  @override
+  String get symptomCravings => 'Cravings';
+
+  @override
+  String get symptomTenderBreasts => 'Tender breasts';
+
+  @override
+  String get pastPeriods => 'Past periods';
+
+  @override
+  String periodRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String periodOngoing(String from) {
+    return '$from – ongoing';
+  }
 }

@@ -23,6 +23,8 @@ import 'dart:io' show Platform;
 import 'package:bmi_health/features/movement/movement_provider.dart';
 import 'package:bmi_health/features/movement/ui/timeline_screen.dart';
 import 'package:bmi_health/features/recovery/ui/recovery_card.dart';
+import 'package:bmi_health/features/cycle/cycle_provider.dart';
+import 'package:bmi_health/features/cycle/ui/cycle_screen.dart';
 
 /// Home dashboard: the day at a glance with one-tap actions.
 class TodayScreen extends StatelessWidget {
@@ -32,6 +34,7 @@ class TodayScreen extends StatelessWidget {
   final VoidCallback onCalculateBmi;
   final VoidCallback onOpenTips;
   final VoidCallback onOpenTimeline;
+  final VoidCallback onOpenCycle;
 
   const TodayScreen({
     super.key,
@@ -41,6 +44,7 @@ class TodayScreen extends StatelessWidget {
     required this.onCalculateBmi,
     required this.onOpenTips,
     required this.onOpenTimeline,
+    required this.onOpenCycle,
   });
 
   @override
@@ -121,6 +125,7 @@ class TodayScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 const RecoveryCard(),
+                _CycleCard(onOpen: onOpenCycle),
                 const _StepsCard(),
                 _MovementCard(onOpen: onOpenTimeline),
                 // ── Fuel ───────────────────────────────────────────────
@@ -362,6 +367,54 @@ class _MovementCard extends StatelessWidget {
               if (m.gymTimeThisWeek > Duration.zero)
                 Text(l.gymTimeWeek(formatDuration(l, m.gymTimeThisWeek)),
                     style: GoogleFonts.inter(fontSize: 13, color: fg3)),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Shown only when the user opted in to cycle tracking (and their profile
+/// offers it). Hides details while the cycle lock is on.
+class _CycleCard extends StatelessWidget {
+  final VoidCallback onOpen;
+  const _CycleCard({required this.onOpen});
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.watch<CycleProvider>();
+    final offered = context.watch<ProfileProvider>().profile.cycleTrackingOffered;
+    if (!c.enabled || !offered) return const SizedBox.shrink();
+    final l = context.l10n;
+    final s = c.unlocked ? c.status : null;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: AppCard(
+        padding: 18,
+        onTap: onOpen,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              const Icon(Icons.water_drop_outlined, color: AppColors.bmiObese, size: 20),
+              const SizedBox(width: 6),
+              OverlineLabel(l.cycleTitle),
+              const Spacer(),
+              Icon(Icons.chevron_right_rounded, color: fg3),
+            ]),
+            const SizedBox(height: 6),
+            if (!c.unlocked)
+              Text(l.cycleLocked, style: GoogleFonts.inter(fontSize: 14, color: fg3))
+            else if (s == null)
+              Text(l.cycleNoData, style: GoogleFonts.inter(fontSize: 14, color: fg3))
+            else ...[
+              Text('${l.cycleDay(s.day)} · ${l.phase(s.phase)}',
+                  style: GoogleFonts.inter(fontSize: 17, fontWeight: FontWeight.w600)),
+              Text(l.nextPeriod(s, DateTime.now()),
+                  style: GoogleFonts.inter(fontSize: 13, color: fg3)),
             ],
           ],
         ),

@@ -18,6 +18,7 @@ import 'package:bmi_health/features/profile/data/profile_repository.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
+import 'package:bmi_health/features/cycle/cycle_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,10 +49,11 @@ void main() async {
     final movement = MovementProvider(db);
     final purchases = PurchaseService.instance;
     final recovery = RecoveryProvider();
+    final cycle = CycleProvider(db);
     final catalog = await ExerciseCatalog.loadBundled();
     await Future.wait([
       settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-      fuel.load(), steps.load(), movement.load(), recovery.load(),
+      fuel.load(), steps.load(), movement.load(), recovery.load(), cycle.load(),
     ]);
 
     runApp(BmiHealthProviders(
@@ -65,6 +67,7 @@ void main() async {
       movement: movement,
       purchases: purchases,
       recovery: recovery,
+      cycle: cycle,
       catalog: catalog,
       child: const BmiHealthApp(),
     ));

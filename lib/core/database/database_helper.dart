@@ -5,6 +5,7 @@ import 'package:bmi_health/features/body/bmi/domain/bmi_entry.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
 import 'package:bmi_health/features/body/metrics/domain/body_metrics.dart';
 import 'package:bmi_health/features/fuel/domain/nutrition.dart';
+import 'package:bmi_health/features/cycle/domain/cycle.dart';
 import 'package:bmi_health/features/movement/domain/timeline.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
@@ -13,7 +14,7 @@ class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 7;
+  static const schemaVersion = 8;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -146,6 +147,22 @@ class DatabaseHelper {
           lng REAL NOT NULL,
           radius_m REAL NOT NULL DEFAULT 120,
           is_gym INTEGER NOT NULL DEFAULT 0
+        )
+      ''');
+    },
+    // 7 → 8: cycle tracking (opt-in; deleted with one tap)
+    (db) async {
+      await db.execute('''
+        CREATE TABLE periods (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          start TEXT NOT NULL,
+          "end" TEXT
+        )
+      ''');
+      await db.execute('''
+        CREATE TABLE cycle_symptoms (
+          date TEXT PRIMARY KEY,
+          symptoms TEXT NOT NULL
         )
       ''');
     },
@@ -400,6 +417,41 @@ class DatabaseHelper {
 
   Future<void> deletePlace(int id) async =>
       (await db).delete('places', where: 'id = ?', whereArgs: [id]);
+
+  // ── Cycle ────────────────────────────────────────────────────
+
+  Future<List<Period>> getPeriods() async =>
+      (await (await db).query('periods', orderBy: 'start')).map(Period.fromMap).toList();
+
+  Future<int> insertPeriod(Period p) async => (await db).insert('periods', p.toMap());
+
+  Future<void> updatePeriod(Period p) async => (await db)
+      .update('periods', p.toMap(), where: 'id = ?', whereArgs: [p.id]);
+
+  Future<void> deletePeriod(int id) async =>
+      (await db).delete('periods', where: 'id = ?', whereArgs: [id]);
+
+  Future<Map<String, String>> getCycleSymptoms() async => {
+        for (final r in await (await db).query('cycle_symptoms'))
+          r['date'] as String: r['symptoms'] as String
+      };
+
+  Future<void> setCycleSymptoms(String date, String symptoms) async {
+    final d = await db;
+    if (symptoms.isEmpty) {
+      await d.delete('cycle_symptoms', where: 'date = ?', whereArgs: [date]);
+    } else {
+      await d.insert('cycle_symptoms', {'date': date, 'symptoms': symptoms},
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    }
+  }
+
+  /// Removes every cycle record (one-tap delete).
+  Future<void> deleteAllCycleData() async {
+    final d = await db;
+    await d.delete('periods');
+    await d.delete('cycle_symptoms');
+  }
 
   // ── BMI Entries ──────────────────────────────────────────────
 

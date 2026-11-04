@@ -16,6 +16,7 @@ import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_theme.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
+import 'package:bmi_health/features/cycle/cycle_provider.dart';
 
 /// Supplies the app-wide state objects. Used by main() and by tests.
 class BmiHealthProviders extends StatelessWidget {
@@ -31,6 +32,7 @@ class BmiHealthProviders extends StatelessWidget {
     required this.movement,
     required this.purchases,
     required this.recovery,
+    required this.cycle,
     required this.catalog,
     required this.child,
   });
@@ -45,6 +47,7 @@ class BmiHealthProviders extends StatelessWidget {
   final MovementProvider movement;
   final PurchaseService purchases;
   final RecoveryProvider recovery;
+  final CycleProvider cycle;
   final ExerciseCatalog catalog;
   final Widget child;
 
@@ -61,6 +64,7 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: movement),
           ChangeNotifierProvider.value(value: purchases),
           ChangeNotifierProvider.value(value: recovery),
+          ChangeNotifierProvider.value(value: cycle),
           Provider.value(value: catalog),
         ],
         child: child,
@@ -97,6 +101,8 @@ class _BmiHealthAppState extends State<BmiHealthApp>
   // The 4-hour cooldown inside AdService prevents over-frequency.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Cycle data locks again whenever the app leaves the screen
+    if (state == AppLifecycleState.paused) context.read<CycleProvider>().relock();
     if (state != AppLifecycleState.resumed) return;
     // Fresh step count and day rollover whenever the user comes back
     context.read<StepsProvider>().refresh();
