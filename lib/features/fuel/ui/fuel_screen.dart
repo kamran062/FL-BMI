@@ -12,11 +12,26 @@ import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
+import 'package:bmi_health/features/fuel/barcode/scan_food_screen.dart';
 
 /// Fuel tab: calorie & macro targets, quick food log, water.
 class FuelScreen extends StatelessWidget {
   final VoidCallback onOpenProfile;
   const FuelScreen({super.key, required this.onOpenProfile});
+
+  static void _manual(BuildContext context) =>
+      showDialog<void>(context: context, builder: (_) => const _LogFoodDialog());
+
+  /// Full-screen scanner above the tab bar and banner.
+  static void _scan(BuildContext context) {
+    final nav = Navigator.of(context, rootNavigator: true);
+    nav.push(MaterialPageRoute<void>(
+      builder: (_) => ScanFoodScreen(
+        onClose: nav.pop,
+        onManual: () => _manual(context),
+      ),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +75,28 @@ class FuelScreen extends StatelessWidget {
                 const SizedBox(height: 14),
                 WaterCard(drunk: fuel.waterMl, goal: t.waterMl),
                 const SizedBox(height: 14),
-                AppButton(
-                  label: l.logFood,
-                  icon: Icons.add_rounded,
-                  size: AppButtonSize.lg,
-                  fullWidth: true,
-                  onPressed: () => showDialog<void>(
-                      context: context, builder: (_) => const _LogFoodDialog()),
-                ),
+                Row(children: [
+                  Expanded(
+                    child: AppButton(
+                      label: l.logFood,
+                      icon: Icons.add_rounded,
+                      size: AppButtonSize.lg,
+                      fullWidth: true,
+                      onPressed: () => _manual(context),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: AppButton(
+                      label: l.scanBarcode,
+                      icon: Icons.qr_code_scanner_rounded,
+                      size: AppButtonSize.lg,
+                      variant: AppButtonVariant.secondary,
+                      fullWidth: true,
+                      onPressed: () => _scan(context),
+                    ),
+                  ),
+                ]),
                 const SizedBox(height: 14),
                 if (fuel.food.isEmpty)
                   Text(l.foodEmpty,

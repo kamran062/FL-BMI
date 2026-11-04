@@ -563,6 +563,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Testing:** unit tests for prediction with irregular cycles; privacy review
 
 ### 4.4 Food logging, barcode scanner & food photo estimate
+
+> **Status: barcode done; photo estimate with 4.5.** EAN/UPC scanning (mobile_scanner 7.0.1 — newer versions need AGP 8.9/SDK 36), Open Food Facts lookup (kcal, kJ fallback, protein, serving size; nonsense values rejected), serving/50/100/200 g or custom grams, logs kcal + protein, last 60 products cached for offline, manual entry fallback for not found / no nutrition / offline, ODbL credit shown. **Still to do:** the 100-local-products accuracy check (Pakistani products are thinly covered in Open Food Facts — expect many "not found"); carbs/fat logging.
 - Food database search and barcode scanning (Open Food Facts API, cached locally)
 - Food photo → estimated calories and macros using a vision AI model. The user always confirms or edits the result.
 - Pakistani / South Asian food entries (roti, daal, biryani, etc.) added to the local database

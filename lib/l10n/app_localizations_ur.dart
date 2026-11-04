@@ -1673,4 +1673,62 @@ class AppLocalizationsUr extends AppLocalizations {
   String periodOngoing(String from) {
     return '$from – جاری';
   }
+
+  @override
+  String get scanBarcode => 'بارکوڈ اسکین کریں';
+
+  @override
+  String get scanHint => 'کیمرا پیکٹ پر بارکوڈ کی طرف کریں۔';
+
+  @override
+  String get lookingUp => 'پروڈکٹ تلاش ہو رہی ہے…';
+
+  @override
+  String get productNotFound => 'پروڈکٹ نہیں ملی۔ آپ خود درج کر سکتے ہیں۔';
+
+  @override
+  String get productNoNutrition => 'اس پروڈکٹ میں ابھی کیلوریز کی معلومات نہیں۔ آپ خود درج کر سکتے ہیں۔';
+
+  @override
+  String get lookupOffline => 'فوڈ ڈیٹا بیس سے رابطہ نہیں ہو سکا۔ کنکشن چیک کریں یا خود درج کریں۔';
+
+  @override
+  String get enterManually => 'خود درج کریں';
+
+  @override
+  String get scanAgain => 'دوبارہ اسکین کریں';
+
+  @override
+  String per100g(String kcal) {
+    return '$kcal کیلوری فی 100 گرام';
+  }
+
+  @override
+  String get portionGrams => 'مقدار (گرام)';
+
+  @override
+  String oneServing(String grams) {
+    return '1 سرونگ ($grams گرام)';
+  }
+
+  @override
+  String portionTotal(int kcal, String protein) {
+    return '$kcal کیلوری · $protein گرام پروٹین';
+  }
+
+  @override
+  String portionTotalKcal(int kcal) {
+    return '$kcal کیلوری';
+  }
+
+  @override
+  String get logThis => 'درج کریں';
+
+  @override
+  String foodLogged(String name) {
+    return 'درج ہو گیا: $name';
+  }
+
+  @override
+  String get offAttribution => 'پروڈکٹ ڈیٹا: اوپن فوڈ فیکٹس (ODbL)';
 }

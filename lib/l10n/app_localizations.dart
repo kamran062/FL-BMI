@@ -3094,6 +3094,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{from} – ongoing'**
   String periodOngoing(String from);
+
+  /// Button and screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Scan barcode'**
+  String get scanBarcode;
+
+  /// Scanner hint
+  ///
+  /// In en, this message translates to:
+  /// **'Point the camera at the barcode on the pack.'**
+  String get scanHint;
+
+  /// Lookup in progress
+  ///
+  /// In en, this message translates to:
+  /// **'Looking up product…'**
+  String get lookingUp;
+
+  /// Lookup error
+  ///
+  /// In en, this message translates to:
+  /// **'Product not found. You can enter it yourself.'**
+  String get productNotFound;
+
+  /// Lookup error
+  ///
+  /// In en, this message translates to:
+  /// **'This product has no calorie information yet. You can enter it yourself.'**
+  String get productNoNutrition;
+
+  /// Lookup error
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the food database. Check your connection or enter it yourself.'**
+  String get lookupOffline;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Enter manually'**
+  String get enterManually;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Scan again'**
+  String get scanAgain;
+
+  /// Product energy
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal per 100 g'**
+  String per100g(String kcal);
+
+  /// Text field label
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (g)'**
+  String get portionGrams;
+
+  /// Portion chip
+  ///
+  /// In en, this message translates to:
+  /// **'1 serving ({grams} g)'**
+  String oneServing(String grams);
+
+  /// Portion total
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal · {protein} g protein'**
+  String portionTotal(int kcal, String protein);
+
+  /// Portion total without protein
+  ///
+  /// In en, this message translates to:
+  /// **'{kcal} kcal'**
+  String portionTotalKcal(int kcal);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Log it'**
+  String get logThis;
+
+  /// Snack bar
+  ///
+  /// In en, this message translates to:
+  /// **'Logged: {name}'**
+  String foodLogged(String name);
+
+  /// Data source credit
+  ///
+  /// In en, this message translates to:
+  /// **'Product data: Open Food Facts (ODbL)'**
+  String get offAttribution;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

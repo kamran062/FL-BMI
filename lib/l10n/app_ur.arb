@@ -499,5 +499,21 @@
   "symptomTenderBreasts": "چھاتی میں درد",
   "pastPeriods": "پچھلی ماہواریاں",
   "periodRange": "{from} – {to}",
-  "periodOngoing": "{from} – جاری"
+  "periodOngoing": "{from} – جاری",
+  "scanBarcode": "بارکوڈ اسکین کریں",
+  "scanHint": "کیمرا پیکٹ پر بارکوڈ کی طرف کریں۔",
+  "lookingUp": "پروڈکٹ تلاش ہو رہی ہے…",
+  "productNotFound": "پروڈکٹ نہیں ملی۔ آپ خود درج کر سکتے ہیں۔",
+  "productNoNutrition": "اس پروڈکٹ میں ابھی کیلوریز کی معلومات نہیں۔ آپ خود درج کر سکتے ہیں۔",
+  "lookupOffline": "فوڈ ڈیٹا بیس سے رابطہ نہیں ہو سکا۔ کنکشن چیک کریں یا خود درج کریں۔",
+  "enterManually": "خود درج کریں",
+  "scanAgain": "دوبارہ اسکین کریں",
+  "per100g": "{kcal} کیلوری فی 100 گرام",
+  "portionGrams": "مقدار (گرام)",
+  "oneServing": "1 سرونگ ({grams} گرام)",
+  "portionTotal": "{kcal} کیلوری · {protein} گرام پروٹین",
+  "portionTotalKcal": "{kcal} کیلوری",
+  "logThis": "درج کریں",
+  "foodLogged": "درج ہو گیا: {name}",
+  "offAttribution": "پروڈکٹ ڈیٹا: اوپن فوڈ فیکٹس (ODbL)"
 }

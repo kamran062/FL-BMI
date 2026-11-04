@@ -2413,5 +2413,103 @@
         "example": "Nov 1"
       }
     }
+  },
+  "scanBarcode": "Scan barcode",
+  "@scanBarcode": {
+    "description": "Button and screen title"
+  },
+  "scanHint": "Point the camera at the barcode on the pack.",
+  "@scanHint": {
+    "description": "Scanner hint"
+  },
+  "lookingUp": "Looking up product…",
+  "@lookingUp": {
+    "description": "Lookup in progress"
+  },
+  "productNotFound": "Product not found. You can enter it yourself.",
+  "@productNotFound": {
+    "description": "Lookup error"
+  },
+  "productNoNutrition": "This product has no calorie information yet. You can enter it yourself.",
+  "@productNoNutrition": {
+    "description": "Lookup error"
+  },
+  "lookupOffline": "Couldn't reach the food database. Check your connection or enter it yourself.",
+  "@lookupOffline": {
+    "description": "Lookup error"
+  },
+  "enterManually": "Enter manually",
+  "@enterManually": {
+    "description": "Button"
+  },
+  "scanAgain": "Scan again",
+  "@scanAgain": {
+    "description": "Button"
+  },
+  "per100g": "{kcal} kcal per 100 g",
+  "@per100g": {
+    "description": "Product energy",
+    "placeholders": {
+      "kcal": {
+        "type": "String",
+        "example": "480"
+      }
+    }
+  },
+  "portionGrams": "Amount (g)",
+  "@portionGrams": {
+    "description": "Text field label"
+  },
+  "oneServing": "1 serving ({grams} g)",
+  "@oneServing": {
+    "description": "Portion chip",
+    "placeholders": {
+      "grams": {
+        "type": "String",
+        "example": "30"
+      }
+    }
+  },
+  "portionTotal": "{kcal} kcal · {protein} g protein",
+  "@portionTotal": {
+    "description": "Portion total",
+    "placeholders": {
+      "kcal": {
+        "type": "int",
+        "example": "144"
+      },
+      "protein": {
+        "type": "String",
+        "example": "2.2"
+      }
+    }
+  },
+  "portionTotalKcal": "{kcal} kcal",
+  "@portionTotalKcal": {
+    "description": "Portion total without protein",
+    "placeholders": {
+      "kcal": {
+        "type": "int",
+        "example": "144"
+      }
+    }
+  },
+  "logThis": "Log it",
+  "@logThis": {
+    "description": "Button"
+  },
+  "foodLogged": "Logged: {name}",
+  "@foodLogged": {
+    "description": "Snack bar",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Digestive biscuits"
+      }
+    }
+  },
+  "offAttribution": "Product data: Open Food Facts (ODbL)",
+  "@offAttribution": {
+    "description": "Data source credit"
   }
 }

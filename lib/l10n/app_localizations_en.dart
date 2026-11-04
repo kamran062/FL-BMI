@@ -1680,4 +1680,62 @@ class AppLocalizationsEn extends AppLocalizations {
   String periodOngoing(String from) {
     return '$from – ongoing';
   }
+
+  @override
+  String get scanBarcode => 'Scan barcode';
+
+  @override
+  String get scanHint => 'Point the camera at the barcode on the pack.';
+
+  @override
+  String get lookingUp => 'Looking up product…';
+
+  @override
+  String get productNotFound => 'Product not found. You can enter it yourself.';
+
+  @override
+  String get productNoNutrition => 'This product has no calorie information yet. You can enter it yourself.';
+
+  @override
+  String get lookupOffline => 'Couldn\'t reach the food database. Check your connection or enter it yourself.';
+
+  @override
+  String get enterManually => 'Enter manually';
+
+  @override
+  String get scanAgain => 'Scan again';
+
+  @override
+  String per100g(String kcal) {
+    return '$kcal kcal per 100 g';
+  }
+
+  @override
+  String get portionGrams => 'Amount (g)';
+
+  @override
+  String oneServing(String grams) {
+    return '1 serving ($grams g)';
+  }
+
+  @override
+  String portionTotal(int kcal, String protein) {
+    return '$kcal kcal · $protein g protein';
+  }
+
+  @override
+  String portionTotalKcal(int kcal) {
+    return '$kcal kcal';
+  }
+
+  @override
+  String get logThis => 'Log it';
+
+  @override
+  String foodLogged(String name) {
+    return 'Logged: $name';
+  }
+
+  @override
+  String get offAttribution => 'Product data: Open Food Facts (ODbL)';
 }

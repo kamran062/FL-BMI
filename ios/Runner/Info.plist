@@ -55,7 +55,7 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>Face ID can lock your cycle data so only you can see it.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>The camera counts your reps and checks your form. Video is analysed on your phone and never recorded or uploaded.</string>
+	<string>The camera counts your reps, checks your form and scans food barcodes. Video is analysed on your phone and never recorded or uploaded.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location builds your private daily timeline (places, routes, gym visits). It never leaves your phone.</string>
 	<key>NSHealthShareUsageDescription</key>
