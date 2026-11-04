@@ -24,6 +24,7 @@ import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/body/photos/photo_vault.dart';
 import 'package:bmi_health/features/coach/ai_client.dart';
+import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -56,6 +57,7 @@ Future<AppState> launchApp(
   RecoverySource? recovery,
   AppLock? lock,
   AiClient? ai,
+  WearChannel? wear,
 }) async {
   // iPhone 14-sized screen instead of the default 800×600 test surface
   tester.view.physicalSize = const Size(1170, 2532);
@@ -113,6 +115,7 @@ Future<AppState> launchApp(
     // Unconfigured by default: AI features hidden, as in builds without URLs
     ai: ai ?? AiClient(coachUrl: '', foodUrl: ''),
     db: db,
+    wear: WearBridge(workouts, catalog, channel: wear ?? NoWatchChannel()),
     catalog: catalog,
     child: const BmiHealthApp(),
   ));
@@ -142,5 +145,13 @@ class MemoryKeyStore implements KeyStore {
   Future<String?> read() async => value;
   @override
   Future<void> write(String v) async => value = v;
+}
+
+/// No watch in tests unless a test passes its own channel.
+class NoWatchChannel implements WearChannel {
+  @override
+  Future<void> send(WearState s) async {}
+  @override
+  void listen(Future<void> Function(String event, Object? arg) onEvent) {}
 }
 

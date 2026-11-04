@@ -88,4 +88,6 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    // Wear OS companion: Data Layer (ROADMAP 5.4)
+    implementation("com.google.android.gms:play-services-wearable:18.2.0")
 }

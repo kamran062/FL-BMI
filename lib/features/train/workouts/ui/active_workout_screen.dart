@@ -13,6 +13,7 @@ import 'package:bmi_health/shared/units/units.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/features/train/programs/progression.dart';
+import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 
 /// Logs the active workout: exercises, sets (weight × reps), rest timer.
 class ActiveWorkoutScreen extends StatefulWidget {
@@ -131,6 +132,22 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                 fontWeight: FontWeight.w700,
                 fontFeatures: const [FontFeature.tabularFigures()])),
         actions: [
+          // Heart rate from the watch, when one is sending it
+          ValueListenableBuilder<int?>(
+            valueListenable: context.read<WearBridge>().heartRate,
+            builder: (context, _, __) {
+              final bpm = context.read<WearBridge>().currentHeartRate;
+              if (bpm == null) return const SizedBox.shrink();
+              return Padding(
+                padding: const EdgeInsetsDirectional.only(end: 4),
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  const Icon(Icons.favorite_rounded, color: AppColors.bmiObese, size: 18),
+                  const SizedBox(width: 4),
+                  Text('$bpm', style: GoogleFonts.inter(fontWeight: FontWeight.w700)),
+                ]),
+              );
+            },
+          ),
           IconButton(
             tooltip: l.discardWorkout,
             icon: const Icon(Icons.delete_outline_rounded),

@@ -611,6 +611,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Testing:** backup → wipe → restore with large datasets; corrupted backup handling; encryption audit
 
 ### 5.4 Wearables
+
+> **Status: Wear OS done; Apple Watch not started.** `android/wear` module (Compose for Wear OS, same app IDs/flavors/signing as the phone so the Data Layer pairs them). Phone → watch: current exercise, set n of m, weight × reps, rest-timer end (synced data item; reset on app start). Watch → phone: "Done" ticks the next set (also starts the rest timer), heart rate every 5 s while a workout is open (sensor stops otherwise; values outside 30–230 and readings older than 20 s ignored) shown in the phone's workout bar. Screen stays on during a workout; buzz when rest ends. Verified on a Wear OS 5 emulator (idle, active set, rest countdown, Done; found and fixed a crash: missing VIBRATE permission). **Not verified:** a real phone↔watch pairing (needs the Wear OS app + Google sign-in) and real heart-rate data. **Play:** upload the wear APK/AAB in the same listing (Wear OS form factor), with screenshots. **Apple Watch:** needs a watchOS target in Xcode and WatchConnectivity on the phone; not started.
 - Wear OS and Apple Watch companion: active workout, rest timer, heart rate during sets
 - **Testing:** pairing, phone disconnect mid-workout, battery use on the watch
 

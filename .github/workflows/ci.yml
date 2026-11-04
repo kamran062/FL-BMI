@@ -85,6 +85,9 @@ jobs:
 
       # Debug build: uses Google's test ad IDs, needs no secrets
       - run: flutter build apk --debug --flavor dev
+      - name: Wear OS companion — unit tests and build
+        working-directory: android
+        run: ./gradlew :wear:testDevDebugUnitTest :wear:assembleDevDebug
 
       - uses: actions/upload-artifact@v4
         with:
