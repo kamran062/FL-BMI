@@ -80,6 +80,7 @@ class StepsProvider extends ChangeNotifier {
   final DateTime Function() _now;
 
   static const _connectedKey = 'steps_connected';
+  static const _bestKey = 'steps_best_day';
   static const defaultGoal = 8000;
 
   StepsStatus _status = StepsStatus.unsupported;
@@ -88,6 +89,10 @@ class StepsProvider extends ChangeNotifier {
 
   StepsStatus get status => _status;
   int get today => _today;
+
+  /// Most steps seen on one day since connecting (for the 10k badge).
+  int get bestDay => _bestDay;
+  int _bestDay = 0;
   int get goal => defaultGoal;
 
   Future<void> load() async {
@@ -107,6 +112,12 @@ class StepsProvider extends ChangeNotifier {
       if (_status == StepsStatus.connected) {
         final n = _now();
         _today = await _source.stepsBetween(DateTime(n.year, n.month, n.day), n);
+        final prefs = await SharedPreferences.getInstance();
+        _bestDay = prefs.getInt(_bestKey) ?? 0;
+        if (_today > _bestDay) {
+          _bestDay = _today;
+          await prefs.setInt(_bestKey, _today);
+        }
       }
     } catch (e, st) {
       reportError(e, st, reason: 'steps');

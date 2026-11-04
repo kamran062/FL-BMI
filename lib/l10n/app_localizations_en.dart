@@ -1823,4 +1823,130 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get estimateSuffix => '(estimate)';
+
+  @override
+  String get progressTitle => 'Progress';
+
+  @override
+  String weekStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count-week streak',
+      one: '1-week streak',
+      zero: 'No streak yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakGoal(int count) {
+    return 'Hit $count workouts a week to keep it going.';
+  }
+
+  @override
+  String badgesEarned(int earned, int total) {
+    return '$earned of $total badges';
+  }
+
+  @override
+  String get thisMonth => 'This month';
+
+  @override
+  String get lastMonth => 'Last month';
+
+  @override
+  String recapWorkouts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count workouts',
+      one: '1 workout',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recapSets(int count, String kg) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sets · $kg kg lifted',
+      one: '1 set · $kg kg lifted',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recapPrs(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count personal records',
+      one: '1 personal record',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recapTime(String time) {
+    return '$time training';
+  }
+
+  @override
+  String recapDistance(String km) {
+    return '$km km moved';
+  }
+
+  @override
+  String recapGym(String time) {
+    return '$time at the gym';
+  }
+
+  @override
+  String recapWeight(String change) {
+    return 'Weight $change kg';
+  }
+
+  @override
+  String get recapEmpty => 'Nothing logged in this period yet.';
+
+  @override
+  String get shareRecap => 'Share';
+
+  @override
+  String get badgesTitle => 'Badges';
+
+  @override
+  String get badgeFirstWorkout => 'First workout';
+
+  @override
+  String get badgeWorkouts10 => '10 workouts';
+
+  @override
+  String get badgeWorkouts50 => '50 workouts';
+
+  @override
+  String get badgeWorkouts100 => '100 workouts';
+
+  @override
+  String get badgeStreak4 => '4-week streak';
+
+  @override
+  String get badgeStreak12 => '12-week streak';
+
+  @override
+  String get badgeFirstPr => 'First personal record';
+
+  @override
+  String get badgePrs10 => '10 personal records';
+
+  @override
+  String get badgeTon => '1,000 kg lifted';
+
+  @override
+  String get badgeSteps10k => '10,000 steps in a day';
+
+  @override
+  String get appName => 'BMI Health';
 }

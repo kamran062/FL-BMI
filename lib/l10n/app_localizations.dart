@@ -3352,6 +3352,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'(estimate)'**
   String get estimateSuffix;
+
+  /// Progress screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get progressTitle;
+
+  /// Week streak
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No streak yet} =1{1-week streak} other{{count}-week streak}}'**
+  String weekStreak(int count);
+
+  /// Streak explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Hit {count} workouts a week to keep it going.'**
+  String streakGoal(int count);
+
+  /// Badge count
+  ///
+  /// In en, this message translates to:
+  /// **'{earned} of {total} badges'**
+  String badgesEarned(int earned, int total);
+
+  /// Recap title
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get thisMonth;
+
+  /// Recap toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Last month'**
+  String get lastMonth;
+
+  /// Recap line
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 workout} other{{count} workouts}}'**
+  String recapWorkouts(int count);
+
+  /// Recap line
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 set · {kg} kg lifted} other{{count} sets · {kg} kg lifted}}'**
+  String recapSets(int count, String kg);
+
+  /// Recap line
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 personal record} other{{count} personal records}}'**
+  String recapPrs(int count);
+
+  /// Recap line
+  ///
+  /// In en, this message translates to:
+  /// **'{time} training'**
+  String recapTime(String time);
+
+  /// Recap line
+  ///
+  /// In en, this message translates to:
+  /// **'{km} km moved'**
+  String recapDistance(String km);
+
+  /// Recap line
+  ///
+  /// In en, this message translates to:
+  /// **'{time} at the gym'**
+  String recapGym(String time);
+
+  /// Recap line
+  ///
+  /// In en, this message translates to:
+  /// **'Weight {change} kg'**
+  String recapWeight(String change);
+
+  /// Empty recap
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing logged in this period yet.'**
+  String get recapEmpty;
+
+  /// Share button
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareRecap;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Badges'**
+  String get badgesTitle;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'First workout'**
+  String get badgeFirstWorkout;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'10 workouts'**
+  String get badgeWorkouts10;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'50 workouts'**
+  String get badgeWorkouts50;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'100 workouts'**
+  String get badgeWorkouts100;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'4-week streak'**
+  String get badgeStreak4;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'12-week streak'**
+  String get badgeStreak12;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'First personal record'**
+  String get badgeFirstPr;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'10 personal records'**
+  String get badgePrs10;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'1,000 kg lifted'**
+  String get badgeTon;
+
+  /// Badge
+  ///
+  /// In en, this message translates to:
+  /// **'10,000 steps in a day'**
+  String get badgeSteps10k;
+
+  /// App name shown on shared cards
+  ///
+  /// In en, this message translates to:
+  /// **'BMI Health'**
+  String get appName;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

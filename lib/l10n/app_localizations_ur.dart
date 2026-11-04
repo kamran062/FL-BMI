@@ -1816,4 +1816,126 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get estimateSuffix => '(اندازہ)';
+
+  @override
+  String get progressTitle => 'پیش رفت';
+
+  @override
+  String weekStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ہفتوں کا سلسلہ',
+      zero: 'ابھی کوئی سلسلہ نہیں',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakGoal(int count) {
+    return 'سلسلہ جاری رکھنے کے لیے ہفتے میں $count ورزشیں کریں۔';
+  }
+
+  @override
+  String badgesEarned(int earned, int total) {
+    return '$total میں سے $earned بیجز';
+  }
+
+  @override
+  String get thisMonth => 'اس مہینے';
+
+  @override
+  String get lastMonth => 'پچھلے مہینے';
+
+  @override
+  String recapWorkouts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ورزشیں',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recapSets(int count, String kg) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سیٹ · $kg کلو اٹھایا',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recapPrs(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ذاتی ریکارڈ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recapTime(String time) {
+    return '$time ورزش';
+  }
+
+  @override
+  String recapDistance(String km) {
+    return '$km کلومیٹر حرکت';
+  }
+
+  @override
+  String recapGym(String time) {
+    return 'جم میں $time';
+  }
+
+  @override
+  String recapWeight(String change) {
+    return 'وزن $change کلو';
+  }
+
+  @override
+  String get recapEmpty => 'اس مدت میں ابھی کچھ درج نہیں۔';
+
+  @override
+  String get shareRecap => 'شیئر کریں';
+
+  @override
+  String get badgesTitle => 'بیجز';
+
+  @override
+  String get badgeFirstWorkout => 'پہلی ورزش';
+
+  @override
+  String get badgeWorkouts10 => '10 ورزشیں';
+
+  @override
+  String get badgeWorkouts50 => '50 ورزشیں';
+
+  @override
+  String get badgeWorkouts100 => '100 ورزشیں';
+
+  @override
+  String get badgeStreak4 => '4 ہفتوں کا سلسلہ';
+
+  @override
+  String get badgeStreak12 => '12 ہفتوں کا سلسلہ';
+
+  @override
+  String get badgeFirstPr => 'پہلا ذاتی ریکارڈ';
+
+  @override
+  String get badgePrs10 => '10 ذاتی ریکارڈ';
+
+  @override
+  String get badgeTon => '1,000 کلو اٹھایا';
+
+  @override
+  String get badgeSteps10k => 'ایک دن میں 10,000 قدم';
+
+  @override
+  String get appName => 'بی ایم آئی ہیلتھ';
 }

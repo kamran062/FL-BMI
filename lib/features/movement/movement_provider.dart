@@ -217,6 +217,22 @@ class MovementProvider extends ChangeNotifier {
     return gyms.any((g) => window.every((p) => g.contains(p.lat, p.lng)));
   }
 
+  /// Distance moved and gym time between two dates (for recaps). Built
+  /// day by day so each day's timeline stays small.
+  Future<({double km, Duration gym})> totalsBetween(DateTime from, DateTime to) async {
+    var m = 0.0;
+    var gym = Duration.zero;
+    for (var d = _dayStart(from); d.isBefore(to); d = d.add(const Duration(days: 1))) {
+      final items = TimelineBuilder.build(
+          await _db.getPoints(d, d.add(const Duration(days: 1))), _places);
+      for (final i in items) {
+        if (i is Trip) m += i.distanceM;
+        if (i is Visit && (i.place?.isGym ?? false)) gym += i.duration;
+      }
+    }
+    return (km: m / 1000, gym: gym);
+  }
+
   Future<void> addPlace(Place place) async {
     await _db.insertPlace(place);
     _places = await _db.getPlaces();

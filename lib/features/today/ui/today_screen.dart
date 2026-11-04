@@ -26,6 +26,7 @@ import 'package:bmi_health/features/recovery/ui/recovery_card.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/cycle/ui/cycle_screen.dart';
 import 'package:bmi_health/features/coach/ai_client.dart';
+import 'package:bmi_health/features/progress/domain/achievements.dart';
 
 /// Home dashboard: the day at a glance with one-tap actions.
 class TodayScreen extends StatelessWidget {
@@ -37,6 +38,7 @@ class TodayScreen extends StatelessWidget {
   final VoidCallback onOpenTimeline;
   final VoidCallback onOpenCycle;
   final VoidCallback onOpenCoach;
+  final VoidCallback onOpenProgress;
 
   const TodayScreen({
     super.key,
@@ -48,6 +50,7 @@ class TodayScreen extends StatelessWidget {
     required this.onOpenTimeline,
     required this.onOpenCycle,
     required this.onOpenCoach,
+    required this.onOpenProgress,
   });
 
   @override
@@ -127,6 +130,7 @@ class TodayScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 14),
+                _StreakCard(onOpen: onOpenProgress),
                 if (context.read<AiClient>().coachEnabled)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 14),
@@ -434,6 +438,35 @@ class _CycleCard extends StatelessWidget {
                   style: GoogleFonts.inter(fontSize: 13, color: fg3)),
             ],
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Week streak; opens Progress (recap and badges).
+class _StreakCard extends StatelessWidget {
+  final VoidCallback onOpen;
+  const _StreakCard({required this.onOpen});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final history = context.watch<WorkoutProvider>().history;
+    if (history.isEmpty) return const SizedBox.shrink();
+    final goal = context.watch<ProfileProvider>().profile.daysPerWeek;
+    final streak =
+        Streaks.weeks([for (final h in history) h.workout.startedAt], goal, DateTime.now());
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: AppCard(
+        padding: 4,
+        onTap: onOpen,
+        child: ListTile(
+          leading: const Icon(Icons.local_fire_department_rounded, color: AppColors.bmiOver),
+          title: Text(l.weekStreak(streak)),
+          subtitle: Text(l.progressTitle),
+          trailing: const Icon(Icons.chevron_right_rounded),
         ),
       ),
     );

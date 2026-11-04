@@ -594,9 +594,13 @@ Every module in this roadmap is only "done" when it meets all of these.
 **Goal:** retention and multi-device support. **Duration:** ongoing.
 
 ### 5.1 Weekly & monthly recap
+
+> **Status: done (monthly).** This / last month: workouts, sets and kg lifted, PRs, training time (forgotten open workouts ignored), km moved and gym time from the timeline, weight change; shared as an image with totals only — never places or routes.
 - "This month: 84 km walked, 9 h at the gym, 3 new PRs" as a shareable card (no location shown on shared cards)
 
 ### 5.2 Streaks, badges & challenges
+
+> **Status: done (solo).** Week streak against the profile's days-per-week goal (the running week never breaks it), 10 badges with progress bars (workouts, streaks, PRs, 1,000 kg lifted, 10k steps), Today streak card. Not yet: challenges with friends (needs accounts + a backend).
 - Workout streaks, step challenges, PR badges; optional challenges with friends
 
 ### 5.3 Backup & sync (opt-in)

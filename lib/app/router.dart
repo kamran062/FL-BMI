@@ -31,6 +31,7 @@ import 'package:bmi_health/features/train/rep_counter/rep_counter_screen.dart';
 import 'package:bmi_health/features/premium/paywall_screen.dart';
 import 'package:bmi_health/features/cycle/ui/cycle_screen.dart';
 import 'package:bmi_health/features/coach/coach_screen.dart';
+import 'package:bmi_health/features/progress/ui/progress_screen.dart';
 
 /// Route paths. Use these instead of string literals.
 abstract final class Routes {
@@ -41,6 +42,7 @@ abstract final class Routes {
   static const movement   = '/today/movement';
   static const cycle      = '/today/cycle';
   static const coach      = '/today/coach';
+  static const progress   = '/today/progress';
   static const body       = '/body';
   static const calculate  = '/body/calculate';
   static const history    = '/body/history';
@@ -137,12 +139,18 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
                 onOpenTimeline: () => context.go(Routes.movement),
                 onOpenCycle: () => context.go(Routes.cycle),
                 onOpenCoach: () => context.go(Routes.coach),
+                onOpenProgress: () => context.go(Routes.progress),
               ),
               routes: [
                 GoRoute(
                   path: 'tips',
                   builder: (context, _) =>
                       TipsScreen(onBack: () => context.go(Routes.today)),
+                ),
+                GoRoute(
+                  path: 'progress',
+                  builder: (context, _) =>
+                      ProgressScreen(onBack: () => context.go(Routes.today)),
                 ),
                 GoRoute(
                   path: 'coach',
