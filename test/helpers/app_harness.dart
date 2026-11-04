@@ -21,6 +21,8 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
+import 'package:bmi_health/features/body/photos/photos_provider.dart';
+import 'package:bmi_health/features/body/photos/photo_vault.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -39,6 +41,8 @@ typedef AppState = ({
   StepsProvider steps,
   MovementProvider movement,
   CycleProvider cycle,
+  PhotosProvider photos,
+  Directory photosDir,
 });
 
 /// Launches the real app as a returning user who has already answered (or
@@ -82,11 +86,14 @@ Future<AppState> launchApp(
   final purchases = PurchaseService(publicKey: '');
   final recoveryProvider = RecoveryProvider(source: recovery);
   final cycle = CycleProvider(db, lock: lock);
+  final photosDir = Directory('${dir.path}/photos');
+  final photos = PhotosProvider(
+      db, () async => PhotoVault(photosDir, keys: MemoryKeyStore()));
   final catalog = ExerciseCatalog.parse(
       File('assets/exercises/catalog.json').readAsStringSync());
   await tester.runAsync(() => Future.wait([
         settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-        fuel.load(), stepsProvider.load(), movement.load(), recoveryProvider.load(), cycle.load(),
+        fuel.load(), stepsProvider.load(), movement.load(), recoveryProvider.load(), cycle.load(), photos.load(),
       ]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
@@ -100,6 +107,7 @@ Future<AppState> launchApp(
     purchases: purchases,
     recovery: recoveryProvider,
     cycle: cycle,
+    photos: photos,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));
@@ -111,6 +119,8 @@ Future<AppState> launchApp(
     workouts: workouts, fuel: fuel, steps: stepsProvider,
     movement: movement,
     cycle: cycle,
+    photos: photos,
+    photosDir: photosDir,
   );
 }
 
@@ -119,3 +129,13 @@ Future<void> pressBack(WidgetTester tester) async {
   await tester.binding.handlePopRoute();
   await tester.pumpAndSettle();
 }
+
+/// In-memory key store for the photo vault (no platform keychain in tests).
+class MemoryKeyStore implements KeyStore {
+  String? value;
+  @override
+  Future<String?> read() async => value;
+  @override
+  Future<void> write(String v) async => value = v;
+}
+

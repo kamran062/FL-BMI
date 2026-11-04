@@ -19,6 +19,9 @@ import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
+import 'package:bmi_health/features/body/photos/photos_provider.dart';
+import 'package:bmi_health/features/body/photos/photo_vault.dart';
+import 'package:bmi_health/core/storage/backup_exclusion.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,10 +53,12 @@ void main() async {
     final purchases = PurchaseService.instance;
     final recovery = RecoveryProvider();
     final cycle = CycleProvider(db);
+    final photos = PhotosProvider(
+        db, () async => PhotoVault(await BackupExclusion.photosDir()));
     final catalog = await ExerciseCatalog.loadBundled();
     await Future.wait([
       settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-      fuel.load(), steps.load(), movement.load(), recovery.load(), cycle.load(),
+      fuel.load(), steps.load(), movement.load(), recovery.load(), cycle.load(), photos.load(),
     ]);
 
     runApp(BmiHealthProviders(
@@ -68,6 +73,7 @@ void main() async {
       purchases: purchases,
       recovery: recovery,
       cycle: cycle,
+      photos: photos,
       catalog: catalog,
       child: const BmiHealthApp(),
     ));
@@ -78,5 +84,6 @@ void main() async {
     // Store connection after the first frame too; premium state is read
     // from the saved signed entitlement inside.
     purchases.init();
+    BackupExclusion.apply();
   });
 }

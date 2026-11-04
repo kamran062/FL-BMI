@@ -50,10 +50,16 @@ If you turn on **Tracking** in the App, it records your phone's location about o
 ### 1.5 Cycle Tracking (optional)
 If you turn on cycle tracking, the period dates and symptoms you enter are stored **only on your device**. They are never uploaded, shared, used for advertising or included in crash reports. You can lock this data behind your fingerprint, face or PIN, and delete all of it at any time from Settings.
 
-### 1.6 Premium Purchases (optional)
+### 1.6 Progress Photos (optional)
+Progress photos you add are encrypted and stored in the App's private storage on your device. They are not added to your photo gallery, never uploaded, and deleting a photo removes it from the device.
+
+### 1.7 Device Backups
+To keep your health data on your device, the App opts out of Android cloud backup and device-to-device transfer, and excludes its data from iCloud device backups. This means your App data is not restored when you move to a new phone.
+
+### 1.8 Premium Purchases (optional)
 If you buy Premium, the App sends the store's purchase receipt (purchase token or transaction ID, and the product bought) to our verification service, which checks it with Google Play or Apple and returns a signed confirmation. The service stores nothing and does not receive your name, email, health data or location. Payment details are handled entirely by Google Play or Apple.
 
-### 1.7 Crash Reports (via Sentry)
+### 1.9 Crash Reports (via Sentry)
 If the App crashes or hits a technical error, an anonymous crash report may be sent to Sentry, our crash-reporting service. A report contains:
 
 - Device model, operating system and version
@@ -92,7 +98,7 @@ You can opt out of personalized advertising by going to:
 **Settings → Google → Ads → Opt out of Ads Personalization** on your Android device.
 
 ### Sentry
-We use Sentry to receive anonymous crash reports (see section 1.7). Sentry processes this data under its own privacy policy:
+We use Sentry to receive anonymous crash reports (see section 1.9). Sentry processes this data under its own privacy policy:
 [https://sentry.io/privacy/](https://sentry.io/privacy/)
 
 ---

@@ -2511,5 +2511,47 @@
   "offAttribution": "Product data: Open Food Facts (ODbL)",
   "@offAttribution": {
     "description": "Data source credit"
+  },
+  "progressPhotos": "Progress photos",
+  "@progressPhotos": {
+    "description": "Card title"
+  },
+  "progressPhotosBody": "Private: encrypted on this phone and never added to your gallery.",
+  "@progressPhotosBody": {
+    "description": "Explains photo privacy"
+  },
+  "addPhoto": "Add photo",
+  "@addPhoto": {
+    "description": "Button"
+  },
+  "takePhoto": "Take photo",
+  "@takePhoto": {
+    "description": "Picker option"
+  },
+  "chooseFromGallery": "Choose from gallery",
+  "@chooseFromGallery": {
+    "description": "Picker option"
+  },
+  "comparePhotos": "Compare first and latest",
+  "@comparePhotos": {
+    "description": "Button"
+  },
+  "deletePhoto": "Delete photo",
+  "@deletePhoto": {
+    "description": "Button"
+  },
+  "deletePhotoConfirm": "This permanently deletes the photo from this phone.",
+  "@deletePhotoConfirm": {
+    "description": "Confirmation"
+  },
+  "photoDate": "{date}",
+  "@photoDate": {
+    "description": "Date under a photo",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "Nov 4"
+      }
+    }
   }
 }

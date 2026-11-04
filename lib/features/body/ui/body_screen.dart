@@ -18,6 +18,7 @@ import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
+import 'package:bmi_health/features/body/photos/progress_photos_card.dart';
 
 /// Body tab: weight trend, body-fat estimate, measurements, BMI history.
 class BodyScreen extends StatelessWidget {
@@ -54,6 +55,8 @@ class BodyScreen extends StatelessWidget {
                 const SizedBox(height: 14),
                 _MeasurementsCard(
                     profile: profile, latest: body.latestMeasurement),
+                const SizedBox(height: 14),
+                const ProgressPhotosCard(),
                 const SizedBox(height: 14),
                 _BmiCard(bmi: lastBmi?.bmi, onOpen: onOpenBmiHistory),
                 const SizedBox(height: 10),

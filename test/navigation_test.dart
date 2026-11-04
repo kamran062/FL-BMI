@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helpers/app_harness.dart';
@@ -26,7 +27,9 @@ void main() {
     await launchApp(tester);
     await tester.tap(find.text('Body'));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Calculate BMI'));
+    await tester.scrollUntilVisible(find.text('Calculate BMI'), 300,
+        scrollable: find.byType(Scrollable).first);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Calculate BMI'));
     await tester.pumpAndSettle();
     expect(find.text('BMI Calculator'), findsOneWidget);

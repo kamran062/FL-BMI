@@ -14,7 +14,7 @@ class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 8;
+  static const schemaVersion = 9;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -163,6 +163,17 @@ class DatabaseHelper {
         CREATE TABLE cycle_symptoms (
           date TEXT PRIMARY KEY,
           symptoms TEXT NOT NULL
+        )
+      ''');
+    },
+    // 8 → 9: progress photos (encrypted files; this table holds metadata)
+    (db) async {
+      await db.execute('''
+        CREATE TABLE progress_photos (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date INTEGER NOT NULL,
+          file TEXT NOT NULL,
+          weight_kg REAL
         )
       ''');
     },
@@ -452,6 +463,21 @@ class DatabaseHelper {
     await d.delete('periods');
     await d.delete('cycle_symptoms');
   }
+
+  // ── Progress photos ──────────────────────────────────────────
+
+  Future<List<Map<String, Object?>>> getProgressPhotos() async =>
+      (await db).query('progress_photos', orderBy: 'date ASC');
+
+  Future<int> insertProgressPhoto(DateTime date, String file, double? weightKg) async =>
+      (await db).insert('progress_photos', {
+        'date': date.millisecondsSinceEpoch,
+        'file': file,
+        'weight_kg': weightKg,
+      });
+
+  Future<void> deleteProgressPhoto(int id) async =>
+      (await db).delete('progress_photos', where: 'id = ?', whereArgs: [id]);
 
   // ── BMI Entries ──────────────────────────────────────────────
 

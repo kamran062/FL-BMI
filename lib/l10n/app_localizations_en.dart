@@ -1738,4 +1738,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get offAttribution => 'Product data: Open Food Facts (ODbL)';
+
+  @override
+  String get progressPhotos => 'Progress photos';
+
+  @override
+  String get progressPhotosBody => 'Private: encrypted on this phone and never added to your gallery.';
+
+  @override
+  String get addPhoto => 'Add photo';
+
+  @override
+  String get takePhoto => 'Take photo';
+
+  @override
+  String get chooseFromGallery => 'Choose from gallery';
+
+  @override
+  String get comparePhotos => 'Compare first and latest';
+
+  @override
+  String get deletePhoto => 'Delete photo';
+
+  @override
+  String get deletePhotoConfirm => 'This permanently deletes the photo from this phone.';
+
+  @override
+  String photoDate(String date) {
+    return '$date';
+  }
 }

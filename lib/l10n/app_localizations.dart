@@ -3190,6 +3190,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Product data: Open Food Facts (ODbL)'**
   String get offAttribution;
+
+  /// Card title
+  ///
+  /// In en, this message translates to:
+  /// **'Progress photos'**
+  String get progressPhotos;
+
+  /// Explains photo privacy
+  ///
+  /// In en, this message translates to:
+  /// **'Private: encrypted on this phone and never added to your gallery.'**
+  String get progressPhotosBody;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Add photo'**
+  String get addPhoto;
+
+  /// Picker option
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo'**
+  String get takePhoto;
+
+  /// Picker option
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get chooseFromGallery;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Compare first and latest'**
+  String get comparePhotos;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete photo'**
+  String get deletePhoto;
+
+  /// Confirmation
+  ///
+  /// In en, this message translates to:
+  /// **'This permanently deletes the photo from this phone.'**
+  String get deletePhotoConfirm;
+
+  /// Date under a photo
+  ///
+  /// In en, this message translates to:
+  /// **'{date}'**
+  String photoDate(String date);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

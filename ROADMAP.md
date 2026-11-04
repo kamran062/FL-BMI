@@ -578,6 +578,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Testing:** prompt evaluation set (200+ questions covering unsafe and medical questions), cost per user monitoring, rate limiting
 
 ### 4.6 Progress photos
+
+> **Status: done.** Camera or gallery (downscaled to 1440 px), AES-256-GCM encrypted into the app's private folder with the key in Android Keystore / iOS Keychain; never written to the gallery; tamper-evident; thumbnails, full view, first-vs-latest side-by-side with dates and weight; delete removes the file. **Also fixed app-wide:** Android cloud backup and device transfer were on by default (health, location and cycle data were going to Google Drive) — now off via allowBackup=false + data extraction rules; on iOS the database and photo folders are excluded from iCloud backup. Not yet: pose guide overlay, choosing which two photos to compare.
 - Pose-guided capture (outline overlay so every photo has the same angle)
 - Before / after slider and monthly collage
 - Stored encrypted in app storage; hidden from the phone's gallery

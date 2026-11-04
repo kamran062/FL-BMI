@@ -23,6 +23,10 @@ void main() {
     await openBody(tester);
     expect(find.text('Log your weight regularly to see your trend.'),
         findsOneWidget);
+    // Lower cards are built lazily; scroll down to them
+    await tester.scrollUntilVisible(
+        find.text('For general wellness only. Not medical advice.'), 300,
+        scrollable: find.byType(Scrollable).first);
     expect(find.text('No BMI saved yet'), findsOneWidget);
     expect(find.text('For general wellness only. Not medical advice.'),
         findsOneWidget);

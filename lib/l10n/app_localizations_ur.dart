@@ -1731,4 +1731,33 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get offAttribution => 'پروڈکٹ ڈیٹا: اوپن فوڈ فیکٹس (ODbL)';
+
+  @override
+  String get progressPhotos => 'پیش رفت کی تصاویر';
+
+  @override
+  String get progressPhotosBody => 'نجی: اس فون پر خفیہ کردہ اور آپ کی گیلری میں کبھی شامل نہیں۔';
+
+  @override
+  String get addPhoto => 'تصویر شامل کریں';
+
+  @override
+  String get takePhoto => 'تصویر لیں';
+
+  @override
+  String get chooseFromGallery => 'گیلری سے منتخب کریں';
+
+  @override
+  String get comparePhotos => 'پہلی اور تازہ ترین کا موازنہ کریں';
+
+  @override
+  String get deletePhoto => 'تصویر حذف کریں';
+
+  @override
+  String get deletePhotoConfirm => 'یہ تصویر اس فون سے مستقل طور پر حذف کر دے گا۔';
+
+  @override
+  String photoDate(String date) {
+    return '$date';
+  }
 }

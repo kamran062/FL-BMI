@@ -515,5 +515,14 @@
   "portionTotalKcal": "{kcal} کیلوری",
   "logThis": "درج کریں",
   "foodLogged": "درج ہو گیا: {name}",
-  "offAttribution": "پروڈکٹ ڈیٹا: اوپن فوڈ فیکٹس (ODbL)"
+  "offAttribution": "پروڈکٹ ڈیٹا: اوپن فوڈ فیکٹس (ODbL)",
+  "progressPhotos": "پیش رفت کی تصاویر",
+  "progressPhotosBody": "نجی: اس فون پر خفیہ کردہ اور آپ کی گیلری میں کبھی شامل نہیں۔",
+  "addPhoto": "تصویر شامل کریں",
+  "takePhoto": "تصویر لیں",
+  "chooseFromGallery": "گیلری سے منتخب کریں",
+  "comparePhotos": "پہلی اور تازہ ترین کا موازنہ کریں",
+  "deletePhoto": "تصویر حذف کریں",
+  "deletePhotoConfirm": "یہ تصویر اس فون سے مستقل طور پر حذف کر دے گا۔",
+  "photoDate": "{date}"
 }
