@@ -208,6 +208,8 @@ class _PassphraseDialogState extends State<_PassphraseDialog> {
       content: SingleChildScrollView(
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(widget.confirm ? l.backupBody : l.restoreWarning),
+          // Room for the field's floating label
+          const SizedBox(height: 12),
           TextField(
             controller: _pass,
             obscureText: true,
