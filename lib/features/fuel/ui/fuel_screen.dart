@@ -13,6 +13,8 @@ import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/features/fuel/barcode/scan_food_screen.dart';
+import 'package:bmi_health/features/coach/ai_client.dart';
+import 'package:bmi_health/features/coach/photo_estimate_screen.dart';
 
 /// Fuel tab: calorie & macro targets, quick food log, water.
 class FuelScreen extends StatelessWidget {
@@ -97,6 +99,16 @@ class FuelScreen extends StatelessWidget {
                     ),
                   ),
                 ]),
+                if (context.read<AiClient>().foodPhotoEnabled) ...[
+                  const SizedBox(height: 10),
+                  AppButton(
+                    label: l.photoEstimate,
+                    icon: Icons.photo_camera_outlined,
+                    variant: AppButtonVariant.secondary,
+                    fullWidth: true,
+                    onPressed: () => startPhotoEstimate(context),
+                  ),
+                ],
                 const SizedBox(height: 14),
                 if (fuel.food.isEmpty)
                   Text(l.foodEmpty,

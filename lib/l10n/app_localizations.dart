@@ -3244,6 +3244,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{date}'**
   String photoDate(String date);
+
+  /// Coach screen title and card
+  ///
+  /// In en, this message translates to:
+  /// **'AI coach'**
+  String get coachTitle;
+
+  /// Today card text
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about training, food or recovery.'**
+  String get coachCardBody;
+
+  /// Chat input hint
+  ///
+  /// In en, this message translates to:
+  /// **'Ask a question…'**
+  String get coachHint;
+
+  /// First coach message
+  ///
+  /// In en, this message translates to:
+  /// **'Hi! I can help with workouts, nutrition, recovery and habits. I\'m not a doctor, so for medical questions please see a professional.'**
+  String get coachWelcome;
+
+  /// Consent dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Before you start'**
+  String get aiConsentTitle;
+
+  /// Consent dialog text
+  ///
+  /// In en, this message translates to:
+  /// **'Your questions, and a short profile summary (age, sex, weight, goal, experience, training days), are sent to our server and to Anthropic\'s Claude AI to write answers. Photos you send for a calorie estimate are sent the same way. Nothing is stored or used for ads. Answers are general guidance, not medical advice.'**
+  String get aiConsentBody;
+
+  /// Consent button
+  ///
+  /// In en, this message translates to:
+  /// **'I agree'**
+  String get aiAgree;
+
+  /// Rate limit message
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve reached today\'s limit. Try again tomorrow.'**
+  String get aiLimit;
+
+  /// Network error
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the coach. Check your connection and try again.'**
+  String get aiUnavailable;
+
+  /// Shown while waiting
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking…'**
+  String get coachThinking;
+
+  /// Fuel button
+  ///
+  /// In en, this message translates to:
+  /// **'Photo estimate'**
+  String get photoEstimate;
+
+  /// Progress
+  ///
+  /// In en, this message translates to:
+  /// **'Estimating calories…'**
+  String get photoEstimating;
+
+  /// Not food
+  ///
+  /// In en, this message translates to:
+  /// **'That doesn\'t look like food. Try another photo.'**
+  String get photoNotFood;
+
+  /// Estimate disclaimer
+  ///
+  /// In en, this message translates to:
+  /// **'AI estimate from a photo — portions can be off by 20–40%. Adjust if you know better.'**
+  String get photoEstimateNote;
+
+  /// Confidence label
+  ///
+  /// In en, this message translates to:
+  /// **'Low confidence'**
+  String get photoConfidenceLow;
+
+  /// Total of selected items
+  ///
+  /// In en, this message translates to:
+  /// **'Total: {kcal} kcal'**
+  String photoTotal(int kcal);
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Log selected'**
+  String get logSelected;
+
+  /// Added after food names logged from a photo
+  ///
+  /// In en, this message translates to:
+  /// **'(estimate)'**
+  String get estimateSuffix;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

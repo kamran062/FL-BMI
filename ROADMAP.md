@@ -564,13 +564,15 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 4.4 Food logging, barcode scanner & food photo estimate
 
-> **Status: barcode done; photo estimate with 4.5.** EAN/UPC scanning (mobile_scanner 7.0.1 — newer versions need AGP 8.9/SDK 36), Open Food Facts lookup (kcal, kJ fallback, protein, serving size; nonsense values rejected), serving/50/100/200 g or custom grams, logs kcal + protein, last 60 products cached for offline, manual entry fallback for not found / no nutrition / offline, ODbL credit shown. **Still to do:** the 100-local-products accuracy check (Pakistani products are thinly covered in Open Food Facts — expect many "not found"); carbs/fat logging.
+> **Status: barcode done; photo estimate built (see 4.5).** EAN/UPC scanning (mobile_scanner 7.0.1 — newer versions need AGP 8.9/SDK 36), Open Food Facts lookup (kcal, kJ fallback, protein, serving size; nonsense values rejected), serving/50/100/200 g or custom grams, logs kcal + protein, last 60 products cached for offline, manual entry fallback for not found / no nutrition / offline, ODbL credit shown. **Still to do:** the 100-local-products accuracy check (Pakistani products are thinly covered in Open Food Facts — expect many "not found"); carbs/fat logging.
 - Food database search and barcode scanning (Open Food Facts API, cached locally)
 - Food photo → estimated calories and macros using a vision AI model. The user always confirms or edits the result.
 - Pakistani / South Asian food entries (roti, daal, biryani, etc.) added to the local database
 - **Testing:** barcode accuracy on 100 local products; photo estimate compared with known portions (shown clearly as an estimate)
 
 ### 4.5 AI coach
+
+> **Status: built; needs your Anthropic key + deploy.** Firebase functions `coach` and `estimateFood` call Claude Opus 5.5 (`claude-opus-5-5`; effort low for chat, medium for photos; server-side refusal fallback on). Emergencies (chest pain, fainting, self-harm…) get a fixed "contact 1122 / a doctor" reply without calling the AI; system prompt limits it to general fitness, no diagnosis, no extreme diets. Input validation, profile values whitelisted (no prompt injection via profile), 30 chats / 15 photos per install per day via Firestore counters, nothing stored or logged. App: one-time consent dialog naming what is sent, chat kept in memory only, food-photo estimate with per-item selection, "(estimate)" label and a ±20–40 % note. Hidden until `COACH_URL` / `FOOD_PHOTO_URL` are set. **Still required before launch:** the 200-question prompt evaluation set (unsafe + medical questions), Firebase App Check, an Anthropic spend limit, Urdu reply review, and the photo-estimate accuracy check against known portions.
 - Weekly summary written in plain language (English / Urdu)
 - Chat with a coach about workouts and nutrition; can generate or adjust a program
 - Guardrails: no medical diagnosis, an emergency-symptom warning, and the disclaimer

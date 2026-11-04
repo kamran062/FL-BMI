@@ -22,6 +22,7 @@ import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/body/photos/photo_vault.dart';
 import 'package:bmi_health/core/storage/backup_exclusion.dart';
+import 'package:bmi_health/features/coach/ai_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,6 +75,7 @@ void main() async {
       recovery: recovery,
       cycle: cycle,
       photos: photos,
+      ai: AiClient(),
       catalog: catalog,
       child: const BmiHealthApp(),
     ));

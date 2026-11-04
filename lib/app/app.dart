@@ -18,6 +18,7 @@ import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/body/photos/photos_provider.dart';
+import 'package:bmi_health/features/coach/ai_client.dart';
 
 /// Supplies the app-wide state objects. Used by main() and by tests.
 class BmiHealthProviders extends StatelessWidget {
@@ -35,6 +36,7 @@ class BmiHealthProviders extends StatelessWidget {
     required this.recovery,
     required this.cycle,
     required this.photos,
+    required this.ai,
     required this.catalog,
     required this.child,
   });
@@ -51,6 +53,7 @@ class BmiHealthProviders extends StatelessWidget {
   final RecoveryProvider recovery;
   final CycleProvider cycle;
   final PhotosProvider photos;
+  final AiClient ai;
   final ExerciseCatalog catalog;
   final Widget child;
 
@@ -69,6 +72,7 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: recovery),
           ChangeNotifierProvider.value(value: cycle),
           ChangeNotifierProvider.value(value: photos),
+          Provider.value(value: ai),
           Provider.value(value: catalog),
         ],
         child: child,

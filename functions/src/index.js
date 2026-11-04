@@ -97,3 +97,60 @@ exports.verifyPurchase = onRequest(
     }
   },
 );
+
+// ── AI coach & food-photo estimate ──────────────────────────────────────────
+//   firebase functions:secrets:set ANTHROPIC_API_KEY
+// Daily per-install usage counters live in Firestore (collection ai_usage);
+// documents hold only a count — no messages or photos are stored.
+
+const ANTHROPIC_API_KEY = defineSecret('ANTHROPIC_API_KEY');
+const ai = require('./ai');
+
+let _admin;
+function firestoreStore() {
+  if (!_admin) {
+    _admin = require('firebase-admin');
+    if (!_admin.apps.length) _admin.initializeApp();
+  }
+  const db = _admin.firestore();
+  return {
+    increment: (key) => db.runTransaction(async (tx) => {
+      const ref = db.collection('ai_usage').doc(key);
+      const snap = await tx.get(ref);
+      const count = (snap.exists ? snap.get('count') : 0) + 1;
+      // expireAt lets a Firestore TTL policy delete old counters.
+      tx.set(ref, { count, expireAt: new Date(Date.now() + 3 * 864e5) });
+      return count;
+    }),
+  };
+}
+
+function aiEndpoint(handler) {
+  return onRequest(
+    { region: 'us-central1', secrets: [ANTHROPIC_API_KEY], maxInstances: 10, timeoutSeconds: 120, cors: false },
+    async (req, res) => {
+      if (req.method !== 'POST') {
+        res.status(405).send('POST only');
+        return;
+      }
+      try {
+        const Anthropic = require('@anthropic-ai/sdk');
+        const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
+        res.json(await handler(req.body, { client, store: firestoreStore(), now: new Date() }));
+      } catch (e) {
+        if (e instanceof ai.BadRequest) {
+          res.status(400).json({ error: e.message });
+        } else if (e instanceof ai.RateLimited) {
+          res.status(429).json({ error: 'daily_limit' });
+        } else {
+          // Never log message text or images.
+          console.error('ai endpoint failed:', e && e.constructor && e.constructor.name, e && e.status);
+          res.status(502).json({ error: 'unavailable' });
+        }
+      }
+    },
+  );
+}
+
+exports.coach = aiEndpoint(ai.coach);
+exports.estimateFood = aiEndpoint(ai.estimateFood);

@@ -23,6 +23,7 @@ import 'package:bmi_health/features/recovery/recovery_provider.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/body/photos/photo_vault.dart';
+import 'package:bmi_health/features/coach/ai_client.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -54,6 +55,7 @@ Future<AppState> launchApp(
   StepsSource? steps,
   RecoverySource? recovery,
   AppLock? lock,
+  AiClient? ai,
 }) async {
   // iPhone 14-sized screen instead of the default 800×600 test surface
   tester.view.physicalSize = const Size(1170, 2532);
@@ -108,6 +110,8 @@ Future<AppState> launchApp(
     recovery: recoveryProvider,
     cycle: cycle,
     photos: photos,
+    // Unconfigured by default: AI features hidden, as in builds without URLs
+    ai: ai ?? AiClient(coachUrl: '', foodUrl: ''),
     catalog: catalog,
     child: const BmiHealthApp(),
   ));
