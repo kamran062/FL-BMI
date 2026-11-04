@@ -15,6 +15,7 @@ import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_theme.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
+import 'package:bmi_health/features/recovery/recovery_provider.dart';
 
 /// Supplies the app-wide state objects. Used by main() and by tests.
 class BmiHealthProviders extends StatelessWidget {
@@ -29,6 +30,7 @@ class BmiHealthProviders extends StatelessWidget {
     required this.steps,
     required this.movement,
     required this.purchases,
+    required this.recovery,
     required this.catalog,
     required this.child,
   });
@@ -42,6 +44,7 @@ class BmiHealthProviders extends StatelessWidget {
   final StepsProvider steps;
   final MovementProvider movement;
   final PurchaseService purchases;
+  final RecoveryProvider recovery;
   final ExerciseCatalog catalog;
   final Widget child;
 
@@ -57,6 +60,7 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: steps),
           ChangeNotifierProvider.value(value: movement),
           ChangeNotifierProvider.value(value: purchases),
+          ChangeNotifierProvider.value(value: recovery),
           Provider.value(value: catalog),
         ],
         child: child,
@@ -98,6 +102,7 @@ class _BmiHealthAppState extends State<BmiHealthApp>
     context.read<StepsProvider>().refresh();
     context.read<FuelProvider>().load();
     context.read<MovementProvider>().refresh();
+    context.read<RecoveryProvider>().refresh();
     final path = _router.routerDelegate.currentConfiguration.uri.path;
     if (path == Routes.splash || path == Routes.onboarding) return;
     AdService.instance.showAppOpenIfReady();

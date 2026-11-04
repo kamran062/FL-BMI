@@ -22,6 +22,7 @@ import 'package:bmi_health/features/movement/steps_provider.dart';
 import 'dart:io' show Platform;
 import 'package:bmi_health/features/movement/movement_provider.dart';
 import 'package:bmi_health/features/movement/ui/timeline_screen.dart';
+import 'package:bmi_health/features/recovery/ui/recovery_card.dart';
 
 /// Home dashboard: the day at a glance with one-tap actions.
 class TodayScreen extends StatelessWidget {
@@ -119,6 +120,7 @@ class TodayScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 14),
+                const RecoveryCard(),
                 const _StepsCard(),
                 _MovementCard(onOpen: onOpenTimeline),
                 // ── Fuel ───────────────────────────────────────────────

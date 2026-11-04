@@ -19,6 +19,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
+import 'package:bmi_health/features/recovery/recovery_provider.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -45,6 +46,7 @@ Future<AppState> launchApp(
   WidgetTester tester, {
   Map<String, Object> prefs = const {},
   StepsSource? steps,
+  RecoverySource? recovery,
 }) async {
   // iPhone 14-sized screen instead of the default 800×600 test surface
   tester.view.physicalSize = const Size(1170, 2532);
@@ -75,11 +77,12 @@ Future<AppState> launchApp(
   final movement = MovementProvider(db);
   // Unconfigured: premium hidden, as in builds without the server URL
   final purchases = PurchaseService(publicKey: '');
+  final recoveryProvider = RecoveryProvider(source: recovery);
   final catalog = ExerciseCatalog.parse(
       File('assets/exercises/catalog.json').readAsStringSync());
   await tester.runAsync(() => Future.wait([
         settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-        fuel.load(), stepsProvider.load(), movement.load(),
+        fuel.load(), stepsProvider.load(), movement.load(), recoveryProvider.load(),
       ]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
@@ -91,6 +94,7 @@ Future<AppState> launchApp(
     steps: stepsProvider,
     movement: movement,
     purchases: purchases,
+    recovery: recoveryProvider,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));

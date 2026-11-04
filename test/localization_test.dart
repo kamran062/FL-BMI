@@ -67,6 +67,7 @@ void main() {
   testWidgets('choosing Urdu shows Urdu text right-to-left', (tester) async {
     await launchApp(tester, prefs: {'language': 'ur'});
 
+    await scrollToBmiTile(tester);
     expect(find.text('بی ایم آئی معلوم کریں'), findsOneWidget); // Calculate BMI
     expect(find.text('ترتیبات'), findsOneWidget); // Settings tab
     final dir = Directionality.of(tester.element(find.text('بی ایم آئی معلوم کریں')));
@@ -80,6 +81,18 @@ void main() {
     expect(find.text('ڈارک موڈ'), findsOneWidget); // Dark mode
 
     await pressBack(tester);
+    expect(find.text('آج'), findsWidgets); // back on the Today tab
+    await scrollToBmiTile(tester);
     expect(find.text('بی ایم آئی معلوم کریں'), findsOneWidget);
   });
+}
+
+/// The BMI tile sits below the fold on Today; scroll until it is built.
+Future<void> scrollToBmiTile(WidgetTester tester) async {
+  await tester.scrollUntilVisible(
+    find.text('بی ایم آئی معلوم کریں'),
+    300,
+    scrollable: find.byType(Scrollable).first,
+  );
+  await tester.pumpAndSettle();
 }

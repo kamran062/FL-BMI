@@ -1472,4 +1472,75 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get thanksNote => 'بی ایم آئی ہیلتھ کی مدد کا شکریہ۔';
+
+  @override
+  String get recoveryTitle => 'بحالی';
+
+  @override
+  String recoveryScore(int score) {
+    return '$score / 100';
+  }
+
+  @override
+  String get adviceTrainHard => 'آج سخت ورزش کے لیے اچھا دن ہے';
+
+  @override
+  String get adviceTrainLight => 'آج ہلکی ورزش کریں: آسان سیٹ یا کارڈیو';
+
+  @override
+  String get adviceRest => 'آج آرام کریں یا ہلکی چہل قدمی';
+
+  @override
+  String get limiterSleep => 'کم نیند کی وجہ سے کم';
+
+  @override
+  String get limiterRestingHr => 'آرام کی دل کی دھڑکن معمول سے زیادہ ہے';
+
+  @override
+  String get limiterHrv => 'دل کی دھڑکن کا تغیر معمول سے کم ہے';
+
+  @override
+  String get limiterLoad => 'آپ نے حال ہی میں معمول سے بہت زیادہ ورزش کی ہے';
+
+  @override
+  String get limiterSoreness => 'آپ کے پٹھوں میں درد ہے';
+
+  @override
+  String get sorenessQuestion => 'آج آپ کے پٹھوں میں کتنا درد ہے؟';
+
+  @override
+  String get sorenessScale => '1 = بالکل نہیں، 5 = بہت زیادہ';
+
+  @override
+  String get connectSleepHeart => 'نیند اور دل کا ڈیٹا جوڑیں';
+
+  @override
+  String get connectSleepHeartBody => 'اختیاری: زیادہ درست اسکور کے لیے آپ کی گھڑی یا فون سے نیند، آرام کی دل کی دھڑکن اور HRV شامل کرتا ہے۔';
+
+  @override
+  String get recoveryEmpty => 'اپنی بحالی دیکھنے کے لیے سوال کا جواب دیں یا ورزش درج کریں۔';
+
+  @override
+  String get sleepTitle => 'نیند';
+
+  @override
+  String sleepLastNight(String time) {
+    return 'گزشتہ رات: $time';
+  }
+
+  @override
+  String sleepAverage(String time) {
+    return '7 راتوں کی اوسط: $time';
+  }
+
+  @override
+  String sleepDebt(String time) {
+    return 'اس ہفتے نیند کی کمی: $time';
+  }
+
+  @override
+  String get sleepRegular => 'آپ کے سونے کے اوقات باقاعدہ ہیں، جو نیند کے معیار میں مدد کرتا ہے۔';
+
+  @override
+  String get sleepIrregular => 'سونے کے اوقات میں بہت فرق ہے۔ ایک مقررہ وقت عموماً نیند بہتر بناتا ہے۔';
 }

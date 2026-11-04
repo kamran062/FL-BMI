@@ -1479,4 +1479,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thanksNote => 'Thank you for supporting BMI Health.';
+
+  @override
+  String get recoveryTitle => 'Recovery';
+
+  @override
+  String recoveryScore(int score) {
+    return '$score / 100';
+  }
+
+  @override
+  String get adviceTrainHard => 'Good day to train hard';
+
+  @override
+  String get adviceTrainLight => 'Train light today: easier sets or cardio';
+
+  @override
+  String get adviceRest => 'Rest or gentle movement today';
+
+  @override
+  String get limiterSleep => 'Held back by short sleep';
+
+  @override
+  String get limiterRestingHr => 'Resting heart rate is higher than usual';
+
+  @override
+  String get limiterHrv => 'Heart-rate variability is lower than usual';
+
+  @override
+  String get limiterLoad => 'You\'ve trained much more than usual lately';
+
+  @override
+  String get limiterSoreness => 'You\'re feeling sore';
+
+  @override
+  String get sorenessQuestion => 'How sore are you today?';
+
+  @override
+  String get sorenessScale => '1 = not at all, 5 = very';
+
+  @override
+  String get connectSleepHeart => 'Connect sleep & heart data';
+
+  @override
+  String get connectSleepHeartBody => 'Optional: adds sleep, resting heart rate and HRV from your watch or phone for a more accurate score.';
+
+  @override
+  String get recoveryEmpty => 'Answer the check-in or log a workout to see your recovery.';
+
+  @override
+  String get sleepTitle => 'Sleep';
+
+  @override
+  String sleepLastNight(String time) {
+    return 'Last night: $time';
+  }
+
+  @override
+  String sleepAverage(String time) {
+    return '7-night average: $time';
+  }
+
+  @override
+  String sleepDebt(String time) {
+    return 'Sleep debt this week: $time';
+  }
+
+  @override
+  String get sleepRegular => 'Your bedtimes are regular, which helps sleep quality.';
+
+  @override
+  String get sleepIrregular => 'Bedtimes vary a lot. A steadier bedtime usually improves sleep.';
 }

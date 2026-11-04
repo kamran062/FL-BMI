@@ -2728,6 +2728,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thank you for supporting BMI Health.'**
   String get thanksNote;
+
+  /// Card title
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery'**
+  String get recoveryTitle;
+
+  /// Recovery score
+  ///
+  /// In en, this message translates to:
+  /// **'{score} / 100'**
+  String recoveryScore(int score);
+
+  /// Recovery advice
+  ///
+  /// In en, this message translates to:
+  /// **'Good day to train hard'**
+  String get adviceTrainHard;
+
+  /// Recovery advice
+  ///
+  /// In en, this message translates to:
+  /// **'Train light today: easier sets or cardio'**
+  String get adviceTrainLight;
+
+  /// Recovery advice
+  ///
+  /// In en, this message translates to:
+  /// **'Rest or gentle movement today'**
+  String get adviceRest;
+
+  /// Main reason for a lower score
+  ///
+  /// In en, this message translates to:
+  /// **'Held back by short sleep'**
+  String get limiterSleep;
+
+  /// Main reason for a lower score
+  ///
+  /// In en, this message translates to:
+  /// **'Resting heart rate is higher than usual'**
+  String get limiterRestingHr;
+
+  /// Main reason for a lower score
+  ///
+  /// In en, this message translates to:
+  /// **'Heart-rate variability is lower than usual'**
+  String get limiterHrv;
+
+  /// Main reason for a lower score
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve trained much more than usual lately'**
+  String get limiterLoad;
+
+  /// Main reason for a lower score
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re feeling sore'**
+  String get limiterSoreness;
+
+  /// Soreness check-in
+  ///
+  /// In en, this message translates to:
+  /// **'How sore are you today?'**
+  String get sorenessQuestion;
+
+  /// Soreness scale hint
+  ///
+  /// In en, this message translates to:
+  /// **'1 = not at all, 5 = very'**
+  String get sorenessScale;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Connect sleep & heart data'**
+  String get connectSleepHeart;
+
+  /// Explains the connection
+  ///
+  /// In en, this message translates to:
+  /// **'Optional: adds sleep, resting heart rate and HRV from your watch or phone for a more accurate score.'**
+  String get connectSleepHeartBody;
+
+  /// Shown with no data
+  ///
+  /// In en, this message translates to:
+  /// **'Answer the check-in or log a workout to see your recovery.'**
+  String get recoveryEmpty;
+
+  /// Card section title
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get sleepTitle;
+
+  /// Last night's sleep
+  ///
+  /// In en, this message translates to:
+  /// **'Last night: {time}'**
+  String sleepLastNight(String time);
+
+  /// Average sleep
+  ///
+  /// In en, this message translates to:
+  /// **'7-night average: {time}'**
+  String sleepAverage(String time);
+
+  /// Sleep debt
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep debt this week: {time}'**
+  String sleepDebt(String time);
+
+  /// Sleep insight
+  ///
+  /// In en, this message translates to:
+  /// **'Your bedtimes are regular, which helps sleep quality.'**
+  String get sleepRegular;
+
+  /// Sleep insight
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtimes vary a lot. A steadier bedtime usually improves sleep.'**
+  String get sleepIrregular;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

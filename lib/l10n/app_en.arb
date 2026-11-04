@@ -2107,5 +2107,113 @@
   "thanksNote": "Thank you for supporting BMI Health.",
   "@thanksNote": {
     "description": "Note after purchase"
+  },
+  "recoveryTitle": "Recovery",
+  "@recoveryTitle": {
+    "description": "Card title"
+  },
+  "recoveryScore": "{score} / 100",
+  "@recoveryScore": {
+    "description": "Recovery score",
+    "placeholders": {
+      "score": {
+        "type": "int",
+        "example": "78"
+      }
+    }
+  },
+  "adviceTrainHard": "Good day to train hard",
+  "@adviceTrainHard": {
+    "description": "Recovery advice"
+  },
+  "adviceTrainLight": "Train light today: easier sets or cardio",
+  "@adviceTrainLight": {
+    "description": "Recovery advice"
+  },
+  "adviceRest": "Rest or gentle movement today",
+  "@adviceRest": {
+    "description": "Recovery advice"
+  },
+  "limiterSleep": "Held back by short sleep",
+  "@limiterSleep": {
+    "description": "Main reason for a lower score"
+  },
+  "limiterRestingHr": "Resting heart rate is higher than usual",
+  "@limiterRestingHr": {
+    "description": "Main reason for a lower score"
+  },
+  "limiterHrv": "Heart-rate variability is lower than usual",
+  "@limiterHrv": {
+    "description": "Main reason for a lower score"
+  },
+  "limiterLoad": "You've trained much more than usual lately",
+  "@limiterLoad": {
+    "description": "Main reason for a lower score"
+  },
+  "limiterSoreness": "You're feeling sore",
+  "@limiterSoreness": {
+    "description": "Main reason for a lower score"
+  },
+  "sorenessQuestion": "How sore are you today?",
+  "@sorenessQuestion": {
+    "description": "Soreness check-in"
+  },
+  "sorenessScale": "1 = not at all, 5 = very",
+  "@sorenessScale": {
+    "description": "Soreness scale hint"
+  },
+  "connectSleepHeart": "Connect sleep & heart data",
+  "@connectSleepHeart": {
+    "description": "Button"
+  },
+  "connectSleepHeartBody": "Optional: adds sleep, resting heart rate and HRV from your watch or phone for a more accurate score.",
+  "@connectSleepHeartBody": {
+    "description": "Explains the connection"
+  },
+  "recoveryEmpty": "Answer the check-in or log a workout to see your recovery.",
+  "@recoveryEmpty": {
+    "description": "Shown with no data"
+  },
+  "sleepTitle": "Sleep",
+  "@sleepTitle": {
+    "description": "Card section title"
+  },
+  "sleepLastNight": "Last night: {time}",
+  "@sleepLastNight": {
+    "description": "Last night's sleep",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "7 h 20 min"
+      }
+    }
+  },
+  "sleepAverage": "7-night average: {time}",
+  "@sleepAverage": {
+    "description": "Average sleep",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "7 h 05 min"
+      }
+    }
+  },
+  "sleepDebt": "Sleep debt this week: {time}",
+  "@sleepDebt": {
+    "description": "Sleep debt",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "3 h 10 min"
+      }
+    }
+  },
+  "sleepRegular": "Your bedtimes are regular, which helps sleep quality.",
+  "@sleepRegular": {
+    "description": "Sleep insight"
+  },
+  "sleepIrregular": "Bedtimes vary a lot. A steadier bedtime usually improves sleep.",
+  "@sleepIrregular": {
+    "description": "Sleep insight"
   }
 }

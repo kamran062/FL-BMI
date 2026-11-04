@@ -544,11 +544,15 @@ Every module in this roadmap is only "done" when it meets all of these.
 **Goal:** daily health insight from all the data collected. **Duration:** ~8–10 weeks.
 
 ### 4.1 Recovery score
+
+> **Status: done.** 0–100 from sleep, resting HR and HRV vs. 14-day baseline (if connected), training load (last 2 days vs. 4-week norm) and a 1–5 soreness check-in; missing factors re-weighted; one very bad sign (e.g. illness HR spike) caps it at 40 → rest. Advice: train hard / light / rest plus the main limiting factor. Health data is a separate optional Connect.
 - Daily 0–100 score from sleep, resting heart rate, HRV (if a wearable provides it), training load and soreness check-in
 - Tells the user whether today is for training hard, training light or resting
 - **Testing:** unit tests with synthetic data covering missing data (no wearable), illness spikes and overtraining
 
 ### 4.2 Sleep insights
+
+> **Status: done (v1).** Watch segments merged into nights, naps ignored; last night, 7-night average, weekly sleep debt vs. 8 h, bedtime regularity. Not yet: sleep stages, trends chart, bedtime reminder.
 - Sleep duration and consistency from Health Connect / HealthKit, and bedtime reminders
 
 ### 4.3 Cycle tracking & cycle-aware training (opt-in, for female / other profiles)
