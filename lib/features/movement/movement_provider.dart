@@ -25,6 +25,26 @@ class MovementProvider extends ChangeNotifier {
   final DatabaseHelper _db;
   final DateTime Function() _now;
   static const _enabledKey = 'tracking_enabled';
+  static const _saverKey = 'tracking_battery_saver';
+  bool _batterySaver = false;
+
+  /// Fewer, coarser fixes (every 3 min, ~100 m) to save battery.
+  bool get batterySaver => _batterySaver;
+
+  /// Long silences in the shown day while tracking was on.
+  List<({DateTime from, DateTime to})> get gaps =>
+      _enabled ? TrackingGaps.find(_points) : const [];
+
+  Future<void> setBatterySaver(bool v, AppLocalizations l) async {
+    _batterySaver = v;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_saverKey, v);
+    // Restart the stream with the new settings.
+    await _sub?.cancel();
+    _sub = null;
+    notifyListeners();
+    await resume(l);
+  }
 
   StreamSubscription<Position>? _sub;
   bool _enabled = false;
@@ -56,6 +76,7 @@ class MovementProvider extends ChangeNotifier {
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     _enabled = prefs.getBool(_enabledKey) ?? false;
+    _batterySaver = prefs.getBool(_saverKey) ?? false;
     _places = await _db.getPlaces();
     _day = _dayStart(_now());
     await _rebuild();
@@ -138,13 +159,13 @@ class MovementProvider extends ChangeNotifier {
       }
       final LocationSettings settings = Platform.isAndroid
           ? AndroidSettings(
-              accuracy: LocationAccuracy.high,
+              accuracy: _batterySaver ? LocationAccuracy.medium : LocationAccuracy.high,
               // Time-based updates (no distance filter): stays need points
               // while standing still, and Android's fused provider blocks
               // distance-filtered delivery as "too fast" when the interval
               // is short. One fix a minute keeps battery use low.
               distanceFilter: 0,
-              intervalDuration: const Duration(seconds: 60),
+              intervalDuration: Duration(seconds: _batterySaver ? 180 : 60),
               foregroundNotificationConfig: ForegroundNotificationConfig(
                 notificationTitle: l.trackingNotificationTitle,
                 notificationText: l.trackingNotificationBody,
@@ -154,8 +175,8 @@ class MovementProvider extends ChangeNotifier {
               ),
             )
           : AppleSettings(
-              accuracy: LocationAccuracy.high,
-              distanceFilter: 25,
+              accuracy: _batterySaver ? LocationAccuracy.reduced : LocationAccuracy.high,
+              distanceFilter: _batterySaver ? 100 : 25,
               activityType: ActivityType.fitness,
               pauseLocationUpdatesAutomatically: true,
               showBackgroundLocationIndicator: true,

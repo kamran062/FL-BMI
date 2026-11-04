@@ -6,6 +6,7 @@ import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/l10n/l10n.dart';
+import 'package:bmi_health/core/config/legal_links.dart';
 
 class PaywallScreen extends StatefulWidget {
   final VoidCallback onClose;
@@ -438,15 +439,30 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 12, 20, 40),
-                    child: Text(
-                      _svc.isPremium ? l.thanksNote : l.renewNote,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: fg3, height: 1.5,
+                    child: Column(children: [
+                      Text(
+                        _svc.isPremium ? l.thanksNote : l.renewNote,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: fg3, height: 1.5,
+                        ),
                       ),
-                    ),
+                      // Required by Apple on any subscription screen
+                      if (LegalLinks.configured)
+                        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          TextButton(
+                            onPressed: () => LegalLinks.open(LegalLinks.terms),
+                            child: Text(l.termsOfUse),
+                          ),
+                          Text('·', style: TextStyle(color: fg3)),
+                          TextButton(
+                            onPressed: () => LegalLinks.open(LegalLinks.privacy),
+                            child: Text(l.privacyPolicy),
+                          ),
+                        ]),
+                    ]),
                   ),
                 ),
               ],

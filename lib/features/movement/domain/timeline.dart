@@ -217,3 +217,21 @@ abstract final class TimelineBuilder {
     return items;
   }
 }
+
+/// Stretches with no location fixes while tracking was on (ROADMAP risk:
+/// phone-maker battery savers killing the tracker). Fixes arrive at least
+/// every few minutes, so a long silence means tracking was stopped.
+abstract final class TrackingGaps {
+  static const minGap = Duration(minutes: 45);
+
+  static List<({DateTime from, DateTime to})> find(List<LocationPoint> points,
+      {Duration min = minGap}) {
+    final sorted = [...points]..sort((a, b) => a.time.compareTo(b.time));
+    return [
+      for (var i = 1; i < sorted.length; i++)
+        if (sorted[i].time.difference(sorted[i - 1].time) >= min)
+          (from: sorted[i - 1].time, to: sorted[i].time)
+    ];
+  }
+}
+

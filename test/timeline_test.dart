@@ -80,5 +80,17 @@ void main() {
       expect(MovementProvider.gymArrival(pts, const [], now), isFalse);
     });
   });
+
+  test('tracking gaps: only long silences count', () {
+    final pts = [
+      p(0, 31.5, 74.3), p(2, 31.5, 74.3), p(30, 31.5, 74.3), // 28 min: fine
+      p(120, 31.5, 74.3), // 90 min silence
+      p(121, 31.5, 74.3),
+    ];
+    final gaps = TrackingGaps.find(pts);
+    expect(gaps, hasLength(1));
+    expect(gaps.single.to.difference(gaps.single.from), const Duration(minutes: 90));
+    expect(TrackingGaps.find(const []), isEmpty);
+  });
 }
 

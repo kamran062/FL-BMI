@@ -288,7 +288,7 @@
   },
   "privacyPolicy": "Privacy Policy",
   "@privacyPolicy": {
-    "description": "Privacy dialog title"
+    "description": "Link on the paywall and in Settings"
   },
   "privacyDataTitle": "🔒 Data stays on your device",
   "@privacyDataTitle": {
@@ -2885,5 +2885,67 @@
   "csvWarning": "Spreadsheet files are not encrypted. Anyone you share them with can read them.",
   "@csvWarning": {
     "description": "CSV warning"
+  },
+  "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "Link on the paywall"
+  },
+  "batterySaver": "Battery saver",
+  "@batterySaver": {
+    "description": "Tracking setting"
+  },
+  "batterySaverBody": "Fewer, less precise location fixes. Uses less battery; short walks may be missed.",
+  "@batterySaverBody": {
+    "description": "Setting explanation"
+  },
+  "trackingGap": "Tracking stopped from {from} to {to}",
+  "@trackingGap": {
+    "description": "Gap notice",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "2:10 PM"
+      },
+      "to": {
+        "type": "String",
+        "example": "4:05 PM"
+      }
+    }
+  },
+  "trackingGapBody": "Your phone's battery saver probably closed the app.",
+  "@trackingGapBody": {
+    "description": "Gap explanation"
+  },
+  "keepTrackingOn": "How to keep tracking on",
+  "@keepTrackingOn": {
+    "description": "Button / sheet title"
+  },
+  "keepTrackingIntro": "Allow BMI Health to run in the background on your phone:",
+  "@keepTrackingIntro": {
+    "description": "Sheet intro"
+  },
+  "guideXiaomi": "Xiaomi / Redmi / POCO: Settings → Apps → BMI Health → Battery saver → No restrictions. Also turn on Autostart.",
+  "@guideXiaomi": {
+    "description": "Brand guide"
+  },
+  "guideOppo": "Oppo / Realme / OnePlus: Settings → Battery → App battery management → BMI Health → Allow background activity.",
+  "@guideOppo": {
+    "description": "Brand guide"
+  },
+  "guideVivo": "Vivo / iQOO: Settings → Battery → Background power consumption → BMI Health → Allow.",
+  "@guideVivo": {
+    "description": "Brand guide"
+  },
+  "guideSamsung": "Samsung: Settings → Apps → BMI Health → Battery → Unrestricted.",
+  "@guideSamsung": {
+    "description": "Brand guide"
+  },
+  "guideHuawei": "Huawei / Honor: Settings → Battery → App launch → BMI Health → Manage manually, all on.",
+  "@guideHuawei": {
+    "description": "Brand guide"
+  },
+  "guideOther": "Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don't optimise\"). Don't swipe the app away from recent apps.",
+  "@guideOther": {
+    "description": "Brand guide"
   }
 }

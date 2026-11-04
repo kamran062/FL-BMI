@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bmi_health/core/monitoring/crash_reporting.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/features/premium/entitlement.dart';
+import 'package:bmi_health/core/config/legal_links.dart';
 
 // ── Product IDs ────────────────────────────────────────────────────────────
 // Must exactly match Play Console / App Store Connect and functions/src/verify.js.
@@ -53,7 +54,13 @@ class PurchaseService extends ChangeNotifier {
   List<ProductDetails> _products = [];
 
   /// Premium can be sold in this build (server + key configured).
-  bool get configured => _verifier != null && _publicKey.isNotEmpty;
+  /// Also needs public Terms/Privacy pages: Apple rejects paywalls without them.
+  bool get configured =>
+      _verifier != null && _publicKey.isNotEmpty && (legalLinksOk ?? LegalLinks.configured);
+
+  /// Test override for the legal-links requirement.
+  @visibleForTesting
+  static bool? legalLinksOk;
   bool get available => _available;
   bool get isPremium => _entitlement?.isActive(_now()) ?? false;
   Entitlement? get entitlement => _entitlement;

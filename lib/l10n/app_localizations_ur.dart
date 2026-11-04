@@ -1994,4 +1994,45 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get csvWarning => 'اسپریڈشیٹ فائلیں خفیہ نہیں ہوتیں۔ جس کے ساتھ آپ شیئر کریں وہ انہیں پڑھ سکتا ہے۔';
+
+  @override
+  String get termsOfUse => 'شرائط استعمال';
+
+  @override
+  String get batterySaver => 'بیٹری بچت';
+
+  @override
+  String get batterySaverBody => 'کم اور کم درست مقام۔ بیٹری کم خرچ ہوتی ہے؛ مختصر چہل قدمی رہ سکتی ہے۔';
+
+  @override
+  String trackingGap(String from, String to) {
+    return '$from سے $to تک ٹریکنگ رکی رہی';
+  }
+
+  @override
+  String get trackingGapBody => 'غالباً آپ کے فون کے بیٹری سیور نے ایپ بند کر دی۔';
+
+  @override
+  String get keepTrackingOn => 'ٹریکنگ کیسے جاری رکھیں';
+
+  @override
+  String get keepTrackingIntro => 'اپنے فون پر بی ایم آئی ہیلتھ کو پس منظر میں چلنے دیں:';
+
+  @override
+  String get guideXiaomi => 'Xiaomi / Redmi / POCO: ترتیبات ← ایپس ← BMI Health ← بیٹری سیور ← کوئی پابندی نہیں۔ آٹو اسٹارٹ بھی آن کریں۔';
+
+  @override
+  String get guideOppo => 'Oppo / Realme / OnePlus: ترتیبات ← بیٹری ← ایپ بیٹری مینجمنٹ ← BMI Health ← پس منظر کی سرگرمی کی اجازت۔';
+
+  @override
+  String get guideVivo => 'Vivo / iQOO: ترتیبات ← بیٹری ← پس منظر بجلی کا استعمال ← BMI Health ← اجازت۔';
+
+  @override
+  String get guideSamsung => 'Samsung: ترتیبات ← ایپس ← BMI Health ← بیٹری ← بلا پابندی۔';
+
+  @override
+  String get guideHuawei => 'Huawei / Honor: ترتیبات ← بیٹری ← ایپ لانچ ← BMI Health ← دستی انتظام، سب آن۔';
+
+  @override
+  String get guideOther => 'دیگر فون: ترتیبات ← ایپس ← BMI Health ← بیٹری ← بلا پابندی۔ حالیہ ایپس سے ایپ کو سوائپ نہ کریں۔';
 }

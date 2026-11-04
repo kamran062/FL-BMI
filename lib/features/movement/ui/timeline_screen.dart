@@ -141,10 +141,45 @@ class TimelineScreen extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(l.trackingLimitNote,
                     style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+                if (m.enabled)
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(l.batterySaver),
+                    subtitle: Text(l.batterySaverBody,
+                        style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+                    value: m.batterySaver,
+                    onChanged: (v) => m.setBatterySaver(v, l),
+                  ),
               ],
             ),
           ),
           const SizedBox(height: 12),
+          // Explain gaps instead of silently showing a broken day
+          for (final g in m.gaps)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: AppCard(
+                padding: 14,
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Row(children: [
+                    const Icon(Icons.battery_alert_rounded, color: AppColors.bmiOver),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        l.trackingGap(DateFormat.jm(l.localeName).format(g.from),
+                            DateFormat.jm(l.localeName).format(g.to)),
+                        style: GoogleFonts.inter(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ]),
+                  Text(l.trackingGapBody, style: GoogleFonts.inter(fontSize: 13, color: fg3)),
+                  TextButton(
+                    onPressed: () => showKeepTrackingGuide(context),
+                    child: Text(l.keepTrackingOn),
+                  ),
+                ]),
+              ),
+            ),
           if (m.points.isNotEmpty) ...[
             _DayMap(points: m.points, visits: m.visits),
             const SizedBox(height: 12),
@@ -183,7 +218,11 @@ class _DayMap extends StatelessWidget {
         height: 220,
         child: FlutterMap(
           options: MapOptions(
-            initialCameraFit: latLngs.length < 2
+            // Fitting a zero-size area (all fixes in one spot, e.g. home all
+            // day) gives an infinite zoom; centre on it instead.
+            initialCameraFit: latLngs.length < 2 ||
+                    (bounds.north - bounds.south).abs() < 1e-4 &&
+                        (bounds.east - bounds.west).abs() < 1e-4
                 ? null
                 : CameraFit.bounds(
                     bounds: bounds, padding: const EdgeInsets.all(28)),
@@ -360,3 +399,31 @@ class _NamePlaceDialogState extends State<_NamePlaceDialog> {
     );
   }
 }
+
+/// Per-brand steps to stop battery savers killing tracking.
+void showKeepTrackingGuide(BuildContext context) {
+  final l = context.l10n;
+  showModalBottomSheet<void>(
+    context: context,
+    useRootNavigator: true,
+    isScrollControlled: true,
+    builder: (_) => SafeArea(
+      child: ListView(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(20),
+        children: [
+          Text(l.keepTrackingOn,
+              style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 6),
+          Text(l.keepTrackingIntro),
+          for (final step in [l.guideXiaomi, l.guideOppo, l.guideVivo, l.guideSamsung, l.guideHuawei, l.guideOther])
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('• $step', style: GoogleFonts.inter(fontSize: 14, height: 1.4)),
+            ),
+        ],
+      ),
+    ),
+  );
+}
+

@@ -497,7 +497,7 @@ abstract class AppLocalizations {
   /// **'Made with care.  ·  No account required.'**
   String get settingsFooter;
 
-  /// Privacy dialog title
+  /// Link on the paywall and in Settings
   ///
   /// In en, this message translates to:
   /// **'Privacy Policy'**
@@ -3622,6 +3622,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Spreadsheet files are not encrypted. Anyone you share them with can read them.'**
   String get csvWarning;
+
+  /// Link on the paywall
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get termsOfUse;
+
+  /// Tracking setting
+  ///
+  /// In en, this message translates to:
+  /// **'Battery saver'**
+  String get batterySaver;
+
+  /// Setting explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Fewer, less precise location fixes. Uses less battery; short walks may be missed.'**
+  String get batterySaverBody;
+
+  /// Gap notice
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking stopped from {from} to {to}'**
+  String trackingGap(String from, String to);
+
+  /// Gap explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Your phone\'s battery saver probably closed the app.'**
+  String get trackingGapBody;
+
+  /// Button / sheet title
+  ///
+  /// In en, this message translates to:
+  /// **'How to keep tracking on'**
+  String get keepTrackingOn;
+
+  /// Sheet intro
+  ///
+  /// In en, this message translates to:
+  /// **'Allow BMI Health to run in the background on your phone:'**
+  String get keepTrackingIntro;
+
+  /// Brand guide
+  ///
+  /// In en, this message translates to:
+  /// **'Xiaomi / Redmi / POCO: Settings → Apps → BMI Health → Battery saver → No restrictions. Also turn on Autostart.'**
+  String get guideXiaomi;
+
+  /// Brand guide
+  ///
+  /// In en, this message translates to:
+  /// **'Oppo / Realme / OnePlus: Settings → Battery → App battery management → BMI Health → Allow background activity.'**
+  String get guideOppo;
+
+  /// Brand guide
+  ///
+  /// In en, this message translates to:
+  /// **'Vivo / iQOO: Settings → Battery → Background power consumption → BMI Health → Allow.'**
+  String get guideVivo;
+
+  /// Brand guide
+  ///
+  /// In en, this message translates to:
+  /// **'Samsung: Settings → Apps → BMI Health → Battery → Unrestricted.'**
+  String get guideSamsung;
+
+  /// Brand guide
+  ///
+  /// In en, this message translates to:
+  /// **'Huawei / Honor: Settings → Battery → App launch → BMI Health → Manage manually, all on.'**
+  String get guideHuawei;
+
+  /// Brand guide
+  ///
+  /// In en, this message translates to:
+  /// **'Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don\'t optimise\"). Don\'t swipe the app away from recent apps.'**
+  String get guideOther;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

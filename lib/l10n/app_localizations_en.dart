@@ -2005,4 +2005,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get csvWarning => 'Spreadsheet files are not encrypted. Anyone you share them with can read them.';
+
+  @override
+  String get termsOfUse => 'Terms of Use';
+
+  @override
+  String get batterySaver => 'Battery saver';
+
+  @override
+  String get batterySaverBody => 'Fewer, less precise location fixes. Uses less battery; short walks may be missed.';
+
+  @override
+  String trackingGap(String from, String to) {
+    return 'Tracking stopped from $from to $to';
+  }
+
+  @override
+  String get trackingGapBody => 'Your phone\'s battery saver probably closed the app.';
+
+  @override
+  String get keepTrackingOn => 'How to keep tracking on';
+
+  @override
+  String get keepTrackingIntro => 'Allow BMI Health to run in the background on your phone:';
+
+  @override
+  String get guideXiaomi => 'Xiaomi / Redmi / POCO: Settings → Apps → BMI Health → Battery saver → No restrictions. Also turn on Autostart.';
+
+  @override
+  String get guideOppo => 'Oppo / Realme / OnePlus: Settings → Battery → App battery management → BMI Health → Allow background activity.';
+
+  @override
+  String get guideVivo => 'Vivo / iQOO: Settings → Battery → Background power consumption → BMI Health → Allow.';
+
+  @override
+  String get guideSamsung => 'Samsung: Settings → Apps → BMI Health → Battery → Unrestricted.';
+
+  @override
+  String get guideHuawei => 'Huawei / Honor: Settings → Battery → App launch → BMI Health → Manage manually, all on.';
+
+  @override
+  String get guideOther => 'Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don\'t optimise\"). Don\'t swipe the app away from recent apps.';
 }

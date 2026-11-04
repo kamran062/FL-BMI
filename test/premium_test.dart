@@ -51,6 +51,7 @@ class _FakeVerifier implements PurchaseVerifier {
 }
 
 void main() {
+  setUpAll(() => PurchaseService.legalLinksOk = true);
   setUp(() {
     SharedPreferences.setMockInitialValues({});
     AdService.instance.premium = false;
