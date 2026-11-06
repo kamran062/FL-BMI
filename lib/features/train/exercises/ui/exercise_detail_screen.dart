@@ -2,10 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
-import 'package:bmi_health/features/train/exercises/demo/exercise_demo.dart';
+import 'package:bmi_health/features/train/exercises/ui/exercise_media.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
@@ -44,11 +43,7 @@ class ExerciseDetailScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
         children: [
-          _ExerciseVideo(
-            exercise: exercise,
-            url: exercise.videoFor(demonstrator),
-            demonstrator: demonstrator,
-          ),
+          _ExerciseVideo(exercise: exercise, demonstrator: demonstrator),
           const SizedBox(height: 16),
           Wrap(
             spacing: 8,
@@ -410,109 +405,24 @@ class _AlternativesCard extends StatelessWidget {
   }
 }
 
-/// Looping, muted demonstrator clip. Shows a placeholder until the clip for
-/// this exercise has been filmed (ROADMAP §4).
-class _ExerciseVideo extends StatefulWidget {
+/// The clip or animated guide in a rounded 16:10 frame.
+class _ExerciseVideo extends StatelessWidget {
   final Exercise exercise;
-  final String? url;
   final Sex demonstrator;
 
-  const _ExerciseVideo({required this.exercise, required this.url, required this.demonstrator});
-
-  @override
-  State<_ExerciseVideo> createState() => _ExerciseVideoState();
-}
-
-class _ExerciseVideoState extends State<_ExerciseVideo> {
-  VideoPlayerController? _controller;
-  bool _failed = false;
-
-  @override
-  void initState() {
-    super.initState();
-    final url = widget.url;
-    if (url == null) return;
-    final c = VideoPlayerController.networkUrl(Uri.parse(url));
-    _controller = c;
-    c.initialize().then((_) {
-      if (!mounted) return;
-      c
-        ..setLooping(true)
-        ..setVolume(0)
-        ..play();
-      setState(() {});
-    }).catchError((Object _) {
-      if (mounted) setState(() => _failed = true);
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
+  const _ExerciseVideo({required this.exercise, required this.demonstrator});
 
   @override
   Widget build(BuildContext context) {
-    final l = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final sunken = isDark ? AppColors.darkBgSunken : AppColors.bgSunken;
-    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
-    final c = _controller;
-    final trainer = widget.demonstrator == Sex.male
-        ? l.demonstratorMale
-        : l.demonstratorFemale;
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(18),
       child: AspectRatio(
         aspectRatio: 16 / 10,
-        child: c != null && c.value.isInitialized && !_failed
-            ? FittedBox(
-                fit: BoxFit.cover,
-                child: SizedBox(
-                  width: c.value.size.width,
-                  height: c.value.size.height,
-                  child: VideoPlayer(c),
-                ),
-              )
-            : (widget.url == null || _failed) && ExerciseDemo.has(widget.exercise)
-                ? Container(
-                    color: sunken,
-                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
-                    child: Column(children: [
-                      Expanded(
-                        child: ExerciseDemo(
-                          exercise: widget.exercise,
-                          female: widget.demonstrator == Sex.female,
-                        ),
-                      ),
-                      Text(l.demoCaption,
-                          style: GoogleFonts.inter(fontSize: 12, color: fg3)),
-                    ]),
-                  )
-                : Container(
-                color: sunken,
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                        widget.url == null || _failed
-                            ? Icons.videocam_outlined
-                            : Icons.hourglass_empty_rounded,
-                        size: 40,
-                        color: fg3),
-                    const SizedBox(height: 8),
-                    if (widget.url == null || _failed)
-                      Text(l.videoComingSoon,
-                          style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w600, color: fg3)),
-                    Text(l.videoWithTrainer(trainer.toLowerCase()),
-                        style: GoogleFonts.inter(fontSize: 13, color: fg3)),
-                  ],
-                ),
-              ),
+        child: Container(
+          color: isDark ? AppColors.darkBgSunken : AppColors.bgSunken,
+          child: ExerciseMedia(exercise: exercise, demonstrator: demonstrator),
+        ),
       ),
     );
   }

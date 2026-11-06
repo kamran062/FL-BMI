@@ -9,7 +9,7 @@ import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/challenges/domain/challenge.dart';
 import 'package:bmi_health/features/train/challenges/voice_coach.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart' show ChallengeLabels;
-import 'package:bmi_health/features/train/exercises/demo/exercise_demo.dart';
+import 'package:bmi_health/features/train/exercises/ui/exercise_media.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
@@ -114,7 +114,7 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
   ({String exerciseId, WorkoutSet set, int index, int total})? get _next =>
       _w.active == null ? null : WearState.nextSet(_w);
 
-  bool get _female => context.read<ProfileProvider>().profile.demonstrator == Sex.female;
+  Sex get _demonstrator => context.read<ProfileProvider>().profile.demonstrator;
 
   ChallengeStep? get _step => _next == null ? null : _steps[_next!.exerciseId];
 
@@ -319,7 +319,7 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
         const SizedBox(height: 4),
         Text(l.setOfTotal(next.index + 1, next.total), style: GoogleFonts.inter(fontSize: 15)),
         const SizedBox(height: 12),
-        Expanded(child: ExerciseDemo(exercise: e, female: _female)),
+        Expanded(child: ExerciseMedia(exercise: e, demonstrator: _demonstrator, caption: false)),
         const SizedBox(height: 12),
         // Big target: countdown for holds, rep goal otherwise
         SizedBox(
@@ -380,7 +380,7 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
           ),
         const SizedBox(height: 12),
         if (step != null)
-          Expanded(child: ExerciseDemo(exercise: step.exercise, female: _female))
+          Expanded(child: ExerciseMedia(exercise: step.exercise, demonstrator: _demonstrator, caption: false))
         else
           const Spacer(),
         const SizedBox(height: 12),

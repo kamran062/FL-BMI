@@ -315,7 +315,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 1.3 Exercise library (human videos)
 
-> **Status: built, waiting for video content.** 30-exercise bundled catalog (`assets/exercises/catalog.json`, English + Urdu names, form steps), search, muscle filter and "my equipment" filter from the profile, detail page with the gender-matched demonstrator player (falls back to the other demonstrator, "Video coming soon" placeholder until clips exist). Not yet: remote catalog download, offline video cache, Urdu form steps, the remaining 70 exercises.
+> **Status: built; animated guides now, filmed clips when ready.** 114 exercises (English + Urdu names, steps, tips, mistakes, prescriptions), search, muscle and "my equipment" filters. Every exercise has an animated guide drawn in code (`lib/features/train/exercises/demo/`): an illustrated person with adult proportions, clothes, shading, the working muscle glowing, and the equipment drawn; female or male to match the trainer setting; still pose with reduced motion. Shown on the exercise page and in the Home Challenges player. Filmed clips replace it per exercise and trainer: `tool/videos/add_videos.py` compresses clips and either bundles them in the app or points to free hosting (cached on the device after first play, so offline afterwards); the animation stays as the fallback. Filming guide and shot list: `docs/exercise-filming-guide.md`. No free, copyright-safe photo/video library exists (the popular free-exercise-db images come from Bodybuilding.com), so clips must be filmed. Not yet: the clips themselves, remote catalog download.
 
 **Features**
 - 100 exercises with male and female human videos (§4)
