@@ -18,6 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:bmi_health/features/premium/entitlement.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
@@ -89,7 +90,7 @@ Future<AppState> launchApp(
   final stepsProvider = StepsProvider(source: steps);
   final movement = MovementProvider(db);
   // Unconfigured: premium hidden, as in builds without the server URL
-  final purchases = PurchaseService(publicKey: '');
+  final purchases = PurchaseService(store: MemoryEntitlementStore());
   final recoveryProvider = RecoveryProvider(source: recovery);
   final cycle = CycleProvider(db, lock: lock);
   final challenges = ChallengeProvider(db);

@@ -1,44 +1,30 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-/// Premium is on only with a valid entitlement signed by our server
-/// (functions/src/entitlement.js). The app ships the public key, so the
-/// entitlement cannot be forged or edited on the device.
+/// Premium as last confirmed by the store, kept on the device so it works
+/// offline. There is no server: the store's purchase data is trusted as the
+/// app receives it (see PurchaseService).
 class Entitlement {
-  final bool active;
   final String productId;
-  final DateTime expiresAt; // subscription end (lifetime: year 2100)
-  final DateTime validUntil; // when the app must re-check with the server
+  final DateTime expiresAt; // lifetime: year 2100
 
-  const Entitlement({
-    required this.active,
-    required this.productId,
-    required this.expiresAt,
-    required this.validUntil,
-  });
+  const Entitlement({required this.productId, required this.expiresAt});
 
-  bool isActive(DateTime now) =>
-      active && now.isBefore(expiresAt) && now.isBefore(validUntil);
+  bool isActive(DateTime now) => now.isBefore(expiresAt);
 
-  /// Verifies [jwt] with [publicKeyPem]; null if forged, malformed or for
-  /// another issuer. Expiry is checked separately so a lapsed token can
-  /// still tell us which product to re-verify.
-  static Entitlement? parse(String jwt, String publicKeyPem) {
+  String encode() => jsonEncode({
+        'productId': productId,
+        'expiresAt': expiresAt.millisecondsSinceEpoch,
+      });
+
+  /// Null if [raw] is missing or malformed.
+  static Entitlement? decode(String? raw) {
+    if (raw == null) return null;
     try {
-      final verified = JWT.verify(
-        jwt,
-        ECPublicKey(publicKeyPem),
-        checkExpiresIn: false,
-        issuer: 'bmi-health',
-      );
-      final p = verified.payload as Map<String, dynamic>;
+      final m = jsonDecode(raw) as Map<String, dynamic>;
       return Entitlement(
-        active: p['active'] == true,
-        productId: p['productId'] as String,
-        expiresAt: DateTime.fromMillisecondsSinceEpoch((p['expiresAt'] as num).toInt()),
-        validUntil: DateTime.fromMillisecondsSinceEpoch((p['exp'] as num).toInt() * 1000),
+        productId: m['productId'] as String,
+        expiresAt: DateTime.fromMillisecondsSinceEpoch((m['expiresAt'] as num).toInt()),
       );
     } catch (_) {
       return null;
@@ -46,38 +32,32 @@ class Entitlement {
   }
 }
 
-/// Talks to the verifyPurchase function.
-abstract class PurchaseVerifier {
-  /// Returns the signed entitlement JWT, or throws on network/server error.
-  Future<String> verify({
-    required String productId,
-    required String token,
-  });
+/// Where the entitlement is saved: Keystore / Keychain-backed storage, not
+/// plain preferences, so it isn't a one-line edit on the device.
+abstract class EntitlementStore {
+  Future<String?> read();
+  Future<void> write(String? value);
 }
 
-class HttpPurchaseVerifier implements PurchaseVerifier {
-  HttpPurchaseVerifier(this.url, {http.Client? client})
-      : _client = client ?? http.Client();
-
-  final String url;
-  final http.Client _client;
+class SecureEntitlementStore implements EntitlementStore {
+  static const _key = 'premium_entitlement_v2';
+  final _storage = const FlutterSecureStorage();
 
   @override
-  Future<String> verify({required String productId, required String token}) async {
-    final res = await _client
-        .post(
-          Uri.parse(url),
-          headers: {'content-type': 'application/json'},
-          body: jsonEncode({
-            'platform': Platform.isIOS ? 'ios' : 'android',
-            'productId': productId,
-            'token': token,
-          }),
-        )
-        .timeout(const Duration(seconds: 20));
-    if (res.statusCode != 200) {
-      throw HttpException('verifyPurchase ${res.statusCode}');
-    }
-    return (jsonDecode(res.body) as Map<String, dynamic>)['entitlement'] as String;
-  }
+  Future<String?> read() => _storage.read(key: _key);
+
+  @override
+  Future<void> write(String? value) =>
+      value == null ? _storage.delete(key: _key) : _storage.write(key: _key, value: value);
+}
+
+class MemoryEntitlementStore implements EntitlementStore {
+  MemoryEntitlementStore([this.value]);
+  String? value;
+
+  @override
+  Future<String?> read() async => value;
+
+  @override
+  Future<void> write(String? v) async => value = v;
 }

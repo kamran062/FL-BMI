@@ -2,48 +2,59 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bmi_health/core/monitoring/crash_reporting.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/features/premium/entitlement.dart';
 import 'package:bmi_health/core/config/legal_links.dart';
 
 // ── Product IDs ────────────────────────────────────────────────────────────
-// Must exactly match Play Console / App Store Connect and functions/src/verify.js.
+// Must exactly match Play Console / App Store Connect.
 const kProductMonthly  = 'bmi_health_premium_monthly';
 const kProductYearly   = 'bmi_health_premium_yearly';
 const kProductLifetime = 'bmi_health_premium_lifetime';
 
 const _allProductIds = <String>{kProductMonthly, kProductYearly, kProductLifetime};
 
-// Build-time config (.env.json). Premium stays hidden until both are set.
-const _verifyUrl = String.fromEnvironment('PREMIUM_VERIFY_URL');
-const _publicKeyEnv = String.fromEnvironment('ENTITLEMENT_PUBLIC_KEY');
-
-const _entitlementKey = 'premium_entitlement'; // signed JWT
-const _tokenKey = 'premium_token'; // last purchase token, for re-checks
-const _productKey = 'premium_product';
-
-/// Premium purchases (ROADMAP 3.5). Premium is granted only by a server-
-/// signed entitlement; the store purchase alone is not trusted.
+/// Premium purchases (ROADMAP 3.5), with no server of our own.
+///
+/// The store's purchase stream is trusted as delivered and the result is
+/// saved on the device. Trade-off accepted to avoid a paid backend: on a
+/// rooted / jailbroken device the purchase flow or the saved entitlement can
+/// be tampered with. Premium only removes ads, so the loss is small.
+///
+/// Re-checks: on Android every launch asks Google Play for owned purchases
+/// (no UI) and drops premium when a successful query no longer lists one
+/// (cancelled after the period ends, refunded). iOS has no silent query
+/// (restoring can ask for the Apple ID password), so subscriptions there
+/// end at the last transaction date + the period; renewals arrive through
+/// the purchase stream while the app runs and extend it.
 class PurchaseService extends ChangeNotifier {
   PurchaseService({
-    PurchaseVerifier? verifier,
-    String publicKey = _publicKeyEnv,
+    EntitlementStore? store,
     InAppPurchase? iap,
     DateTime Function()? clock,
-  })  : _verifier = verifier ??
-            (_verifyUrl.isEmpty ? null : HttpPurchaseVerifier(_verifyUrl)),
-        _publicKey = publicKey.replaceAll(r'\n', '\n'),
+    bool? isAndroid,
+    this.restoreSettle = const Duration(seconds: 2),
+  })  : _store = store ?? SecureEntitlementStore(),
         _iapOverride = iap,
-        _now = clock ?? DateTime.now;
+        _now = clock ?? DateTime.now,
+        _android = isAndroid ?? Platform.isAndroid,
+        _mobile = isAndroid != null || Platform.isAndroid || Platform.isIOS;
 
   static final instance = PurchaseService();
 
-  final PurchaseVerifier? _verifier;
-  final String _publicKey;
+  /// Android: confirmed subscriptions stay valid this long without a new
+  /// successful check (offline use).
+  static const offlineGrace = Duration(days: 35);
+
+  /// Time to wait for restored purchases after a restore call returns.
+  final Duration restoreSettle;
+
+  final EntitlementStore _store;
   final InAppPurchase? _iapOverride;
   final DateTime Function() _now;
+  final bool _android;
+  final bool _mobile;
   InAppPurchase get _iap => _iapOverride ?? InAppPurchase.instance;
 
   StreamSubscription<List<PurchaseDetails>>? _sub;
@@ -52,11 +63,13 @@ class PurchaseService extends ChangeNotifier {
   bool _loading = false;
   String? _error;
   List<ProductDetails> _products = [];
+  Set<String>? _seenDuringCheck;
 
-  /// Premium can be sold in this build (server + key configured).
-  /// Also needs public Terms/Privacy pages: Apple rejects paywalls without them.
+  /// Premium can be sold in this build: the store returned the products and
+  /// public Terms/Privacy pages exist (Apple rejects paywalls without them).
+  /// An active premium user always sees their status.
   bool get configured =>
-      _verifier != null && _publicKey.isNotEmpty && (legalLinksOk ?? LegalLinks.configured);
+      isPremium || (_products.isNotEmpty && (legalLinksOk ?? LegalLinks.configured));
 
   /// Test override for the legal-links requirement.
   @visibleForTesting
@@ -70,22 +83,15 @@ class PurchaseService extends ChangeNotifier {
 
   // ── Init ──────────────────────────────────────────────────────────────
   Future<void> init() async {
-    if (!configured) return;
-    final prefs = await SharedPreferences.getInstance();
-    final jwt = prefs.getString(_entitlementKey);
-    if (jwt != null) _entitlement = Entitlement.parse(jwt, _publicKey);
+    try {
+      _entitlement = Entitlement.decode(await _store.read());
+    } catch (e, st) {
+      reportError(e, st, reason: 'premium-read');
+    }
     _applyAds();
     notifyListeners();
 
-    // Re-check with the server when the signed entitlement has lapsed
-    // (renewals, refunds, cancellations).
-    final token = prefs.getString(_tokenKey);
-    final product = prefs.getString(_productKey);
-    if (!isPremium && token != null && product != null) {
-      unawaited(_verify(product, token));
-    }
-
-    if (!(Platform.isAndroid || Platform.isIOS)) return;
+    if (!_mobile) return;
     _available = await _iap.isAvailable();
     if (!_available) return;
     _sub = _iap.purchaseStream.listen(
@@ -95,6 +101,7 @@ class PurchaseService extends ChangeNotifier {
     final response = await _iap.queryProductDetails(_allProductIds);
     _products = response.productDetails;
     notifyListeners();
+    if (_android) await _check();
   }
 
   // ── Purchase ──────────────────────────────────────────────────────────
@@ -115,13 +122,19 @@ class PurchaseService extends ChangeNotifier {
   }
 
   // ── Restore ───────────────────────────────────────────────────────────
-  /// Restores past purchases. Stops the spinner after 20 s even if the
-  /// store reports nothing (it sends no event when there is nothing to
-  /// restore).
+  /// Restores past purchases (the paywall button). On iOS the spinner stops
+  /// after 20 s even if the store reports nothing (it sends no event when
+  /// there is nothing to restore).
   Future<void> restore() async {
     _setError(null);
     _loading = true;
     notifyListeners();
+    if (_android) {
+      await _check();
+      _loading = false;
+      notifyListeners();
+      return;
+    }
     try {
       await _iap.restorePurchases();
     } catch (e) {
@@ -135,6 +148,26 @@ class PurchaseService extends ChangeNotifier {
     });
   }
 
+  /// Android: asks Play for owned purchases; a successful answer without any
+  /// premium product ends premium. Offline / errors keep what we have.
+  Future<void> _check() async {
+    final seen = _seenDuringCheck = <String>{};
+    try {
+      await _iap.restorePurchases();
+      await Future<void>.delayed(restoreSettle);
+      if (seen.isEmpty && _entitlement != null) {
+        _entitlement = null;
+        await _store.write(null);
+        _applyAds();
+        notifyListeners();
+      }
+    } catch (e, st) {
+      reportError(e, st, reason: 'premium-check');
+    } finally {
+      _seenDuringCheck = null;
+    }
+  }
+
   // ── Purchase stream ───────────────────────────────────────────────────
   Future<void> _onPurchaseUpdate(List<PurchaseDetails> purchases) async {
     for (final p in purchases) {
@@ -144,16 +177,14 @@ class PurchaseService extends ChangeNotifier {
           notifyListeners();
         case PurchaseStatus.purchased:
         case PurchaseStatus.restored:
-          // Always acknowledge, or Google refunds after 3 days. A real
-          // purchase that we fail to verify now is retried on next launch.
+          // Always acknowledge, or Google refunds after 3 days.
           if (p.pendingCompletePurchase) await _iap.completePurchase(p);
-          final token = Platform.isIOS
-              ? (p.purchaseID ?? '')
-              : p.verificationData.serverVerificationData;
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString(_tokenKey, token);
-          await prefs.setString(_productKey, p.productID);
-          await _verify(p.productID, token);
+          if (_allProductIds.contains(p.productID)) {
+            _seenDuringCheck?.add(p.productID);
+            await _grant(p);
+          }
+          _loading = false;
+          notifyListeners();
         case PurchaseStatus.error:
           _loading = false;
           _setError(p.error?.message ?? 'Purchase failed. Please try again.');
@@ -165,30 +196,30 @@ class PurchaseService extends ChangeNotifier {
     }
   }
 
-  /// Asks the server; stores the signed entitlement it returns.
+  /// When premium from [p] ends; the latest of all known purchases wins.
   @visibleForTesting
-  Future<void> verify(String productId, String token) =>
-      _verify(productId, token);
+  DateTime expiryFor(PurchaseDetails p) {
+    if (p.productID == kProductLifetime) return DateTime(2100);
+    final now = _now();
+    if (_android) return now.add(offlineGrace);
+    final ms = int.tryParse(p.transactionDate ?? '');
+    final from = ms == null ? now : DateTime.fromMillisecondsSinceEpoch(ms);
+    final period = p.productID == kProductYearly ? 366 : 31;
+    return from.add(Duration(days: period + 3)); // + billing-retry grace
+  }
 
-  Future<void> _verify(String productId, String token) async {
-    final verifier = _verifier;
-    if (verifier == null) return;
+  Future<void> _grant(PurchaseDetails p) async {
+    final expires = expiryFor(p);
+    final current = _entitlement;
+    if (current != null && !expires.isAfter(current.expiresAt)) return;
+    _entitlement = Entitlement(productId: p.productID, expiresAt: expires);
+    _error = null;
     try {
-      final jwt = await verifier.verify(productId: productId, token: token);
-      final ent = Entitlement.parse(jwt, _publicKey);
-      if (ent == null) throw const FormatException('entitlement signature invalid');
-      _entitlement = ent;
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_entitlementKey, jwt);
-      _error = null;
+      await _store.write(_entitlement!.encode());
     } catch (e, st) {
-      reportError(e, st, reason: 'premium-verify');
-      _error = 'Could not confirm your purchase. It will be retried automatically.';
-    } finally {
-      _loading = false;
-      _applyAds();
-      notifyListeners();
+      reportError(e, st, reason: 'premium-save');
     }
+    _applyAds();
   }
 
   void _applyAds() => AdService.instance.premium = isPremium;

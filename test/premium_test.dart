@@ -1,152 +1,161 @@
+import 'dart:async';
+
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/features/premium/entitlement.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
-// Test-only keys (generated for these tests; not used anywhere else).
-const _priv = '''-----BEGIN PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgLDOkGETOkTcIOYXK
-Kb9s+mY1ikTSiLTfW+0G8wDiKEqhRANCAASc0coqDOjceUhMYogxoL0Fvt5TN6yH
-KyvJEmHlSFAHQ4xtFi4lrDfnTcFauGJQgMa1U5js45Y/5yI4hEzYNk8b
------END PRIVATE KEY-----''';
-const _pub = '''-----BEGIN PUBLIC KEY-----
-MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEnNHKKgzo3HlITGKIMaC9Bb7eUzes
-hysryRJh5UhQB0OMbRYuJaw3503BWrhiUIDGtVOY7OOWP+ciOIRM2DZPGw==
------END PUBLIC KEY-----''';
-const _otherPriv = '''-----BEGIN PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgJWm2nBthFB05RamY
-rRpmMT4sYqFmZ5IrkiQ31PxXV22hRANCAATqiqTnnUkvF8EAgHOdsos7p8ax6GNH
-TmPgJRfIu+XRUm4n1c2K5F7rs+pQwM2YHprrEc9Jv6DhRw4ba1PWEVIZ
------END PRIVATE KEY-----''';
+final _now = DateTime.utc(2026, 11, 6);
 
-final _now = DateTime.utc(2026, 11, 4);
-
-String _sign({
-  bool active = true,
-  String product = kProductMonthly,
-  Duration expiresIn = const Duration(days: 30),
-  Duration validFor = const Duration(days: 30),
-  String key = _priv,
-  String issuer = 'bmi-health',
+PurchaseDetails _purchase(
+  String product, {
+  PurchaseStatus status = PurchaseStatus.purchased,
+  DateTime? at,
 }) =>
-    JWT({
-      'active': active,
-      'productId': product,
-      'expiresAt': _now.add(expiresIn).millisecondsSinceEpoch,
-      'exp': _now.add(validFor).millisecondsSinceEpoch ~/ 1000,
-    }, issuer: issuer).sign(ECPrivateKey(key), algorithm: JWTAlgorithm.ES256);
+    PurchaseDetails(
+      productID: product,
+      verificationData: PurchaseVerificationData(
+          localVerificationData: '', serverVerificationData: 'token', source: 'test'),
+      transactionDate: (at ?? _now).millisecondsSinceEpoch.toString(),
+      status: status,
+    )..pendingCompletePurchase = true;
 
-class _FakeVerifier implements PurchaseVerifier {
-  _FakeVerifier(this.response);
-  String Function() response;
-  int calls = 0;
+/// Store stand-in: [owned] is what a restore reports; [restoreFails]
+/// simulates being offline.
+class _FakeIap implements InAppPurchase {
+  final _stream = StreamController<List<PurchaseDetails>>.broadcast();
+  List<String> owned = [];
+  bool restoreFails = false;
+  int completed = 0;
+
+  void emit(List<PurchaseDetails> p) => _stream.add(p);
 
   @override
-  Future<String> verify({required String productId, required String token}) async {
-    calls++;
-    return response();
+  Stream<List<PurchaseDetails>> get purchaseStream => _stream.stream;
+
+  @override
+  Future<bool> isAvailable() async => true;
+
+  @override
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> ids) async =>
+      ProductDetailsResponse(
+        productDetails: [
+          for (final id in ids)
+            ProductDetails(
+                id: id, title: id, description: '', price: '1', rawPrice: 1, currencyCode: 'USD'),
+        ],
+        notFoundIDs: const [],
+      );
+
+  @override
+  Future<void> restorePurchases({String? applicationUserName}) async {
+    if (restoreFails) throw Exception('offline');
+    emit([for (final id in owned) _purchase(id, status: PurchaseStatus.restored)]);
   }
+
+  @override
+  Future<void> completePurchase(PurchaseDetails purchase) async => completed++;
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 void main() {
   setUpAll(() => PurchaseService.legalLinksOk = true);
-  setUp(() {
-    SharedPreferences.setMockInitialValues({});
-    AdService.instance.premium = false;
+  setUp(() => AdService.instance.premium = false);
+
+  PurchaseService service(_FakeIap iap, MemoryEntitlementStore store, {bool android = true}) =>
+      PurchaseService(
+        store: store,
+        iap: iap,
+        clock: () => _now,
+        isAndroid: android,
+        restoreSettle: Duration.zero,
+      );
+
+  Future<void> settle() => Future<void>.delayed(const Duration(milliseconds: 10));
+
+  test('a purchase unlocks premium, is acknowledged, saved, and removes ads', () async {
+    final iap = _FakeIap();
+    final store = MemoryEntitlementStore();
+    final s = service(iap, store);
+    await s.init();
+    expect(s.configured, isTrue); // products loaded + legal links
+    expect(s.isPremium, isFalse);
+
+    iap.emit([_purchase(kProductMonthly)]);
+    await settle();
+    expect(s.isPremium, isTrue);
+    expect(iap.completed, 1);
+    expect(AdService.instance.premium, isTrue);
+    expect(Entitlement.decode(store.value)!.productId, kProductMonthly);
   });
 
-  group('Entitlement.parse', () {
-    test('accepts a server-signed entitlement', () {
-      final e = Entitlement.parse(_sign(), _pub)!;
-      expect(e.productId, kProductMonthly);
-      expect(e.isActive(_now), isTrue);
-    });
-
-    test('rejects a token signed with another key (forged)', () {
-      expect(Entitlement.parse(_sign(key: _otherPriv), _pub), isNull);
-    });
-
-    test('rejects edited payloads', () {
-      final parts = _sign(active: false).split('.');
-      final forged = '${parts[0]}.${_sign().split('.')[1]}.${parts[2]}';
-      expect(Entitlement.parse(forged, _pub), isNull);
-    });
-
-    test('rejects the wrong issuer', () {
-      expect(Entitlement.parse(_sign(issuer: 'someone-else'), _pub), isNull);
-    });
-
-    test('inactive after the subscription or the check window ends', () {
-      final e = Entitlement.parse(_sign(expiresIn: const Duration(days: 2)), _pub)!;
-      expect(e.isActive(_now.add(const Duration(days: 1))), isTrue);
-      expect(e.isActive(_now.add(const Duration(days: 3))), isFalse);
-      final stale = Entitlement.parse(_sign(validFor: const Duration(days: 1)), _pub)!;
-      expect(stale.isActive(_now.add(const Duration(days: 2))), isFalse);
-    });
+  test('saved premium works offline after a restart', () async {
+    final iap = _FakeIap()..restoreFails = true;
+    final store = MemoryEntitlementStore(
+        Entitlement(productId: kProductYearly, expiresAt: _now.add(const Duration(days: 10)))
+            .encode());
+    final s = service(iap, store);
+    await s.init();
+    expect(s.isPremium, isTrue);
   });
 
-  group('PurchaseService', () {
-    PurchaseService service(_FakeVerifier v) =>
-        PurchaseService(verifier: v, publicKey: _pub, clock: () => _now);
+  test('Android: a successful check without the purchase ends premium', () async {
+    final iap = _FakeIap(); // owns nothing any more (cancelled / refunded)
+    final store = MemoryEntitlementStore(
+        Entitlement(productId: kProductMonthly, expiresAt: _now.add(const Duration(days: 10)))
+            .encode());
+    final s = service(iap, store);
+    await s.init();
+    expect(s.isPremium, isFalse);
+    expect(store.value, isNull);
+  });
 
-    test('a verified purchase unlocks premium and removes ads', () async {
-      final s = service(_FakeVerifier(() => _sign()));
-      await s.verify(kProductMonthly, 'purchase-token-123');
-      expect(s.isPremium, isTrue);
-      expect(AdService.instance.premium, isTrue);
-      final prefs = await SharedPreferences.getInstance();
-      expect(prefs.getString('premium_entitlement'), isNotNull);
-    });
+  test('Android: a check that still lists the purchase renews the offline window',
+      () async {
+    final iap = _FakeIap()..owned = [kProductMonthly];
+    final store = MemoryEntitlementStore(
+        Entitlement(productId: kProductMonthly, expiresAt: _now.add(const Duration(days: 1)))
+            .encode());
+    final s = service(iap, store);
+    await s.init();
+    expect(s.entitlement!.expiresAt, _now.add(PurchaseService.offlineGrace));
+  });
 
-    test('a forged server response does not unlock premium', () async {
-      final s = service(_FakeVerifier(() => _sign(key: _otherPriv)));
-      await s.verify(kProductMonthly, 'purchase-token-123');
-      expect(s.isPremium, isFalse);
-      expect(s.error, isNotNull);
-      expect(AdService.instance.premium, isFalse);
-    });
+  test('lifetime never expires; iOS subscriptions end after the period', () async {
+    final s = service(_FakeIap(), MemoryEntitlementStore(), android: false);
+    expect(s.expiryFor(_purchase(kProductLifetime)).year, 2100);
+    final bought = _now.subtract(const Duration(days: 40));
+    final monthly = s.expiryFor(_purchase(kProductMonthly, at: bought));
+    expect(monthly.isBefore(_now), isTrue);
+    expect(s.expiryFor(_purchase(kProductYearly, at: bought)).isAfter(_now), isTrue);
+  });
 
-    test('server unreachable: no premium, friendly error, retried on launch',
-        () async {
-      final v = _FakeVerifier(() => throw Exception('offline'));
-      final s = service(v);
-      SharedPreferences.setMockInitialValues({
-        'premium_token': 'purchase-token-123',
-        'premium_product': kProductYearly,
-      });
-      await s.init(); // retries in the background
-      await Future<void>.delayed(Duration.zero);
-      expect(v.calls, 1);
-      expect(s.isPremium, isFalse);
-      expect(s.error, contains('retried'));
-    });
+  test('an older restored transaction does not shorten premium (iOS)', () async {
+    final iap = _FakeIap();
+    final s = service(iap, MemoryEntitlementStore(), android: false);
+    await s.init();
+    iap.emit([
+      _purchase(kProductMonthly, status: PurchaseStatus.restored),
+      _purchase(kProductMonthly,
+          status: PurchaseStatus.restored, at: _now.subtract(const Duration(days: 60))),
+    ]);
+    await settle();
+    expect(s.isPremium, isTrue);
+  });
 
-    test('a saved entitlement keeps premium offline after restart', () async {
-      SharedPreferences.setMockInitialValues({'premium_entitlement': _sign()});
-      final v = _FakeVerifier(() => throw Exception('offline'));
-      final s = service(v);
-      await s.init();
-      expect(s.isPremium, isTrue);
-      expect(v.calls, 0);
-    });
+  test('garbage in storage does not grant premium', () async {
+    final s = service(_FakeIap()..restoreFails = true, MemoryEntitlementStore('not json'));
+    await s.init();
+    expect(s.isPremium, isFalse);
+  });
 
-    test('editing the saved flag on the device cannot grant premium', () async {
-      SharedPreferences.setMockInitialValues({
-        'is_premium': true, // the old, unsigned flag
-        'premium_entitlement': 'not-a-real-token',
-      });
-      final s = service(_FakeVerifier(() => throw Exception('offline')));
-      await s.init();
-      expect(s.isPremium, isFalse);
-    });
-
-    test('not configured → premium hidden and inactive', () async {
-      final s = PurchaseService(publicKey: '', clock: () => _now);
-      await s.init();
-      expect(s.configured, isFalse);
-      expect(s.isPremium, isFalse);
-    });
+  test('no store products → premium hidden', () async {
+    final s = PurchaseService(store: MemoryEntitlementStore(), clock: () => _now);
+    await s.init();
+    expect(s.configured, isFalse);
+    expect(s.isPremium, isFalse);
   });
 }
