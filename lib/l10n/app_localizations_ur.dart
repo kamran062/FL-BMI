@@ -2255,4 +2255,38 @@ class AppLocalizationsUr extends AppLocalizations {
   String continueChallenge(String name) {
     return 'جاری رکھیں: $name';
   }
+
+  @override
+  String get voiceCoach => 'آواز کوچ';
+
+  @override
+  String sayExerciseReps(String name, int count) {
+    return '$name۔ $count ریپس۔';
+  }
+
+  @override
+  String sayExerciseSeconds(String name, int count) {
+    return '$name۔ $count سیکنڈ۔ شروع!';
+  }
+
+  @override
+  String saySetOf(int set, int total) {
+    return 'سیٹ $set از $total۔';
+  }
+
+  @override
+  String get sayHalfway => 'آدھا ہو گیا۔';
+
+  @override
+  String sayRest(int count, String name) {
+    return '$count سیکنڈ آرام۔ اگلا: $name۔';
+  }
+
+  @override
+  String get sayGetReady => 'تیار ہو جائیں۔';
+
+  @override
+  String sayDayComplete(int day) {
+    return 'دن $day مکمل۔ شاباش!';
+  }
 }

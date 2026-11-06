@@ -661,5 +661,13 @@
   "challengeStreak": "{count, plural, other{{count} دن کا سلسلہ}}",
   "finishActiveFirst": "پہلے موجودہ ورزش مکمل یا ختم کریں۔",
   "restartChallenge": "چیلنج دوبارہ شروع کریں",
-  "continueChallenge": "جاری رکھیں: {name}"
+  "continueChallenge": "جاری رکھیں: {name}",
+  "voiceCoach": "آواز کوچ",
+  "sayExerciseReps": "{name}۔ {count} ریپس۔",
+  "sayExerciseSeconds": "{name}۔ {count} سیکنڈ۔ شروع!",
+  "saySetOf": "سیٹ {set} از {total}۔",
+  "sayHalfway": "آدھا ہو گیا۔",
+  "sayRest": "{count} سیکنڈ آرام۔ اگلا: {name}۔",
+  "sayGetReady": "تیار ہو جائیں۔",
+  "sayDayComplete": "دن {day} مکمل۔ شاباش!"
 }

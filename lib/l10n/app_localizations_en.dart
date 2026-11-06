@@ -2267,4 +2267,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String continueChallenge(String name) {
     return 'Continue: $name';
   }
+
+  @override
+  String get voiceCoach => 'Voice coach';
+
+  @override
+  String sayExerciseReps(String name, int count) {
+    return '$name. $count reps.';
+  }
+
+  @override
+  String sayExerciseSeconds(String name, int count) {
+    return '$name. $count seconds. Go!';
+  }
+
+  @override
+  String saySetOf(int set, int total) {
+    return 'Set $set of $total.';
+  }
+
+  @override
+  String get sayHalfway => 'Halfway.';
+
+  @override
+  String sayRest(int count, String name) {
+    return 'Rest $count seconds. Next: $name.';
+  }
+
+  @override
+  String get sayGetReady => 'Get ready.';
+
+  @override
+  String sayDayComplete(int day) {
+    return 'Day $day complete. Well done!';
+  }
 }

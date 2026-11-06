@@ -89,6 +89,10 @@
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
     <queries>
+        <!-- Voice coach (flutter_tts): find the system text-to-speech engine -->
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
         <!-- Detect whether Health Connect is installed -->
         <package android:name="com.google.android.apps.healthdata" />
         <intent>

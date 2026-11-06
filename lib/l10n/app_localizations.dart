@@ -4066,6 +4066,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue: {name}'**
   String continueChallenge(String name);
+
+  /// Player toggle tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Voice coach'**
+  String get voiceCoach;
+
+  /// Spoken when an exercise starts
+  ///
+  /// In en, this message translates to:
+  /// **'{name}. {count} reps.'**
+  String sayExerciseReps(String name, int count);
+
+  /// Spoken when a timed exercise starts
+  ///
+  /// In en, this message translates to:
+  /// **'{name}. {count} seconds. Go!'**
+  String sayExerciseSeconds(String name, int count);
+
+  /// Spoken before later sets
+  ///
+  /// In en, this message translates to:
+  /// **'Set {set} of {total}.'**
+  String saySetOf(int set, int total);
+
+  /// Spoken at the halfway point
+  ///
+  /// In en, this message translates to:
+  /// **'Halfway.'**
+  String get sayHalfway;
+
+  /// Spoken when rest starts
+  ///
+  /// In en, this message translates to:
+  /// **'Rest {count} seconds. Next: {name}.'**
+  String sayRest(int count, String name);
+
+  /// Spoken 5 seconds before rest ends
+  ///
+  /// In en, this message translates to:
+  /// **'Get ready.'**
+  String get sayGetReady;
+
+  /// Spoken at the end
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} complete. Well done!'**
+  String sayDayComplete(int day);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

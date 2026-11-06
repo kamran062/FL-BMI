@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/challenges/domain/challenge.dart';
+import 'package:bmi_health/features/train/challenges/voice_coach.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart' show ChallengeLabels;
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
@@ -25,8 +26,11 @@ class GuidedPlayerScreen extends StatefulWidget {
   final ChallengeLevel level;
   final ChallengeDay plan;
 
+  /// Spoken cues; tests pass a recording coach.
+  final VoiceCoach? coach;
+
   const GuidedPlayerScreen(
-      {super.key, required this.focus, required this.level, required this.plan});
+      {super.key, required this.focus, required this.level, required this.plan, this.coach});
 
   @override
   State<GuidedPlayerScreen> createState() => GuidedPlayerScreenState();
@@ -47,11 +51,36 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
   int? _timedForSet;
   final _startedAt = DateTime.now();
   int _setsDone = 0;
+  late final VoiceCoach _coach = widget.coach ?? createVoiceCoach();
+  int? _announcedSet;
 
   @override
   void initState() {
     super.initState();
+    _coach.load().then((_) {
+      if (mounted) setState(() {});
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) => _begin());
+  }
+
+  void _say(String text) => _coach.say(text, locale: context.l10n.localeName);
+
+  /// Names the exercise (or "Set 2 of 3") once per set.
+  void _announce() {
+    final next = _next;
+    final step = _step;
+    if (next == null || step == null || _announcedSet == next.set.id) return;
+    _announcedSet = next.set.id;
+    final l = context.l10n;
+    if (next.index == 0) {
+      final name = step.exercise.nameIn(l.localeName);
+      _say(step.timed
+          ? l.sayExerciseSeconds(name, step.target)
+          : l.sayExerciseReps(name, step.target));
+    } else {
+      _say('${l.saySetOf(next.index + 1, next.total)} '
+          '${step.timed ? l.secondsTarget(step.target) : l.repsTarget(step.target)}');
+    }
   }
 
   Future<void> _begin() async {
@@ -65,13 +94,17 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
     );
     _w.addListener(_onWorkout);
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) => _tick());
-    if (mounted) setState(() => _phase = _Phase.work);
+    if (mounted) {
+      setState(() => _phase = _Phase.work);
+      _announce();
+    }
   }
 
   @override
   void dispose() {
     _ticker?.cancel();
     _w.removeListener(_onWorkout);
+    _coach.stop();
     super.dispose();
   }
 
@@ -102,6 +135,12 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
           _phase = _Phase.work;
         }
       });
+      final l = context.l10n;
+      if (rest > 0 && _step != null) {
+        _say(l.sayRest(rest, _step!.exercise.nameIn(l.localeName)));
+      } else {
+        _announce();
+      }
     } else {
       setState(() {});
     }
@@ -112,14 +151,20 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
     setState(() {
       if (_phase == _Phase.rest) {
         _restLeft--;
-        if (_restLeft <= 3 && _restLeft > 0) HapticFeedback.selectionClick();
+        if (_restLeft == 5) _say(context.l10n.sayGetReady);
+        if (_restLeft <= 3 && _restLeft > 0) {
+          HapticFeedback.selectionClick();
+          _say('$_restLeft');
+        }
         if (_restLeft <= 0) {
           HapticFeedback.heavyImpact();
           _phase = _Phase.work;
+          _announce();
         }
       } else if (_phase == _Phase.work) {
         final step = _step;
         final next = _next;
+        _announce();
         if (step == null || next == null || !step.timed) return;
         // Start the countdown for each new timed set.
         if (_timedForSet != next.set.id) {
@@ -128,7 +173,13 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
           return;
         }
         _timedLeft = (_timedLeft ?? step.target) - 1;
-        if (_timedLeft! <= 3 && _timedLeft! > 0) HapticFeedback.selectionClick();
+        if (step.target >= 20 && _timedLeft == step.target ~/ 2) {
+          _say(context.l10n.sayHalfway);
+        }
+        if (_timedLeft! <= 3 && _timedLeft! > 0) {
+          HapticFeedback.selectionClick();
+          _say('$_timedLeft');
+        }
         if (_timedLeft! <= 0) _markDone();
       }
     });
@@ -168,6 +219,7 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
     await _w.finish();
     await challenges.completeDay(widget.focus, widget.level, widget.plan.day);
     HapticFeedback.heavyImpact();
+    if (mounted) _say(context.l10n.sayDayComplete(widget.plan.day));
   }
 
   Future<void> _quit() async {
@@ -213,6 +265,14 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
           leading: CloseButton(onPressed: _quit),
           title: Text(l.challengeProgress(widget.plan.day, widget.level.days)),
           actions: [
+            IconButton(
+              tooltip: l.voiceCoach,
+              icon: Icon(_coach.enabled ? Icons.volume_up_rounded : Icons.volume_off_rounded),
+              onPressed: () async {
+                await _coach.setEnabled(!_coach.enabled);
+                if (mounted) setState(() {});
+              },
+            ),
             if (_phase == _Phase.work || _phase == _Phase.rest)
               IconButton(
                 tooltip: _paused ? l.resume : l.pause,

@@ -3327,5 +3327,83 @@
         "example": "Core & Abs"
       }
     }
+  },
+  "voiceCoach": "Voice coach",
+  "@voiceCoach": {
+    "description": "Player toggle tooltip"
+  },
+  "sayExerciseReps": "{name}. {count} reps.",
+  "@sayExerciseReps": {
+    "description": "Spoken when an exercise starts",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Push-up"
+      },
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "sayExerciseSeconds": "{name}. {count} seconds. Go!",
+  "@sayExerciseSeconds": {
+    "description": "Spoken when a timed exercise starts",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Plank"
+      },
+      "count": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "saySetOf": "Set {set} of {total}.",
+  "@saySetOf": {
+    "description": "Spoken before later sets",
+    "placeholders": {
+      "set": {
+        "type": "int",
+        "example": "2"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "sayHalfway": "Halfway.",
+  "@sayHalfway": {
+    "description": "Spoken at the halfway point"
+  },
+  "sayRest": "Rest {count} seconds. Next: {name}.",
+  "@sayRest": {
+    "description": "Spoken when rest starts",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "30"
+      },
+      "name": {
+        "type": "String",
+        "example": "Crunch"
+      }
+    }
+  },
+  "sayGetReady": "Get ready.",
+  "@sayGetReady": {
+    "description": "Spoken 5 seconds before rest ends"
+  },
+  "sayDayComplete": "Day {day} complete. Well done!",
+  "@sayDayComplete": {
+    "description": "Spoken at the end",
+    "placeholders": {
+      "day": {
+        "type": "int",
+        "example": "5"
+      }
+    }
   }
 }

@@ -4,6 +4,7 @@ import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/challenges/domain/challenge.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
+import 'package:bmi_health/features/train/challenges/voice_coach.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -79,6 +80,8 @@ void main() {
   testWidgets('guided player: day 1 start → every set → finished, logged',
       (tester) async {
     setUpAppHarness();
+    final coach = RecordingVoiceCoach();
+    createVoiceCoach = () => coach;
     final app = await launchApp(tester);
 
     // Open Home Challenges from the Train tab
@@ -131,6 +134,12 @@ void main() {
     expect(app.workouts.history, isNotEmpty);
     expect(app.challenges.completedDays(ChallengeFocus.coreAbs, ChallengeLevel.beginner), {1});
     expect(find.textContaining('1-day streak'), findsOneWidget);
+
+    // Voice cues: warm-up announced, rests with the next exercise, the end
+    expect(coach.said.first, 'Jumping Jack. 30 seconds. Go!');
+    expect(coach.said.where((t) => t.startsWith('Rest ')), isNotEmpty);
+    expect(coach.said.any((t) => t.contains('Next: ')), isTrue);
+    expect(coach.said.last, 'Day 1 complete. Well done!');
 
     await tester.tap(find.text('Continue'));
     await tester.pumpAndSettle();
