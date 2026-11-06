@@ -19,6 +19,7 @@ import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/app/router.dart';
 import 'package:go_router/go_router.dart';
+import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
 
 /// Train tab: start or resume a workout, routines, library, history.
 class TrainScreen extends StatelessWidget {
@@ -118,6 +119,20 @@ class TrainScreen extends StatelessWidget {
                     ),
                   ),
                 ]),
+                const SizedBox(height: 14),
+                AppCard(
+                  padding: 4,
+                  onTap: () => Navigator.of(context, rootNavigator: true).push(
+                      MaterialPageRoute<void>(
+                          builder: (c) => ChallengesScreen(onBack: () => Navigator.pop(c)))),
+                  child: ListTile(
+                    leading: const Icon(Icons.home_rounded, color: AppColors.bmiOver),
+                    title: Text(l.homeChallenges,
+                        style: GoogleFonts.inter(fontWeight: FontWeight.w700)),
+                    subtitle: Text(l.homeChallengesBody),
+                    trailing: const Icon(Icons.chevron_right_rounded),
+                  ),
+                ),
                 const SizedBox(height: 20),
                 OverlineLabel(l.muscleDayTitle),
                 const SizedBox(height: 8),

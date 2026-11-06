@@ -18,7 +18,7 @@ void main() {
       expect(e.tipsIn('ur'), isNotEmpty, reason: e.id);
       expect(e.mistakesIn('en'), isNotEmpty, reason: e.id);
       expect(e.prescription.repMin, lessThanOrEqualTo(e.prescription.repMax), reason: e.id);
-      expect(e.prescription.restSec, inInclusiveRange(30, 240), reason: e.id);
+      expect(e.prescription.restSec, inInclusiveRange(10, 240), reason: e.id); // stretches: 15 s
     }
   });
 

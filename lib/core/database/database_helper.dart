@@ -14,7 +14,7 @@ class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 9;
+  static const schemaVersion = 10;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -174,6 +174,17 @@ class DatabaseHelper {
           date INTEGER NOT NULL,
           file TEXT NOT NULL,
           weight_kg REAL
+        )
+      ''');
+    },
+    // 9 → 10: Home Challenges progress (one row per completed day)
+    (db) async {
+      await db.execute('''
+        CREATE TABLE challenge_progress (
+          challenge TEXT NOT NULL,
+          day INTEGER NOT NULL,
+          completed_at INTEGER NOT NULL,
+          PRIMARY KEY (challenge, day)
         )
       ''');
     },
@@ -478,6 +489,26 @@ class DatabaseHelper {
 
   Future<void> deleteProgressPhoto(int id) async =>
       (await db).delete('progress_photos', where: 'id = ?', whereArgs: [id]);
+
+  // ── Home Challenges ──────────────────────────────────────────
+
+  /// challenge key → completed day → when.
+  Future<Map<String, Map<int, DateTime>>> getChallengeProgress() async {
+    final out = <String, Map<int, DateTime>>{};
+    for (final r in await (await db).query('challenge_progress')) {
+      out.putIfAbsent(r['challenge'] as String, () => {})[r['day'] as int] =
+          DateTime.fromMillisecondsSinceEpoch(r['completed_at'] as int);
+    }
+    return out;
+  }
+
+  Future<void> completeChallengeDay(String challenge, int day, DateTime at) async =>
+      (await db).insert('challenge_progress',
+          {'challenge': challenge, 'day': day, 'completed_at': at.millisecondsSinceEpoch},
+          conflictAlgorithm: ConflictAlgorithm.replace);
+
+  Future<void> resetChallenge(String challenge) async => (await db)
+      .delete('challenge_progress', where: 'challenge = ?', whereArgs: [challenge]);
 
   // ── BMI Entries ──────────────────────────────────────────────
 

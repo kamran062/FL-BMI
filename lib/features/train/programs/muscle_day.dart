@@ -62,6 +62,7 @@ abstract final class MuscleDayBuilder {
     final jointFriendly = (bmi ?? 0) >= jointFriendlyBmi;
 
     bool ok(Exercise e) =>
+        e.category == ExerciseCategory.strength &&
         equipment.contains(e.equipment) &&
         e.difficulty.index <= maxDiff.index &&
         !(e.highImpact && (jointFriendly || level == Experience.beginner));

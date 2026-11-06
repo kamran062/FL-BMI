@@ -1290,8 +1290,8 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String startDay(String day) {
-    return '$day شروع کریں';
+  String startDay(int day) {
+    return 'دن $day شروع کریں';
   }
 
   @override
@@ -2102,4 +2102,157 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get noExercisesForDay => 'اس دن کے لیے ابھی آپ کے سامان کے مطابق کوئی ورزش نہیں۔';
+
+  @override
+  String get homeChallenges => 'گھریلو چیلنجز';
+
+  @override
+  String get homeChallengesBody => 'بغیر سامان کے روزانہ کے منصوبے۔ سطح اور توجہ منتخب کریں۔';
+
+  @override
+  String get levelBeginner => 'ابتدائی';
+
+  @override
+  String get levelIntermediate => 'درمیانہ';
+
+  @override
+  String get levelAdvanced => 'ماہر';
+
+  @override
+  String levelLocked(String level) {
+    return 'کھولنے کے لیے اس توجہ میں $level مکمل کریں';
+  }
+
+  @override
+  String get focusFullBody => 'پورا جسم';
+
+  @override
+  String get focusUpperBody => 'سینہ اور اوپری جسم';
+
+  @override
+  String get focusCoreAbs => 'پیٹ اور ایبز';
+
+  @override
+  String get focusLegsGlutes => 'ٹانگیں اور کولہے';
+
+  @override
+  String get focusHiit => 'ہٹ اور چربی جلانا';
+
+  @override
+  String get focusStretch => 'اسٹریچ اور لچک';
+
+  @override
+  String challengeLength(int days, int minutes) {
+    return '$days دن · روزانہ $minutes منٹ';
+  }
+
+  @override
+  String challengeProgress(int day, int total) {
+    return '$total میں سے دن $day';
+  }
+
+  @override
+  String get challengeDone => 'مکمل!';
+
+  @override
+  String get restDay => 'آرام کا دن';
+
+  @override
+  String get restDayBody => 'بحالی بھی ورزش کا حصہ ہے۔ چہل قدمی کریں یا ہلکا اسٹریچ کریں۔';
+
+  @override
+  String get markRested => 'آرام مکمل کریں';
+
+  @override
+  String get todayPlan => 'آج کا منصوبہ';
+
+  @override
+  String get warmUp => 'وارم اپ';
+
+  @override
+  String get coolDown => 'کول ڈاؤن';
+
+  @override
+  String repsTarget(int count) {
+    return '$count ریپس';
+  }
+
+  @override
+  String secondsTarget(int count) {
+    return '$count سیکنڈ';
+  }
+
+  @override
+  String setOfTotal(int set, int total) {
+    return 'سیٹ $set از $total';
+  }
+
+  @override
+  String get doneSet => 'ہو گیا';
+
+  @override
+  String get restNow => 'آرام';
+
+  @override
+  String nextUp(String name) {
+    return 'اگلا: $name';
+  }
+
+  @override
+  String get addTwenty => '+20 سیکنڈ';
+
+  @override
+  String get skipRest => 'آرام چھوڑیں';
+
+  @override
+  String get skipExercise => 'ورزش چھوڑیں';
+
+  @override
+  String get pause => 'روکیں';
+
+  @override
+  String get resume => 'جاری رکھیں';
+
+  @override
+  String get howTo2 => 'کیسے کریں';
+
+  @override
+  String get quitWorkoutTitle => 'یہ ورزش چھوڑ دیں؟';
+
+  @override
+  String get quitWorkoutBody => 'آج کی پیش رفت محفوظ نہیں ہوگی۔';
+
+  @override
+  String get quit => 'چھوڑ دیں';
+
+  @override
+  String dayComplete(int day) {
+    return 'دن $day مکمل!';
+  }
+
+  @override
+  String dayCompleteBody(int minutes, int sets) {
+    return '$minutes منٹ · $sets سیٹ۔ بہت خوب، کل ملتے ہیں۔';
+  }
+
+  @override
+  String challengeStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count دن کا سلسلہ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get finishActiveFirst => 'پہلے موجودہ ورزش مکمل یا ختم کریں۔';
+
+  @override
+  String get restartChallenge => 'چیلنج دوبارہ شروع کریں';
+
+  @override
+  String continueChallenge(String name) {
+    return 'جاری رکھیں: $name';
+  }
 }

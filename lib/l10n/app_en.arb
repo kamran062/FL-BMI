@@ -1824,13 +1824,13 @@
       }
     }
   },
-  "startDay": "Start {day}",
+  "startDay": "Start Day {day}",
   "@startDay": {
-    "description": "Starts a workout for one program day",
+    "description": "Button",
     "placeholders": {
       "day": {
-        "type": "String",
-        "example": "Push"
+        "type": "int",
+        "example": "5"
       }
     }
   },
@@ -3077,5 +3077,255 @@
   "noExercisesForDay": "No exercises match your equipment for this day yet.",
   "@noExercisesForDay": {
     "description": "Empty plan"
+  },
+  "homeChallenges": "Home Challenges",
+  "@homeChallenges": {
+    "description": "Title of the no-equipment day-by-day plans"
+  },
+  "homeChallengesBody": "Day-by-day plans with no equipment. Pick a level and a focus.",
+  "@homeChallengesBody": {
+    "description": "Card subtitle"
+  },
+  "levelBeginner": "Beginner",
+  "@levelBeginner": {
+    "description": "Challenge level"
+  },
+  "levelIntermediate": "Intermediate",
+  "@levelIntermediate": {
+    "description": "Challenge level"
+  },
+  "levelAdvanced": "Advanced",
+  "@levelAdvanced": {
+    "description": "Challenge level"
+  },
+  "levelLocked": "Finish {level} in this focus to unlock",
+  "@levelLocked": {
+    "description": "Locked level hint",
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "Beginner"
+      }
+    }
+  },
+  "focusFullBody": "Full Body",
+  "@focusFullBody": {
+    "description": "Challenge focus"
+  },
+  "focusUpperBody": "Chest & Upper Body",
+  "@focusUpperBody": {
+    "description": "Challenge focus"
+  },
+  "focusCoreAbs": "Core & Abs",
+  "@focusCoreAbs": {
+    "description": "Challenge focus"
+  },
+  "focusLegsGlutes": "Legs & Glutes",
+  "@focusLegsGlutes": {
+    "description": "Challenge focus"
+  },
+  "focusHiit": "HIIT & Fat Burn",
+  "@focusHiit": {
+    "description": "Challenge focus"
+  },
+  "focusStretch": "Stretch & Mobility",
+  "@focusStretch": {
+    "description": "Challenge focus"
+  },
+  "challengeLength": "{days} days · {minutes} min a day",
+  "@challengeLength": {
+    "description": "Challenge card subtitle",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "30"
+      },
+      "minutes": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "challengeProgress": "Day {day} of {total}",
+  "@challengeProgress": {
+    "description": "Progress",
+    "placeholders": {
+      "day": {
+        "type": "int",
+        "example": "5"
+      },
+      "total": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "challengeDone": "Completed!",
+  "@challengeDone": {
+    "description": "Finished challenge"
+  },
+  "restDay": "Rest day",
+  "@restDay": {
+    "description": "Day type"
+  },
+  "restDayBody": "Recovery is part of training. Take a walk or stretch gently.",
+  "@restDayBody": {
+    "description": "Rest day text"
+  },
+  "markRested": "Mark as rested",
+  "@markRested": {
+    "description": "Button"
+  },
+  "todayPlan": "Today's plan",
+  "@todayPlan": {
+    "description": "Section title"
+  },
+  "warmUp": "Warm-up",
+  "@warmUp": {
+    "description": "Step label"
+  },
+  "coolDown": "Cool-down",
+  "@coolDown": {
+    "description": "Step label"
+  },
+  "repsTarget": "{count} reps",
+  "@repsTarget": {
+    "description": "Rep target",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "secondsTarget": "{count} s",
+  "@secondsTarget": {
+    "description": "Timed target",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "setOfTotal": "Set {set} of {total}",
+  "@setOfTotal": {
+    "description": "Player set label",
+    "placeholders": {
+      "set": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "doneSet": "Done",
+  "@doneSet": {
+    "description": "Player button"
+  },
+  "restNow": "Rest",
+  "@restNow": {
+    "description": "Rest phase title"
+  },
+  "nextUp": "Next: {name}",
+  "@nextUp": {
+    "description": "Rest phase next exercise",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Push-up"
+      }
+    }
+  },
+  "addTwenty": "+20 s",
+  "@addTwenty": {
+    "description": "Extend rest"
+  },
+  "skipRest": "Skip rest",
+  "@skipRest": {
+    "description": "Button"
+  },
+  "skipExercise": "Skip exercise",
+  "@skipExercise": {
+    "description": "Button"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Button"
+  },
+  "resume": "Resume",
+  "@resume": {
+    "description": "Button"
+  },
+  "howTo2": "How to do it",
+  "@howTo2": {
+    "description": "Expandable steps in the player"
+  },
+  "quitWorkoutTitle": "Quit this workout?",
+  "@quitWorkoutTitle": {
+    "description": "Dialog title"
+  },
+  "quitWorkoutBody": "Today's progress won't be saved.",
+  "@quitWorkoutBody": {
+    "description": "Dialog text"
+  },
+  "quit": "Quit",
+  "@quit": {
+    "description": "Button"
+  },
+  "dayComplete": "Day {day} complete!",
+  "@dayComplete": {
+    "description": "Finish title",
+    "placeholders": {
+      "day": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "dayCompleteBody": "{minutes} min · {sets} sets. Great work, see you tomorrow.",
+  "@dayCompleteBody": {
+    "description": "Finish text",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "14"
+      },
+      "sets": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "challengeStreak": "{count, plural, =1{1-day streak} other{{count}-day streak}}",
+  "@challengeStreak": {
+    "description": "Streak",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "finishActiveFirst": "Finish or discard your current workout first.",
+  "@finishActiveFirst": {
+    "description": "Snack bar"
+  },
+  "restartChallenge": "Restart challenge",
+  "@restartChallenge": {
+    "description": "Menu item"
+  },
+  "continueChallenge": "Continue: {name}",
+  "@continueChallenge": {
+    "description": "Today card",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Core & Abs"
+      }
+    }
   }
 }

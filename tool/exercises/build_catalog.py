@@ -41,7 +41,7 @@ def X(id, en, ur, primary, secondary, equipment, difficulty, kind,
                 tips_ur=tips_ur, mistakes_en=mistakes_en, mistakes_ur=mistakes_ur,
                 high_impact=high_impact, sets=sets, reps=reps, rest=rest)
 
-GROUPS = ['chest', 'back', 'shoulders', 'arms', 'legs', 'core']
+GROUPS = ['chest', 'back', 'shoulders', 'arms', 'legs', 'core', 'mobility']
 
 def main():
     old = {}
@@ -80,6 +80,8 @@ def main():
                     'timed': x['kind'] == 'hold', 'restSec': rest,
                 },
                 'highImpact': x['high_impact'],
+                # strength | stretch | cardio (Home Challenges focuses)
+                'category': x.get('category', 'strength'),
                 'videos': old.get(i, {}).get('videos', {'male': None, 'female': None}),
             })
     missing = set(old) - seen

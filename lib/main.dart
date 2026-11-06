@@ -24,6 +24,7 @@ import 'package:bmi_health/features/body/photos/photo_vault.dart';
 import 'package:bmi_health/core/storage/backup_exclusion.dart';
 import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
+import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,12 +56,13 @@ void main() async {
     final purchases = PurchaseService.instance;
     final recovery = RecoveryProvider();
     final cycle = CycleProvider(db);
+    final challenges = ChallengeProvider(db);
     final photos = PhotosProvider(
         db, () async => PhotoVault(await BackupExclusion.photosDir()));
     final catalog = await ExerciseCatalog.loadBundled();
     await Future.wait([
       settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-      fuel.load(), steps.load(), movement.load(), recovery.load(), cycle.load(), photos.load(),
+      fuel.load(), steps.load(), movement.load(), recovery.load(), cycle.load(), photos.load(), challenges.load(),
     ]);
 
     runApp(BmiHealthProviders(
@@ -80,6 +82,7 @@ void main() async {
       db: db,
       // Wear OS companion; a no-op on iOS and without a watch
       wear: WearBridge(workouts, catalog),
+      challenges: challenges,
       catalog: catalog,
       child: const BmiHealthApp(),
     ));

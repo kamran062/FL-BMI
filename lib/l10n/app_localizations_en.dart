@@ -1296,8 +1296,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String startDay(String day) {
-    return 'Start $day';
+  String startDay(int day) {
+    return 'Start Day $day';
   }
 
   @override
@@ -2113,4 +2113,158 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noExercisesForDay => 'No exercises match your equipment for this day yet.';
+
+  @override
+  String get homeChallenges => 'Home Challenges';
+
+  @override
+  String get homeChallengesBody => 'Day-by-day plans with no equipment. Pick a level and a focus.';
+
+  @override
+  String get levelBeginner => 'Beginner';
+
+  @override
+  String get levelIntermediate => 'Intermediate';
+
+  @override
+  String get levelAdvanced => 'Advanced';
+
+  @override
+  String levelLocked(String level) {
+    return 'Finish $level in this focus to unlock';
+  }
+
+  @override
+  String get focusFullBody => 'Full Body';
+
+  @override
+  String get focusUpperBody => 'Chest & Upper Body';
+
+  @override
+  String get focusCoreAbs => 'Core & Abs';
+
+  @override
+  String get focusLegsGlutes => 'Legs & Glutes';
+
+  @override
+  String get focusHiit => 'HIIT & Fat Burn';
+
+  @override
+  String get focusStretch => 'Stretch & Mobility';
+
+  @override
+  String challengeLength(int days, int minutes) {
+    return '$days days · $minutes min a day';
+  }
+
+  @override
+  String challengeProgress(int day, int total) {
+    return 'Day $day of $total';
+  }
+
+  @override
+  String get challengeDone => 'Completed!';
+
+  @override
+  String get restDay => 'Rest day';
+
+  @override
+  String get restDayBody => 'Recovery is part of training. Take a walk or stretch gently.';
+
+  @override
+  String get markRested => 'Mark as rested';
+
+  @override
+  String get todayPlan => 'Today\'s plan';
+
+  @override
+  String get warmUp => 'Warm-up';
+
+  @override
+  String get coolDown => 'Cool-down';
+
+  @override
+  String repsTarget(int count) {
+    return '$count reps';
+  }
+
+  @override
+  String secondsTarget(int count) {
+    return '$count s';
+  }
+
+  @override
+  String setOfTotal(int set, int total) {
+    return 'Set $set of $total';
+  }
+
+  @override
+  String get doneSet => 'Done';
+
+  @override
+  String get restNow => 'Rest';
+
+  @override
+  String nextUp(String name) {
+    return 'Next: $name';
+  }
+
+  @override
+  String get addTwenty => '+20 s';
+
+  @override
+  String get skipRest => 'Skip rest';
+
+  @override
+  String get skipExercise => 'Skip exercise';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
+  String get resume => 'Resume';
+
+  @override
+  String get howTo2 => 'How to do it';
+
+  @override
+  String get quitWorkoutTitle => 'Quit this workout?';
+
+  @override
+  String get quitWorkoutBody => 'Today\'s progress won\'t be saved.';
+
+  @override
+  String get quit => 'Quit';
+
+  @override
+  String dayComplete(int day) {
+    return 'Day $day complete!';
+  }
+
+  @override
+  String dayCompleteBody(int minutes, int sets) {
+    return '$minutes min · $sets sets. Great work, see you tomorrow.';
+  }
+
+  @override
+  String challengeStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count-day streak',
+      one: '1-day streak',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get finishActiveFirst => 'Finish or discard your current workout first.';
+
+  @override
+  String get restartChallenge => 'Restart challenge';
+
+  @override
+  String continueChallenge(String name) {
+    return 'Continue: $name';
+  }
 }

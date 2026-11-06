@@ -27,6 +27,8 @@ import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/cycle/ui/cycle_screen.dart';
 import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/features/progress/domain/achievements.dart';
+import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
+import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
 
 /// Home dashboard: the day at a glance with one-tap actions.
 class TodayScreen extends StatelessWidget {
@@ -130,6 +132,7 @@ class TodayScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 14),
+                const _ChallengeCard(),
                 _StreakCard(onOpen: onOpenProgress),
                 if (context.read<AiClient>().coachEnabled)
                   Padding(
@@ -467,6 +470,35 @@ class _StreakCard extends StatelessWidget {
           title: Text(l.weekStreak(streak)),
           subtitle: Text(l.progressTitle),
           trailing: const Icon(Icons.chevron_right_rounded),
+        ),
+      ),
+    );
+  }
+}
+
+/// "Continue: Core & Abs · Day 5 of 30" for the challenge in progress.
+class _ChallengeCard extends StatelessWidget {
+  const _ChallengeCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.watch<ChallengeProvider>();
+    final latest = c.latest;
+    if (latest == null) return const SizedBox.shrink();
+    final l = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: AppCard(
+        padding: 4,
+        onTap: () => Navigator.of(context, rootNavigator: true).push(MaterialPageRoute<void>(
+            builder: (_) => ChallengeDetailScreen(focus: latest.focus, level: latest.level))),
+        child: ListTile(
+          leading: Icon(focusIcon(latest.focus), color: AppColors.bmiOver),
+          title: Text(l.continueChallenge(l.focus(latest.focus)),
+              style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          subtitle: Text(l.challengeProgress(
+              c.currentDay(latest.focus, latest.level), latest.level.days)),
+          trailing: const Icon(Icons.play_circle_fill_rounded, size: 32, color: AppColors.bmiNormal),
         ),
       ),
     );

@@ -21,6 +21,7 @@ import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
+import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 
 /// Supplies the app-wide state objects. Used by main() and by tests.
 class BmiHealthProviders extends StatelessWidget {
@@ -41,6 +42,7 @@ class BmiHealthProviders extends StatelessWidget {
     required this.ai,
     required this.db,
     required this.wear,
+    required this.challenges,
     required this.catalog,
     required this.child,
   });
@@ -60,6 +62,7 @@ class BmiHealthProviders extends StatelessWidget {
   final AiClient ai;
   final DatabaseHelper db;
   final WearBridge wear;
+  final ChallengeProvider challenges;
   final ExerciseCatalog catalog;
   final Widget child;
 
@@ -81,6 +84,7 @@ class BmiHealthProviders extends StatelessWidget {
           Provider.value(value: ai),
           Provider.value(value: db),
           Provider.value(value: wear),
+          ChangeNotifierProvider.value(value: challenges),
           Provider.value(value: catalog),
         ],
         child: child,

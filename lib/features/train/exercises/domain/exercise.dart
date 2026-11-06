@@ -11,6 +11,9 @@ enum ExerciseEquipment { barbell, dumbbell, machine, cable, bodyweight, band, ke
 
 enum Difficulty { beginner, intermediate, advanced }
 
+/// Strength moves, stretches and cardio (Home Challenges focuses).
+enum ExerciseCategory { strength, stretch, cardio }
+
 /// Recommended sets × reps (or seconds for timed holds) and rest.
 class Prescription {
   final int sets;
@@ -54,6 +57,7 @@ class Exercise {
 
   /// Jumping / impact moves; avoided for high BMI and beginners.
   final bool highImpact;
+  final ExerciseCategory category;
 
   /// Demonstrator video URLs (HLS/MP4). null until the clip is filmed.
   final String? maleVideo;
@@ -71,6 +75,7 @@ class Exercise {
     this.mistakes = const {},
     this.prescription = const Prescription(),
     this.highImpact = false,
+    this.category = ExerciseCategory.strength,
     this.maleVideo,
     this.femaleVideo,
   });
@@ -112,6 +117,7 @@ class Exercise {
       mistakes: texts('mistakes'),
       prescription: Prescription.fromJson(j['prescription'] as Map<String, dynamic>?),
       highImpact: j['highImpact'] as bool? ?? false,
+      category: ExerciseCategory.values.asNameMap()[j['category']] ?? ExerciseCategory.strength,
       maleVideo: videos['male'] as String?,
       femaleVideo: videos['female'] as String?,
     );
@@ -147,6 +153,7 @@ class ExerciseCatalog {
         .where((x) =>
             x.id != e.id &&
             x.primary == e.primary &&
+            x.category == e.category &&
             (available == null || available.contains(x.equipment)))
         .toList()
       ..sort((a, b) {

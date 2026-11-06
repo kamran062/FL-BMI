@@ -2411,11 +2411,11 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 day a week} other{{count} days a week}}'**
   String programDays(int count);
 
-  /// Starts a workout for one program day
+  /// Button
   ///
   /// In en, this message translates to:
-  /// **'Start {day}'**
-  String startDay(String day);
+  /// **'Start Day {day}'**
+  String startDay(int day);
 
   /// Section title on exercise detail
   ///
@@ -3814,6 +3814,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No exercises match your equipment for this day yet.'**
   String get noExercisesForDay;
+
+  /// Title of the no-equipment day-by-day plans
+  ///
+  /// In en, this message translates to:
+  /// **'Home Challenges'**
+  String get homeChallenges;
+
+  /// Card subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Day-by-day plans with no equipment. Pick a level and a focus.'**
+  String get homeChallengesBody;
+
+  /// Challenge level
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get levelBeginner;
+
+  /// Challenge level
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get levelIntermediate;
+
+  /// Challenge level
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get levelAdvanced;
+
+  /// Locked level hint
+  ///
+  /// In en, this message translates to:
+  /// **'Finish {level} in this focus to unlock'**
+  String levelLocked(String level);
+
+  /// Challenge focus
+  ///
+  /// In en, this message translates to:
+  /// **'Full Body'**
+  String get focusFullBody;
+
+  /// Challenge focus
+  ///
+  /// In en, this message translates to:
+  /// **'Chest & Upper Body'**
+  String get focusUpperBody;
+
+  /// Challenge focus
+  ///
+  /// In en, this message translates to:
+  /// **'Core & Abs'**
+  String get focusCoreAbs;
+
+  /// Challenge focus
+  ///
+  /// In en, this message translates to:
+  /// **'Legs & Glutes'**
+  String get focusLegsGlutes;
+
+  /// Challenge focus
+  ///
+  /// In en, this message translates to:
+  /// **'HIIT & Fat Burn'**
+  String get focusHiit;
+
+  /// Challenge focus
+  ///
+  /// In en, this message translates to:
+  /// **'Stretch & Mobility'**
+  String get focusStretch;
+
+  /// Challenge card subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days · {minutes} min a day'**
+  String challengeLength(int days, int minutes);
+
+  /// Progress
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} of {total}'**
+  String challengeProgress(int day, int total);
+
+  /// Finished challenge
+  ///
+  /// In en, this message translates to:
+  /// **'Completed!'**
+  String get challengeDone;
+
+  /// Day type
+  ///
+  /// In en, this message translates to:
+  /// **'Rest day'**
+  String get restDay;
+
+  /// Rest day text
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery is part of training. Take a walk or stretch gently.'**
+  String get restDayBody;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as rested'**
+  String get markRested;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s plan'**
+  String get todayPlan;
+
+  /// Step label
+  ///
+  /// In en, this message translates to:
+  /// **'Warm-up'**
+  String get warmUp;
+
+  /// Step label
+  ///
+  /// In en, this message translates to:
+  /// **'Cool-down'**
+  String get coolDown;
+
+  /// Rep target
+  ///
+  /// In en, this message translates to:
+  /// **'{count} reps'**
+  String repsTarget(int count);
+
+  /// Timed target
+  ///
+  /// In en, this message translates to:
+  /// **'{count} s'**
+  String secondsTarget(int count);
+
+  /// Player set label
+  ///
+  /// In en, this message translates to:
+  /// **'Set {set} of {total}'**
+  String setOfTotal(int set, int total);
+
+  /// Player button
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get doneSet;
+
+  /// Rest phase title
+  ///
+  /// In en, this message translates to:
+  /// **'Rest'**
+  String get restNow;
+
+  /// Rest phase next exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Next: {name}'**
+  String nextUp(String name);
+
+  /// Extend rest
+  ///
+  /// In en, this message translates to:
+  /// **'+20 s'**
+  String get addTwenty;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Skip rest'**
+  String get skipRest;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Skip exercise'**
+  String get skipExercise;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pause;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resume;
+
+  /// Expandable steps in the player
+  ///
+  /// In en, this message translates to:
+  /// **'How to do it'**
+  String get howTo2;
+
+  /// Dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Quit this workout?'**
+  String get quitWorkoutTitle;
+
+  /// Dialog text
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s progress won\'t be saved.'**
+  String get quitWorkoutBody;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Quit'**
+  String get quit;
+
+  /// Finish title
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} complete!'**
+  String dayComplete(int day);
+
+  /// Finish text
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min · {sets} sets. Great work, see you tomorrow.'**
+  String dayCompleteBody(int minutes, int sets);
+
+  /// Streak
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1-day streak} other{{count}-day streak}}'**
+  String challengeStreak(int count);
+
+  /// Snack bar
+  ///
+  /// In en, this message translates to:
+  /// **'Finish or discard your current workout first.'**
+  String get finishActiveFirst;
+
+  /// Menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Restart challenge'**
+  String get restartChallenge;
+
+  /// Today card
+  ///
+  /// In en, this message translates to:
+  /// **'Continue: {name}'**
+  String continueChallenge(String name);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

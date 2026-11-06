@@ -56,6 +56,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -116,6 +117,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -175,6 +177,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -235,6 +238,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -295,6 +299,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -354,6 +359,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -414,6 +420,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -471,6 +478,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -530,6 +538,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -589,6 +598,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -650,6 +660,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -710,6 +721,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -770,6 +782,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -830,6 +843,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -889,6 +903,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -950,6 +965,7 @@
     "restSec": 180
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1010,6 +1026,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1069,6 +1086,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1128,6 +1146,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1187,6 +1206,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1246,6 +1266,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1305,6 +1326,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1364,6 +1386,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1423,6 +1446,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1482,6 +1506,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1541,6 +1566,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1601,6 +1627,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1661,6 +1688,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1720,6 +1748,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1780,6 +1809,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1837,6 +1867,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1896,6 +1927,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -1955,6 +1987,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2010,6 +2043,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2067,6 +2101,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2124,6 +2159,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2183,6 +2219,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2242,6 +2279,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2301,6 +2339,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2360,6 +2399,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2417,6 +2457,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2472,6 +2513,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2529,6 +2571,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2586,6 +2629,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2643,6 +2687,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2700,6 +2745,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2757,6 +2803,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2814,6 +2861,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2869,6 +2917,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2926,6 +2975,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -2983,6 +3033,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3040,6 +3091,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3100,6 +3152,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3157,6 +3210,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3217,6 +3271,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3276,6 +3331,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3337,6 +3393,7 @@
     "restSec": 180
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3397,6 +3454,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3457,6 +3515,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3516,6 +3575,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3574,6 +3634,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3633,6 +3694,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3690,6 +3752,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3749,6 +3812,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3807,6 +3871,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3866,6 +3931,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3925,6 +3991,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -3984,6 +4051,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4044,6 +4112,7 @@
     "restSec": 60
    },
    "highImpact": true,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4105,6 +4174,7 @@
     "restSec": 60
    },
    "highImpact": true,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4165,6 +4235,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4224,6 +4295,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4284,6 +4356,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4344,6 +4417,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4403,6 +4477,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4460,6 +4535,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4517,6 +4593,7 @@
     "restSec": 120
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4576,6 +4653,7 @@
     "restSec": 150
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4637,6 +4715,7 @@
     "restSec": 180
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4696,6 +4775,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4755,6 +4835,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4814,6 +4895,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4871,6 +4953,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4928,6 +5011,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -4989,6 +5073,7 @@
     "restSec": 90
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5044,6 +5129,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5101,6 +5187,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5158,6 +5245,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5215,6 +5303,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5275,6 +5364,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5332,6 +5422,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5392,6 +5483,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5449,6 +5541,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5506,6 +5599,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5563,6 +5657,7 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5620,6 +5715,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5677,6 +5773,7 @@
     "restSec": 60
    },
    "highImpact": false,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5737,6 +5834,7 @@
     "restSec": 45
    },
    "highImpact": true,
+   "category": "strength",
    "videos": {
     "male": null,
     "female": null
@@ -5794,6 +5892,905 @@
     "restSec": 45
    },
    "highImpact": false,
+   "category": "strength",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "chest_doorway_stretch",
+   "name": {
+    "en": "Doorway Chest Stretch",
+    "ur": "دروازے میں سینے کا کھنچاؤ"
+   },
+   "primary": "chest",
+   "secondary": [
+    "shoulders"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Stand in a doorway with forearms on the frame, elbows at shoulder height.",
+     "Step one foot forward.",
+     "Lean gently until you feel a stretch across your chest.",
+     "Breathe slowly and hold."
+    ],
+    "ur": [
+     "دروازے میں کھڑے ہوں، بازو کے اگلے حصے چوکھٹ پر، کہنیاں کندھوں کی اونچائی پر۔",
+     "ایک پاؤں آگے رکھیں۔",
+     "آہستہ آگے جھکیں یہاں تک کہ سینے میں کھنچاؤ محسوس ہو۔",
+     "آہستہ سانس لیں اور رکیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "A stretch, never pain.",
+     "Great after push-ups or desk work."
+    ],
+    "ur": [
+     "کھنچاؤ ہو، درد کبھی نہیں۔",
+     "پش اپ یا دفتر کے کام کے بعد بہترین۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Bouncing into the stretch.",
+     "Shrugging the shoulders."
+    ],
+    "ur": [
+     "جھٹکے سے کھنچاؤ میں جانا۔",
+     "کندھے اچکانا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 30,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "cross_body_shoulder_stretch",
+   "name": {
+    "en": "Cross-body Shoulder Stretch",
+    "ur": "کراس باڈی شولڈر اسٹریچ"
+   },
+   "primary": "shoulders",
+   "secondary": [],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Bring one arm straight across your chest.",
+     "Hold it above the elbow with the other hand.",
+     "Pull gently towards your chest.",
+     "Hold, then switch arms."
+    ],
+    "ur": [
+     "ایک بازو سیدھا سینے کے سامنے سے لے جائیں۔",
+     "دوسرے ہاتھ سے کہنی کے اوپر پکڑیں۔",
+     "آہستہ سینے کی طرف کھینچیں۔",
+     "رکیں، پھر بازو بدلیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Keep the shoulder down, away from your ear.",
+     "Breathe out to relax into it."
+    ],
+    "ur": [
+     "کندھا نیچے، کان سے دور رکھیں۔",
+     "سانس باہر نکال کر ڈھیلا چھوڑیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Pulling on the elbow joint itself.",
+     "Twisting the body."
+    ],
+    "ur": [
+     "کہنی کے جوڑ پر کھینچنا۔",
+     "جسم کو مروڑنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 30,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "cat_cow",
+   "name": {
+    "en": "Cat-Cow",
+    "ur": "کیٹ کاؤ"
+   },
+   "primary": "back",
+   "secondary": [
+    "core"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Start on hands and knees.",
+     "Breathe in: drop your belly and lift your chest and tailbone.",
+     "Breathe out: round your back up towards the ceiling.",
+     "Keep flowing slowly between the two."
+    ],
+    "ur": [
+     "ہاتھوں اور گھٹنوں پر آئیں۔",
+     "سانس اندر: پیٹ نیچے کریں اور سینہ اور دم کی ہڈی اوپر اٹھائیں۔",
+     "سانس باہر: کمر کو چھت کی طرف گول کریں۔",
+     "دونوں کے درمیان آہستہ آہستہ حرکت کرتے رہیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Move with your breath.",
+     "Lovely in the morning or after sitting."
+    ],
+    "ur": [
+     "سانس کے ساتھ حرکت کریں۔",
+     "صبح یا دیر تک بیٹھنے کے بعد بہترین۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Rushing the movement.",
+     "Bending the elbows."
+    ],
+    "ur": [
+     "حرکت میں جلدی کرنا۔",
+     "کہنیاں موڑنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 45,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "childs_pose",
+   "name": {
+    "en": "Child's Pose",
+    "ur": "چائلڈز پوز"
+   },
+   "primary": "back",
+   "secondary": [
+    "glutes"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Kneel and sit back on your heels.",
+     "Fold forward and reach your arms out in front.",
+     "Rest your forehead on the floor.",
+     "Breathe deeply into your back."
+    ],
+    "ur": [
+     "گھٹنوں کے بل بیٹھ کر ایڑیوں پر ٹیک لگائیں۔",
+     "آگے جھکیں اور بازو سامنے پھیلائیں۔",
+     "ماتھا زمین پر رکھیں۔",
+     "کمر میں گہرا سانس لیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Spread your knees for more space.",
+     "A resting pose: relax completely."
+    ],
+    "ur": [
+     "زیادہ جگہ کے لیے گھٹنے کھولیں۔",
+     "آرام کی حالت: مکمل ڈھیلے ہو جائیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Holding your breath.",
+     "Forcing the hips down."
+    ],
+    "ur": [
+     "سانس روکنا۔",
+     "کولہوں کو زبردستی نیچے دبانا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 45,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "cobra_stretch",
+   "name": {
+    "en": "Cobra Stretch",
+    "ur": "کوبرا اسٹریچ"
+   },
+   "primary": "core",
+   "secondary": [
+    "back"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Lie face down with hands under your shoulders.",
+     "Press up gently, lifting your chest.",
+     "Keep your hips on the floor.",
+     "Hold and breathe."
+    ],
+    "ur": [
+     "منہ کے بل لیٹیں، ہاتھ کندھوں کے نیچے۔",
+     "آہستہ سے اوپر دھکیل کر سینہ اٹھائیں۔",
+     "کولہے زمین پر رکھیں۔",
+     "رکیں اور سانس لیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Go only as high as is comfortable for your lower back.",
+     "Relax your shoulders down."
+    ],
+    "ur": [
+     "صرف اتنا اوپر جائیں جتنا نچلی کمر کے لیے آرام دہ ہو۔",
+     "کندھے ڈھیلے اور نیچے رکھیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Locking the elbows and forcing the arch.",
+     "Lifting the hips."
+    ],
+    "ur": [
+     "کہنیاں لاک کر کے کمر کو زبردستی موڑنا۔",
+     "کولہے اٹھانا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 20,
+    "repMax": 30,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "standing_quad_stretch",
+   "name": {
+    "en": "Standing Quad Stretch",
+    "ur": "کھڑے ہو کر ران کا کھنچاؤ"
+   },
+   "primary": "quads",
+   "secondary": [],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Stand tall and hold a wall for balance.",
+     "Bend one knee and hold your foot behind you.",
+     "Bring your heel towards your glutes, knees together.",
+     "Hold, then switch legs."
+    ],
+    "ur": [
+     "سیدھے کھڑے ہوں اور توازن کے لیے دیوار پکڑیں۔",
+     "ایک گھٹنا موڑ کر پیچھے سے پاؤں پکڑیں۔",
+     "ایڑی کو کولہوں کی طرف لائیں، گھٹنے ساتھ ساتھ۔",
+     "رکیں، پھر ٹانگ بدلیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Squeeze your glute to feel it more at the front.",
+     "Keep standing tall."
+    ],
+    "ur": [
+     "آگے زیادہ محسوس کرنے کے لیے کولہا دبائیں۔",
+     "سیدھے کھڑے رہیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Arching the lower back.",
+     "Letting the knee drift out."
+    ],
+    "ur": [
+     "نچلی کمر موڑنا۔",
+     "گھٹنے کو باہر جانے دینا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 30,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "hamstring_stretch",
+   "name": {
+    "en": "Seated Hamstring Stretch",
+    "ur": "بیٹھ کر ران کے پچھلے حصے کا کھنچاؤ"
+   },
+   "primary": "hamstrings",
+   "secondary": [
+    "back"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Sit with one leg straight and the other foot against your inner thigh.",
+     "Keep your back long.",
+     "Hinge forward from the hips towards your straight leg.",
+     "Hold, then switch sides."
+    ],
+    "ur": [
+     "ایک ٹانگ سیدھی اور دوسرے پاؤں کو اندرونی ران سے لگا کر بیٹھیں۔",
+     "کمر سیدھی رکھیں۔",
+     "کولہوں سے سیدھی ٹانگ کی طرف آگے جھکیں۔",
+     "رکیں، پھر طرف بدلیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Reaching your shin is fine; touching toes isn't required.",
+     "Lead with the chest, not the head."
+    ],
+    "ur": [
+     "پنڈلی تک پہنچنا بھی ٹھیک ہے؛ پنجے چھونا ضروری نہیں۔",
+     "سر کے بجائے سینے سے آگے جھکیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Rounding the back to reach further.",
+     "Bouncing."
+    ],
+    "ur": [
+     "آگے پہنچنے کے لیے کمر گول کرنا۔",
+     "جھٹکے دینا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 30,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "hip_flexor_stretch",
+   "name": {
+    "en": "Kneeling Hip Flexor Stretch",
+    "ur": "گھٹنے کے بل ہپ فلیکسر اسٹریچ"
+   },
+   "primary": "quads",
+   "secondary": [
+    "core"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Kneel on one knee with the other foot in front.",
+     "Tuck your hips under slightly.",
+     "Shift forward until you feel a stretch at the front of the back hip.",
+     "Hold, then switch sides."
+    ],
+    "ur": [
+     "ایک گھٹنے پر بیٹھیں، دوسرا پاؤں سامنے۔",
+     "کولہوں کو تھوڑا اندر کی طرف موڑیں۔",
+     "آگے سرکیں یہاں تک کہ پچھلے کولہے کے اگلے حصے میں کھنچاؤ ہو۔",
+     "رکیں، پھر طرف بدلیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Helps if you sit a lot.",
+     "Put a cushion under the knee."
+    ],
+    "ur": [
+     "اگر آپ زیادہ بیٹھتے ہیں تو مددگار۔",
+     "گھٹنے کے نیچے کشن رکھیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Arching the lower back.",
+     "Leaning the torso forward."
+    ],
+    "ur": [
+     "نچلی کمر موڑنا۔",
+     "دھڑ آگے جھکانا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 30,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "figure_four_stretch",
+   "name": {
+    "en": "Figure-four Glute Stretch",
+    "ur": "فِگر فور گلوٹ اسٹریچ"
+   },
+   "primary": "glutes",
+   "secondary": [],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Lie on your back with knees bent.",
+     "Cross one ankle over the opposite knee.",
+     "Pull the bottom thigh towards your chest.",
+     "Hold, then switch sides."
+    ],
+    "ur": [
+     "کمر کے بل لیٹیں، گھٹنے مڑے ہوئے۔",
+     "ایک ٹخنہ مخالف گھٹنے پر رکھیں۔",
+     "نیچے والی ران کو سینے کی طرف کھینچیں۔",
+     "رکیں، پھر طرف بدلیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Keep your head and shoulders relaxed on the floor.",
+     "Great after leg days."
+    ],
+    "ur": [
+     "سر اور کندھے زمین پر ڈھیلے رکھیں۔",
+     "ٹانگوں کے دن کے بعد بہترین۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Lifting the head.",
+     "Forcing the knee open."
+    ],
+    "ur": [
+     "سر اٹھانا۔",
+     "گھٹنے کو زبردستی کھولنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 2,
+    "repMin": 30,
+    "repMax": 30,
+    "timed": true,
+    "restSec": 15
+   },
+   "highImpact": false,
+   "category": "stretch",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "jumping_jack",
+   "name": {
+    "en": "Jumping Jack",
+    "ur": "جمپنگ جیک"
+   },
+   "primary": "calves",
+   "secondary": [
+    "shoulders",
+    "quads"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Stand with feet together, arms by your sides.",
+     "Jump your feet out while raising your arms overhead.",
+     "Jump back to the start.",
+     "Keep a steady rhythm."
+    ],
+    "ur": [
+     "پاؤں ملا کر کھڑے ہوں، بازو اطراف میں۔",
+     "بازو سر کے اوپر اٹھاتے ہوئے پاؤں باہر کی طرف کودیں۔",
+     "واپس شروع کی حالت میں کودیں۔",
+     "یکساں رفتار رکھیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Land softly on the balls of your feet.",
+     "Classic warm-up."
+    ],
+    "ur": [
+     "پنجوں کے اگلے حصے پر نرمی سے اتریں۔",
+     "روایتی وارم اپ۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Landing flat-footed and heavy.",
+     "Holding your breath."
+    ],
+    "ur": [
+     "چپٹے پاؤں زور سے اترنا۔",
+     "سانس روکنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 3,
+    "repMin": 30,
+    "repMax": 45,
+    "timed": true,
+    "restSec": 20
+   },
+   "highImpact": true,
+   "category": "cardio",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "step_jack",
+   "name": {
+    "en": "Step Jack",
+    "ur": "اسٹیپ جیک"
+   },
+   "primary": "calves",
+   "secondary": [
+    "shoulders"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Stand with feet together.",
+     "Step one foot out to the side while raising your arms.",
+     "Step back in and lower your arms.",
+     "Alternate sides at a brisk pace."
+    ],
+    "ur": [
+     "پاؤں ملا کر کھڑے ہوں۔",
+     "بازو اٹھاتے ہوئے ایک پاؤں سائیڈ پر رکھیں۔",
+     "واپس اندر آئیں اور بازو نیچے کریں۔",
+     "تیز رفتار سے باری باری طرف بدلیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "The no-jump version of a jumping jack: joint-friendly.",
+     "Quiet enough for apartments."
+    ],
+    "ur": [
+     "بغیر کودے جمپنگ جیک: جوڑوں کے لیے آسان۔",
+     "فلیٹ میں بھی خاموشی سے ہو سکتی ہے۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Going so slowly the heart rate doesn't rise.",
+     "Shrugging the shoulders."
+    ],
+    "ur": [
+     "اتنا آہستہ کرنا کہ دل کی دھڑکن نہ بڑھے۔",
+     "کندھے اچکانا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 3,
+    "repMin": 30,
+    "repMax": 45,
+    "timed": true,
+    "restSec": 20
+   },
+   "highImpact": false,
+   "category": "cardio",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "high_knees",
+   "name": {
+    "en": "High Knees",
+    "ur": "ہائی نیز"
+   },
+   "primary": "quads",
+   "secondary": [
+    "core",
+    "calves"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "intermediate",
+   "steps": {
+    "en": [
+     "Run on the spot.",
+     "Drive your knees up to hip height.",
+     "Pump your arms.",
+     "Stay light on your feet."
+    ],
+    "ur": [
+     "ایک جگہ کھڑے کھڑے دوڑیں۔",
+     "گھٹنوں کو کولہوں کی اونچائی تک اٹھائیں۔",
+     "بازو ہلائیں۔",
+     "پاؤں پر ہلکے رہیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Stay on the balls of your feet.",
+     "Keep your chest up."
+    ],
+    "ur": [
+     "پنجوں کے اگلے حصے پر رہیں۔",
+     "سینہ اوپر رکھیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Leaning back.",
+     "Knees barely lifting."
+    ],
+    "ur": [
+     "پیچھے جھکنا۔",
+     "گھٹنے بمشکل اٹھنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 3,
+    "repMin": 20,
+    "repMax": 40,
+    "timed": true,
+    "restSec": 20
+   },
+   "highImpact": true,
+   "category": "cardio",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "march_in_place",
+   "name": {
+    "en": "Fast March in Place",
+    "ur": "ایک جگہ تیز مارچ"
+   },
+   "primary": "quads",
+   "secondary": [
+    "core"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Stand tall.",
+     "March on the spot, lifting each knee high.",
+     "Swing your arms.",
+     "Keep a brisk pace."
+    ],
+    "ur": [
+     "سیدھے کھڑے ہوں۔",
+     "ایک جگہ مارچ کریں، ہر گھٹنا اونچا اٹھائیں۔",
+     "بازو ہلائیں۔",
+     "تیز رفتار رکھیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "The low-impact version of high knees.",
+     "Raise your knees higher to work harder."
+    ],
+    "ur": [
+     "ہائی نیز کا کم جھٹکے والا انداز۔",
+     "زیادہ محنت کے لیے گھٹنے مزید اونچے اٹھائیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Slouching.",
+     "Moving too slowly."
+    ],
+    "ur": [
+     "جھک کر کھڑے ہونا۔",
+     "بہت آہستہ حرکت کرنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 3,
+    "repMin": 30,
+    "repMax": 45,
+    "timed": true,
+    "restSec": 20
+   },
+   "highImpact": false,
+   "category": "cardio",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "skater_hop",
+   "name": {
+    "en": "Skater Hop",
+    "ur": "اسکیٹر ہاپ"
+   },
+   "primary": "glutes",
+   "secondary": [
+    "quads",
+    "calves"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "intermediate",
+   "steps": {
+    "en": [
+     "Hop sideways onto one foot.",
+     "Let the other leg swing behind you.",
+     "Hop back to the other side.",
+     "Keep going side to side."
+    ],
+    "ur": [
+     "ایک پاؤں پر سائیڈ کی طرف اچھلیں۔",
+     "دوسری ٹانگ کو پیچھے جھولنے دیں۔",
+     "واپس دوسری طرف اچھلیں۔",
+     "دائیں بائیں جاری رکھیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "Land softly with a bent knee.",
+     "Step instead of hop for low impact."
+    ],
+    "ur": [
+     "مڑے گھٹنے کے ساتھ نرمی سے اتریں۔",
+     "کم جھٹکے کے لیے اچھلنے کے بجائے قدم رکھیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Landing on a straight leg.",
+     "Knee caving in on landing."
+    ],
+    "ur": [
+     "سیدھی ٹانگ پر اترنا۔",
+     "اترتے وقت گھٹنے کا اندر مڑنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 3,
+    "repMin": 20,
+    "repMax": 40,
+    "timed": true,
+    "restSec": 20
+   },
+   "highImpact": true,
+   "category": "cardio",
+   "videos": {
+    "male": null,
+    "female": null
+   }
+  },
+  {
+   "id": "squat_to_reach",
+   "name": {
+    "en": "Squat to Overhead Reach",
+    "ur": "اسکواٹ ٹو اوور ہیڈ ریچ"
+   },
+   "primary": "quads",
+   "secondary": [
+    "glutes",
+    "shoulders"
+   ],
+   "equipment": "bodyweight",
+   "difficulty": "beginner",
+   "steps": {
+    "en": [
+     "Squat down with arms forward.",
+     "Stand up and reach both arms overhead.",
+     "Return straight into the next squat.",
+     "Keep moving at a steady pace."
+    ],
+    "ur": [
+     "بازو آگے کر کے نیچے بیٹھیں۔",
+     "کھڑے ہو کر دونوں بازو سر کے اوپر پھیلائیں۔",
+     "سیدھا اگلے اسکواٹ میں جائیں۔",
+     "یکساں رفتار سے جاری رکھیں۔"
+    ]
+   },
+   "tips": {
+    "en": [
+     "A low-impact cardio move that raises the heart rate.",
+     "Go as deep as is comfortable."
+    ],
+    "ur": [
+     "کم جھٹکے والی کارڈیو حرکت جو دل کی دھڑکن بڑھاتی ہے۔",
+     "جتنا آرام دہ ہو اتنا گہرا جائیں۔"
+    ]
+   },
+   "mistakes": {
+    "en": [
+     "Heels lifting.",
+     "Rushing and losing form."
+    ],
+    "ur": [
+     "ایڑیاں اٹھنا۔",
+     "جلدی میں انداز بگاڑنا۔"
+    ]
+   },
+   "prescription": {
+    "sets": 3,
+    "repMin": 30,
+    "repMax": 45,
+    "timed": true,
+    "restSec": 20
+   },
+   "highImpact": false,
+   "category": "cardio",
    "videos": {
     "male": null,
     "female": null

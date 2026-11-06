@@ -25,6 +25,7 @@ import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/body/photos/photo_vault.dart';
 import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
+import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -45,6 +46,7 @@ typedef AppState = ({
   CycleProvider cycle,
   PhotosProvider photos,
   Directory photosDir,
+  ChallengeProvider challenges,
 });
 
 /// Launches the real app as a returning user who has already answered (or
@@ -90,6 +92,7 @@ Future<AppState> launchApp(
   final purchases = PurchaseService(publicKey: '');
   final recoveryProvider = RecoveryProvider(source: recovery);
   final cycle = CycleProvider(db, lock: lock);
+  final challenges = ChallengeProvider(db);
   final photosDir = Directory('${dir.path}/photos');
   final photos = PhotosProvider(
       db, () async => PhotoVault(photosDir, keys: MemoryKeyStore()));
@@ -97,7 +100,7 @@ Future<AppState> launchApp(
       File('assets/exercises/catalog.json').readAsStringSync());
   await tester.runAsync(() => Future.wait([
         settings.load(), profile.load(), bmi.load(), body.load(), workouts.load(),
-        fuel.load(), stepsProvider.load(), movement.load(), recoveryProvider.load(), cycle.load(), photos.load(),
+        fuel.load(), stepsProvider.load(), movement.load(), recoveryProvider.load(), cycle.load(), photos.load(), challenges.load(),
       ]));
   await tester.pumpWidget(BmiHealthProviders(
     settings: settings,
@@ -116,6 +119,7 @@ Future<AppState> launchApp(
     ai: ai ?? AiClient(coachUrl: '', foodUrl: ''),
     db: db,
     wear: WearBridge(workouts, catalog, channel: wear ?? NoWatchChannel()),
+    challenges: challenges,
     catalog: catalog,
     child: const BmiHealthApp(),
   ));
@@ -129,6 +133,7 @@ Future<AppState> launchApp(
     cycle: cycle,
     photos: photos,
     photosDir: photosDir,
+    challenges: challenges,
   );
 }
 
