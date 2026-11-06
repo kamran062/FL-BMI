@@ -292,7 +292,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 1.2 Body module (existing BMI + new metrics)
 
-> **Status: done** (1.2a `2ec79b6`, 1.2b). Body tab replaces the History tab (History opens from it). Weight log with 7-day trend chart (existing BMI entries imported as weight history), gender-specific measurements, US Navy body-fat estimate, disclaimer. Logging a weight also updates the calculator's weight. Not yet: editing/deleting single weigh-ins and measurements from the UI (storage supports it), progress photos (Phase 4.6).
+> **Status: done** (1.2a `2ec79b6`, 1.2b). Body tab replaces the History tab (History opens from it). Weight log with 7-day trend chart (existing BMI entries imported as weight history), gender-specific measurements, US Navy body-fat estimate, disclaimer. Logging a weight also updates the calculator's weight. Weigh-ins and measurements can be edited (value and date) and deleted from their history lists; the current weight re-syncs to the latest weigh-in. Progress photos: Phase 4.6.
 
 **Features**
 - **BMI (existing):** calculator, history, goals, share, tips, moved into Body
@@ -357,7 +357,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 1.5 Fuel v1 — calorie & macro targets
 
-> **Status: done.** Mifflin-St Jeor BMR (sex-specific, "Other" uses formula basis), activity from training days, goal adjustment, safety floor (1200/1500 kcal), protein by goal, 25 % fat, water ≈ 35 ml/kg. Fuel tab: calories left, macros, water ±250 ml, quick food log with optional protein, swipe to delete. Schema v6. Not yet: per-entry carbs/fat, custom activity level, history beyond today.
+> **Status: done.** Mifflin-St Jeor BMR (sex-specific, "Other" uses formula basis), activity from training days, goal adjustment, safety floor (1200/1500 kcal), protein by goal, 25 % fat, water ≈ 35 ml/kg. Fuel tab: calories left, macros, water ±250 ml, quick food log with optional protein, swipe to delete. Schema v6. Browse past days (arrows or date picker) and log, edit or delete food and water there; last-7-days calories chart against the target (tap a bar to open the day); optional carbs and fat per entry (schema v11; barcode scans fill them). Not yet: custom activity level.
 
 **Features**
 - BMR and TDEE (Mifflin-St Jeor, gender-specific), activity level, goal adjustment (cut / maintain / bulk)
@@ -583,7 +583,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 4.6 Progress photos
 
-> **Status: done.** Camera or gallery (downscaled to 1440 px), AES-256-GCM encrypted into the app's private folder with the key in Android Keystore / iOS Keychain; never written to the gallery; tamper-evident; thumbnails, full view, first-vs-latest side-by-side with dates and weight; delete removes the file. **Also fixed app-wide:** Android cloud backup and device transfer were on by default (health, location and cycle data were going to Google Drive) — now off via allowBackup=false + data extraction rules; on iOS the database and photo folders are excluded from iCloud backup. Not yet: pose guide overlay, choosing which two photos to compare.
+> **Status: done.** Camera or gallery (downscaled to 1440 px), AES-256-GCM encrypted into the app's private folder with the key in Android Keystore / iOS Keychain; never written to the gallery; tamper-evident; thumbnails, full view, first-vs-latest side-by-side with dates and weight; delete removes the file. **Also fixed app-wide:** Android cloud backup and device transfer were on by default (health, location and cycle data were going to Google Drive) — now off via allowBackup=false + data extraction rules; on iOS the database and photo folders are excluded from iCloud backup. Compare picks any two photos (first vs latest by default). Not yet: pose guide overlay.
 - Pose-guided capture (outline overlay so every photo has the same angle)
 - Before / after slider and monthly collage
 - Stored encrypted in app storage; hidden from the phone's gallery

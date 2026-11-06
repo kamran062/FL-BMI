@@ -134,6 +134,15 @@ class _WeightCard extends StatelessWidget {
             fullWidth: true,
             onPressed: () => _showLogWeight(context, profile),
           ),
+          if (logs.isNotEmpty)
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: TextButton.icon(
+                onPressed: () => _showWeightHistory(context),
+                icon: const Icon(Icons.history_rounded, size: 18),
+                label: Text(l.bodyWeighIns),
+              ),
+            ),
         ],
       ),
     );
@@ -212,17 +221,162 @@ class _WeightChart extends StatelessWidget {
   }
 }
 
-Future<void> _showLogWeight(BuildContext context, UserProfile profile) =>
+Future<void> _showLogWeight(BuildContext context, UserProfile profile,
+        {WeightLog? existing}) =>
     showDialog<void>(
       context: context,
-      builder: (_) => _LogWeightDialog(profile: profile),
+      builder: (_) => _LogWeightDialog(profile: profile, existing: existing),
     );
 
+/// The latest weigh-in is the user's current weight everywhere, including
+/// the BMI calculator; re-synced after any add, edit or delete.
+Future<void> _syncProfileWeight(
+    BodyProvider body, ProfileProvider profiles) async {
+  final latest = body.latestWeight;
+  if (latest == null) return;
+  final p = profiles.profile;
+  final value = double.parse(
+      Units.kgTo(p.weightUnit, latest.weightKg).toStringAsFixed(1));
+  if (value != p.weight) await profiles.update(p.copyWith(weight: value));
+}
+
+Future<bool> _confirmDelete(BuildContext context, String title) async {
+  final l = context.l10n;
+  final ok = await showDialog<bool>(
+    context: context,
+    builder: (d) => AlertDialog(
+      title: Text(title),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.pop(d, false),
+            child: Text(MaterialLocalizations.of(d).cancelButtonLabel)),
+        TextButton(
+            onPressed: () => Navigator.pop(d, true),
+            child: Text(l.delete,
+                style: const TextStyle(color: AppColors.bmiObese))),
+      ],
+    ),
+  );
+  return ok == true;
+}
+
+/// A date no later than today.
+Future<DateTime?> _pickDate(BuildContext context, DateTime initial) {
+  final now = DateTime.now();
+  return showDatePicker(
+    context: context,
+    initialDate: initial.isAfter(now) ? now : initial,
+    firstDate: DateTime(2000),
+    lastDate: now,
+  );
+}
+
+/// [day] with the time of day of [old].
+DateTime _onDay(DateTime day, DateTime old) =>
+    DateTime(day.year, day.month, day.day, old.hour, old.minute, old.second);
+
+/// Opens a list sheet above the tab bar and banner.
+Future<void> _showSheet(BuildContext context, Widget sheet) =>
+    showModalBottomSheet<void>(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) => sheet,
+    );
+
+Future<void> _showWeightHistory(BuildContext context) =>
+    _showSheet(context, const _WeightHistorySheet());
+
+/// Every weigh-in, newest first; tap to edit, bin to delete.
+class _WeightHistorySheet extends StatelessWidget {
+  const _WeightHistorySheet();
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final body = context.watch<BodyProvider>();
+    final profile = context.watch<ProfileProvider>().profile;
+    final fmt = DateFormat.yMMMd(l.localeName);
+
+    return _HistoryList(
+      title: l.bodyWeighIns,
+      empty: l.weightEmpty,
+      children: [
+        for (final w in body.weights.reversed)
+          ListTile(
+            key: ValueKey('weight-${w.id}'),
+            title: Text(Units.weight(w.weightKg, profile.weightUnit),
+                style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+            subtitle: Text(fmt.format(w.date)),
+            onTap: () => _showLogWeight(context, profile, existing: w),
+            trailing: IconButton(
+              tooltip: l.delete,
+              icon: const Icon(Icons.delete_outline_rounded),
+              onPressed: () async {
+                final profiles = context.read<ProfileProvider>();
+                if (!await _confirmDelete(context, l.bodyDeleteWeighIn)) return;
+                await body.deleteWeight(w.id!);
+                await _syncProfileWeight(body, profiles);
+              },
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+/// A titled, scrollable list for a bottom sheet.
+class _HistoryList extends StatelessWidget {
+  final String title;
+  final String empty;
+  final List<Widget> children;
+  const _HistoryList(
+      {required this.title, required this.empty, required this.children});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    return ConstrainedBox(
+      constraints:
+          BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.75),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+            child: Text(title,
+                style: GoogleFonts.inter(
+                    fontSize: 20, fontWeight: FontWeight.w700)),
+          ),
+          if (children.isEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+              child: Text(empty,
+                  style: GoogleFonts.inter(fontSize: 14, color: fg3)),
+            )
+          else
+            Flexible(
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(bottom: 16),
+                children: children,
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
 /// Owns its text controller so it is disposed only after the dialog's exit
-/// animation has finished.
+/// animation has finished. With [existing], edits that weigh-in.
 class _LogWeightDialog extends StatefulWidget {
   final UserProfile profile;
-  const _LogWeightDialog({required this.profile});
+  final WeightLog? existing;
+  const _LogWeightDialog({required this.profile, this.existing});
 
   @override
   State<_LogWeightDialog> createState() => _LogWeightDialogState();
@@ -230,8 +384,10 @@ class _LogWeightDialog extends StatefulWidget {
 
 class _LogWeightDialogState extends State<_LogWeightDialog> {
   late final TextEditingController _controller = TextEditingController(
-      text: Units.kgTo(widget.profile.weightUnit, widget.profile.weightInKg)
+      text: Units.kgTo(widget.profile.weightUnit,
+              widget.existing?.weightKg ?? widget.profile.weightInKg)
           .toStringAsFixed(1));
+  late DateTime _date = widget.existing?.date ?? DateTime.now();
   String? _error;
 
   @override
@@ -254,25 +410,48 @@ class _LogWeightDialogState extends State<_LogWeightDialog> {
     final body = context.read<BodyProvider>();
     final profiles = context.read<ProfileProvider>();
     Navigator.pop(context);
-    await body.logWeight(kg);
-    // The latest weigh-in is the user's current weight everywhere,
-    // including the BMI calculator.
-    await profiles.update(profiles.profile.copyWith(weight: value));
+    final existing = widget.existing;
+    if (existing == null) {
+      await body.logWeight(kg, at: _date);
+    } else {
+      await body.updateWeight(
+          WeightLog(id: existing.id, date: _date, weightKg: kg));
+    }
+    await _syncProfileWeight(body, profiles);
+  }
+
+  Future<void> _changeDate() async {
+    final picked = await _pickDate(context, _date);
+    if (picked != null) setState(() => _date = _onDay(picked, _date));
   }
 
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     return AlertDialog(
-      title: Text(l.logWeight),
-      content: TextField(
-        controller: _controller,
-        autofocus: true,
-        keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[\d.]'))],
-        decoration: InputDecoration(
-            suffixText: widget.profile.weightUnit, errorText: _error),
-        onSubmitted: (_) => _save(),
+      title: Text(widget.existing == null ? l.logWeight : l.bodyEditWeighIn),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextField(
+            controller: _controller,
+            autofocus: true,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[\d.]'))
+            ],
+            decoration: InputDecoration(
+                suffixText: widget.profile.weightUnit, errorText: _error),
+            onSubmitted: (_) => _save(),
+          ),
+          const SizedBox(height: 8),
+          TextButton.icon(
+            onPressed: _changeDate,
+            icon: const Icon(Icons.event_rounded, size: 18),
+            label: Text(DateFormat.yMMMd(l.localeName).format(_date)),
+          ),
+        ],
       ),
       actions: [
         TextButton(
@@ -410,26 +589,76 @@ class _MeasurementsCard extends StatelessWidget {
             fullWidth: true,
             onPressed: () => _showAddMeasurements(context, profile),
           ),
+          if (m != null)
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: TextButton.icon(
+                onPressed: () =>
+                    _showSheet(context, const _MeasurementHistorySheet()),
+                icon: const Icon(Icons.history_rounded, size: 18),
+                label: Text(l.bodyMeasurementHistory),
+              ),
+            ),
         ],
       ),
     );
   }
 }
 
-Future<void> _showAddMeasurements(BuildContext context, UserProfile profile) {
-  return showModalBottomSheet<void>(
-    context: context,
-    // Above the tab bar and banner, which sit over each tab's navigator
-    useRootNavigator: true,
-    isScrollControlled: true,
-    showDragHandle: true,
-    builder: (_) => _MeasurementsSheet(profile: profile),
-  );
+// Above the tab bar and banner, which sit over each tab's navigator
+Future<void> _showAddMeasurements(BuildContext context, UserProfile profile,
+        {Measurement? existing}) =>
+    _showSheet(context, _MeasurementsSheet(profile: profile, existing: existing));
+
+/// Every measurement session, newest first; tap to edit, bin to delete.
+class _MeasurementHistorySheet extends StatelessWidget {
+  const _MeasurementHistorySheet();
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final body = context.watch<BodyProvider>();
+    final profile = context.watch<ProfileProvider>().profile;
+    final sex = profile.formulaSex;
+    final unit = Units.lengthUnit(profile.heightUnit);
+    final fmt = DateFormat.yMMMd(l.localeName);
+
+    return _HistoryList(
+      title: l.bodyMeasurementHistory,
+      empty: l.measurementsEmpty,
+      children: [
+        for (final m in body.measurements)
+          ListTile(
+            key: ValueKey('measurement-${m.id}'),
+            title: Text(fmt.format(m.date),
+                style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+            subtitle: Text([
+              for (final f in measureFieldsFor(sex))
+                if (_valueOf(m, f) case final v?)
+                  '${_fieldLabel(l, f, sex)} ${Units.length(v, unit)}'
+            ].join(' · ')),
+            onTap: () => _showAddMeasurements(context, profile, existing: m),
+            trailing: IconButton(
+              tooltip: l.delete,
+              icon: const Icon(Icons.delete_outline_rounded),
+              onPressed: () async {
+                if (!await _confirmDelete(context, l.bodyDeleteMeasurement)) {
+                  return;
+                }
+                await body.deleteMeasurement(m.id!);
+              },
+            ),
+          ),
+      ],
+    );
+  }
 }
 
+/// Adds a measurement session, or with [existing] edits it.
 class _MeasurementsSheet extends StatefulWidget {
   final UserProfile profile;
-  const _MeasurementsSheet({required this.profile});
+  final Measurement? existing;
+  const _MeasurementsSheet({required this.profile, this.existing});
 
   @override
   State<_MeasurementsSheet> createState() => _MeasurementsSheetState();
@@ -437,9 +666,19 @@ class _MeasurementsSheet extends StatefulWidget {
 
 class _MeasurementsSheetState extends State<_MeasurementsSheet> {
   late final Map<MeasureField, TextEditingController> _fields = {
-    for (final f in MeasureField.values) f: TextEditingController(),
+    for (final f in MeasureField.values)
+      f: TextEditingController(text: _initial(f)),
   };
+  late DateTime _date = widget.existing?.date ?? DateTime.now();
   String? _error;
+
+  String _initial(MeasureField f) {
+    final m = widget.existing;
+    final v = m == null ? null : _valueOf(m, f);
+    if (v == null) return '';
+    return Units.cmTo(Units.lengthUnit(widget.profile.heightUnit), v)
+        .toStringAsFixed(1);
+  }
 
   @override
   void dispose() {
@@ -466,15 +705,21 @@ class _MeasurementsSheetState extends State<_MeasurementsSheet> {
     }
     final body = context.read<BodyProvider>();
     Navigator.pop(context);
-    await body.addMeasurement(Measurement(
-      date: DateTime.now(),
+    final m = Measurement(
+      id: widget.existing?.id,
+      date: _date,
       neck: cm[MeasureField.neck],
       chest: cm[MeasureField.chest],
       waist: cm[MeasureField.waist],
       hips: cm[MeasureField.hips],
       arm: cm[MeasureField.arm],
       thigh: cm[MeasureField.thigh],
-    ));
+    );
+    if (widget.existing == null) {
+      await body.addMeasurement(m);
+    } else {
+      await body.updateMeasurement(m);
+    }
   }
 
   @override
@@ -501,7 +746,17 @@ class _MeasurementsSheetState extends State<_MeasurementsSheet> {
             const SizedBox(height: 4),
             Text(l.measureHint,
                 style: GoogleFonts.inter(fontSize: 13, color: fg2, height: 1.4)),
-            const SizedBox(height: 12),
+            TextButton.icon(
+              onPressed: () async {
+                final picked = await _pickDate(context, _date);
+                if (picked != null) {
+                  setState(() => _date = _onDay(picked, _date));
+                }
+              },
+              icon: const Icon(Icons.event_rounded, size: 18),
+              label: Text(DateFormat.yMMMd(l.localeName).format(_date)),
+            ),
+            const SizedBox(height: 4),
             for (final f in measureFieldsFor(sex))
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),

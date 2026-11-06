@@ -78,4 +78,70 @@ void main() {
     await db.close();
     tmp.deleteSync(recursive: true);
   });
+
+  test('browsing past days: log, edit, macros, water and the 7-day chart',
+      () async {
+    sqfliteFfiInit();
+    final tmp = Directory.systemTemp.createTempSync('fuel_days');
+    final db = DatabaseHelper.test(databaseFactoryFfi, '${tmp.path}/f.db');
+    var now = DateTime(2026, 11, 6, 13, 0);
+    final fuel = FuelProvider(db, clock: () => now);
+    await fuel.load();
+
+    await fuel.addFood(kcal: 500, proteinG: 30, carbsG: 50, fatG: 10);
+    expect(fuel.viewingToday, isTrue);
+    expect(fuel.dayKcal, 500);
+    expect(fuel.dayCarbsG, 50);
+    expect(fuel.dayFatG, 10);
+
+    // Yesterday: entries and water land there, today's totals stay put
+    await fuel.previousDay();
+    expect(fuel.viewDay, DateTime(2026, 11, 5));
+    expect(fuel.dayFood, isEmpty);
+    await fuel.addFood(kcal: 800, name: 'Karahi');
+    await fuel.addWater(500, viewedDay: true);
+    expect(fuel.dayKcal, 800);
+    expect(fuel.dayWaterMl, 500);
+    expect(fuel.dayHasCarbs, isFalse);
+    expect(fuel.dayFood.single.date, DateTime(2026, 11, 5, 13, 0));
+    expect(fuel.kcal, 500); // today unchanged
+    expect(fuel.waterMl, 0);
+
+    // Water from Today goes to today even while Fuel shows yesterday
+    await fuel.addWater(250);
+    expect(fuel.waterMl, 250);
+    expect(fuel.dayWaterMl, 500);
+
+    // Edit keeps the entry's day
+    final k = fuel.dayFood.single;
+    await fuel.updateFood(FoodLog(
+        id: k.id, date: k.date, name: 'Chicken karahi', kcal: 750, fatG: 40));
+    expect(fuel.dayFood.single.name, 'Chicken karahi');
+    expect(fuel.dayKcal, 750);
+    expect(fuel.dayFatG, 40);
+
+    // Week ends on the viewed day: Oct 30 … Nov 5
+    expect(fuel.week, hasLength(7));
+    expect(fuel.week.first.day, DateTime(2026, 10, 30));
+    expect(fuel.week.last, (day: DateTime(2026, 11, 5), kcal: 750));
+
+    // Can't go past today; a future date shows today
+    await fuel.nextDay();
+    expect(fuel.viewingToday, isTrue);
+    await fuel.nextDay();
+    expect(fuel.viewingToday, isTrue);
+    await fuel.showDay(DateTime(2026, 12, 1));
+    expect(fuel.viewingToday, isTrue);
+    expect(fuel.week.last, (day: DateTime(2026, 11, 6), kcal: 500));
+    expect(fuel.week[5].kcal, 750);
+
+    // Viewing yesterday, then midnight passes: that day is now "today"
+    await fuel.showDay(DateTime(2026, 11, 5));
+    now = DateTime(2026, 11, 5, 23, 0);
+    await fuel.load();
+    expect(fuel.viewingToday, isTrue);
+
+    await db.close();
+    tmp.deleteSync(recursive: true);
+  });
 }

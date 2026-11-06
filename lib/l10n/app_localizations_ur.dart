@@ -2487,4 +2487,83 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get trainNext => 'اگلا';
+
+  @override
+  String get bodyWeighIns => 'وزن کا ریکارڈ';
+
+  @override
+  String get bodyEditWeighIn => 'وزن میں ترمیم';
+
+  @override
+  String get bodyDeleteWeighIn => 'یہ وزن حذف کریں؟';
+
+  @override
+  String get bodyMeasurementHistory => 'پیمائش کا ریکارڈ';
+
+  @override
+  String get bodyDeleteMeasurement => 'یہ پیمائشیں حذف کریں؟';
+
+  @override
+  String get bodyChoosePhotos => 'تصاویر منتخب کریں';
+
+  @override
+  String get bodyChoosePhotosHint => 'موازنے کے لیے کوئی سی دو تصاویر چنیں۔';
+
+  @override
+  String get bodyCompareThese => 'ان دونوں کا موازنہ کریں';
+
+  @override
+  String get fuelToday => 'آج';
+
+  @override
+  String get fuelYesterday => 'کل';
+
+  @override
+  String get fuelPreviousDay => 'پچھلا دن';
+
+  @override
+  String get fuelNextDay => 'اگلا دن';
+
+  @override
+  String get fuelPickDay => 'دن دکھائیں';
+
+  @override
+  String get fuelWeekTitle => 'پچھلے 7 دن';
+
+  @override
+  String fuelWeekAverage(int kcal) {
+    return 'اوسط $kcal kcal/دن';
+  }
+
+  @override
+  String fuelWeekTarget(int kcal) {
+    return 'ڈیش لائن: آپ کا ہدف $kcal kcal۔ کسی دن کو کھولنے کے لیے اس پر ٹیپ کریں۔';
+  }
+
+  @override
+  String get fuelEditFood => 'کھانے میں ترمیم';
+
+  @override
+  String get fuelCarbsField => 'کاربز (گرام، اختیاری)';
+
+  @override
+  String get fuelFatField => 'چکنائی (گرام، اختیاری)';
+
+  @override
+  String get fuelMacroError => 'گرام 0 سے 1000 کے درمیان ہونے چاہئیں۔';
+
+  @override
+  String fuelMacroP(String g) {
+    return 'پ $g گ';
+  }
+
+  @override
+  String fuelMacroC(String g) {
+    return 'ک $g گ';
+  }
+
+  @override
+  String fuelMacroF(String g) {
+    return 'چ $g گ';
+  }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/body/bmi/domain/goal.dart';
+import 'package:bmi_health/features/fuel/domain/nutrition.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -113,6 +114,48 @@ void main() {
     expect(logs.map((l) => l.weightKg), [70.5, 69.0]); // oldest first
     expect(logs.first.date, DateTime(2026, 5, 17));
     expect(await helper.getMeasurements(), isEmpty);
+    await helper.close();
+  });
+
+  test('migration 11 adds carbs and fat to food entries, keeping old ones',
+      () async {
+    // A v10 food table with one entry (11 only touches this table)
+    final path = p.join(tmp.path, 'v10.db');
+    final old = await factory.openDatabase(path,
+        options: OpenDatabaseOptions(
+          version: 10,
+          onCreate: (db, _) async {
+            await db.execute('''
+              CREATE TABLE food_logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date INTEGER NOT NULL,
+                name TEXT NOT NULL DEFAULT '',
+                kcal INTEGER NOT NULL,
+                protein_g REAL
+              )
+            ''');
+            await db.insert('food_logs', {
+              'date': DateTime(2026, 11, 1, 13).millisecondsSinceEpoch,
+              'name': 'Daal', 'kcal': 320, 'protein_g': 14.0,
+            });
+          },
+        ));
+    await old.close();
+
+    final helper = DatabaseHelper.test(factory, path);
+    final day = DateTime(2026, 11, 1);
+    final kept = (await helper.getFoodBetween(day, DateTime(2026, 11, 2))).single;
+    expect(kept.name, 'Daal');
+    expect(kept.proteinG, 14.0);
+    expect(kept.carbsG, isNull);
+    expect(kept.fatG, isNull);
+
+    await helper.insertFood(FoodLog(
+        date: DateTime(2026, 11, 1, 20), kcal: 400, carbsG: 55.5, fatG: 9));
+    final both = await helper.getFoodBetween(day, DateTime(2026, 11, 2));
+    expect(both.last.carbsG, 55.5);
+    expect(both.last.fatG, 9);
+    expect(await (await helper.db).getVersion(), DatabaseHelper.schemaVersion);
     await helper.close();
   });
 

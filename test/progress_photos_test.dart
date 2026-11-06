@@ -47,12 +47,28 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Sep 1, 2026 · 80.0 kg'), findsOneWidget);
     expect(find.text('Nov 1, 2026 · 76.0 kg'), findsOneWidget);
+
+    // Choose another pair: add a middle photo, swap the first one for it
+    await tester.runAsync(() =>
+        app.photos.add(_png, date: DateTime(2026, 10, 1), weightKg: 78));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Choose photos'));
+    await tester.pumpAndSettle();
+    final ids = app.photos.photos.map((p) => p.id).toList(); // Sep, Oct, Nov
+    await tester.tap(find.byKey(ValueKey('pick-${ids[0]}'))); // unselect Sep
+    await tester.tap(find.byKey(ValueKey('pick-${ids[1]}'))); // select Oct
+    await tester.pump();
+    await tester.tap(find.text('Compare these two'));
+    await tester.pumpAndSettle();
+    expect(find.text('Sep 1, 2026 · 80.0 kg'), findsNothing);
+    expect(find.text('Oct 1, 2026 · 78.0 kg'), findsOneWidget);
+    expect(find.text('Nov 1, 2026 · 76.0 kg'), findsOneWidget);
     await tester.pageBack();
     await tester.pumpAndSettle();
 
     // Delete removes the file from disk
     await tester.runAsync(() => app.photos.delete(first));
     expect(file.existsSync(), isFalse);
-    expect(app.photos.photos, hasLength(1));
+    expect(app.photos.photos, hasLength(2));
   });
 }

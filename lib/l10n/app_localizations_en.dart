@@ -2511,4 +2511,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get trainNext => 'Next';
+
+  @override
+  String get bodyWeighIns => 'Weigh-ins';
+
+  @override
+  String get bodyEditWeighIn => 'Edit weigh-in';
+
+  @override
+  String get bodyDeleteWeighIn => 'Delete this weigh-in?';
+
+  @override
+  String get bodyMeasurementHistory => 'Measurement history';
+
+  @override
+  String get bodyDeleteMeasurement => 'Delete these measurements?';
+
+  @override
+  String get bodyChoosePhotos => 'Choose photos';
+
+  @override
+  String get bodyChoosePhotosHint => 'Pick any two photos to compare.';
+
+  @override
+  String get bodyCompareThese => 'Compare these two';
+
+  @override
+  String get fuelToday => 'Today';
+
+  @override
+  String get fuelYesterday => 'Yesterday';
+
+  @override
+  String get fuelPreviousDay => 'Previous day';
+
+  @override
+  String get fuelNextDay => 'Next day';
+
+  @override
+  String get fuelPickDay => 'Show day';
+
+  @override
+  String get fuelWeekTitle => 'Last 7 days';
+
+  @override
+  String fuelWeekAverage(int kcal) {
+    return 'Avg $kcal kcal/day';
+  }
+
+  @override
+  String fuelWeekTarget(int kcal) {
+    return 'Dashed line: your target of $kcal kcal. Tap a day to open it.';
+  }
+
+  @override
+  String get fuelEditFood => 'Edit food';
+
+  @override
+  String get fuelCarbsField => 'Carbs (g, optional)';
+
+  @override
+  String get fuelFatField => 'Fat (g, optional)';
+
+  @override
+  String get fuelMacroError => 'Grams must be between 0 and 1000.';
+
+  @override
+  String fuelMacroP(String g) {
+    return 'P $g g';
+  }
+
+  @override
+  String fuelMacroC(String g) {
+    return 'C $g g';
+  }
+
+  @override
+  String fuelMacroF(String g) {
+    return 'F $g g';
+  }
 }

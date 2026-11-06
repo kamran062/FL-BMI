@@ -126,10 +126,103 @@ class ProgressPhotosCard extends StatelessWidget {
   }
 }
 
+/// Pick any two photos to compare; returns them oldest first.
+class _ComparePicker extends StatefulWidget {
+  final List<ProgressPhoto> initial;
+  const _ComparePicker({required this.initial});
+
+  @override
+  State<_ComparePicker> createState() => _ComparePickerState();
+}
+
+class _ComparePickerState extends State<_ComparePicker> {
+  late final List<ProgressPhoto> _selected = [...widget.initial];
+
+  void _toggle(ProgressPhoto p) => setState(() {
+        final i = _selected.indexWhere((s) => s.id == p.id);
+        if (i >= 0) {
+          _selected.removeAt(i);
+        } else {
+          // A third pick replaces the one chosen first.
+          if (_selected.length == 2) _selected.removeAt(0);
+          _selected.add(p);
+        }
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final photos = context.watch<PhotosProvider>().photos;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final brand = isDark ? AppColors.darkBrand500 : AppColors.brand500;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    final ids = _selected.map((p) => p.id).toSet();
+
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l.bodyChoosePhotos,
+                style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w700)),
+            const SizedBox(height: 4),
+            Text(l.bodyChoosePhotosHint,
+                style: GoogleFonts.inter(fontSize: 13, color: fg3)),
+            const SizedBox(height: 12),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.5),
+              child: SingleChildScrollView(
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final p in photos)
+                      Stack(children: [
+                        _Thumb(
+                          key: ValueKey('pick-${p.id}'),
+                          photo: p,
+                          onTap: () => _toggle(p),
+                        ),
+                        if (ids.contains(p.id))
+                          PositionedDirectional(
+                            top: 4,
+                            end: 4,
+                            child: CircleAvatar(
+                              radius: 11,
+                              backgroundColor: brand,
+                              child: const Icon(Icons.check_rounded,
+                                  size: 14, color: Colors.white),
+                            ),
+                          ),
+                      ]),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+            AppButton(
+              label: l.bodyCompareThese,
+              icon: Icons.compare_rounded,
+              fullWidth: true,
+              onPressed: _selected.length == 2
+                  ? () => Navigator.pop(context,
+                      [..._selected]..sort((a, b) => a.date.compareTo(b.date)))
+                  : null,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _Thumb extends StatelessWidget {
   final ProgressPhoto photo;
   final VoidCallback onTap;
-  const _Thumb({required this.photo, required this.onTap});
+  const _Thumb({super.key, required this.photo, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -180,10 +273,28 @@ class _DecryptedImageState extends State<_DecryptedImage> {
       );
 }
 
-/// One photo full screen, or two side by side for comparison.
-class _PhotoViewer extends StatelessWidget {
+/// One photo full screen, or two side by side for comparison (first vs
+/// latest by default; "Choose photos" picks any two).
+class _PhotoViewer extends StatefulWidget {
   final List<ProgressPhoto> photos;
   const _PhotoViewer({required this.photos});
+
+  @override
+  State<_PhotoViewer> createState() => _PhotoViewerState();
+}
+
+class _PhotoViewerState extends State<_PhotoViewer> {
+  late List<ProgressPhoto> photos = widget.photos;
+
+  Future<void> _choose() async {
+    final picked = await showModalBottomSheet<List<ProgressPhoto>>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) => _ComparePicker(initial: photos),
+    );
+    if (picked != null && picked.length == 2) setState(() => photos = picked);
+  }
 
   Future<void> _delete(BuildContext context, ProgressPhoto p) async {
     final l = context.l10n;
@@ -223,6 +334,12 @@ class _PhotoViewer extends StatelessWidget {
               tooltip: l.deletePhoto,
               icon: const Icon(Icons.delete_outline_rounded),
               onPressed: () => _delete(context, photos.single),
+            )
+          else
+            IconButton(
+              tooltip: l.bodyChoosePhotos,
+              icon: const Icon(Icons.photo_library_outlined),
+              onPressed: _choose,
             ),
         ],
       ),
