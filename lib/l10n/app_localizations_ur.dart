@@ -2396,4 +2396,95 @@ class AppLocalizationsUr extends AppLocalizations {
   String sleepTrendSemantics(int nights) {
     return 'پچھلی 14 راتوں کی نیند، $nights راتیں درج';
   }
+
+  @override
+  String get trainRestChannel => 'آرام کا ٹائمر';
+
+  @override
+  String get trainRestCountdownTitle => 'آرام';
+
+  @override
+  String get trainRestCountdownBody => 'ٹائمر ختم ہونے پر اگلا سیٹ شروع کریں۔';
+
+  @override
+  String get trainRestOverTitle => 'آرام ختم';
+
+  @override
+  String get trainRestOverBody => 'اگلے سیٹ کا وقت ہو گیا۔';
+
+  @override
+  String get trainRestNotifyAsk => 'ایپ بند ہو تو آرام ختم ہونے پر اطلاع چاہیے؟';
+
+  @override
+  String get trainAllow => 'اجازت دیں';
+
+  @override
+  String get trainRename => 'نام بدلیں';
+
+  @override
+  String get trainWorkoutName => 'ورزش کا نام';
+
+  @override
+  String get trainDeleteWorkout => 'ورزش حذف کریں';
+
+  @override
+  String get trainDeleteWorkoutConfirm => 'یہ ورزش حذف کریں؟ اس کے سیٹ، والیوم اور ریکارڈ آپ کی ہسٹری سے ہٹ جائیں گے۔';
+
+  @override
+  String get trainEditHint => 'سیٹ میں تبدیلی کے لیے اس پر ٹیپ کریں، حذف کرنے کے لیے بائیں سوائپ کریں۔';
+
+  @override
+  String get trainEditSet => 'سیٹ میں تبدیلی';
+
+  @override
+  String get trainSetSaved => 'سیٹ اپ ڈیٹ ہو گیا';
+
+  @override
+  String trainRepsCount(int count) {
+    return '$count ریپس';
+  }
+
+  @override
+  String get trainProgressTitle => 'آپ کی پیش رفت';
+
+  @override
+  String get trainProgressEmpty => 'اپنی پیش رفت یہاں دیکھنے کے لیے یہ ورزش کسی ورک آؤٹ میں لاگ کریں۔';
+
+  @override
+  String get trainBestSet => 'بہترین سیٹ';
+
+  @override
+  String get trainVolume => 'والیوم';
+
+  @override
+  String get trainMostReps => 'سب سے زیادہ ریپس';
+
+  @override
+  String get trainTotalReps => 'کل ریپس';
+
+  @override
+  String trainEst1rm(String value) {
+    return 'اندازاً ایک ریپ زیادہ سے زیادہ $value';
+  }
+
+  @override
+  String trainBestEver(String value) {
+    return 'بہترین: $value';
+  }
+
+  @override
+  String trainSessions(int count) {
+    return '$count سیشن';
+  }
+
+  @override
+  String trainThisWeek(int done, int target) {
+    return 'اس ہفتے $done/$target';
+  }
+
+  @override
+  String get trainWeekDone => 'ہفتہ مکمل';
+
+  @override
+  String get trainNext => 'اگلا';
 }

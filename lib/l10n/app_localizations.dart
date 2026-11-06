@@ -4300,6 +4300,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sleep for the last 14 nights, {nights} nights recorded'**
   String sleepTrendSemantics(int nights);
+
+  /// Notification channel name
+  ///
+  /// In en, this message translates to:
+  /// **'Rest timer'**
+  String get trainRestChannel;
+
+  /// Ongoing notification while resting
+  ///
+  /// In en, this message translates to:
+  /// **'Resting'**
+  String get trainRestCountdownTitle;
+
+  /// Ongoing notification body
+  ///
+  /// In en, this message translates to:
+  /// **'Your next set starts when the timer ends.'**
+  String get trainRestCountdownBody;
+
+  /// Notification when rest ends
+  ///
+  /// In en, this message translates to:
+  /// **'Rest is over'**
+  String get trainRestOverTitle;
+
+  /// Notification when rest ends
+  ///
+  /// In en, this message translates to:
+  /// **'Time for your next set.'**
+  String get trainRestOverBody;
+
+  /// One-time offer at the first rest timer
+  ///
+  /// In en, this message translates to:
+  /// **'Get a notification when rest ends while the app is closed?'**
+  String get trainRestNotifyAsk;
+
+  /// Snackbar action
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get trainAllow;
+
+  /// Rename workout
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get trainRename;
+
+  /// Text field label
+  ///
+  /// In en, this message translates to:
+  /// **'Workout name'**
+  String get trainWorkoutName;
+
+  /// Tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Delete workout'**
+  String get trainDeleteWorkout;
+
+  /// Confirm dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this workout? Its sets, volume and records are removed from your history.'**
+  String get trainDeleteWorkoutConfirm;
+
+  /// Hint on the finished workout screen
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a set to edit it, swipe left to delete it.'**
+  String get trainEditHint;
+
+  /// Dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Edit set'**
+  String get trainEditSet;
+
+  /// Snackbar
+  ///
+  /// In en, this message translates to:
+  /// **'Set updated'**
+  String get trainSetSaved;
+
+  /// Bodyweight set
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 rep} other{{count} reps}}'**
+  String trainRepsCount(int count);
+
+  /// Exercise detail card
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get trainProgressTitle;
+
+  /// Empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Log this exercise in a workout to see your progress here.'**
+  String get trainProgressEmpty;
+
+  /// Chart choice
+  ///
+  /// In en, this message translates to:
+  /// **'Best set'**
+  String get trainBestSet;
+
+  /// Chart choice
+  ///
+  /// In en, this message translates to:
+  /// **'Volume'**
+  String get trainVolume;
+
+  /// Chart choice for bodyweight moves
+  ///
+  /// In en, this message translates to:
+  /// **'Most reps'**
+  String get trainMostReps;
+
+  /// Chart choice for bodyweight moves
+  ///
+  /// In en, this message translates to:
+  /// **'Total reps'**
+  String get trainTotalReps;
+
+  /// Under the best set
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated 1-rep max {value}'**
+  String trainEst1rm(String value);
+
+  /// Best set ever
+  ///
+  /// In en, this message translates to:
+  /// **'Best: {value}'**
+  String trainBestEver(String value);
+
+  /// Number of logged sessions
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 session} other{{count} sessions}}'**
+  String trainSessions(int count);
+
+  /// Program card
+  ///
+  /// In en, this message translates to:
+  /// **'This week {done}/{target}'**
+  String trainThisWeek(int done, int target);
+
+  /// Program card when every day is trained
+  ///
+  /// In en, this message translates to:
+  /// **'Week done'**
+  String get trainWeekDone;
+
+  /// Marks the next program day
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get trainNext;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

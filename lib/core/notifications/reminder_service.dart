@@ -16,6 +16,9 @@ class ReminderService {
   ReminderService._();
   static final instance = ReminderService._();
 
+  // Reminders use 1–4, 100s and 200s (see ReminderSettings); gym check-in 10.
+  static const _restId = 300;
+
   final _plugin = FlutterLocalNotificationsPlugin();
   bool _ready = false;
 
@@ -138,7 +141,78 @@ class ReminderService {
     }
   }
 
-  /// Next occurrence of [hour]:[minute] (optionally on [weekday]) after [now].
+  /// Whether notifications are allowed; null if it can't be told.
+  Future<bool?> notificationsAllowed() async {
+    try {
+      await _init();
+      final android = _plugin.resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>();
+      if (android != null) return await android.areNotificationsEnabled();
+      final ios = _plugin.resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>();
+      if (ios != null) return (await ios.checkPermissions())?.isEnabled;
+    } catch (e, st) {
+      reportError(e, st, reason: 'notify-check');
+    }
+    return null;
+  }
+
+  /// While the app is in the background during rest: a live countdown
+  /// (Android) and an alert when rest ends. The alert replaces the countdown.
+  Future<void> scheduleRestEnd(DateTime end, {required AppLocalizations l}) async {
+    try {
+      await _init();
+      final left = end.difference(DateTime.now());
+      if (left <= Duration.zero) return;
+      if (_plugin.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>() !=
+          null) {
+        await _plugin.show(
+          _restId,
+          l.trainRestCountdownTitle,
+          l.trainRestCountdownBody,
+          NotificationDetails(
+            android: AndroidNotificationDetails('rest_countdown', l.trainRestChannel,
+                importance: Importance.low,
+                silent: true,
+                ongoing: true,
+                usesChronometer: true,
+                chronometerCountDown: true,
+                when: end.millisecondsSinceEpoch,
+                timeoutAfter: left.inMilliseconds),
+          ),
+        );
+      }
+      await _plugin.zonedSchedule(
+        _restId,
+        l.trainRestOverTitle,
+        l.trainRestOverBody,
+        tz.TZDateTime.from(end, tz.local),
+        NotificationDetails(
+          android: AndroidNotificationDetails('rest_end', l.trainRestChannel,
+              importance: Importance.high, priority: Priority.high),
+          iOS: const DarwinNotificationDetails(
+              interruptionLevel: InterruptionLevel.timeSensitive),
+        ),
+        // Inexact (no special permission): on Android it can arrive a little
+        // late; the countdown above shows the exact time.
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      );
+    } catch (e, st) {
+      reportError(e, st, reason: 'rest-notify');
+    }
+  }
+
+  Future<void> cancelRest() async {
+    try {
+      await _init();
+      await _plugin.cancel(_restId);
+    } catch (e, st) {
+      reportError(e, st, reason: 'rest-notify');
+    }
+  }
+
+    /// Next occurrence of [hour]:[minute] (optionally on [weekday]) after [now].
   @visibleForTesting
   static tz.TZDateTime nextAt(tz.TZDateTime now,
       {required int hour, int minute = 0, int? weekday}) {

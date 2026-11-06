@@ -200,6 +200,46 @@ class WorkoutProvider extends ChangeNotifier {
     await _db.deleteWorkout(w.id!);
   }
 
+  // ── Finished workouts ─────────────────────────────────────────────────
+  // Edits re-read history, so volume and PRs are recomputed everywhere.
+
+  WorkoutSummary? summaryOf(int workoutId) {
+    for (final h in _history) {
+      if (h.workout.id == workoutId) return h;
+    }
+    return null;
+  }
+
+  Future<void> renameWorkout(int workoutId, String name) async {
+    final h = summaryOf(workoutId);
+    if (h == null) return;
+    await _db.updateWorkout(h.workout.copyWith(name: name.trim()));
+    await _reload();
+  }
+
+  Future<void> updateFinishedSet(WorkoutSet s) async {
+    await _db.updateSet(s);
+    await _reload();
+  }
+
+  /// Deleting the last set deletes the workout too.
+  Future<void> deleteFinishedSet(WorkoutSet s) async {
+    await _db.deleteSet(s.id!);
+    final left = summaryOf(s.workoutId)?.sets.where((x) => x.id != s.id) ?? const [];
+    if (left.isEmpty) await _db.deleteWorkout(s.workoutId);
+    await _reload();
+  }
+
+  Future<void> deleteWorkout(int workoutId) async {
+    await _db.deleteWorkout(workoutId);
+    await _reload();
+  }
+
+  Future<void> _reload() async {
+    await _loadHistory();
+    notifyListeners();
+  }
+
   // ── Routines ──────────────────────────────────────────────────────────
 
   Future<void> saveRoutine(String name, List<String> exerciseIds) async {

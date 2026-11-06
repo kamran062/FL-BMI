@@ -2408,4 +2408,107 @@ class AppLocalizationsEn extends AppLocalizations {
   String sleepTrendSemantics(int nights) {
     return 'Sleep for the last 14 nights, $nights nights recorded';
   }
+
+  @override
+  String get trainRestChannel => 'Rest timer';
+
+  @override
+  String get trainRestCountdownTitle => 'Resting';
+
+  @override
+  String get trainRestCountdownBody => 'Your next set starts when the timer ends.';
+
+  @override
+  String get trainRestOverTitle => 'Rest is over';
+
+  @override
+  String get trainRestOverBody => 'Time for your next set.';
+
+  @override
+  String get trainRestNotifyAsk => 'Get a notification when rest ends while the app is closed?';
+
+  @override
+  String get trainAllow => 'Allow';
+
+  @override
+  String get trainRename => 'Rename';
+
+  @override
+  String get trainWorkoutName => 'Workout name';
+
+  @override
+  String get trainDeleteWorkout => 'Delete workout';
+
+  @override
+  String get trainDeleteWorkoutConfirm => 'Delete this workout? Its sets, volume and records are removed from your history.';
+
+  @override
+  String get trainEditHint => 'Tap a set to edit it, swipe left to delete it.';
+
+  @override
+  String get trainEditSet => 'Edit set';
+
+  @override
+  String get trainSetSaved => 'Set updated';
+
+  @override
+  String trainRepsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reps',
+      one: '1 rep',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get trainProgressTitle => 'Your progress';
+
+  @override
+  String get trainProgressEmpty => 'Log this exercise in a workout to see your progress here.';
+
+  @override
+  String get trainBestSet => 'Best set';
+
+  @override
+  String get trainVolume => 'Volume';
+
+  @override
+  String get trainMostReps => 'Most reps';
+
+  @override
+  String get trainTotalReps => 'Total reps';
+
+  @override
+  String trainEst1rm(String value) {
+    return 'Estimated 1-rep max $value';
+  }
+
+  @override
+  String trainBestEver(String value) {
+    return 'Best: $value';
+  }
+
+  @override
+  String trainSessions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sessions',
+      one: '1 session',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String trainThisWeek(int done, int target) {
+    return 'This week $done/$target';
+  }
+
+  @override
+  String get trainWeekDone => 'Week done';
+
+  @override
+  String get trainNext => 'Next';
 }
