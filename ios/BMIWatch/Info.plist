@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Most keys are generated from build settings (INFOPLIST_KEY_*). This key
+     is repeated here because the Flutter tool detects the watch companion
+     by reading it from this file (its build-settings check fails when a
+     simulator device ID is passed), and then builds without forcing -sdk. -->
+<plist version="1.0">
+<dict>
+	<key>WKCompanionAppBundleIdentifier</key>
+	<string>com.bmihealth.bmiHealth</string>
+	<key>WKApplication</key>
+	<true/>
+</dict>
+</plist>

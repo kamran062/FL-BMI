@@ -40,6 +40,9 @@ This information is collected and processed by Google according to their privacy
 ### 1.3 Step Count (Health Connect / Apple Health)
 If you choose to connect, the App reads your **daily step count** from Health Connect (Android) or Apple Health (iOS) to show it on your Today screen. The App only reads steps; it does not read any other health data and does not write to these services. Step data is **never** sent off your device, shared with advertisers, or used for advertising. You can revoke access at any time in Health Connect or the Health app.
 
+### 1.3a Watch Apps (optional)
+If you use the Wear OS or Apple Watch app, your phone sends the current exercise, set and rest timer to your watch, and the watch sends back "set done" taps and your heart rate during a workout. This goes directly between your own devices. On Apple Watch, a workout session keeps the heart-rate sensor on during your workout; it is discarded afterwards and nothing is saved to Apple Health.
+
 ### 1.4 Location Timeline (optional)
 If you turn on **Tracking** in the App, it records your phone's location about once a minute while tracking is on, to build your private daily timeline (places you stayed, routes, distance and gym visits). On Android a notification is shown the whole time tracking runs; the App never uses "all the time" background location.
 
