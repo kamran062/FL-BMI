@@ -2301,4 +2301,111 @@ class AppLocalizationsEn extends AppLocalizations {
   String sayDayComplete(int day) {
     return 'Day $day complete. Well done!';
   }
+
+  @override
+  String get remindWaterTitle => 'Time for some water';
+
+  @override
+  String get remindWaterBody => 'A glass now keeps you on track for today\'s water goal.';
+
+  @override
+  String get remindWeighInTitle => 'Weigh-in time';
+
+  @override
+  String get remindWeighInBody => 'Weigh yourself before breakfast for the most consistent trend.';
+
+  @override
+  String get remindWorkoutTitle => 'It\'s a training day';
+
+  @override
+  String get remindWorkoutBody => 'Open the app to start today\'s workout.';
+
+  @override
+  String get remindBedtimeTitle => 'Time to wind down';
+
+  @override
+  String get remindBedtimeBody => 'Put the screen away soon to get a full night\'s sleep.';
+
+  @override
+  String get remindWater => 'Water reminders';
+
+  @override
+  String get remindWeighIn => 'Weigh-in reminder';
+
+  @override
+  String get remindWorkout => 'Workout-day reminders';
+
+  @override
+  String get remindBedtime => 'Bedtime reminder';
+
+  @override
+  String remindDailyAt(String time) {
+    return 'Every day at $time';
+  }
+
+  @override
+  String remindWeeklyAt(String day, String time) {
+    return '${day}s at $time';
+  }
+
+  @override
+  String remindDaysAt(String days, String time) {
+    return '$days at $time';
+  }
+
+  @override
+  String remindWaterEvery(int hours, String from, String to) {
+    return 'Every $hours h, $from–$to';
+  }
+
+  @override
+  String get remindTapToChange => 'Tap to change the time';
+
+  @override
+  String get remindTime => 'Time';
+
+  @override
+  String get remindDay => 'Day';
+
+  @override
+  String get remindDays => 'Days';
+
+  @override
+  String get remindEvery => 'Every';
+
+  @override
+  String remindHours(int hours) {
+    return '$hours h';
+  }
+
+  @override
+  String get remindFrom => 'From';
+
+  @override
+  String get remindUntil => 'Until';
+
+  @override
+  String get remindPickDay => 'Choose at least one day.';
+
+  @override
+  String get stepsGoal => 'Daily step goal';
+
+  @override
+  String get stepsGoalHint => 'Pick a goal you can reach most days, then raise it.';
+
+  @override
+  String stepsGoalValue(int steps) {
+    return '$steps steps';
+  }
+
+  @override
+  String get sleepTrend => 'Last 14 nights';
+
+  @override
+  String get sleepTrendHint => 'Each bar is one night. Amber means under 7 h.';
+
+  @override
+  String sleepTrendSemantics(int nights) {
+    return 'Sleep for the last 14 nights, $nights nights recorded';
+  }
 }

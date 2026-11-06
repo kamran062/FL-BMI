@@ -4,21 +4,17 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:bmi_health/core/monitoring/crash_reporting.dart';
+import 'package:bmi_health/core/notifications/reminder_settings.dart';
 import 'package:bmi_health/features/ads/ad_service.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 
-/// Local daily / weekly reminders. Nothing leaves the device.
+/// Local reminders (check-ins, water, weigh-in, workouts, bedtime). Nothing leaves the device.
 ///
 /// Uses inexact scheduling, so no "alarms & reminders" special permission
 /// is needed; reminders may arrive a few minutes late, which is fine here.
 class ReminderService {
   ReminderService._();
   static final instance = ReminderService._();
-
-  static const _dailyId = 1;
-  static const _weeklyId = 2;
-  static const dailyHour = 20; // 8:00 PM
-  static const weeklyHour = 10; // Sunday 10:00 AM
 
   final _plugin = FlutterLocalNotificationsPlugin();
   bool _ready = false;
@@ -73,11 +69,10 @@ class ReminderService {
   }
 
   /// Makes the scheduled reminders match the settings. Safe to call often.
-  Future<void> sync({
-    required bool daily,
-    required bool weekly,
-    required AppLocalizations l,
-  }) async {
+  /// [perWeek] (the profile's training days) picks workout days when the
+  /// user has not chosen them.
+  Future<void> sync(ReminderSettings settings,
+      {required AppLocalizations l, int perWeek = 3}) async {
     try {
       await _init();
       final details = NotificationDetails(
@@ -89,29 +84,29 @@ class ReminderService {
         iOS: const DarwinNotificationDetails(),
       );
 
-      await _plugin.cancel(_dailyId);
-      await _plugin.cancel(_weeklyId);
-      if (daily) {
-        await _plugin.zonedSchedule(
-          _dailyId,
-          l.dailyReminderTitle,
-          l.dailyReminderBody,
-          nextAt(tz.TZDateTime.now(tz.local), hour: dailyHour),
-          details,
-          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-          matchDateTimeComponents: DateTimeComponents.time,
-        );
+      for (final id in ReminderSettings.allIds) {
+        await _plugin.cancel(id);
       }
-      if (weekly) {
+      final now = tz.TZDateTime.now(tz.local);
+      for (final s in settings.slots(perWeek: perWeek)) {
+        final (title, body) = switch (s.kind) {
+          ReminderKind.daily => (l.dailyReminderTitle, l.dailyReminderBody),
+          ReminderKind.weekly => (l.weeklyReminderTitle, l.weeklyReminderBody),
+          ReminderKind.water => (l.remindWaterTitle, l.remindWaterBody),
+          ReminderKind.weighIn => (l.remindWeighInTitle, l.remindWeighInBody),
+          ReminderKind.workout => (l.remindWorkoutTitle, l.remindWorkoutBody),
+          ReminderKind.bedtime => (l.remindBedtimeTitle, l.remindBedtimeBody),
+        };
         await _plugin.zonedSchedule(
-          _weeklyId,
-          l.weeklyReminderTitle,
-          l.weeklyReminderBody,
-          nextAt(tz.TZDateTime.now(tz.local),
-              hour: weeklyHour, weekday: DateTime.sunday),
+          s.id,
+          title,
+          body,
+          nextAt(now, hour: s.hour, minute: s.minute, weekday: s.weekday),
           details,
           androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-          matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+          matchDateTimeComponents: s.weekday == null
+              ? DateTimeComponents.time
+              : DateTimeComponents.dayOfWeekAndTime,
         );
       }
     } catch (e, st) {
@@ -143,10 +138,11 @@ class ReminderService {
     }
   }
 
-  /// Next occurrence of [hour]:00 (optionally on [weekday]) after [now].
+  /// Next occurrence of [hour]:[minute] (optionally on [weekday]) after [now].
   @visibleForTesting
-  static tz.TZDateTime nextAt(tz.TZDateTime now, {required int hour, int? weekday}) {
-    var t = tz.TZDateTime(now.location, now.year, now.month, now.day, hour);
+  static tz.TZDateTime nextAt(tz.TZDateTime now,
+      {required int hour, int minute = 0, int? weekday}) {
+    var t = tz.TZDateTime(now.location, now.year, now.month, now.day, hour, minute);
     if (weekday != null) {
       t = t.add(Duration(days: (weekday - t.weekday) % 7));
     }

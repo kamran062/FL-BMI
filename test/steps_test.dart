@@ -1,4 +1,5 @@
 import 'package:bmi_health/features/movement/steps_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helpers/app_harness.dart';
@@ -56,6 +57,24 @@ void main() {
     await tester.ensureVisible(find.text('5420 / 8000', skipOffstage: false));
     await tester.pumpAndSettle();
     expect(find.text('5420 / 8000'), findsOneWidget);
+  });
+
+  testWidgets('custom step goal is used on the card and can be changed there',
+      (tester) async {
+    final fake = FakeSteps();
+    final app = await launchApp(tester,
+        steps: fake, prefs: {'steps_connected': true, 'steps_goal': 10000});
+    fake.granted = true;
+    await app.steps.refresh();
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('5420 / 10000'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('5420 / 10000'));
+    await tester.pumpAndSettle();
+    expect(find.text('Daily step goal'), findsOneWidget);
+    await tester.tap(find.widgetWithText(ChoiceChip, '6,000'));
+    await settleIO(tester);
+    expect(find.text('5420 / 6000'), findsOneWidget);
   });
 
   testWidgets('offers Health Connect when it is missing', (tester) async {

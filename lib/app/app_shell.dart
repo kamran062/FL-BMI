@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/core/notifications/reminder_service.dart';
 import 'package:bmi_health/features/movement/movement_provider.dart';
+import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 
 /// Tab shell: floating pill nav bar + banner ad above it.
@@ -34,11 +35,11 @@ class _AppShellState extends State<AppShell> {
     // (notification text is localised when it is scheduled).
     final s = context.watch<SettingsProvider>();
     final l = context.l10n;
-    final key = (s.dailyReminder, s.weeklyCheckIn, l.localeName);
+    final perWeek = context.watch<ProfileProvider>().profile.daysPerWeek;
+    final key = (s.reminders.signature, perWeek, l.localeName);
     if (key == _reminderKey) return;
     _reminderKey = key;
-    ReminderService.instance
-        .sync(daily: s.dailyReminder, weekly: s.weeklyCheckIn, l: l);
+    ReminderService.instance.sync(s.reminders, l: l, perWeek: perWeek);
     context.read<WearBridge>().locale = l.localeName;
     // Restart location tracking after a relaunch if the user left it on
     context.read<MovementProvider>().resume(l);

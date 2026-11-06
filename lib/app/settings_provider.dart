@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bmi_health/core/notifications/reminder_settings.dart';
 
 /// App-wide preferences: theme, language, onboarding state, reminders.
 class SettingsProvider extends ChangeNotifier {
@@ -8,8 +9,7 @@ class SettingsProvider extends ChangeNotifier {
   String _language = 'system'; // 'system' | 'en' | 'ur'
   bool _onboardingDone = false;
   bool _profileSetupDismissed = false;
-  bool _dailyReminder = false;
-  bool _weeklyCheckIn = false;
+  ReminderSettings _reminders = const ReminderSettings();
   String _appVersion = '';
   String _versionName = '';
 
@@ -25,8 +25,9 @@ class SettingsProvider extends ChangeNotifier {
 
   /// An existing user chose "Later" on the profile setup prompt.
   bool get profileSetupDismissed => _profileSetupDismissed;
-  bool get dailyReminder => _dailyReminder;
-  bool get weeklyCheckIn => _weeklyCheckIn;
+  ReminderSettings get reminders => _reminders;
+  bool get dailyReminder => _reminders.daily;
+  bool get weeklyCheckIn => _reminders.weekly;
   String get appVersion => _appVersion; // e.g. 1.0.1 (build 3)
   String get versionName => _versionName; // e.g. 1.0.1
 
@@ -39,8 +40,7 @@ class SettingsProvider extends ChangeNotifier {
         : ThemeMode.light;
     _language = prefs.getString('language') ?? 'system';
     // Off until the user turns it on (and grants notification permission)
-    _dailyReminder = prefs.getBool('daily_reminder') ?? false;
-    _weeklyCheckIn = prefs.getBool('weekly_check_in') ?? false;
+    _reminders = ReminderSettings.fromPrefs(prefs);
 
     final info = await PackageInfo.fromPlatform();
     _versionName = info.version;
@@ -76,17 +76,16 @@ class SettingsProvider extends ChangeNotifier {
     await prefs.setBool('profile_setup_dismissed', true);
   }
 
-  Future<void> setDailyReminder(bool v) async {
-    _dailyReminder = v;
-    notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('daily_reminder', v);
-  }
+  Future<void> setDailyReminder(bool v) =>
+      setReminders(_reminders.copyWith(daily: v));
 
-  Future<void> setWeeklyCheckIn(bool v) async {
-    _weeklyCheckIn = v;
+  Future<void> setWeeklyCheckIn(bool v) =>
+      setReminders(_reminders.copyWith(weekly: v));
+
+  Future<void> setReminders(ReminderSettings r) async {
+    _reminders = r;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('weekly_check_in', v);
+    await r.save(prefs);
   }
 }

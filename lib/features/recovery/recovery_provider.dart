@@ -181,6 +181,22 @@ class RecoveryProvider extends ChangeNotifier {
     return null;
   }
 
+  /// The last 14 wake-up days, oldest first; null where nothing was recorded.
+  List<({DateTime day, Duration? sleep})> get fortnight {
+    final today = _day(_now());
+    return [
+      for (var i = 13; i >= 0; i--)
+        () {
+          final day = DateTime(today.year, today.month, today.day - i);
+          final n = _nights.where((x) => x.wakeDay == day);
+          return (
+            day: day,
+            sleep: n.isEmpty ? null : n.fold(Duration.zero, (s, x) => s + x.duration),
+          );
+        }()
+    ];
+  }
+
   SleepSummary? get week => SleepSummary.of(_nights
       .where((n) => n.wakeDay.isAfter(_day(_now()).subtract(const Duration(days: 8))))
       .toList());

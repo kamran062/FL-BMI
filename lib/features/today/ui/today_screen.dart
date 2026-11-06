@@ -19,6 +19,7 @@ import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/features/movement/steps_provider.dart';
+import 'package:bmi_health/features/movement/ui/step_goal_dialog.dart';
 import 'dart:io' show Platform;
 import 'package:bmi_health/features/movement/movement_provider.dart';
 import 'package:bmi_health/features/movement/ui/timeline_screen.dart';
@@ -279,7 +280,10 @@ class _StepsCard extends StatelessWidget {
     const color = AppColors.bmiOver;
 
     final Widget body = switch (steps.status) {
-      StepsStatus.connected => Column(
+      StepsStatus.connected => GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => showStepGoalDialog(context),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(l.stepsOf(steps.today, steps.goal),
@@ -297,6 +301,7 @@ class _StepsCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       _ => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -331,6 +336,18 @@ class _StepsCard extends StatelessWidget {
               const Icon(Icons.directions_walk_rounded, color: color, size: 20),
               const SizedBox(width: 6),
               OverlineLabel(l.stepsTitle),
+              const Spacer(),
+              if (steps.status == StepsStatus.connected)
+                SizedBox(
+                  height: 28,
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    iconSize: 18,
+                    tooltip: l.stepsGoal,
+                    icon: Icon(Icons.flag_outlined, color: fg3),
+                    onPressed: () => showStepGoalDialog(context),
+                  ),
+                ),
             ]),
             const SizedBox(height: 8),
             body,

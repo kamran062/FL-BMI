@@ -2289,4 +2289,111 @@ class AppLocalizationsUr extends AppLocalizations {
   String sayDayComplete(int day) {
     return 'دن $day مکمل۔ شاباش!';
   }
+
+  @override
+  String get remindWaterTitle => 'پانی پینے کا وقت';
+
+  @override
+  String get remindWaterBody => 'ابھی ایک گلاس پانی آج کے ہدف کی طرف آپ کو رکھے گا۔';
+
+  @override
+  String get remindWeighInTitle => 'وزن کرنے کا وقت';
+
+  @override
+  String get remindWeighInBody => 'سب سے درست رجحان کے لیے ناشتے سے پہلے وزن کریں۔';
+
+  @override
+  String get remindWorkoutTitle => 'آج ورزش کا دن ہے';
+
+  @override
+  String get remindWorkoutBody => 'آج کی ورزش شروع کرنے کے لیے ایپ کھولیں۔';
+
+  @override
+  String get remindBedtimeTitle => 'آرام کی تیاری کا وقت';
+
+  @override
+  String get remindBedtimeBody => 'پوری نیند کے لیے جلد اسکرین رکھ دیں۔';
+
+  @override
+  String get remindWater => 'پانی کی یاد دہانی';
+
+  @override
+  String get remindWeighIn => 'وزن کی یاد دہانی';
+
+  @override
+  String get remindWorkout => 'ورزش کے دن کی یاد دہانی';
+
+  @override
+  String get remindBedtime => 'سونے کے وقت کی یاد دہانی';
+
+  @override
+  String remindDailyAt(String time) {
+    return 'ہر روز $time';
+  }
+
+  @override
+  String remindWeeklyAt(String day, String time) {
+    return 'ہر $day $time';
+  }
+
+  @override
+  String remindDaysAt(String days, String time) {
+    return '$days، $time';
+  }
+
+  @override
+  String remindWaterEvery(int hours, String from, String to) {
+    return 'ہر $hours گھنٹے، $from تا $to';
+  }
+
+  @override
+  String get remindTapToChange => 'وقت بدلنے کے لیے تھپتھپائیں';
+
+  @override
+  String get remindTime => 'وقت';
+
+  @override
+  String get remindDay => 'دن';
+
+  @override
+  String get remindDays => 'دن';
+
+  @override
+  String get remindEvery => 'ہر';
+
+  @override
+  String remindHours(int hours) {
+    return '$hours گھنٹے';
+  }
+
+  @override
+  String get remindFrom => 'سے';
+
+  @override
+  String get remindUntil => 'تک';
+
+  @override
+  String get remindPickDay => 'کم از کم ایک دن منتخب کریں۔';
+
+  @override
+  String get stepsGoal => 'روزانہ قدموں کا ہدف';
+
+  @override
+  String get stepsGoalHint => 'ایسا ہدف چنیں جو زیادہ تر دن پورا ہو سکے، پھر بڑھائیں۔';
+
+  @override
+  String stepsGoalValue(int steps) {
+    return '$steps قدم';
+  }
+
+  @override
+  String get sleepTrend => 'پچھلی 14 راتیں';
+
+  @override
+  String get sleepTrendHint => 'ہر بار ایک رات ہے۔ نارنجی کا مطلب 7 گھنٹے سے کم۔';
+
+  @override
+  String sleepTrendSemantics(int nights) {
+    return 'پچھلی 14 راتوں کی نیند، $nights راتیں درج';
+  }
 }
