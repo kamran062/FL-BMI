@@ -3405,5 +3405,187 @@
         "example": "5"
       }
     }
+  },
+  "remindWaterTitle": "Time for some water",
+  "@remindWaterTitle": {
+    "description": "Water reminder notification title"
+  },
+  "remindWaterBody": "A glass now keeps you on track for today's water goal.",
+  "@remindWaterBody": {
+    "description": "Water reminder notification text"
+  },
+  "remindWeighInTitle": "Weigh-in time",
+  "@remindWeighInTitle": {
+    "description": "Weigh-in reminder notification title"
+  },
+  "remindWeighInBody": "Weigh yourself before breakfast for the most consistent trend.",
+  "@remindWeighInBody": {
+    "description": "Weigh-in reminder notification text"
+  },
+  "remindWorkoutTitle": "It's a training day",
+  "@remindWorkoutTitle": {
+    "description": "Workout-day reminder notification title"
+  },
+  "remindWorkoutBody": "Open the app to start today's workout.",
+  "@remindWorkoutBody": {
+    "description": "Workout-day reminder notification text"
+  },
+  "remindBedtimeTitle": "Time to wind down",
+  "@remindBedtimeTitle": {
+    "description": "Bedtime reminder notification title"
+  },
+  "remindBedtimeBody": "Put the screen away soon to get a full night's sleep.",
+  "@remindBedtimeBody": {
+    "description": "Bedtime reminder notification text"
+  },
+  "remindWater": "Water reminders",
+  "@remindWater": {
+    "description": "Settings row"
+  },
+  "remindWeighIn": "Weigh-in reminder",
+  "@remindWeighIn": {
+    "description": "Settings row"
+  },
+  "remindWorkout": "Workout-day reminders",
+  "@remindWorkout": {
+    "description": "Settings row"
+  },
+  "remindBedtime": "Bedtime reminder",
+  "@remindBedtime": {
+    "description": "Settings row"
+  },
+  "remindDailyAt": "Every day at {time}",
+  "@remindDailyAt": {
+    "description": "Reminder schedule under a settings row",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "8:00 PM"
+      }
+    }
+  },
+  "remindWeeklyAt": "{day}s at {time}",
+  "@remindWeeklyAt": {
+    "description": "Weekly reminder schedule; day is a weekday name",
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "Sunday"
+      },
+      "time": {
+        "type": "String",
+        "example": "10:00 AM"
+      }
+    }
+  },
+  "remindDaysAt": "{days} at {time}",
+  "@remindDaysAt": {
+    "description": "Workout reminder schedule; days is a short weekday list",
+    "placeholders": {
+      "days": {
+        "type": "String",
+        "example": "Mon, Wed, Fri"
+      },
+      "time": {
+        "type": "String",
+        "example": "6:00 PM"
+      }
+    }
+  },
+  "remindWaterEvery": "Every {hours} h, {from}–{to}",
+  "@remindWaterEvery": {
+    "description": "Water reminder schedule",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      },
+      "from": {
+        "type": "String",
+        "example": "9:00 AM"
+      },
+      "to": {
+        "type": "String",
+        "example": "9:00 PM"
+      }
+    }
+  },
+  "remindTapToChange": "Tap to change the time",
+  "@remindTapToChange": {
+    "description": "Hint under a reminder that is on"
+  },
+  "remindTime": "Time",
+  "@remindTime": {
+    "description": "Reminder editor label"
+  },
+  "remindDay": "Day",
+  "@remindDay": {
+    "description": "Reminder editor label"
+  },
+  "remindDays": "Days",
+  "@remindDays": {
+    "description": "Reminder editor label"
+  },
+  "remindEvery": "Every",
+  "@remindEvery": {
+    "description": "Reminder editor label: how often"
+  },
+  "remindHours": "{hours} h",
+  "@remindHours": {
+    "description": "Interval chip",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "remindFrom": "From",
+  "@remindFrom": {
+    "description": "Water window start"
+  },
+  "remindUntil": "Until",
+  "@remindUntil": {
+    "description": "Water window end"
+  },
+  "remindPickDay": "Choose at least one day.",
+  "@remindPickDay": {
+    "description": "Validation in the workout reminder editor"
+  },
+  "stepsGoal": "Daily step goal",
+  "@stepsGoal": {
+    "description": "Settings row and dialog title"
+  },
+  "stepsGoalHint": "Pick a goal you can reach most days, then raise it.",
+  "@stepsGoalHint": {
+    "description": "Step goal dialog text"
+  },
+  "stepsGoalValue": "{steps} steps",
+  "@stepsGoalValue": {
+    "description": "Step goal option",
+    "placeholders": {
+      "steps": {
+        "type": "int",
+        "example": "8000"
+      }
+    }
+  },
+  "sleepTrend": "Last 14 nights",
+  "@sleepTrend": {
+    "description": "Sleep chart label"
+  },
+  "sleepTrendHint": "Each bar is one night. Amber means under 7 h.",
+  "@sleepTrendHint": {
+    "description": "Sleep chart legend"
+  },
+  "sleepTrendSemantics": "Sleep for the last 14 nights, {nights} nights recorded",
+  "@sleepTrendSemantics": {
+    "description": "Screen reader label for the sleep chart",
+    "placeholders": {
+      "nights": {
+        "type": "int",
+        "example": "10"
+      }
+    }
   }
 }

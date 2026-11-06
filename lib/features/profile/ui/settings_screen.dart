@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:bmi_health/app/settings_provider.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
@@ -14,6 +15,10 @@ import 'package:bmi_health/core/notifications/reminder_service.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/backup/backup_ui.dart';
+import 'package:bmi_health/core/notifications/reminder_settings.dart';
+import 'package:bmi_health/features/movement/steps_provider.dart';
+import 'package:bmi_health/features/movement/ui/step_goal_dialog.dart';
+import 'package:bmi_health/features/profile/ui/reminder_sheet.dart';
 
 class SettingsScreen extends StatelessWidget {
   final VoidCallback onOpenProfile;
@@ -61,6 +66,14 @@ class SettingsScreen extends StatelessWidget {
                 kind: _RowKind.nav,
                 meta: name.isEmpty ? l.notSet : name,
                 onTap: onOpenProfile,
+              ),
+              _Row(
+                icon: Icons.directions_walk_rounded,
+                label: l.stepsGoal,
+                kind: _RowKind.nav,
+                meta: NumberFormat.decimalPattern(l.localeName)
+                    .format(context.watch<StepsProvider>().goal),
+                onTap: () => showStepGoalDialog(context),
               ),
             ],
           ),
@@ -163,20 +176,16 @@ class SettingsScreen extends StatelessWidget {
           _Section(
             title: l.sectionNotifications,
             rows: [
-              _Row(
-                icon: Icons.notifications_outlined,
-                label: l.dailyReminders,
-                kind: _RowKind.toggle,
-                toggleValue: provider.dailyReminder,
-                onToggle: (v) => _setReminder(context, v, provider.setDailyReminder),
-              ),
-              _Row(
-                icon: Icons.calendar_today_outlined,
-                label: l.weeklyCheckIn,
-                kind: _RowKind.toggle,
-                toggleValue: provider.weeklyCheckIn,
-                onToggle: (v) => _setReminder(context, v, provider.setWeeklyCheckIn),
-              ),
+              for (final (kind, icon, label) in [
+                (ReminderKind.daily, Icons.notifications_outlined, l.dailyReminders),
+                (ReminderKind.weekly, Icons.calendar_today_outlined, l.weeklyCheckIn),
+                (ReminderKind.workout, Icons.fitness_center_rounded, l.remindWorkout),
+                (ReminderKind.water, Icons.water_drop_outlined, l.remindWater),
+                (ReminderKind.weighIn, Icons.monitor_weight_outlined, l.remindWeighIn),
+                (ReminderKind.bedtime, Icons.bedtime_outlined, l.remindBedtime),
+              ])
+                _reminderRow(context, provider, kind, icon, label,
+                    profileProvider.profile.daysPerWeek),
             ],
           ),
           _Section(
@@ -314,6 +323,45 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
     if (ok == true) await c.deleteAll();
+  }
+
+  static bool _isOn(ReminderSettings r, ReminderKind k) => switch (k) {
+        ReminderKind.daily => r.daily,
+        ReminderKind.weekly => r.weekly,
+        ReminderKind.water => r.water,
+        ReminderKind.weighIn => r.weighIn,
+        ReminderKind.workout => r.workout,
+        ReminderKind.bedtime => r.bedtime,
+      };
+
+  static ReminderSettings _withOn(ReminderSettings r, ReminderKind k, bool on) => switch (k) {
+        ReminderKind.daily => r.copyWith(daily: on),
+        ReminderKind.weekly => r.copyWith(weekly: on),
+        ReminderKind.water => r.copyWith(water: on),
+        ReminderKind.weighIn => r.copyWith(weighIn: on),
+        ReminderKind.workout => r.copyWith(workout: on),
+        ReminderKind.bedtime => r.copyWith(bedtime: on),
+      };
+
+  /// Toggle; once on, shows when it fires and tapping edits the schedule.
+  static _Row _reminderRow(BuildContext context, SettingsProvider provider,
+      ReminderKind kind, IconData icon, String label, int perWeek) {
+    final on = _isOn(provider.reminders, kind);
+    return _Row(
+      icon: icon,
+      label: label,
+      kind: _RowKind.toggle,
+      sub: on ? reminderSummary(context, kind, provider.reminders, perWeek) : null,
+      toggleValue: on,
+      onToggle: (v) => _setReminder(context, v,
+          (v) => provider.setReminders(_withOn(provider.reminders, kind, v))),
+      onTap: on
+          ? () async {
+              final r = await editReminder(context, kind, provider.reminders, perWeek);
+              if (r != null) await provider.setReminders(r);
+            }
+          : null,
+    );
   }
 
   static Future<void> _setReminder(BuildContext context, bool on,
@@ -465,6 +513,9 @@ class _Row {
   final String label;
   final _RowKind kind;
   final String? meta;
+
+  /// Second line under the label (e.g. a reminder's schedule).
+  final String? sub;
   final bool? toggleValue;
   final ValueChanged<bool>? onToggle;
   final VoidCallback? onTap;
@@ -474,6 +525,7 @@ class _Row {
     required this.label,
     required this.kind,
     this.meta,
+    this.sub,
     this.toggleValue,
     this.onToggle,
     this.onTap,
@@ -534,11 +586,21 @@ class _SettingsRow extends StatelessWidget {
           ),
           const SizedBox(width: 14),
           Expanded(
-            child: Text(
-              row.label,
-              style: GoogleFonts.inter(
-                fontSize: 15, fontWeight: FontWeight.w500, color: fg1,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  row.label,
+                  style: GoogleFonts.inter(
+                    fontSize: 15, fontWeight: FontWeight.w500, color: fg1,
+                  ),
+                ),
+                if (row.sub != null)
+                  Text(
+                    row.sub!,
+                    style: GoogleFonts.inter(fontSize: 12.5, color: fg3),
+                  ),
+              ],
             ),
           ),
           if (row.kind == _RowKind.toggle)

@@ -393,7 +393,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 2.1 Steps & health platform sync
 
-> **Status: steps done.** `health` package, read-only STEPS on Health Connect / HealthKit, asked only from the Connect button; install prompt when Health Connect is missing; refresh on app resume; daily goal 8,000; privacy policy updated. **minSdk raised to 26** (Android 8.0) as Health Connect requires. Verified on an Android 16 emulator incl. revoke → reconnect. Not yet: hourly chart, distance/active calories, sleep & heart rate, custom step goal. Play Console needs the Health Connect permission declaration before release.
+> **Status: steps done.** `health` package, read-only STEPS on Health Connect / HealthKit, asked only from the Connect button; install prompt when Health Connect is missing; refresh on app resume; daily goal 8,000; privacy policy updated. **minSdk raised to 26** (Android 8.0) as Health Connect requires. Verified on an Android 16 emulator incl. revoke → reconnect. Custom daily step goal (Settings, or tap the Today steps card); the 10k badge stays a fixed 10,000. Not yet: hourly chart, distance/active calories. Play Console needs the Health Connect permission declaration before release.
 
 **Features**
 - Daily steps, distance and active calories; hourly breakdown chart
@@ -473,7 +473,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 2.5 Sitting alerts & reminders
 
-> **Status: reminders done.** Daily (8 PM) and weekly (Sunday 10 AM) local notifications from the Settings toggles; permission asked on first enable (declined → toggle stays off with an explanation); localised text; inexact scheduling (no exact-alarm permission); survive reboot; App Open ad suppressed around the permission prompt. Not yet: custom times, workout/water/weigh-in specific reminders, sitting alerts (needs activity data, Phase 2.1).
+> **Status: reminders done.** Daily (8 PM) and weekly (Sunday 10 AM) local notifications from the Settings toggles; permission asked on first enable (declined → toggle stays off with an explanation); localised text; inexact scheduling (no exact-alarm permission); survive reboot; App Open ad suppressed around the permission prompt. Custom times and days for both (tap a reminder that is on). Added: workout-day reminders (days follow the profile's days per week until chosen), water every 1–4 h within a waking window, weekly weigh-in, bedtime. Not yet: sitting alerts (needs activity data, Phase 2.1).
 
 **Features**
 - "You've been still for 2 hours": walk reminder (respects quiet hours and sleep)
@@ -554,7 +554,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 4.2 Sleep insights
 
-> **Status: done (v1).** Watch segments merged into nights, naps ignored; last night, 7-night average, weekly sleep debt vs. 8 h, bedtime regularity. Not yet: sleep stages, trends chart, bedtime reminder.
+> **Status: done (v1).** Watch segments merged into nights, naps ignored; last night, 7-night average, weekly sleep debt vs. 8 h, bedtime regularity. 14-night bar chart (amber under 7 h) and an optional bedtime reminder (Settings). Not yet: sleep stages.
 - Sleep duration and consistency from Health Connect / HealthKit, and bedtime reminders
 
 ### 4.3 Cycle tracking & cycle-aware training (opt-in, for female / other profiles)

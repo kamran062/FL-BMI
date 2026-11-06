@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:bmi_health/features/movement/ui/timeline_screen.dart' show formatDuration;
 import 'package:bmi_health/features/recovery/domain/recovery.dart';
@@ -148,6 +149,77 @@ class RecoveryCard extends StatelessWidget {
         if (week.nights >= 3)
           Text(week.regular ? l.sleepRegular : l.sleepIrregular, style: text),
       ],
+      const SizedBox(height: 12),
+      SleepTrendChart(nights: r.fortnight),
     ];
+  }
+}
+
+/// One bar per night for the last 14 nights; under 7 h is amber.
+class SleepTrendChart extends StatelessWidget {
+  final List<({DateTime day, Duration? sleep})> nights;
+  const SleepTrendChart({super.key, required this.nights});
+
+  static const _maxHours = 10.0;
+  static const _height = 72.0;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    final sunken = isDark ? AppColors.darkBgSunken : AppColors.bgSunken;
+    final recorded = nights.where((n) => n.sleep != null).length;
+    final small = GoogleFonts.inter(fontSize: 11, color: fg3);
+
+    return Semantics(
+      label: l.sleepTrendSemantics(recorded),
+      excludeSemantics: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l.sleepTrend,
+              style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
+          const SizedBox(height: 6),
+          SizedBox(
+            height: _height,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                for (final n in nights)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      child: Container(
+                        height: n.sleep == null
+                            ? 4
+                            : (_height *
+                                    (n.sleep!.inMinutes / 60 / _maxHours).clamp(0.05, 1.0))
+                                .toDouble(),
+                        decoration: BoxDecoration(
+                          color: n.sleep == null
+                              ? sunken
+                              : n.sleep! >= const Duration(hours: 7)
+                                  ? AppColors.bmiNormal
+                                  : AppColors.bmiOver,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 4),
+          Row(children: [
+            Text(DateFormat.MMMd(l.localeName).format(nights.first.day), style: small),
+            const Spacer(),
+            Text(DateFormat.MMMd(l.localeName).format(nights.last.day), style: small),
+          ]),
+          const SizedBox(height: 2),
+          Text(l.sleepTrendHint, style: small),
+        ],
+      ),
+    );
   }
 }

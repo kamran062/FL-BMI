@@ -81,7 +81,9 @@ class StepsProvider extends ChangeNotifier {
 
   static const _connectedKey = 'steps_connected';
   static const _bestKey = 'steps_best_day';
+  static const _goalKey = 'steps_goal';
   static const defaultGoal = 8000;
+  static const goalChoices = [4000, 5000, 6000, 7000, 8000, 10000, 12000, 15000];
 
   StepsStatus _status = StepsStatus.unsupported;
   int _today = 0;
@@ -93,11 +95,13 @@ class StepsProvider extends ChangeNotifier {
   /// Most steps seen on one day since connecting (for the 10k badge).
   int get bestDay => _bestDay;
   int _bestDay = 0;
-  int get goal => defaultGoal;
+  int get goal => _goal;
+  int _goal = defaultGoal;
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();
     _userConnected = prefs.getBool(_connectedKey) ?? false;
+    _goal = prefs.getInt(_goalKey) ?? defaultGoal;
     await refresh();
   }
 
@@ -123,6 +127,13 @@ class StepsProvider extends ChangeNotifier {
       reportError(e, st, reason: 'steps');
     }
     notifyListeners();
+  }
+
+  Future<void> setGoal(int steps) async {
+    _goal = steps.clamp(1000, 50000);
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_goalKey, _goal);
   }
 
   /// Asks for read access to steps. Only ever called from a user tap.

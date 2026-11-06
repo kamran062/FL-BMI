@@ -4114,6 +4114,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Day {day} complete. Well done!'**
   String sayDayComplete(int day);
+
+  /// Water reminder notification title
+  ///
+  /// In en, this message translates to:
+  /// **'Time for some water'**
+  String get remindWaterTitle;
+
+  /// Water reminder notification text
+  ///
+  /// In en, this message translates to:
+  /// **'A glass now keeps you on track for today\'s water goal.'**
+  String get remindWaterBody;
+
+  /// Weigh-in reminder notification title
+  ///
+  /// In en, this message translates to:
+  /// **'Weigh-in time'**
+  String get remindWeighInTitle;
+
+  /// Weigh-in reminder notification text
+  ///
+  /// In en, this message translates to:
+  /// **'Weigh yourself before breakfast for the most consistent trend.'**
+  String get remindWeighInBody;
+
+  /// Workout-day reminder notification title
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s a training day'**
+  String get remindWorkoutTitle;
+
+  /// Workout-day reminder notification text
+  ///
+  /// In en, this message translates to:
+  /// **'Open the app to start today\'s workout.'**
+  String get remindWorkoutBody;
+
+  /// Bedtime reminder notification title
+  ///
+  /// In en, this message translates to:
+  /// **'Time to wind down'**
+  String get remindBedtimeTitle;
+
+  /// Bedtime reminder notification text
+  ///
+  /// In en, this message translates to:
+  /// **'Put the screen away soon to get a full night\'s sleep.'**
+  String get remindBedtimeBody;
+
+  /// Settings row
+  ///
+  /// In en, this message translates to:
+  /// **'Water reminders'**
+  String get remindWater;
+
+  /// Settings row
+  ///
+  /// In en, this message translates to:
+  /// **'Weigh-in reminder'**
+  String get remindWeighIn;
+
+  /// Settings row
+  ///
+  /// In en, this message translates to:
+  /// **'Workout-day reminders'**
+  String get remindWorkout;
+
+  /// Settings row
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtime reminder'**
+  String get remindBedtime;
+
+  /// Reminder schedule under a settings row
+  ///
+  /// In en, this message translates to:
+  /// **'Every day at {time}'**
+  String remindDailyAt(String time);
+
+  /// Weekly reminder schedule; day is a weekday name
+  ///
+  /// In en, this message translates to:
+  /// **'{day}s at {time}'**
+  String remindWeeklyAt(String day, String time);
+
+  /// Workout reminder schedule; days is a short weekday list
+  ///
+  /// In en, this message translates to:
+  /// **'{days} at {time}'**
+  String remindDaysAt(String days, String time);
+
+  /// Water reminder schedule
+  ///
+  /// In en, this message translates to:
+  /// **'Every {hours} h, {from}–{to}'**
+  String remindWaterEvery(int hours, String from, String to);
+
+  /// Hint under a reminder that is on
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to change the time'**
+  String get remindTapToChange;
+
+  /// Reminder editor label
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get remindTime;
+
+  /// Reminder editor label
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get remindDay;
+
+  /// Reminder editor label
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get remindDays;
+
+  /// Reminder editor label: how often
+  ///
+  /// In en, this message translates to:
+  /// **'Every'**
+  String get remindEvery;
+
+  /// Interval chip
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} h'**
+  String remindHours(int hours);
+
+  /// Water window start
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get remindFrom;
+
+  /// Water window end
+  ///
+  /// In en, this message translates to:
+  /// **'Until'**
+  String get remindUntil;
+
+  /// Validation in the workout reminder editor
+  ///
+  /// In en, this message translates to:
+  /// **'Choose at least one day.'**
+  String get remindPickDay;
+
+  /// Settings row and dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily step goal'**
+  String get stepsGoal;
+
+  /// Step goal dialog text
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a goal you can reach most days, then raise it.'**
+  String get stepsGoalHint;
+
+  /// Step goal option
+  ///
+  /// In en, this message translates to:
+  /// **'{steps} steps'**
+  String stepsGoalValue(int steps);
+
+  /// Sleep chart label
+  ///
+  /// In en, this message translates to:
+  /// **'Last 14 nights'**
+  String get sleepTrend;
+
+  /// Sleep chart legend
+  ///
+  /// In en, this message translates to:
+  /// **'Each bar is one night. Amber means under 7 h.'**
+  String get sleepTrendHint;
+
+  /// Screen reader label for the sleep chart
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep for the last 14 nights, {nights} nights recorded'**
+  String sleepTrendSemantics(int nights);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -66,5 +66,22 @@ void main() {
     expect(find.text('Last night: 8 h 0 min'), findsOneWidget);
     expect(find.textContaining('7-night average'), findsOneWidget);
     expect(find.textContaining('regular'), findsOneWidget);
+    // 14-night chart: six nights recorded
+    await tester.ensureVisible(find.text('Last 14 nights'));
+    expect(find.text('Last 14 nights'), findsOneWidget);
+    expect(find.byWidgetPredicate((w) => w is Semantics && w.properties.label == 'Sleep for the last 14 nights, 6 nights recorded'),
+        findsOneWidget);
+  });
+
+  test('fortnight has 14 days, oldest first, gaps empty', () async {
+    final fake = FakeRecovery()..connected = true;
+    final r = RecoveryProvider(source: fake);
+    await r.load();
+    final f = r.fortnight;
+    expect(f.length, 14);
+    expect(f.first.day.isBefore(f.last.day), isTrue);
+    expect(f.where((n) => n.sleep != null).length, 6);
+    expect(f.last.sleep, const Duration(hours: 8));
+    expect(f.first.sleep, isNull);
   });
 }
