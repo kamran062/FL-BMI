@@ -398,7 +398,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get goalStart => 'ہدف ٹریک کرنا شروع کریں';
 
   @override
-  String get tipsTitle => 'روزانہ مشورے';
+  String get tipsTitle => 'مشورے';
 
   @override
   String get tipCatDiet => 'غذا';
@@ -2035,4 +2035,71 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get guideOther => 'دیگر فون: ترتیبات ← ایپس ← BMI Health ← بیٹری ← بلا پابندی۔ حالیہ ایپس سے ایپ کو سوائپ نہ کریں۔';
+
+  @override
+  String setsReps(int sets, int min, int max) {
+    return '$sets سیٹ × $min–$max ریپس';
+  }
+
+  @override
+  String setsSeconds(int sets, int min, int max) {
+    return '$sets سیٹ × $min–$max سیکنڈ';
+  }
+
+  @override
+  String restBetween(String time) {
+    return 'سیٹس کے درمیان $time آرام';
+  }
+
+  @override
+  String get mistakesTitle => 'عام غلطیاں';
+
+  @override
+  String get alternativesTitle => 'متبادل';
+
+  @override
+  String get muscleDayTitle => 'آج ایک پٹھے کی ورزش';
+
+  @override
+  String get dayChest => 'سینہ';
+
+  @override
+  String get dayBack => 'کمر';
+
+  @override
+  String get dayShoulders => 'کندھے';
+
+  @override
+  String get dayArms => 'بازو';
+
+  @override
+  String get dayLegs => 'ٹانگیں';
+
+  @override
+  String get dayGlutes => 'کولہے';
+
+  @override
+  String get dayCore => 'پیٹ';
+
+  @override
+  String dayWorkout(String day) {
+    return '$day کی ورزش';
+  }
+
+  @override
+  String planSummary(int count, int sets, int minutes) {
+    return '$count ورزشیں · $sets سیٹ · تقریباً $minutes منٹ';
+  }
+
+  @override
+  String get jointFriendlyNote => 'آپ کے بی ایم آئی کے مطابق جوڑوں کے لیے آسان انتخاب: کودنے والی ورزشیں شامل نہیں۔';
+
+  @override
+  String get planBasedOn => 'آپ کے سامان اور تجربے کے مطابق۔ طریقہ اور مشوروں کے لیے ورزش پر ٹیپ کریں۔';
+
+  @override
+  String get startThisWorkout => 'یہ ورزش شروع کریں';
+
+  @override
+  String get noExercisesForDay => 'اس دن کے لیے ابھی آپ کے سامان کے مطابق کوئی ورزش نہیں۔';
 }

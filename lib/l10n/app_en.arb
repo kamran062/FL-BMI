@@ -558,9 +558,9 @@
   "@goalStart": {
     "description": "Button"
   },
-  "tipsTitle": "Daily tips",
+  "tipsTitle": "Tips",
   "@tipsTitle": {
-    "description": "Tips screen title"
+    "description": "Section title"
   },
   "tipCatDiet": "Diet",
   "@tipCatDiet": {
@@ -1836,7 +1836,7 @@
   },
   "recommended": "Recommended",
   "@recommended": {
-    "description": "Badge on the suggested program"
+    "description": "Section title on exercise detail"
   },
   "suggestionIncrease": "Try {weight} × {reps}",
   "@suggestionIncrease": {
@@ -2947,5 +2947,135 @@
   "guideOther": "Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don't optimise\"). Don't swipe the app away from recent apps.",
   "@guideOther": {
     "description": "Brand guide"
+  },
+  "setsReps": "{sets} sets × {min}–{max} reps",
+  "@setsReps": {
+    "description": "Prescription",
+    "placeholders": {
+      "sets": {
+        "type": "int",
+        "example": "3"
+      },
+      "min": {
+        "type": "int",
+        "example": "8"
+      },
+      "max": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "setsSeconds": "{sets} sets × {min}–{max} seconds",
+  "@setsSeconds": {
+    "description": "Prescription for holds",
+    "placeholders": {
+      "sets": {
+        "type": "int",
+        "example": "3"
+      },
+      "min": {
+        "type": "int",
+        "example": "20"
+      },
+      "max": {
+        "type": "int",
+        "example": "45"
+      }
+    }
+  },
+  "restBetween": "Rest {time} between sets",
+  "@restBetween": {
+    "description": "Prescription rest",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "1:30"
+      }
+    }
+  },
+  "mistakesTitle": "Common mistakes",
+  "@mistakesTitle": {
+    "description": "Section title"
+  },
+  "alternativesTitle": "Alternatives",
+  "@alternativesTitle": {
+    "description": "Section title"
+  },
+  "muscleDayTitle": "Train a muscle today",
+  "@muscleDayTitle": {
+    "description": "Train screen section"
+  },
+  "dayChest": "Chest",
+  "@dayChest": {
+    "description": "Muscle day"
+  },
+  "dayBack": "Back",
+  "@dayBack": {
+    "description": "Muscle day"
+  },
+  "dayShoulders": "Shoulders",
+  "@dayShoulders": {
+    "description": "Muscle day"
+  },
+  "dayArms": "Arms",
+  "@dayArms": {
+    "description": "Muscle day"
+  },
+  "dayLegs": "Legs",
+  "@dayLegs": {
+    "description": "Muscle day"
+  },
+  "dayGlutes": "Glutes",
+  "@dayGlutes": {
+    "description": "Muscle day"
+  },
+  "dayCore": "Core",
+  "@dayCore": {
+    "description": "Muscle day"
+  },
+  "dayWorkout": "{day} workout",
+  "@dayWorkout": {
+    "description": "Plan title",
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "Chest"
+      }
+    }
+  },
+  "planSummary": "{count} exercises · {sets} sets · about {minutes} min",
+  "@planSummary": {
+    "description": "Plan summary",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      },
+      "sets": {
+        "type": "int",
+        "example": "16"
+      },
+      "minutes": {
+        "type": "int",
+        "example": "45"
+      }
+    }
+  },
+  "jointFriendlyNote": "Joint-friendly picks based on your BMI: no jumping moves.",
+  "@jointFriendlyNote": {
+    "description": "Shown when BMI ≥ 30"
+  },
+  "planBasedOn": "Matched to your equipment and experience. Tap an exercise for steps and tips.",
+  "@planBasedOn": {
+    "description": "Plan explanation"
+  },
+  "startThisWorkout": "Start this workout",
+  "@startThisWorkout": {
+    "description": "Button"
+  },
+  "noExercisesForDay": "No exercises match your equipment for this day yet.",
+  "@noExercisesForDay": {
+    "description": "Empty plan"
   }
 }

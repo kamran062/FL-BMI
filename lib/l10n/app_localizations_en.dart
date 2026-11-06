@@ -398,7 +398,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get goalStart => 'Start tracking goal';
 
   @override
-  String get tipsTitle => 'Daily tips';
+  String get tipsTitle => 'Tips';
 
   @override
   String get tipCatDiet => 'Diet';
@@ -2046,4 +2046,71 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get guideOther => 'Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don\'t optimise\"). Don\'t swipe the app away from recent apps.';
+
+  @override
+  String setsReps(int sets, int min, int max) {
+    return '$sets sets × $min–$max reps';
+  }
+
+  @override
+  String setsSeconds(int sets, int min, int max) {
+    return '$sets sets × $min–$max seconds';
+  }
+
+  @override
+  String restBetween(String time) {
+    return 'Rest $time between sets';
+  }
+
+  @override
+  String get mistakesTitle => 'Common mistakes';
+
+  @override
+  String get alternativesTitle => 'Alternatives';
+
+  @override
+  String get muscleDayTitle => 'Train a muscle today';
+
+  @override
+  String get dayChest => 'Chest';
+
+  @override
+  String get dayBack => 'Back';
+
+  @override
+  String get dayShoulders => 'Shoulders';
+
+  @override
+  String get dayArms => 'Arms';
+
+  @override
+  String get dayLegs => 'Legs';
+
+  @override
+  String get dayGlutes => 'Glutes';
+
+  @override
+  String get dayCore => 'Core';
+
+  @override
+  String dayWorkout(String day) {
+    return '$day workout';
+  }
+
+  @override
+  String planSummary(int count, int sets, int minutes) {
+    return '$count exercises · $sets sets · about $minutes min';
+  }
+
+  @override
+  String get jointFriendlyNote => 'Joint-friendly picks based on your BMI: no jumping moves.';
+
+  @override
+  String get planBasedOn => 'Matched to your equipment and experience. Tap an exercise for steps and tips.';
+
+  @override
+  String get startThisWorkout => 'Start this workout';
+
+  @override
+  String get noExercisesForDay => 'No exercises match your equipment for this day yet.';
 }

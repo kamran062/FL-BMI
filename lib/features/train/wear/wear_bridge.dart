@@ -134,6 +134,7 @@ class WearBridge {
   /// Null until the first send, so the watch is always reset on app start.
   WearState? _sent;
   int _doneCount = 0;
+  Set<int?> _doneIds = {};
   int _restEndsAt = 0;
 
   int get _done => _workouts.activeSets.where((s) => s.done).length;
@@ -141,15 +142,22 @@ class WearBridge {
   void _onChange() {
     if (_workouts.active == null) {
       _doneCount = 0;
+      _doneIds = {};
       _restEndsAt = 0;
       heartRate.value = null;
     } else {
       final done = _done;
-      // A newly ticked set (phone or watch) starts the rest timer.
+      // A newly ticked set (phone or watch) starts that exercise's rest.
+      final doneSets = _workouts.activeSets.where((s) => s.done).toList();
       if (done > _doneCount) {
-        _restEndsAt = _now().add(const Duration(seconds: restSeconds)).millisecondsSinceEpoch;
+        // The set that was just ticked (any position in the workout).
+        final ticked = doneSets.firstWhere((s) => !_doneIds.contains(s.id),
+            orElse: () => doneSets.last);
+        final rest = _catalog.byId(ticked.exerciseId)?.prescription.restSec ?? restSeconds;
+        _restEndsAt = _now().add(Duration(seconds: rest)).millisecondsSinceEpoch;
       }
       _doneCount = done;
+      _doneIds = {for (final s in doneSets) s.id};
     }
     final s = WearState.of(_workouts, _catalog, locale, restEndsAtMs: _restEndsAt);
     if (s != _sent) {

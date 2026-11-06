@@ -14,6 +14,11 @@ import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/features/train/programs/progression.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
+import 'package:bmi_health/features/train/programs/muscle_day.dart';
+import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
+import 'package:bmi_health/features/body/metrics/body_provider.dart';
+import 'package:bmi_health/app/router.dart';
+import 'package:go_router/go_router.dart';
 
 /// Train tab: start or resume a workout, routines, library, history.
 class TrainScreen extends StatelessWidget {
@@ -113,6 +118,21 @@ class TrainScreen extends StatelessWidget {
                     ),
                   ),
                 ]),
+                const SizedBox(height: 20),
+                OverlineLabel(l.muscleDayTitle),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final d in MuscleDay.values)
+                      ActionChip(
+                        avatar: const Icon(Icons.fitness_center_rounded, size: 16),
+                        label: Text(muscleDayName(l, d)),
+                        onPressed: active != null ? null : () => _showMuscleDay(context, d),
+                      ),
+                  ],
+                ),
                 const SizedBox(height: 20),
                 OverlineLabel(l.programs),
                 const SizedBox(height: 8),
@@ -343,5 +363,120 @@ class _MuscleMapCard extends StatelessWidget {
 
   static String _fmt(double v) =>
       v == v.roundToDouble() ? v.toStringAsFixed(0) : v.toStringAsFixed(1);
+}
+
+String muscleDayName(AppLocalizations l, MuscleDay d) => switch (d) {
+      MuscleDay.chest => l.dayChest,
+      MuscleDay.back => l.dayBack,
+      MuscleDay.shoulders => l.dayShoulders,
+      MuscleDay.arms => l.dayArms,
+      MuscleDay.legs => l.dayLegs,
+      MuscleDay.glutes => l.dayGlutes,
+      MuscleDay.core => l.dayCore,
+    };
+
+/// Builds the day's plan from profile, equipment and BMI, shows it, and
+/// starts it with the recommended sets prefilled.
+void _showMuscleDay(BuildContext context, MuscleDay day) {
+  final profile = context.read<ProfileProvider>().profile;
+  // Latest logged weight, else the one from the profile
+  final weight = context.read<BodyProvider>().latestWeight?.weightKg ??
+      (profile.weightInKg > 0 ? profile.weightInKg : null);
+  final height = profile.heightInCm;
+  final bmi = weight != null && height > 0 ? BmiCalculator.calculate(weight, height) : null;
+  final plan = MuscleDayBuilder.build(
+    day,
+    context.read<ExerciseCatalog>(),
+    equipment: equipmentFor(profile.equipment),
+    experience: profile.experience,
+    bmi: bmi,
+  );
+  showModalBottomSheet<void>(
+    context: context,
+    useRootNavigator: true,
+    isScrollControlled: true,
+    builder: (sheet) => _MuscleDaySheet(plan: plan, parent: context),
+  );
+}
+
+class _MuscleDaySheet extends StatelessWidget {
+  final MuscleDayPlan plan;
+  final BuildContext parent;
+  const _MuscleDaySheet({required this.plan, required this.parent});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    final name = muscleDayName(l, plan.day);
+    return SafeArea(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.85),
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
+          children: [
+            Text(l.dayWorkout(name),
+                style: GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w700)),
+            if (plan.exercises.isNotEmpty)
+              Text(
+                l.planSummary(plan.exercises.length, plan.totalSets, plan.estimatedTime.inMinutes),
+                style: GoogleFonts.inter(fontSize: 14, color: fg3),
+              ),
+            const SizedBox(height: 6),
+            if (plan.jointFriendly)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Row(children: [
+                  const Icon(Icons.favorite_border_rounded, size: 18, color: AppColors.bmiOver),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(l.jointFriendlyNote,
+                        style: GoogleFonts.inter(fontSize: 13, color: AppColors.bmiOver)),
+                  ),
+                ]),
+              ),
+            Text(plan.exercises.isEmpty ? l.noExercisesForDay : l.planBasedOn,
+                style: GoogleFonts.inter(fontSize: 13, color: fg3)),
+            const SizedBox(height: 8),
+            for (final (i, e) in plan.exercises.indexed)
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: CircleAvatar(child: Text('${i + 1}')),
+                title: Text(e.nameIn(l.localeName),
+                    style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                subtitle: Text([
+                  e.prescription.timed
+                      ? l.setsSeconds(e.prescription.sets, e.prescription.repMin, e.prescription.repMax)
+                      : l.setsReps(e.prescription.sets, e.prescription.repMin, e.prescription.repMax),
+                  l.restBetween('${e.prescription.restSec ~/ 60}:${(e.prescription.restSec % 60).toString().padLeft(2, '0')}'),
+                ].join(' · ')),
+                trailing: const Icon(Icons.info_outline_rounded),
+                onTap: () => parent.push(Routes.exercise(e.id)),
+              ),
+            const SizedBox(height: 12),
+            if (plan.exercises.isNotEmpty)
+              AppButton(
+                label: l.startThisWorkout,
+                icon: Icons.play_arrow_rounded,
+                fullWidth: true,
+                onPressed: () async {
+                  final workouts = parent.read<WorkoutProvider>();
+                  Navigator.pop(context);
+                  await workouts.start(
+                    routine: Routine(
+                        name: l.dayWorkout(name),
+                        exerciseIds: [for (final e in plan.exercises) e.id]),
+                    targets: {for (final e in plan.exercises) e.id: e.prescription},
+                  );
+                  if (parent.mounted) parent.push(Routes.workout);
+                },
+              ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 

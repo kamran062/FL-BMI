@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
+import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 
 /// Active workout, workout history and saved routines.
 /// Every change is written to the database immediately, so a workout
@@ -91,31 +92,40 @@ class WorkoutProvider extends ChangeNotifier {
 
   // ── Active workout ────────────────────────────────────────────────────
 
-  Future<void> start({Routine? routine, String name = ''}) async {
+  /// [targets]: recommended sets × reps per exercise (muscle-day plans);
+  /// used only for exercises with no history.
+  Future<void> start({
+    Routine? routine,
+    String name = '',
+    Map<String, Prescription> targets = const {},
+  }) async {
     if (_active != null) return;
     final w = Workout(name: routine?.name ?? name, startedAt: DateTime.now());
     _active = w.copyWith(id: await _db.insertWorkout(w));
     _activeSets = [];
     if (routine != null) {
       for (final id in routine.exerciseIds) {
-        await addExercise(id, notify: false);
+        await addExercise(id, notify: false, target: targets[id]);
       }
     }
     notifyListeners();
   }
 
-  /// Adds an exercise with one set, prefilled from last time.
-  Future<void> addExercise(String exerciseId, {bool notify = true}) async {
+  /// Adds an exercise prefilled from last time, or with the [target]
+  /// number of sets (reps at the bottom of the range) when it's new.
+  Future<void> addExercise(String exerciseId,
+      {bool notify = true, Prescription? target}) async {
     final w = _active;
     if (w == null || activeExercises.contains(exerciseId)) return;
     final order = activeExercises.length;
     final prev = previousSets(exerciseId);
-    final count = prev.isEmpty ? 1 : prev.length;
+    final count = prev.isEmpty ? (target?.sets ?? 1) : prev.length;
     for (var i = 0; i < count; i++) {
       final p = prev.isEmpty ? null : prev[i];
       final s = WorkoutSet(
         workoutId: w.id!, exerciseId: exerciseId, order: order,
-        weightKg: p?.weightKg ?? 0, reps: p?.reps ?? 0,
+        weightKg: p?.weightKg ?? 0,
+        reps: p?.reps ?? (target != null && !target.timed ? target.repMin : 0),
       );
       _activeSets.add(WorkoutSet.fromMap({...s.toMap(), 'id': await _db.insertSet(s)}));
     }

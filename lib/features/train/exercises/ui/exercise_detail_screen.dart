@@ -9,6 +9,8 @@ import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
+import 'package:bmi_health/app/router.dart';
+import 'package:go_router/go_router.dart';
 
 class ExerciseDetailScreen extends StatelessWidget {
   final Exercise exercise;
@@ -102,10 +104,151 @@ class ExerciseDetailScreen extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 12),
+          _RecommendedCard(exercise: exercise),
+          if (exercise.tipsIn(locale).isNotEmpty) ...[
+            const SizedBox(height: 12),
+            _BulletCard(
+              title: l.tipsTitle,
+              items: exercise.tipsIn(locale),
+              icon: Icons.lightbulb_outline_rounded,
+              color: brand,
+            ),
+          ],
+          if (exercise.mistakesIn(locale).isNotEmpty) ...[
+            const SizedBox(height: 12),
+            _BulletCard(
+              title: l.mistakesTitle,
+              items: exercise.mistakesIn(locale),
+              icon: Icons.close_rounded,
+              color: AppColors.bmiObese,
+            ),
+          ],
+          const SizedBox(height: 12),
+          _AlternativesCard(exercise: exercise),
           const SizedBox(height: 16),
           Text(l.wellnessDisclaimer,
               textAlign: TextAlign.center,
               style: GoogleFonts.inter(fontSize: 12, color: fg2)),
+        ],
+      ),
+    );
+  }
+}
+
+String _clock(int seconds) =>
+    '${seconds ~/ 60}:${(seconds % 60).toString().padLeft(2, '0')}';
+
+class _RecommendedCard extends StatelessWidget {
+  final Exercise exercise;
+  const _RecommendedCard({required this.exercise});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final p = exercise.prescription;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg2 = isDark ? AppColors.darkFg2 : AppColors.fg2;
+    return AppCard(
+      padding: 16,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          OverlineLabel(l.recommended),
+          const SizedBox(height: 8),
+          Row(children: [
+            const Icon(Icons.repeat_rounded, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                p.timed
+                    ? l.setsSeconds(p.sets, p.repMin, p.repMax)
+                    : l.setsReps(p.sets, p.repMin, p.repMax),
+                style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+            ),
+          ]),
+          const SizedBox(height: 6),
+          Row(children: [
+            Icon(Icons.timer_outlined, size: 20, color: fg2),
+            const SizedBox(width: 8),
+            Text(l.restBetween(_clock(p.restSec)),
+                style: GoogleFonts.inter(fontSize: 14, color: fg2)),
+          ]),
+        ],
+      ),
+    );
+  }
+}
+
+class _BulletCard extends StatelessWidget {
+  final String title;
+  final List<String> items;
+  final IconData icon;
+  final Color color;
+  const _BulletCard(
+      {required this.title, required this.items, required this.icon, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
+    return AppCard(
+      padding: 16,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          OverlineLabel(title),
+          const SizedBox(height: 4),
+          for (final t in items)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(icon, size: 18, color: color),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(t,
+                        style: GoogleFonts.inter(fontSize: 15, height: 1.45, color: fg1)),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Same-muscle swaps ("machine busy?"), filtered to the user's equipment.
+class _AlternativesCard extends StatelessWidget {
+  final Exercise exercise;
+  const _AlternativesCard({required this.exercise});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final equipment =
+        equipmentFor(context.watch<ProfileProvider>().profile.equipment);
+    final alts = context.read<ExerciseCatalog>().alternativesFor(exercise, available: equipment);
+    if (alts.isEmpty) return const SizedBox.shrink();
+    return AppCard(
+      padding: 8,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 0),
+            child: OverlineLabel(l.alternativesTitle),
+          ),
+          for (final a in alts)
+            ListTile(
+              title: Text(a.nameIn(l.localeName)),
+              subtitle: Text('${l.exerciseEquipment(a.equipment)} · ${l.difficulty(a.difficulty)}'),
+              trailing: const Icon(Icons.chevron_right_rounded),
+              onTap: () => context.push(Routes.exercise(a.id)),
+            ),
         ],
       ),
     );

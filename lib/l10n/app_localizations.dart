@@ -797,10 +797,10 @@ abstract class AppLocalizations {
   /// **'Start tracking goal'**
   String get goalStart;
 
-  /// Tips screen title
+  /// Section title
   ///
   /// In en, this message translates to:
-  /// **'Daily tips'**
+  /// **'Tips'**
   String get tipsTitle;
 
   /// Tip category
@@ -2417,7 +2417,7 @@ abstract class AppLocalizations {
   /// **'Start {day}'**
   String startDay(String day);
 
-  /// Badge on the suggested program
+  /// Section title on exercise detail
   ///
   /// In en, this message translates to:
   /// **'Recommended'**
@@ -3700,6 +3700,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don\'t optimise\"). Don\'t swipe the app away from recent apps.'**
   String get guideOther;
+
+  /// Prescription
+  ///
+  /// In en, this message translates to:
+  /// **'{sets} sets × {min}–{max} reps'**
+  String setsReps(int sets, int min, int max);
+
+  /// Prescription for holds
+  ///
+  /// In en, this message translates to:
+  /// **'{sets} sets × {min}–{max} seconds'**
+  String setsSeconds(int sets, int min, int max);
+
+  /// Prescription rest
+  ///
+  /// In en, this message translates to:
+  /// **'Rest {time} between sets'**
+  String restBetween(String time);
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Common mistakes'**
+  String get mistakesTitle;
+
+  /// Section title
+  ///
+  /// In en, this message translates to:
+  /// **'Alternatives'**
+  String get alternativesTitle;
+
+  /// Train screen section
+  ///
+  /// In en, this message translates to:
+  /// **'Train a muscle today'**
+  String get muscleDayTitle;
+
+  /// Muscle day
+  ///
+  /// In en, this message translates to:
+  /// **'Chest'**
+  String get dayChest;
+
+  /// Muscle day
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get dayBack;
+
+  /// Muscle day
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulders'**
+  String get dayShoulders;
+
+  /// Muscle day
+  ///
+  /// In en, this message translates to:
+  /// **'Arms'**
+  String get dayArms;
+
+  /// Muscle day
+  ///
+  /// In en, this message translates to:
+  /// **'Legs'**
+  String get dayLegs;
+
+  /// Muscle day
+  ///
+  /// In en, this message translates to:
+  /// **'Glutes'**
+  String get dayGlutes;
+
+  /// Muscle day
+  ///
+  /// In en, this message translates to:
+  /// **'Core'**
+  String get dayCore;
+
+  /// Plan title
+  ///
+  /// In en, this message translates to:
+  /// **'{day} workout'**
+  String dayWorkout(String day);
+
+  /// Plan summary
+  ///
+  /// In en, this message translates to:
+  /// **'{count} exercises · {sets} sets · about {minutes} min'**
+  String planSummary(int count, int sets, int minutes);
+
+  /// Shown when BMI ≥ 30
+  ///
+  /// In en, this message translates to:
+  /// **'Joint-friendly picks based on your BMI: no jumping moves.'**
+  String get jointFriendlyNote;
+
+  /// Plan explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Matched to your equipment and experience. Tap an exercise for steps and tips.'**
+  String get planBasedOn;
+
+  /// Button
+  ///
+  /// In en, this message translates to:
+  /// **'Start this workout'**
+  String get startThisWorkout;
+
+  /// Empty plan
+  ///
+  /// In en, this message translates to:
+  /// **'No exercises match your equipment for this day yet.'**
+  String get noExercisesForDay;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -29,7 +29,6 @@ class ActiveWorkoutScreen extends StatefulWidget {
 }
 
 class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
-  static const _restSeconds = 90;
   Timer? _ticker;
   int _restLeft = 0;
 
@@ -184,7 +183,9 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                   _ExerciseBlock(
                     exercise: catalog.byId(id),
                     exerciseId: id,
-                    onSetDone: () => setState(() => _restLeft = _restSeconds),
+                    // Rest suited to the exercise (heavy lifts rest longer)
+                    onSetDone: () => setState(() => _restLeft =
+                        catalog.byId(id)?.prescription.restSec ?? 90),
                   ),
                 const SizedBox(height: 8),
                 AppButton(

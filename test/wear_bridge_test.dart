@@ -69,7 +69,10 @@ void main() {
     expect(w.setsFor('barbell_bench_press').first.done, isTrue);
     final s = ch.sent.last;
     expect(s.setNumber, 2);
-    expect(s.restEndsAtMs, now.add(const Duration(seconds: 90)).millisecondsSinceEpoch);
+    // Rest comes from the exercise (bench press: 150 s as a heavy lift)
+    final rest = catalog.byId('barbell_bench_press')!.prescription.restSec;
+    expect(rest, 150);
+    expect(s.restEndsAtMs, now.add(Duration(seconds: rest)).millisecondsSinceEpoch);
 
     await ch.watch('setDone', null);
     expect(ch.sent.last.allDone, isTrue);
