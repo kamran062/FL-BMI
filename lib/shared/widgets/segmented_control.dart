@@ -55,12 +55,12 @@ class AppSegmentedControl<T> extends StatelessWidget {
                 boxShadow: on
                     ? [
                         BoxShadow(
-                          color: const Color(0xFF0E1411).withOpacity(0.04),
+                          color: const Color(0xFF0E1411).withValues(alpha: 0.04),
                           blurRadius: 3,
                           offset: const Offset(0, 1),
                         ),
                         BoxShadow(
-                          color: const Color(0xFF0E1411).withOpacity(0.06),
+                          color: const Color(0xFF0E1411).withValues(alpha: 0.06),
                           blurRadius: 2,
                           offset: const Offset(0, 1),
                         ),

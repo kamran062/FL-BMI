@@ -66,7 +66,7 @@ class _AppShellState extends State<AppShell> {
     final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
     final border = isDark ? AppColors.darkBorderFaint : AppColors.borderFaint;
     final navBg = (isDark ? AppColors.darkBgSurface : AppColors.bgSurface)
-        .withOpacity(0.85);
+        .withValues(alpha: 0.85);
     final current = widget.navigationShell.currentIndex;
     final l = context.l10n;
     final labels = [l.navToday, l.navBody, l.navTrain, l.navFuel, l.navSettings];

@@ -352,7 +352,7 @@ class _RangeBar extends StatelessWidget {
               top: 0, bottom: 0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: normalColor.withOpacity(0.65),
+                  color: normalColor.withValues(alpha: 0.65),
                   borderRadius: BorderRadius.circular(999),
                 ),
               ),

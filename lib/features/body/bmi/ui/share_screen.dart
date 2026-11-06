@@ -73,7 +73,7 @@ class _ShareScreenState extends State<ShareScreen> {
                     child: Container(
                       width: 36, height: 36,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(Icons.close_rounded,
@@ -160,7 +160,7 @@ class _ShareCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withValues(alpha: 0.5),
             blurRadius: 48,
             offset: const Offset(0, 24),
           ),
@@ -176,7 +176,7 @@ class _ShareCard extends StatelessWidget {
               Container(
                 width: 22, height: 22,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: const Icon(
@@ -203,7 +203,7 @@ class _ShareCard extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 11, fontWeight: FontWeight.w600,
               letterSpacing: tracking(context, 0.12 * 11),
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 4),
@@ -221,7 +221,7 @@ class _ShareCard extends StatelessWidget {
             'kg/m²  ·  ${context.l10n.shareCardToday}',
             style: GoogleFonts.inter(
               fontSize: 13, fontWeight: FontWeight.w500,
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
             ),
           ),
 
@@ -234,7 +234,7 @@ class _ShareCard extends StatelessWidget {
                 : context.l10n.shareCardTracking,
             style: GoogleFonts.inter(
               fontSize: 14, fontWeight: FontWeight.w500,
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               height: 1.4,
             ),
           ),
@@ -243,7 +243,7 @@ class _ShareCard extends StatelessWidget {
             'bmihealth.app',
             style: GoogleFonts.inter(
               fontSize: 11, fontWeight: FontWeight.w500,
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withValues(alpha: 0.5),
             ),
           ),
         ],

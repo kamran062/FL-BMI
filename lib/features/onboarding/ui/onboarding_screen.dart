@@ -177,7 +177,7 @@ class _StepContent extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.brand500.withOpacity(0.12),
+                  color: AppColors.brand500.withValues(alpha: 0.12),
                   blurRadius: 48,
                   offset: const Offset(0, 24),
                 ),

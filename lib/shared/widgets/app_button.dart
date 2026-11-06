@@ -63,12 +63,12 @@ class _AppButtonState extends State<AppButton>
           Colors.white,
           [
             BoxShadow(
-              color: AppColors.brand500.withOpacity(0.3),
+              color: AppColors.brand500.withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
             BoxShadow(
-              color: AppColors.brand500.withOpacity(0.18),
+              color: AppColors.brand500.withValues(alpha: 0.18),
               blurRadius: 2,
               offset: const Offset(0, 1),
             ),
@@ -95,7 +95,7 @@ class _AppButtonState extends State<AppButton>
           <BoxShadow>[],
         ),
       AppButtonVariant.light => (
-          Colors.white.withOpacity(0.18),
+          Colors.white.withValues(alpha: 0.18),
           Colors.white,
           <BoxShadow>[],
         ),

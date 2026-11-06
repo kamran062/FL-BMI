@@ -29,31 +29,31 @@ class AppCard extends StatelessWidget {
       0: <BoxShadow>[],
       1: [
         BoxShadow(
-          color: const Color(0xFF0E1411).withOpacity(isDark ? 0.40 : 0.04),
+          color: const Color(0xFF0E1411).withValues(alpha: isDark ? 0.40 : 0.04),
           blurRadius: 3, offset: const Offset(0, 1),
         ),
         BoxShadow(
-          color: const Color(0xFF0E1411).withOpacity(isDark ? 0.30 : 0.06),
+          color: const Color(0xFF0E1411).withValues(alpha: isDark ? 0.30 : 0.06),
           blurRadius: 2, offset: const Offset(0, 1),
         ),
       ],
       2: [
         BoxShadow(
-          color: const Color(0xFF0E1411).withOpacity(isDark ? 0.40 : 0.05),
+          color: const Color(0xFF0E1411).withValues(alpha: isDark ? 0.40 : 0.05),
           blurRadius: 12, offset: const Offset(0, 4),
         ),
         BoxShadow(
-          color: const Color(0xFF0E1411).withOpacity(isDark ? 0.30 : 0.04),
+          color: const Color(0xFF0E1411).withValues(alpha: isDark ? 0.30 : 0.04),
           blurRadius: 4, offset: const Offset(0, 2),
         ),
       ],
       3: [
         BoxShadow(
-          color: const Color(0xFF0E1411).withOpacity(isDark ? 0.50 : 0.08),
+          color: const Color(0xFF0E1411).withValues(alpha: isDark ? 0.50 : 0.08),
           blurRadius: 32, offset: const Offset(0, 12),
         ),
         BoxShadow(
-          color: const Color(0xFF0E1411).withOpacity(isDark ? 0.35 : 0.05),
+          color: const Color(0xFF0E1411).withValues(alpha: isDark ? 0.35 : 0.05),
           blurRadius: 12, offset: const Offset(0, 4),
         ),
       ],
