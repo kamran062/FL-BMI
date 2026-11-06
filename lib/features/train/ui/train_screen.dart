@@ -20,6 +20,7 @@ import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/app/router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
+import 'package:bmi_health/features/train/workouts/ui/workout_detail_screen.dart';
 
 /// Train tab: start or resume a workout, routines, library, history.
 class TrainScreen extends StatelessWidget {
@@ -152,7 +153,7 @@ class TrainScreen extends StatelessWidget {
                 OverlineLabel(l.programs),
                 const SizedBox(height: 8),
                 SizedBox(
-                  height: 168,
+                  height: 190,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -161,6 +162,7 @@ class TrainScreen extends StatelessWidget {
                           program: p,
                           recommended: i == 0,
                           enabled: active == null,
+                          week: ProgramWeek.of(p, workouts.history, DateTime.now()),
                           onStartDay: (day) => _start(context,
                               routine: Routine(
                                   name: '${p.nameIn(l.localeName)} · ${day.nameIn(l.localeName)}',
@@ -208,6 +210,7 @@ class TrainScreen extends StatelessWidget {
                       child: AppCard(
                         padding: 4,
                         child: ListTile(
+                          onTap: () => WorkoutDetailScreen.open(context, h.workout.id!),
                           title: Text(
                               h.workout.name.isEmpty
                                   ? l.workoutDefaultName
@@ -240,12 +243,14 @@ class _ProgramCard extends StatelessWidget {
   final Program program;
   final bool recommended;
   final bool enabled;
+  final ProgramWeek week;
   final ValueChanged<ProgramDay> onStartDay;
 
   const _ProgramCard({
     required this.program,
     required this.recommended,
     required this.enabled,
+    required this.week,
     required this.onStartDay,
   });
 
@@ -275,17 +280,28 @@ class _ProgramCard extends StatelessWidget {
                   style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w700)),
               Text(l.programDays(program.daysPerWeek),
                   style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+              if (week.started) ...[
+                const SizedBox(height: 6),
+                _WeekDots(week: week, color: brand),
+              ],
               const Spacer(),
               // One row of day buttons; scrolls if a program has many days
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    for (final d in program.days)
+                    for (final (i, d) in program.days.indexed)
                       Padding(
                         padding: const EdgeInsetsDirectional.only(end: 6),
                         child: ActionChip(
                           visualDensity: VisualDensity.compact,
+                          // Trained this week ✓; the next day once started
+                          avatar: week.doneDays.contains(i)
+                              ? Icon(Icons.check_rounded, size: 16, color: brand)
+                              : week.started && i == week.nextDay && !week.complete
+                                  ? Icon(Icons.play_arrow_rounded, size: 16, color: brand)
+                                  : null,
+                          tooltip: week.started && i == week.nextDay ? l.trainNext : null,
                           label: Text(d.nameIn(l.localeName)),
                           onPressed: enabled ? () => onStartDay(d) : null,
                         ),
@@ -298,6 +314,40 @@ class _ProgramCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// "This week 2/3" with one dot per planned day.
+class _WeekDots extends StatelessWidget {
+  final ProgramWeek week;
+  final Color color;
+  const _WeekDots({required this.week, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final sunken = isDark ? AppColors.darkBgSunken : AppColors.bgSunken;
+    return Row(children: [
+      for (var i = 0; i < week.target; i++)
+        Container(
+          width: 10,
+          height: 10,
+          margin: const EdgeInsetsDirectional.only(end: 4),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: i < week.done ? color : sunken,
+          ),
+        ),
+      const SizedBox(width: 4),
+      Flexible(
+        child: Text(
+          week.complete ? l.trainWeekDone : l.trainThisWeek(week.done, week.target),
+          overflow: TextOverflow.ellipsis,
+          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: color),
+        ),
+      ),
+    ]);
   }
 }
 

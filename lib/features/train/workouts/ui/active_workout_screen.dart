@@ -14,6 +14,8 @@ import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/features/train/programs/progression.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
+import 'package:bmi_health/features/train/workouts/rest_alerts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Logs the active workout: exercises, sets (weight × reps), rest timer.
 class ActiveWorkoutScreen extends StatefulWidget {
@@ -28,29 +30,94 @@ class ActiveWorkoutScreen extends StatefulWidget {
   State<ActiveWorkoutScreen> createState() => _ActiveWorkoutScreenState();
 }
 
-class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
+class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen>
+    with WidgetsBindingObserver {
+  static const _askedKey = 'rest_notify_asked';
+
   Timer? _ticker;
-  int _restLeft = 0;
+
+  /// When the current rest ends. Kept as a time (not a countdown) so it
+  /// stays right while the app is in the background.
+  DateTime? _restEnd;
+  bool _inBackground = false;
+
+  int get _restLeft {
+    final end = _restEnd;
+    if (end == null) return 0;
+    final ms = end.difference(DateTime.now()).inMilliseconds;
+    return ms <= 0 ? 0 : (ms / 1000).ceil();
+  }
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     // Drives the elapsed clock and the rest countdown.
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
       setState(() {
-        if (_restLeft > 0) {
-          _restLeft--;
-          if (_restLeft == 0) HapticFeedback.heavyImpact();
+        if (_restEnd != null && _restLeft == 0) {
+          _restEnd = null;
+          if (!_inBackground) HapticFeedback.heavyImpact();
         }
       });
     });
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final l = context.l10n;
+    switch (state) {
+      case AppLifecycleState.paused || AppLifecycleState.hidden:
+        if (_inBackground) return;
+        _inBackground = true;
+        final end = _restEnd;
+        if (end != null && _restLeft > 0) restAlerts.schedule(end, l);
+      case AppLifecycleState.resumed:
+        if (!_inBackground) return;
+        _inBackground = false;
+        restAlerts.cancel();
+        setState(() {});
+      default:
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _ticker?.cancel();
+    if (_restEnd != null) restAlerts.cancel();
     super.dispose();
+  }
+
+  void _startRest(int seconds) {
+    setState(() => _restEnd = DateTime.now().add(Duration(seconds: seconds)));
+    _offerRestAlerts();
+  }
+
+  void _skipRest() {
+    setState(() => _restEnd = null);
+    restAlerts.cancel();
+  }
+
+  /// Once, at the first rest: offer a notification for when rest ends
+  /// with the app closed. Nothing is asked if they're already allowed.
+  Future<void> _offerRestAlerts() async {
+    final l = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      if (prefs.getBool(_askedKey) ?? false) return;
+      await prefs.setBool(_askedKey, true);
+    } catch (_) {
+      return;
+    }
+    if (await restAlerts.allowed() != false || !mounted) return;
+    messenger.showSnackBar(SnackBar(
+      content: Text(l.trainRestNotifyAsk),
+      duration: const Duration(seconds: 8),
+      action: SnackBarAction(label: l.trainAllow, onPressed: restAlerts.request),
+    ));
   }
 
   Future<void> _addExercise() async {
@@ -170,7 +237,7 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                 title: Text(l.restTimer(_clock(Duration(seconds: _restLeft))),
                     style: GoogleFonts.inter(fontWeight: FontWeight.w700)),
                 trailing: TextButton(
-                  onPressed: () => setState(() => _restLeft = 0),
+                  onPressed: _skipRest,
                   child: Text(l.skip2, style: const TextStyle(color: Colors.white)),
                 ),
               ),
@@ -184,8 +251,8 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
                     exercise: catalog.byId(id),
                     exerciseId: id,
                     // Rest suited to the exercise (heavy lifts rest longer)
-                    onSetDone: () => setState(() => _restLeft =
-                        catalog.byId(id)?.prescription.restSec ?? 90),
+                    onSetDone: () =>
+                        _startRest(catalog.byId(id)?.prescription.restSec ?? 90),
                   ),
                 const SizedBox(height: 8),
                 AppButton(

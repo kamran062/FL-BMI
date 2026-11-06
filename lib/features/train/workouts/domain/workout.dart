@@ -155,3 +155,55 @@ abstract final class WorkoutMath {
     };
   }
 }
+
+/// One past workout's result for a single exercise (progress chart).
+class ExerciseSession {
+  final DateTime date;
+
+  /// Heaviest set by estimated 1RM; 0 for bodyweight-only sessions.
+  final double best1RM;
+  final double topWeightKg;
+  final int topReps;
+
+  /// Most reps in one set and total reps (bodyweight progress).
+  final int maxReps;
+  final int totalReps;
+  final double volumeKg;
+
+  const ExerciseSession({
+    required this.date,
+    required this.best1RM,
+    required this.topWeightKg,
+    required this.topReps,
+    required this.maxReps,
+    required this.totalReps,
+    required this.volumeKg,
+  });
+
+  /// [exerciseId]'s completed sets per finished workout, oldest first.
+  static List<ExerciseSession> fromHistory(
+      List<WorkoutSummary> history, String exerciseId) {
+    final out = <ExerciseSession>[];
+    for (final h in history.reversed) {
+      final sets = h.doneSets.where((s) => s.exerciseId == exerciseId).toList();
+      if (sets.isEmpty) continue;
+      var top = sets.first;
+      for (final s in sets) {
+        if (WorkoutMath.estimated1RM(s.weightKg, s.reps) >
+            WorkoutMath.estimated1RM(top.weightKg, top.reps)) {
+          top = s;
+        }
+      }
+      out.add(ExerciseSession(
+        date: h.workout.startedAt,
+        best1RM: WorkoutMath.estimated1RM(top.weightKg, top.reps),
+        topWeightKg: top.weightKg,
+        topReps: top.reps,
+        maxReps: sets.map((s) => s.reps).reduce((a, b) => a > b ? a : b),
+        totalReps: sets.fold(0, (sum, s) => sum + s.reps),
+        volumeKg: WorkoutMath.volume(sets),
+      ));
+    }
+    return out;
+  }
+}

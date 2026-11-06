@@ -233,3 +233,56 @@ abstract final class MuscleVolume {
   static List<Muscle> underTrained(Map<Muscle, double> volume) =>
       [for (final e in volume.entries) if (e.value < low) e.key];
 }
+
+/// This week's progress on a program, read from workout history.
+/// Program workouts are named "program · day" (in either language).
+class ProgramWeek {
+  final int done;
+  final int target;
+
+  /// Days of the program (by index) already trained this week.
+  final Set<int> doneDays;
+
+  /// The day to train next: the one after the last program workout.
+  final int nextDay;
+
+  const ProgramWeek(
+      {required this.done, required this.target, required this.doneDays, required this.nextDay});
+
+  bool get started => done > 0;
+  bool get complete => done >= target;
+
+  /// The program day a workout name belongs to, or null.
+  static int? dayOf(Program p, String workoutName) {
+    for (final (i, d) in p.days.indexed) {
+      for (final locale in p.name.keys) {
+        if (workoutName == '${p.nameIn(locale)} · ${d.nameIn(locale)}') return i;
+      }
+    }
+    return null;
+  }
+
+  /// [history] is newest first; weeks start on Monday.
+  static ProgramWeek of(Program p, List<WorkoutSummary> history, DateTime now) {
+    final weekStart =
+        DateTime(now.year, now.month, now.day).subtract(Duration(days: now.weekday - 1));
+    var done = 0;
+    final days = <int>{};
+    int? last;
+    for (final h in history) {
+      final day = dayOf(p, h.workout.name);
+      if (day == null) continue;
+      last ??= day;
+      if (!h.workout.startedAt.isBefore(weekStart)) {
+        done++;
+        days.add(day);
+      }
+    }
+    return ProgramWeek(
+      done: done,
+      target: p.daysPerWeek,
+      doneDays: days,
+      nextDay: last == null ? 0 : (last + 1) % p.days.length,
+    );
+  }
+}

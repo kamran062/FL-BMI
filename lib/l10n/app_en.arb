@@ -3405,5 +3405,147 @@
         "example": "5"
       }
     }
+  },
+  "trainRestChannel": "Rest timer",
+  "@trainRestChannel": {
+    "description": "Notification channel name"
+  },
+  "trainRestCountdownTitle": "Resting",
+  "@trainRestCountdownTitle": {
+    "description": "Ongoing notification while resting"
+  },
+  "trainRestCountdownBody": "Your next set starts when the timer ends.",
+  "@trainRestCountdownBody": {
+    "description": "Ongoing notification body"
+  },
+  "trainRestOverTitle": "Rest is over",
+  "@trainRestOverTitle": {
+    "description": "Notification when rest ends"
+  },
+  "trainRestOverBody": "Time for your next set.",
+  "@trainRestOverBody": {
+    "description": "Notification when rest ends"
+  },
+  "trainRestNotifyAsk": "Get a notification when rest ends while the app is closed?",
+  "@trainRestNotifyAsk": {
+    "description": "One-time offer at the first rest timer"
+  },
+  "trainAllow": "Allow",
+  "@trainAllow": {
+    "description": "Snackbar action"
+  },
+  "trainRename": "Rename",
+  "@trainRename": {
+    "description": "Rename workout"
+  },
+  "trainWorkoutName": "Workout name",
+  "@trainWorkoutName": {
+    "description": "Text field label"
+  },
+  "trainDeleteWorkout": "Delete workout",
+  "@trainDeleteWorkout": {
+    "description": "Tooltip"
+  },
+  "trainDeleteWorkoutConfirm": "Delete this workout? Its sets, volume and records are removed from your history.",
+  "@trainDeleteWorkoutConfirm": {
+    "description": "Confirm dialog"
+  },
+  "trainEditHint": "Tap a set to edit it, swipe left to delete it.",
+  "@trainEditHint": {
+    "description": "Hint on the finished workout screen"
+  },
+  "trainEditSet": "Edit set",
+  "@trainEditSet": {
+    "description": "Dialog title"
+  },
+  "trainSetSaved": "Set updated",
+  "@trainSetSaved": {
+    "description": "Snackbar"
+  },
+  "trainRepsCount": "{count, plural, =1{1 rep} other{{count} reps}}",
+  "@trainRepsCount": {
+    "description": "Bodyweight set",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "trainProgressTitle": "Your progress",
+  "@trainProgressTitle": {
+    "description": "Exercise detail card"
+  },
+  "trainProgressEmpty": "Log this exercise in a workout to see your progress here.",
+  "@trainProgressEmpty": {
+    "description": "Empty state"
+  },
+  "trainBestSet": "Best set",
+  "@trainBestSet": {
+    "description": "Chart choice"
+  },
+  "trainVolume": "Volume",
+  "@trainVolume": {
+    "description": "Chart choice"
+  },
+  "trainMostReps": "Most reps",
+  "@trainMostReps": {
+    "description": "Chart choice for bodyweight moves"
+  },
+  "trainTotalReps": "Total reps",
+  "@trainTotalReps": {
+    "description": "Chart choice for bodyweight moves"
+  },
+  "trainEst1rm": "Estimated 1-rep max {value}",
+  "@trainEst1rm": {
+    "description": "Under the best set",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "101 kg"
+      }
+    }
+  },
+  "trainBestEver": "Best: {value}",
+  "@trainBestEver": {
+    "description": "Best set ever",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "80 kg × 8"
+      }
+    }
+  },
+  "trainSessions": "{count, plural, =1{1 session} other{{count} sessions}}",
+  "@trainSessions": {
+    "description": "Number of logged sessions",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "trainThisWeek": "This week {done}/{target}",
+  "@trainThisWeek": {
+    "description": "Program card",
+    "placeholders": {
+      "done": {
+        "type": "int",
+        "example": "1"
+      },
+      "target": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "trainWeekDone": "Week done",
+  "@trainWeekDone": {
+    "description": "Program card when every day is trained"
+  },
+  "trainNext": "Next",
+  "@trainNext": {
+    "description": "Marks the next program day"
   }
 }
