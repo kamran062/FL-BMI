@@ -740,8 +740,11 @@ class _LogFoodDialogState extends State<_LogFoodDialog> {
     return AlertDialog(
       title: Text(widget.existing == null ? l.logFood : l.fuelEditFood),
       content: SingleChildScrollView(
+        // Room for the floating labels of outlined fields
+        padding: const EdgeInsets.only(top: 8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          spacing: 12,
           children: [
             ..._foodSearch(context),
             TextField(
