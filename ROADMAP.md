@@ -45,6 +45,9 @@ Three signature features set the app apart from typical gym loggers:
 - **Opt-in for sensitive features:** location, camera, cycle tracking and health sync are all off until the user turns them on.
 - **Battery is a feature:** any background work has a measured battery budget.
 - **Not medical advice:** the app gives guidance and shows clear disclaimers. It never diagnoses.
+- **No paid services (decided 2026-11-06):** every feature runs on our own code — on-device logic and bundled data. No AI APIs, no paid servers or billing-enabled cloud (e.g. Firebase Blaze), no paid SDKs or licences. Free, no-billing services are allowed and listed below so they can be reviewed.
+
+**External services in use (all free):** AdMob (ads; pays us), Open Food Facts (barcode lookup, ODbL), OpenStreetMap tiles (timeline map; light use only), Health Connect / HealthKit, Google ML Kit pose detection (on-device), the phone's text-to-speech, Sentry free plan (crash reports; off unless `SENTRY_DSN` is set), Google Play / App Store billing (store takes its fee; no service of ours).
 
 ---
 
@@ -412,7 +415,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 2.2 Movement timeline (signature feature)
 
-> **Status: done (free approach).** `geolocator` stream as a visible Android foreground service started from the app — **no ACCESS_BACKGROUND_LOCATION** (no background-location declaration/video needed; only the foreground-service `location` declaration). ~1 fix/minute, stays ≥5 min within 100 m become visits, trips classed walk/run/vehicle by speed, noisy fixes dropped, named places, OpenStreetMap map with route, day picker, delete day/all, auto-resume on launch, follows today across midnight. Verified on emulator with simulated GPS. **Limits:** stops if the app is swiped away (restarts on next open); OEM battery savers may pause it; OSM's public tile server is for light use — switch to a paid tile provider before scale.
+> **Status: done (free approach).** `geolocator` stream as a visible Android foreground service started from the app — **no ACCESS_BACKGROUND_LOCATION** (no background-location declaration/video needed; only the foreground-service `location` declaration). ~1 fix/minute, stays ≥5 min within 100 m become visits, trips classed walk/run/vehicle by speed, noisy fixes dropped, named places, OpenStreetMap map with route, day picker, delete day/all, auto-resume on launch, follows today across midnight. Verified on emulator with simulated GPS. **Limits:** stops if the app is swiped away (restarts on next open); OEM battery savers may pause it; OSM's public tile server is for light use — if use grows, self-host tiles or limit the map (no paid provider).
 
 **Features**
 - Daily timeline: places visited, arrival and departure times, **time stayed at each place**
@@ -428,7 +431,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Stay detection:** cluster points within ~100 m for ≥ 5 min → a `visit`; between visits → a `trip`
 - **Route simplification:** Douglas-Peucker before saving; raw points kept for at most 24 h
 - Reverse geocoding through the platform `geocoding` package, cached per place
-- Map: `flutter_map` + OpenStreetMap tiles (check the tile usage policy; use a paid tile provider at scale)
+- Map: `flutter_map` + OpenStreetMap tiles (light use per the tile usage policy; self-host if it grows — no paid provider)
 - Tables: `places`, `visits`, `trips`, `trip_points` (simplified), `raw_points` (short-lived)
 - **All location data stays on the device.** It is never sent to analytics, ads or any server.
 
@@ -533,11 +536,11 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 3.5 Premium launch
 
-> **Status: built; needs your accounts to go live.** `functions/` HTTPS function verifies receipts with Google Play (subscriptionsv2 / products) and Apple (App Store Server API) and returns an ES256-signed entitlement; the app verifies it with a bundled public key (no Firebase SDK in the app). Grace period / cancelled-until-expiry handled; entitlement re-checked at least every 35 days; offline keeps premium until then; restore timeout; purchase always acknowledged. Premium removes all ads. Paywall rewritten: only real benefits, store prices only, localised. Hidden until `PREMIUM_VERIFY_URL` + `ENTITLEMENT_PUBLIC_KEY` are set. **To go live:** follow `functions/README.md` (Firebase Blaze project, keys, Play service account, App Store key), create the 3 products in both stores, add Terms of Use + Privacy Policy links to the paywall (Apple requirement). **Decide:** which features (if any) beyond ad removal become premium-only.
+> **Status: built; no server (rewritten 2026-11-06).** Purchases are handled on the device with `in_app_purchase`: premium is granted from the store's purchase stream (purchased / restored), every purchase is completed/acknowledged, the entitlement is stored locally so it works offline, and a restore runs on app start to drop expired subscriptions. The earlier Firebase `functions/` receipt server was removed because it needed a paid (Blaze) plan. **Trade-off:** without a server, a rooted/jailbroken device can fake a purchase; accepted, since premium only removes ads and unlocks extras. Premium removes all ads. Paywall shows only real benefits and store prices; shown when the store returns the products and `TERMS_URL` / `PRIVACY_URL` are set. **To go live:** create the 3 products in Play Console and App Store Connect (free), host Terms of Use + Privacy Policy pages (e.g. free GitHub Pages). **Decide:** which features (if any) beyond ad removal become premium-only.
 - Premium: no ads, all programs, overload suggestions, rep counter, advanced charts, timeline insights
-- Fix the purchase service from the audit: server-side receipt validation (Google Play Developer API / App Store Server API), subscription expiry handling, restore with timeout
+- Subscription expiry handled by restoring from the store; restore with timeout
 - Hide ads for premium users everywhere
-- **Testing:** Play and App Store sandbox purchases, renewals, cancellation, refund, restore on a new device, offline launch with a cached entitlement
+- **Testing:** Play and App Store sandbox purchases, renewals, cancellation, refund, restore on a new device, offline launch with the stored entitlement
 
 ---
 
@@ -564,22 +567,14 @@ Every module in this roadmap is only "done" when it meets all of these.
 - **Extra privacy:** separate opt-in, optional app lock (biometric), never included in backup unless the user chooses it, one-tap delete
 - **Testing:** unit tests for prediction with irregular cycles; privacy review
 
-### 4.4 Food logging, barcode scanner & food photo estimate
+### 4.4 Food logging, barcode scanner & offline food database
 
-> **Status: barcode done; photo estimate built (see 4.5).** EAN/UPC scanning (mobile_scanner 7.0.1 — newer versions need AGP 8.9/SDK 36), Open Food Facts lookup (kcal, kJ fallback, protein, serving size; nonsense values rejected), serving/50/100/200 g or custom grams, logs kcal + protein, last 60 products cached for offline, manual entry fallback for not found / no nutrition / offline, ODbL credit shown. **Still to do:** the 100-local-products accuracy check (Pakistani products are thinly covered in Open Food Facts — expect many "not found"); carbs/fat logging.
-- Food database search and barcode scanning (Open Food Facts API, cached locally)
-- Food photo → estimated calories and macros using a vision AI model. The user always confirms or edits the result.
-- Pakistani / South Asian food entries (roti, daal, biryani, etc.) added to the local database
-- **Testing:** barcode accuracy on 100 local products; photo estimate compared with known portions (shown clearly as an estimate)
+> **Status: barcode done; offline food database replaces the photo estimate.** EAN/UPC scanning (mobile_scanner 7.0.1 — newer versions need AGP 8.9/SDK 36), Open Food Facts lookup (free; kcal, kJ fallback, protein, carbs, fat, serving size; nonsense values rejected), serving/50/100/200 g or custom grams, last 60 products cached for offline, manual entry fallback, ODbL credit shown. Bundled food database (`assets/foods/foods.json`, generated from `tool/foods/`): ~150 common foods with a strong Pakistani / South Asian set (roti, paratha, daal, biryani, karahi, nihari, chai, lassi…), English + Urdu names and portions; search in Log food with a portion multiplier; recent foods first; values marked approximate. **Still to do:** the 100-local-products barcode check (Pakistani products are thinly covered in Open Food Facts); nutrition review of the bundled values.
+- **Testing:** barcode accuracy on 100 local products; spot-check bundled values against a nutrition reference
 
-### 4.5 AI coach
+### 4.5 AI coach — removed
 
-> **Status: built; needs your Anthropic key + deploy.** Firebase functions `coach` and `estimateFood` call Claude Opus 5.5 (`claude-opus-5-5`; effort low for chat, medium for photos; server-side refusal fallback on). Emergencies (chest pain, fainting, self-harm…) get a fixed "contact 1122 / a doctor" reply without calling the AI; system prompt limits it to general fitness, no diagnosis, no extreme diets. Input validation, profile values whitelisted (no prompt injection via profile), 30 chats / 15 photos per install per day via Firestore counters, nothing stored or logged. App: one-time consent dialog naming what is sent, chat kept in memory only, food-photo estimate with per-item selection, "(estimate)" label and a ±20–40 % note. Hidden until `COACH_URL` / `FOOD_PHOTO_URL` are set. **Still required before launch:** the 200-question prompt evaluation set (unsafe + medical questions), Firebase App Check, an Anthropic spend limit, Urdu reply review, and the photo-estimate accuracy check against known portions.
-- Weekly summary written in plain language (English / Urdu)
-- Chat with a coach about workouts and nutrition; can generate or adjust a program
-- Guardrails: no medical diagnosis, an emergency-symptom warning, and the disclaimer
-- Sends only the minimum data needed, with the user's consent; never location or cycle data unless the user asks
-- **Testing:** prompt evaluation set (200+ questions covering unsafe and medical questions), cost per user monitoring, rate limiting
+> **Removed 2026-11-06 (no paid services).** The chat coach and food-photo estimate needed a paid AI API and a paid server, so they were taken out of the app and `functions/`. Coaching now comes from our own on-device logic: overload suggestions (3.2), recovery score (4.1), sleep insights (4.2), weekly recap (5.1), Muscle day / program recommendations and the guided player's voice coach.
 
 ### 4.6 Progress photos
 
@@ -602,12 +597,12 @@ Every module in this roadmap is only "done" when it meets all of these.
 
 ### 5.2 Streaks, badges & challenges
 
-> **Status: done (solo).** Week streak against the profile's days-per-week goal (the running week never breaks it), 10 badges with progress bars (workouts, streaks, PRs, 1,000 kg lifted, 10k steps), Today streak card. Not yet: challenges with friends (needs accounts + a backend).
+> **Status: done (solo).** Week streak against the profile's days-per-week goal (the running week never breaks it), 10 badges with progress bars (workouts, streaks, PRs, 1,000 kg lifted, 10k steps), Today streak card. Out of scope: challenges with friends (would need accounts and a paid backend).
 - Workout streaks, step challenges, PR badges; optional challenges with friends
 
 ### 5.3 Backup & sync (opt-in)
 
-> **Status: backup/restore/export done; live sync not built.** Passphrase-encrypted backup file (PBKDF2-SHA256 200k → AES-256-GCM over gzipped JSON of all tables + prefs), saved anywhere via the share sheet; cycle data and photos only if ticked (photos re-encrypted with the new phone's key on restore); device-specific prefs not copied; wrong passphrase / damaged / foreign / newer-version files refused without touching data; restore replaces data in one transaction and reloads the app live. CSV export of weights, workout sets and food (warns it is unencrypted). Tested: 730 weights + 4,500 sets + 1,440 location points round-trip. **Not built:** automatic background sync between devices (needs accounts + a backend).
+> **Status: backup/restore/export done; live sync not built.** Passphrase-encrypted backup file (PBKDF2-SHA256 200k → AES-256-GCM over gzipped JSON of all tables + prefs), saved anywhere via the share sheet; cycle data and photos only if ticked (photos re-encrypted with the new phone's key on restore); device-specific prefs not copied; wrong passphrase / damaged / foreign / newer-version files refused without touching data; restore replaces data in one transaction and reloads the app live. CSV export of weights, workout sets and food (warns it is unencrypted). Tested: 730 weights + 4,500 sets + 1,440 location points round-trip. **Out of scope:** automatic background sync between devices (would need accounts and a paid backend); moving phones uses the encrypted backup file.
 - End-to-end encrypted backup (e.g. to the user's Google Drive / iCloud, or your own backend)
 - Restore on a new phone; data export as CSV / JSON
 - **Testing:** backup → wipe → restore with large datasets; corrupted backup handling; encryption audit
@@ -639,7 +634,7 @@ Every module in this roadmap is only "done" when it meets all of these.
 | Camera usage description (rep counter) | 3 | Both |
 | Subscription terms, restore button, cancellation info on paywall | 3 | Both |
 | Model releases and video licences on file | 1 | — |
-| Privacy policy covers location, health, camera, AI and backup | Each phase | Both |
+| Privacy policy covers location, health, camera and backup | Each phase | Both |
 
 ---
 
@@ -653,7 +648,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 | Video production cost and time | Phase 1 delay | Film the top 100 exercises first; use licensed stock clips to fill gaps |
 | Wrong form shown in videos | User injury, trust loss | Certified trainers only; a second trainer reviews every clip |
 | Health / location data leak | Legal and trust damage | Data stays on device, no location in logs or analytics, encryption for photos, cycle and backup |
-| AI cost per user | Losses on free users | AI features only in premium, rate limits, cache weekly summaries |
+| Running costs | Losses on free users | No paid services: on-device logic, bundled data, free store billing |
+| Fake purchases on rooted devices | Lost premium revenue | Accepted; premium is mainly ad removal; no server to pay for |
 | Scope too large for one developer | Nothing ships | Ship each phase on its own; feature flags; cut Phase 4–5 items before cutting quality |
 
 ---
@@ -665,8 +661,8 @@ Every module in this roadmap is only "done" when it meets all of these.
 | **0** | Release blockers, architecture, CI | 2–3 weeks | iOS launches, consent works, BMI data migrates safely |
 | **1** | Profile v2, Body, exercise library (human videos), workout tracker, Fuel v1, Today | 6–8 weeks (+ video production in parallel) | 200 clips QA'd, no data loss, closed beta passed |
 | **2** | Steps, movement timeline, walk/run detection, gym check-in, reminders | 8–10 weeks | Battery ≤ 4 %/day, Play declarations approved |
-| **3** | Programs, overload, heatmap, camera rep counter, premium | ~8 weeks | Rep accuracy ≥ 95 %, purchases verified on the server |
-| **4** | Recovery, sleep, cycle tracking, food logging, AI coach, progress photos | 8–10 weeks | Privacy review passed, AI safety evals passed |
+| **3** | Programs, overload, heatmap, camera rep counter, premium | ~8 weeks | Rep accuracy ≥ 95 %, sandbox purchases and restore pass |
+| **4** | Recovery, sleep, cycle tracking, food logging + offline food database, progress photos | 8–10 weeks | Privacy review passed |
 | **5** | Recaps, challenges, backup & sync, wearables | Ongoing | Restore tested on large datasets |
 
 **Total to Phase 3 (full gym + movement app with premium): ~6–7 months for one developer.**
