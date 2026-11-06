@@ -63,7 +63,7 @@ To keep your health data on your device, the App opts out of Android cloud backu
 The food list used to look up calories and macros is built into the App. Searching it works offline and sends nothing anywhere.
 
 ### 1.9 Premium Purchases (optional)
-If you buy Premium, the App sends the store's purchase receipt (purchase token or transaction ID, and the product bought) to our verification service, which checks it with Google Play or Apple and returns a signed confirmation. The service stores nothing and does not receive your name, email, health data or location. Payment details are handled entirely by Google Play or Apple.
+Purchases are made through Google Play or the App Store; they handle payment and we never see your payment details. Your Premium status is checked with the store and kept on your device. The App does not send your purchase to any server of ours.
 
 ### 1.10 Crash Reports (via Sentry)
 If the App crashes or hits a technical error, an anonymous crash report may be sent to Sentry, our crash-reporting service. A report contains:

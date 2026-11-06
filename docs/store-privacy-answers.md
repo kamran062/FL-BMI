@@ -35,24 +35,20 @@ where they choose; we cannot read it, so it is not collection either.
 | **Approximate location** (from IP) | Google AdMob | Ads shown | Advertising | Yes — consent | No |
 | **App interactions, diagnostics** | Google AdMob | Ads shown | Advertising, fraud prevention | Yes — consent | No |
 | **Crash logs, diagnostics** | Sentry | Only if `SENTRY_DSN` is set | App functionality (crash fixing) | No | No |
-| **Other user-generated content** (coach questions) | Our server → Anthropic | Using the AI coach | App functionality | Yes, with consent screen | **Yes** |
-| **Photos** (meal photo) | Our server → Anthropic | Photo calorie estimate | App functionality | Yes, with consent screen | **Yes** |
-| **Health info / fitness info** (age, sex, weight, goal, experience, training days) | Our server → Anthropic | With each coach question | App functionality (personalised answers) | Yes, with consent screen | **Yes** |
 | Barcode number | Open Food Facts | Scanning a product | App functionality | Yes | — (not personal data) |
 | Map area being viewed | OpenStreetMap tile server | Opening the timeline map | App functionality | Yes | See note |
 
 Notes:
 - **Purchases:** handled entirely by Google Play Billing / StoreKit; the
   app sends nothing to us, so purchase history is not collected by us.
-- **Sharing vs collection (Play):** Anthropic, Sentry and the stores act as
+- **Sharing vs collection (Play):** Sentry and the stores act as
   service providers processing on our behalf, so mark these as *collected*,
   not *shared*. **AdMob is collection by a third-party SDK for advertising** —
   mark the advertising ID as *collected* and *shared* (Play) / *Used to
   Track You* (Apple), unless ads run only in non-personalised mode.
 - **Map tiles:** tile requests reveal which area is on screen (like any map).
   Conservative answer: *Approximate location — collected, ephemeral, app
-  functionality*. Switching to a paid tile provider under a DPA doesn't
-  change this answer.
+  functionality*.
 - **Encryption in transit:** yes — every request uses HTTPS.
 - **Deletion:** users can delete all data in the app (uninstalling removes
   it; cycle data and location history have their own delete buttons). Our
