@@ -1,3 +1,4 @@
+import 'package:bmi_health/features/body/metrics/domain/body_metrics.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -49,6 +50,80 @@ void main() {
     expect(app.body.weights.single.weightKg, 82.5);
     expect(app.profile.profile.weight, 82.5);
     expect(find.text('82.5 kg'), findsOneWidget);
+  });
+
+  Future<void> settleIO(WidgetTester tester) async {
+    for (var i = 0; i < 4; i++) {
+      await tester.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 150)));
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('weigh-ins: edit the latest updates profile; delete falls back',
+      (tester) async {
+    final app = await launchApp(tester);
+    await tester.runAsync(() async {
+      await app.body.logWeight(80, at: DateTime(2026, 10, 1, 8));
+      await app.body.logWeight(78, at: DateTime(2026, 11, 1, 8));
+    });
+    await openBody(tester);
+    await tapText(tester, 'Weigh-ins');
+    expect(find.text('80.0 kg'), findsOneWidget);
+    expect(find.text('78.0 kg'), findsWidgets); // card + list
+
+    // Edit the latest (newest is first in the list)
+    await tester.tap(find.byKey(ValueKey('weight-${app.body.weights.last.id}')));
+    await tester.pumpAndSettle();
+    expect(find.text('Edit weigh-in'), findsOneWidget);
+    await tester.enterText(find.byType(TextField), '77.4');
+    await tester.tap(find.text('Save'));
+    await settleIO(tester);
+    expect(app.body.weights.map((w) => w.weightKg), [80, 77.4]);
+    expect(app.body.weights.last.date, DateTime(2026, 11, 1, 8)); // date kept
+    expect(app.profile.profile.weight, 77.4);
+
+    // Delete it: the earlier weigh-in becomes the current weight
+    final latestKey = ValueKey('weight-${app.body.weights.last.id}');
+    await tester.tap(find.descendant(
+        of: find.byKey(latestKey), matching: find.byTooltip('Delete')));
+    await tester.pumpAndSettle();
+    expect(find.text('Delete this weigh-in?'), findsOneWidget);
+    await tester.tap(find.text('Delete').last);
+    await settleIO(tester);
+    expect(app.body.weights.single.weightKg, 80);
+    expect(app.profile.profile.weight, 80);
+  });
+
+  testWidgets('measurements can be edited and deleted from history',
+      (tester) async {
+    final app = await launchApp(tester);
+    await tester.runAsync(() => app.body.addMeasurement(
+        Measurement(date: DateTime(2026, 11, 1), waist: 90, neck: 38)));
+    await openBody(tester);
+    await tapText(tester, 'Measurement history');
+    final key = ValueKey('measurement-${app.body.measurements.single.id}');
+    expect(find.descendant(of: find.byKey(key), matching: find.textContaining('Waist')),
+        findsOneWidget);
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+    // Prefilled with the saved values
+    expect(find.widgetWithText(TextField, '90.0'), findsOneWidget);
+    await tester.enterText(find.widgetWithText(TextField, 'Waist'), '88');
+    await tester.tap(find.text('Save'));
+    await settleIO(tester);
+    expect(app.body.measurements.single.waist, 88);
+    expect(app.body.measurements.single.neck, 38);
+    expect(app.body.measurements.single.date, DateTime(2026, 11, 1));
+
+    await tester.tap(find.descendant(
+        of: find.byKey(key), matching: find.byTooltip('Delete')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Delete').last);
+    await settleIO(tester);
+    expect(app.body.measurements, isEmpty);
   });
 
   testWidgets('weight outside the human range is rejected', (tester) async {

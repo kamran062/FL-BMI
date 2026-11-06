@@ -3405,5 +3405,127 @@
         "example": "5"
       }
     }
+  },
+  "bodyWeighIns": "Weigh-ins",
+  "@bodyWeighIns": {
+    "description": "Button and sheet title: list of all weigh-ins"
+  },
+  "bodyEditWeighIn": "Edit weigh-in",
+  "@bodyEditWeighIn": {
+    "description": "Dialog title when editing a weigh-in"
+  },
+  "bodyDeleteWeighIn": "Delete this weigh-in?",
+  "@bodyDeleteWeighIn": {
+    "description": "Confirm deleting a weigh-in"
+  },
+  "bodyMeasurementHistory": "Measurement history",
+  "@bodyMeasurementHistory": {
+    "description": "Button and sheet title: past measurements"
+  },
+  "bodyDeleteMeasurement": "Delete these measurements?",
+  "@bodyDeleteMeasurement": {
+    "description": "Confirm deleting a measurement session"
+  },
+  "bodyChoosePhotos": "Choose photos",
+  "@bodyChoosePhotos": {
+    "description": "Pick which two progress photos to compare"
+  },
+  "bodyChoosePhotosHint": "Pick any two photos to compare.",
+  "@bodyChoosePhotosHint": {
+    "description": "Hint in the photo picker"
+  },
+  "fuelToday": "Today",
+  "@fuelToday": {
+    "description": "Day switcher label for today"
+  },
+  "fuelYesterday": "Yesterday",
+  "@fuelYesterday": {
+    "description": "Day switcher label for yesterday"
+  },
+  "fuelPreviousDay": "Previous day",
+  "@fuelPreviousDay": {
+    "description": "Tooltip"
+  },
+  "fuelNextDay": "Next day",
+  "@fuelNextDay": {
+    "description": "Tooltip"
+  },
+  "fuelPickDay": "Show day",
+  "@fuelPickDay": {
+    "description": "Date picker title"
+  },
+  "fuelWeekTitle": "Last 7 days",
+  "@fuelWeekTitle": {
+    "description": "Weekly calories chart title"
+  },
+  "fuelWeekAverage": "Avg {kcal} kcal/day",
+  "@fuelWeekAverage": {
+    "description": "Average over logged days",
+    "placeholders": {
+      "kcal": {
+        "type": "int",
+        "example": "1850"
+      }
+    }
+  },
+  "fuelWeekTarget": "Dashed line: your target of {kcal} kcal. Tap a day to open it.",
+  "@fuelWeekTarget": {
+    "description": "Chart legend",
+    "placeholders": {
+      "kcal": {
+        "type": "int",
+        "example": "2000"
+      }
+    }
+  },
+  "fuelEditFood": "Edit food",
+  "@fuelEditFood": {
+    "description": "Dialog title when editing a food entry"
+  },
+  "fuelCarbsField": "Carbs (g, optional)",
+  "@fuelCarbsField": {
+    "description": "Food entry field"
+  },
+  "fuelFatField": "Fat (g, optional)",
+  "@fuelFatField": {
+    "description": "Food entry field"
+  },
+  "fuelMacroError": "Grams must be between 0 and 1000.",
+  "@fuelMacroError": {
+    "description": "Validation error for macro fields"
+  },
+  "fuelMacroP": "P {g} g",
+  "@fuelMacroP": {
+    "description": "Protein short form in a food row",
+    "placeholders": {
+      "g": {
+        "type": "String",
+        "example": "25"
+      }
+    }
+  },
+  "fuelMacroC": "C {g} g",
+  "@fuelMacroC": {
+    "description": "Carbs short form in a food row",
+    "placeholders": {
+      "g": {
+        "type": "String",
+        "example": "60"
+      }
+    }
+  },
+  "fuelMacroF": "F {g} g",
+  "@fuelMacroF": {
+    "description": "Fat short form in a food row",
+    "placeholders": {
+      "g": {
+        "type": "String",
+        "example": "12"
+      }
+    }
+  },
+  "bodyCompareThese": "Compare these two",
+  "@bodyCompareThese": {
+    "description": "Button in the photo picker"
   }
 }

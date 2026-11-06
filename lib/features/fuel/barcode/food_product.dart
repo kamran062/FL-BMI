@@ -8,6 +8,8 @@ class FoodProduct {
   final String name;
   final double kcalPer100g;
   final double? proteinPer100g;
+  final double? carbsPer100g;
+  final double? fatPer100g;
 
   /// Grams in one serving, when the label gives it.
   final double? servingG;
@@ -17,13 +19,19 @@ class FoodProduct {
     required this.name,
     required this.kcalPer100g,
     this.proteinPer100g,
+    this.carbsPer100g,
+    this.fatPer100g,
     this.servingG,
   });
 
   int kcalFor(double grams) => (kcalPer100g * grams / 100).round();
-  double? proteinFor(double grams) => proteinPer100g == null
+  double? proteinFor(double grams) => _for(proteinPer100g, grams);
+  double? carbsFor(double grams) => _for(carbsPer100g, grams);
+  double? fatFor(double grams) => _for(fatPer100g, grams);
+
+  static double? _for(double? per100g, double grams) => per100g == null
       ? null
-      : (proteinPer100g! * grams / 100 * 10).roundToDouble() / 10;
+      : (per100g * grams / 100 * 10).roundToDouble() / 10;
 
   /// Parses an Open Food Facts v2 product. Null when there is no usable
   /// energy value (many entries are incomplete).
@@ -53,6 +61,8 @@ class FoodProduct {
       name: name.isEmpty ? barcode : name,
       kcalPer100g: (kcal * 10).roundToDouble() / 10,
       proteinPer100g: num_('proteins_100g'),
+      carbsPer100g: num_('carbohydrates_100g'),
+      fatPer100g: num_('fat_100g'),
       servingG: serving is num && serving > 0 && serving < 2000
           ? serving.toDouble()
           : (serving is String ? double.tryParse(serving) : null),
@@ -64,6 +74,8 @@ class FoodProduct {
         'name': name,
         'kcal': kcalPer100g,
         'protein': proteinPer100g,
+        'carbs': carbsPer100g,
+        'fat': fatPer100g,
         'serving': servingG,
       };
 
@@ -72,6 +84,8 @@ class FoodProduct {
         name: j['name'] as String,
         kcalPer100g: (j['kcal'] as num).toDouble(),
         proteinPer100g: (j['protein'] as num?)?.toDouble(),
+        carbsPer100g: (j['carbs'] as num?)?.toDouble(),
+        fatPer100g: (j['fat'] as num?)?.toDouble(),
         servingG: (j['serving'] as num?)?.toDouble(),
       );
 }

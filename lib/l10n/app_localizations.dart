@@ -4114,6 +4114,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Day {day} complete. Well done!'**
   String sayDayComplete(int day);
+
+  /// Button and sheet title: list of all weigh-ins
+  ///
+  /// In en, this message translates to:
+  /// **'Weigh-ins'**
+  String get bodyWeighIns;
+
+  /// Dialog title when editing a weigh-in
+  ///
+  /// In en, this message translates to:
+  /// **'Edit weigh-in'**
+  String get bodyEditWeighIn;
+
+  /// Confirm deleting a weigh-in
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this weigh-in?'**
+  String get bodyDeleteWeighIn;
+
+  /// Button and sheet title: past measurements
+  ///
+  /// In en, this message translates to:
+  /// **'Measurement history'**
+  String get bodyMeasurementHistory;
+
+  /// Confirm deleting a measurement session
+  ///
+  /// In en, this message translates to:
+  /// **'Delete these measurements?'**
+  String get bodyDeleteMeasurement;
+
+  /// Pick which two progress photos to compare
+  ///
+  /// In en, this message translates to:
+  /// **'Choose photos'**
+  String get bodyChoosePhotos;
+
+  /// Hint in the photo picker
+  ///
+  /// In en, this message translates to:
+  /// **'Pick any two photos to compare.'**
+  String get bodyChoosePhotosHint;
+
+  /// Day switcher label for today
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get fuelToday;
+
+  /// Day switcher label for yesterday
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get fuelYesterday;
+
+  /// Tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Previous day'**
+  String get fuelPreviousDay;
+
+  /// Tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Next day'**
+  String get fuelNextDay;
+
+  /// Date picker title
+  ///
+  /// In en, this message translates to:
+  /// **'Show day'**
+  String get fuelPickDay;
+
+  /// Weekly calories chart title
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get fuelWeekTitle;
+
+  /// Average over logged days
+  ///
+  /// In en, this message translates to:
+  /// **'Avg {kcal} kcal/day'**
+  String fuelWeekAverage(int kcal);
+
+  /// Chart legend
+  ///
+  /// In en, this message translates to:
+  /// **'Dashed line: your target of {kcal} kcal. Tap a day to open it.'**
+  String fuelWeekTarget(int kcal);
+
+  /// Dialog title when editing a food entry
+  ///
+  /// In en, this message translates to:
+  /// **'Edit food'**
+  String get fuelEditFood;
+
+  /// Food entry field
+  ///
+  /// In en, this message translates to:
+  /// **'Carbs (g, optional)'**
+  String get fuelCarbsField;
+
+  /// Food entry field
+  ///
+  /// In en, this message translates to:
+  /// **'Fat (g, optional)'**
+  String get fuelFatField;
+
+  /// Validation error for macro fields
+  ///
+  /// In en, this message translates to:
+  /// **'Grams must be between 0 and 1000.'**
+  String get fuelMacroError;
+
+  /// Protein short form in a food row
+  ///
+  /// In en, this message translates to:
+  /// **'P {g} g'**
+  String fuelMacroP(String g);
+
+  /// Carbs short form in a food row
+  ///
+  /// In en, this message translates to:
+  /// **'C {g} g'**
+  String fuelMacroC(String g);
+
+  /// Fat short form in a food row
+  ///
+  /// In en, this message translates to:
+  /// **'F {g} g'**
+  String fuelMacroF(String g);
+
+  /// Button in the photo picker
+  ///
+  /// In en, this message translates to:
+  /// **'Compare these two'**
+  String get bodyCompareThese;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

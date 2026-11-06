@@ -14,7 +14,7 @@ class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 10;
+  static const schemaVersion = 11;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -188,6 +188,11 @@ class DatabaseHelper {
         )
       ''');
     },
+    // 10 → 11: optional carbs and fat per food entry
+    (db) async {
+      await db.execute('ALTER TABLE food_logs ADD COLUMN carbs_g REAL');
+      await db.execute('ALTER TABLE food_logs ADD COLUMN fat_g REAL');
+    },
   ];
 
   DatabaseHelper._(this._factory, this._path);
@@ -296,6 +301,9 @@ class DatabaseHelper {
     return database.insert('weight_logs', log.toMap());
   }
 
+  Future<void> updateWeightLog(WeightLog log) async => (await db).update(
+      'weight_logs', log.toMap(), where: 'id = ?', whereArgs: [log.id]);
+
   Future<void> deleteWeightLog(int id) async {
     final database = await db;
     await database.delete('weight_logs', where: 'id = ?', whereArgs: [id]);
@@ -312,6 +320,9 @@ class DatabaseHelper {
     final database = await db;
     return database.insert('measurements', m.toMap());
   }
+
+  Future<void> updateMeasurement(Measurement m) async => (await db).update(
+      'measurements', m.toMap(), where: 'id = ?', whereArgs: [m.id]);
 
   Future<void> deleteMeasurement(int id) async {
     final database = await db;
@@ -396,8 +407,20 @@ class DatabaseHelper {
     return rows.map(FoodLog.fromMap).toList();
   }
 
+  /// Entries with `from <= date < to`, oldest first.
+  Future<List<FoodLog>> getFoodBetween(DateTime from, DateTime to) async {
+    final rows = await (await db).query('food_logs',
+        where: 'date >= ? AND date < ?',
+        whereArgs: [from.millisecondsSinceEpoch, to.millisecondsSinceEpoch],
+        orderBy: 'date ASC');
+    return rows.map(FoodLog.fromMap).toList();
+  }
+
   Future<int> insertFood(FoodLog f) async =>
       (await db).insert('food_logs', f.toMap());
+
+  Future<void> updateFood(FoodLog f) async => (await db)
+      .update('food_logs', f.toMap(), where: 'id = ?', whereArgs: [f.id]);
 
   Future<void> deleteFood(int id) async =>
       (await db).delete('food_logs', where: 'id = ?', whereArgs: [id]);
@@ -406,6 +429,14 @@ class DatabaseHelper {
     final rows = await (await db).rawQuery(
         'SELECT COALESCE(SUM(ml), 0) AS total FROM water_logs WHERE date >= ?',
         [from.millisecondsSinceEpoch]);
+    return (rows.first['total'] as num).toInt();
+  }
+
+  Future<int> getWaterBetween(DateTime from, DateTime to) async {
+    final rows = await (await db).rawQuery(
+        'SELECT COALESCE(SUM(ml), 0) AS total FROM water_logs '
+        'WHERE date >= ? AND date < ?',
+        [from.millisecondsSinceEpoch, to.millisecondsSinceEpoch]);
     return (rows.first['total'] as num).toInt();
   }
 

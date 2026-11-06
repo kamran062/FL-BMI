@@ -83,13 +83,15 @@ abstract final class Nutrition {
   }
 }
 
-/// A quick calorie entry.
+/// A quick calorie entry. Macros are optional.
 class FoodLog {
   final int? id;
   final DateTime date;
   final String name;
   final int kcal;
   final double? proteinG;
+  final double? carbsG;
+  final double? fatG;
 
   const FoodLog({
     this.id,
@@ -97,6 +99,8 @@ class FoodLog {
     this.name = '',
     required this.kcal,
     this.proteinG,
+    this.carbsG,
+    this.fatG,
   });
 
   Map<String, dynamic> toMap() => {
@@ -105,6 +109,8 @@ class FoodLog {
         'name': name,
         'kcal': kcal,
         'protein_g': proteinG,
+        'carbs_g': carbsG,
+        'fat_g': fatG,
       };
 
   factory FoodLog.fromMap(Map<String, dynamic> m) => FoodLog(
@@ -113,5 +119,7 @@ class FoodLog {
         name: m['name'] as String? ?? '',
         kcal: m['kcal'] as int,
         proteinG: (m['protein_g'] as num?)?.toDouble(),
+        carbsG: (m['carbs_g'] as num?)?.toDouble(),
+        fatG: (m['fat_g'] as num?)?.toDouble(),
       );
 }

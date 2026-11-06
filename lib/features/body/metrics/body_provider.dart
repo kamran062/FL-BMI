@@ -31,6 +31,13 @@ class BodyProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateWeight(WeightLog log) async {
+    if (log.id == null) return;
+    await _db.updateWeightLog(log);
+    _weights = await _db.getWeightLogs();
+    notifyListeners();
+  }
+
   Future<void> deleteWeight(int id) async {
     await _db.deleteWeightLog(id);
     _weights = await _db.getWeightLogs();
@@ -40,6 +47,15 @@ class BodyProvider extends ChangeNotifier {
   Future<void> addMeasurement(Measurement m) async {
     if (m.isEmpty) return;
     await _db.insertMeasurement(m);
+    _measurements = await _db.getMeasurements();
+    notifyListeners();
+  }
+
+  /// Saves an edited measurement; one with every field cleared is deleted.
+  Future<void> updateMeasurement(Measurement m) async {
+    if (m.id == null) return;
+    if (m.isEmpty) return deleteMeasurement(m.id!);
+    await _db.updateMeasurement(m);
     _measurements = await _db.getMeasurements();
     notifyListeners();
   }

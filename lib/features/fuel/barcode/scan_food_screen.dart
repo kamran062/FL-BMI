@@ -90,6 +90,8 @@ class ScanFoodScreenState extends State<ScanFoodScreen> {
           kcal: p.kcalFor(grams),
           name: p.name,
           proteinG: p.proteinFor(grams),
+          carbsG: p.carbsFor(grams),
+          fatG: p.fatFor(grams),
         );
     messenger.showSnackBar(SnackBar(content: Text(l.foodLogged(p.name))));
     widget.onClose();
