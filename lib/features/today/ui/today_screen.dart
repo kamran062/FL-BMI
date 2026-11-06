@@ -26,7 +26,6 @@ import 'package:bmi_health/features/movement/ui/timeline_screen.dart';
 import 'package:bmi_health/features/recovery/ui/recovery_card.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/cycle/ui/cycle_screen.dart';
-import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/features/progress/domain/achievements.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
@@ -40,7 +39,6 @@ class TodayScreen extends StatelessWidget {
   final VoidCallback onOpenTips;
   final VoidCallback onOpenTimeline;
   final VoidCallback onOpenCycle;
-  final VoidCallback onOpenCoach;
   final VoidCallback onOpenProgress;
 
   const TodayScreen({
@@ -52,7 +50,6 @@ class TodayScreen extends StatelessWidget {
     required this.onOpenTips,
     required this.onOpenTimeline,
     required this.onOpenCycle,
-    required this.onOpenCoach,
     required this.onOpenProgress,
   });
 
@@ -135,20 +132,6 @@ class TodayScreen extends StatelessWidget {
                 const SizedBox(height: 14),
                 const _ChallengeCard(),
                 _StreakCard(onOpen: onOpenProgress),
-                if (context.read<AiClient>().coachEnabled)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 14),
-                    child: AppCard(
-                      padding: 4,
-                      onTap: onOpenCoach,
-                      child: ListTile(
-                        leading: const Icon(Icons.auto_awesome_rounded),
-                        title: Text(l.coachTitle),
-                        subtitle: Text(l.coachCardBody),
-                        trailing: const Icon(Icons.chevron_right_rounded),
-                      ),
-                    ),
-                  ),
                 const RecoveryCard(),
                 _CycleCard(onOpen: onOpenCycle),
                 const _StepsCard(),

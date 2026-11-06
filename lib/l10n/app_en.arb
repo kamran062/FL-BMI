@@ -2554,84 +2554,6 @@
       }
     }
   },
-  "coachTitle": "AI coach",
-  "@coachTitle": {
-    "description": "Coach screen title and card"
-  },
-  "coachCardBody": "Ask about training, food or recovery.",
-  "@coachCardBody": {
-    "description": "Today card text"
-  },
-  "coachHint": "Ask a question…",
-  "@coachHint": {
-    "description": "Chat input hint"
-  },
-  "coachWelcome": "Hi! I can help with workouts, nutrition, recovery and habits. I'm not a doctor, so for medical questions please see a professional.",
-  "@coachWelcome": {
-    "description": "First coach message"
-  },
-  "aiConsentTitle": "Before you start",
-  "@aiConsentTitle": {
-    "description": "Consent dialog title"
-  },
-  "aiConsentBody": "Your questions, and a short profile summary (age, sex, weight, goal, experience, training days), are sent to our server and to Anthropic's Claude AI to write answers. Photos you send for a calorie estimate are sent the same way. Nothing is stored or used for ads. Answers are general guidance, not medical advice.",
-  "@aiConsentBody": {
-    "description": "Consent dialog text"
-  },
-  "aiAgree": "I agree",
-  "@aiAgree": {
-    "description": "Consent button"
-  },
-  "aiLimit": "You've reached today's limit. Try again tomorrow.",
-  "@aiLimit": {
-    "description": "Rate limit message"
-  },
-  "aiUnavailable": "Couldn't reach the coach. Check your connection and try again.",
-  "@aiUnavailable": {
-    "description": "Network error"
-  },
-  "coachThinking": "Thinking…",
-  "@coachThinking": {
-    "description": "Shown while waiting"
-  },
-  "photoEstimate": "Photo estimate",
-  "@photoEstimate": {
-    "description": "Fuel button"
-  },
-  "photoEstimating": "Estimating calories…",
-  "@photoEstimating": {
-    "description": "Progress"
-  },
-  "photoNotFood": "That doesn't look like food. Try another photo.",
-  "@photoNotFood": {
-    "description": "Not food"
-  },
-  "photoEstimateNote": "AI estimate from a photo — portions can be off by 20–40%. Adjust if you know better.",
-  "@photoEstimateNote": {
-    "description": "Estimate disclaimer"
-  },
-  "photoConfidenceLow": "Low confidence",
-  "@photoConfidenceLow": {
-    "description": "Confidence label"
-  },
-  "photoTotal": "Total: {kcal} kcal",
-  "@photoTotal": {
-    "description": "Total of selected items",
-    "placeholders": {
-      "kcal": {
-        "type": "int",
-        "example": "640"
-      }
-    }
-  },
-  "logSelected": "Log selected",
-  "@logSelected": {
-    "description": "Button"
-  },
-  "estimateSuffix": "(estimate)",
-  "@estimateSuffix": {
-    "description": "Added after food names logged from a photo"
-  },
   "progressTitle": "Progress",
   "@progressTitle": {
     "description": "Progress screen title"
@@ -3851,5 +3773,47 @@
         "example": "12"
       }
     }
+  },
+  "foodsSearch": "Search foods (e.g. roti, biryani)",
+  "@foodsSearch": {
+    "description": "Search field in the Log food dialog"
+  },
+  "foodsRecent": "Recent",
+  "@foodsRecent": {
+    "description": "Header above recently logged foods"
+  },
+  "foodsNoMatch": "Not in the list. Enter the values below.",
+  "@foodsNoMatch": {
+    "description": "Search found nothing"
+  },
+  "foodsPortionKcal": "{portion} · {kcal} kcal",
+  "@foodsPortionKcal": {
+    "description": "Food suggestion subtitle",
+    "placeholders": {
+      "portion": {
+        "type": "String",
+        "example": "1 medium (40 g)"
+      },
+      "kcal": {
+        "type": "int",
+        "example": "120"
+      }
+    }
+  },
+  "foodsCustom": "Custom",
+  "@foodsCustom": {
+    "description": "Portion chip to enter grams"
+  },
+  "foodsGrams": "Grams eaten",
+  "@foodsGrams": {
+    "description": "Custom portion field"
+  },
+  "foodsApprox": "Values are approximate.",
+  "@foodsApprox": {
+    "description": "Note under a picked food"
+  },
+  "foodsClear": "Clear food",
+  "@foodsClear": {
+    "description": "Tooltip to unpick a food"
   }
 }

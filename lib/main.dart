@@ -22,7 +22,6 @@ import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/body/photos/photo_vault.dart';
 import 'package:bmi_health/core/storage/backup_exclusion.dart';
-import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 
@@ -78,7 +77,6 @@ void main() async {
       recovery: recovery,
       cycle: cycle,
       photos: photos,
-      ai: AiClient(),
       db: db,
       // Wear OS companion; a no-op on iOS and without a watch
       wear: WearBridge(workouts, catalog),

@@ -24,7 +24,6 @@ import 'package:bmi_health/features/recovery/recovery_provider.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/body/photos/photo_vault.dart';
-import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 
@@ -59,7 +58,6 @@ Future<AppState> launchApp(
   StepsSource? steps,
   RecoverySource? recovery,
   AppLock? lock,
-  AiClient? ai,
   WearChannel? wear,
 }) async {
   // iPhone 14-sized screen instead of the default 800×600 test surface
@@ -116,8 +114,6 @@ Future<AppState> launchApp(
     recovery: recoveryProvider,
     cycle: cycle,
     photos: photos,
-    // Unconfigured by default: AI features hidden, as in builds without URLs
-    ai: ai ?? AiClient(coachUrl: '', foodUrl: ''),
     db: db,
     wear: WearBridge(workouts, catalog, channel: wear ?? NoWatchChannel()),
     challenges: challenges,

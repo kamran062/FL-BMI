@@ -59,8 +59,8 @@ Progress photos you add are encrypted and stored in the App's private storage on
 ### 1.7 Device Backups
 To keep your health data on your device, the App opts out of Android cloud backup and device-to-device transfer, and excludes its data from iCloud device backups. This means your App data is not restored automatically when you move to a new phone. Instead, you can create an encrypted backup file in Settings, protected by a passphrase only you know, and save it wherever you choose; we cannot open it. Spreadsheet (CSV) exports are not encrypted.
 
-### 1.8 AI Coach and Food-Photo Estimates (optional)
-If you use the AI coach or a food-photo estimate, the App first asks for your agreement. It then sends your question (and the conversation so far in that screen) or the meal photo, together with a short profile summary — age, sex, weight, goal, experience and training days, but not your name — to our server, which forwards it to Anthropic's Claude AI to produce the answer. A random app-install ID is sent to apply daily usage limits. We do not store your questions, answers or photos, and Anthropic processes them under its commercial terms (it does not use them to train its models). Answers are general wellness guidance, not medical advice.
+### 1.8 Food Search
+The food list used to look up calories and macros is built into the App. Searching it works offline and sends nothing anywhere.
 
 ### 1.9 Premium Purchases (optional)
 If you buy Premium, the App sends the store's purchase receipt (purchase token or transaction ID, and the product bought) to our verification service, which checks it with Google Play or Apple and returns a signed confirmation. The service stores nothing and does not receive your name, email, health data or location. Payment details are handled entirely by Google Play or Apple.

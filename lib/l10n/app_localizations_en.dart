@@ -1769,62 +1769,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get coachTitle => 'AI coach';
-
-  @override
-  String get coachCardBody => 'Ask about training, food or recovery.';
-
-  @override
-  String get coachHint => 'Ask a question…';
-
-  @override
-  String get coachWelcome => 'Hi! I can help with workouts, nutrition, recovery and habits. I\'m not a doctor, so for medical questions please see a professional.';
-
-  @override
-  String get aiConsentTitle => 'Before you start';
-
-  @override
-  String get aiConsentBody => 'Your questions, and a short profile summary (age, sex, weight, goal, experience, training days), are sent to our server and to Anthropic\'s Claude AI to write answers. Photos you send for a calorie estimate are sent the same way. Nothing is stored or used for ads. Answers are general guidance, not medical advice.';
-
-  @override
-  String get aiAgree => 'I agree';
-
-  @override
-  String get aiLimit => 'You\'ve reached today\'s limit. Try again tomorrow.';
-
-  @override
-  String get aiUnavailable => 'Couldn\'t reach the coach. Check your connection and try again.';
-
-  @override
-  String get coachThinking => 'Thinking…';
-
-  @override
-  String get photoEstimate => 'Photo estimate';
-
-  @override
-  String get photoEstimating => 'Estimating calories…';
-
-  @override
-  String get photoNotFood => 'That doesn\'t look like food. Try another photo.';
-
-  @override
-  String get photoEstimateNote => 'AI estimate from a photo — portions can be off by 20–40%. Adjust if you know better.';
-
-  @override
-  String get photoConfidenceLow => 'Low confidence';
-
-  @override
-  String photoTotal(int kcal) {
-    return 'Total: $kcal kcal';
-  }
-
-  @override
-  String get logSelected => 'Log selected';
-
-  @override
-  String get estimateSuffix => '(estimate)';
-
-  @override
   String get progressTitle => 'Progress';
 
   @override
@@ -2590,4 +2534,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String fuelMacroF(String g) {
     return 'F $g g';
   }
+
+  @override
+  String get foodsSearch => 'Search foods (e.g. roti, biryani)';
+
+  @override
+  String get foodsRecent => 'Recent';
+
+  @override
+  String get foodsNoMatch => 'Not in the list. Enter the values below.';
+
+  @override
+  String foodsPortionKcal(String portion, int kcal) {
+    return '$portion · $kcal kcal';
+  }
+
+  @override
+  String get foodsCustom => 'Custom';
+
+  @override
+  String get foodsGrams => 'Grams eaten';
+
+  @override
+  String get foodsApprox => 'Values are approximate.';
+
+  @override
+  String get foodsClear => 'Clear food';
 }
