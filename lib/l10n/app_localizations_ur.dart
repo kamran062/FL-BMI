@@ -2510,4 +2510,30 @@ class AppLocalizationsUr extends AppLocalizations {
   String fuelMacroF(String g) {
     return 'چ $g گ';
   }
+
+  @override
+  String get foodsSearch => 'کھانا تلاش کریں (مثلاً روٹی، بریانی)';
+
+  @override
+  String get foodsRecent => 'حالیہ';
+
+  @override
+  String get foodsNoMatch => 'فہرست میں نہیں۔ نیچے خود درج کریں۔';
+
+  @override
+  String foodsPortionKcal(String portion, int kcal) {
+    return '$portion · $kcal kcal';
+  }
+
+  @override
+  String get foodsCustom => 'اپنی مقدار';
+
+  @override
+  String get foodsGrams => 'کتنے گرام کھائے';
+
+  @override
+  String get foodsApprox => 'یہ مقداریں تخمینی ہیں۔';
+
+  @override
+  String get foodsClear => 'کھانا ہٹائیں';
 }

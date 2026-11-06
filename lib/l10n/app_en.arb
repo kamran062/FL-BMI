@@ -3773,5 +3773,47 @@
         "example": "12"
       }
     }
+  },
+  "foodsSearch": "Search foods (e.g. roti, biryani)",
+  "@foodsSearch": {
+    "description": "Search field in the Log food dialog"
+  },
+  "foodsRecent": "Recent",
+  "@foodsRecent": {
+    "description": "Header above recently logged foods"
+  },
+  "foodsNoMatch": "Not in the list. Enter the values below.",
+  "@foodsNoMatch": {
+    "description": "Search found nothing"
+  },
+  "foodsPortionKcal": "{portion} · {kcal} kcal",
+  "@foodsPortionKcal": {
+    "description": "Food suggestion subtitle",
+    "placeholders": {
+      "portion": {
+        "type": "String",
+        "example": "1 medium (40 g)"
+      },
+      "kcal": {
+        "type": "int",
+        "example": "120"
+      }
+    }
+  },
+  "foodsCustom": "Custom",
+  "@foodsCustom": {
+    "description": "Portion chip to enter grams"
+  },
+  "foodsGrams": "Grams eaten",
+  "@foodsGrams": {
+    "description": "Custom portion field"
+  },
+  "foodsApprox": "Values are approximate.",
+  "@foodsApprox": {
+    "description": "Note under a picked food"
+  },
+  "foodsClear": "Clear food",
+  "@foodsClear": {
+    "description": "Tooltip to unpick a food"
   }
 }

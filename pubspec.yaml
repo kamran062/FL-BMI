@@ -74,3 +74,4 @@ flutter:
     # Google at runtime (privacy). OFL-licensed; see OFL.txt.
     - assets/google_fonts/
     - assets/exercises/
+    - assets/foods/

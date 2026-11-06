@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider/provider.dart';
 import 'package:bmi_health/features/fuel/domain/nutrition.dart';
+import 'package:bmi_health/features/fuel/foods/food_catalog.dart';
 import 'package:bmi_health/features/fuel/fuel_provider.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/l10n/l10n.dart';
@@ -518,11 +519,64 @@ class _LogFoodDialogState extends State<_LogFoodDialog> {
   late final _protein = TextEditingController(text: _g(widget.existing?.proteinG));
   late final _carbs = TextEditingController(text: _g(widget.existing?.carbsG));
   late final _fat = TextEditingController(text: _g(widget.existing?.fatG));
+  final _search = TextEditingController();
+  final _customGrams = TextEditingController();
   String? _error;
   String? _macroError;
 
+  // Offline food list: pick a food and a portion to fill the fields.
+  FoodCatalog? _catalog;
+  Map<String, int> _usage = const {};
+  FoodItem? _picked;
+  static const _portions = [0.5, 1.0, 1.5, 2.0];
+  double? _multiplier = 1; // null = custom grams
+
+  @override
+  void initState() {
+    super.initState();
+    FoodCatalog.load().then((c) async {
+      final usage = await FoodUsage.load();
+      if (!mounted) return;
+      setState(() {
+        _catalog = c;
+        _usage = usage;
+      });
+    });
+  }
+
+  void _pick(FoodItem f) {
+    setState(() {
+      _picked = f;
+      _multiplier = 1;
+      _customGrams.text = '${f.grams}';
+    });
+    _fill();
+  }
+
+  /// Fills name, kcal and macros from the picked food and portion.
+  void _fill() {
+    final f = _picked;
+    if (f == null) return;
+    final m = _multiplier ?? (double.tryParse(_customGrams.text.trim()) ?? 0) / f.grams;
+    _name.text = f.name(context.l10n.localeName);
+    _kcal.text = (f.kcal * m).round().toString();
+    _protein.text = _g(_round1(f.protein * m));
+    _carbs.text = _g(_round1(f.carbs * m));
+    _fat.text = _g(_round1(f.fat * m));
+  }
+
+  static double _round1(double v) => (v * 10).round() / 10;
+
+  static String _portionLabel(double m) => switch (m) {
+        0.5 => '½',
+        1.5 => '1½',
+        _ => m.toStringAsFixed(0),
+      };
+
   @override
   void dispose() {
+    _search.dispose();
+    _customGrams.dispose();
     _name.dispose();
     _kcal.dispose();
     _protein.dispose();
@@ -555,7 +609,9 @@ class _LogFoodDialogState extends State<_LogFoodDialog> {
       return;
     }
     final fuel = context.read<FuelProvider>();
+    final picked = _picked;
     Navigator.pop(context);
+    if (picked != null) await FoodUsage.record(picked.id);
     final e = widget.existing;
     if (e == null) {
       await fuel.addFood(
@@ -582,6 +638,102 @@ class _LogFoodDialogState extends State<_LogFoodDialog> {
         onSubmitted: last ? (_) => _save() : null,
       );
 
+  List<Widget> _foodSearch(BuildContext context) {
+    final l = context.l10n;
+    final locale = l.localeName;
+    final catalog = _catalog;
+    final fg3 = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.darkFg3
+        : AppColors.fg3;
+    final picked = _picked;
+    if (picked != null) {
+      return [
+        Row(children: [
+          Expanded(
+            child: Text(
+                l.foodsPortionKcal(picked.portion(locale), picked.kcal),
+                style: GoogleFonts.inter(fontSize: 13, color: fg3)),
+          ),
+          IconButton(
+            tooltip: l.foodsClear,
+            icon: const Icon(Icons.close_rounded, size: 20),
+            onPressed: () => setState(() => _picked = null),
+          ),
+        ]),
+        Wrap(spacing: 6, runSpacing: 6, children: [
+          for (final m in _portions)
+            ChoiceChip(
+              label: Text('${_portionLabel(m)}×'),
+              selected: _multiplier == m,
+              onSelected: (_) {
+                setState(() => _multiplier = m);
+                _fill();
+              },
+            ),
+          ChoiceChip(
+            label: Text(l.foodsCustom),
+            selected: _multiplier == null,
+            onSelected: (_) {
+              setState(() => _multiplier = null);
+              _fill();
+            },
+          ),
+        ]),
+        if (_multiplier == null)
+          TextField(
+            controller: _customGrams,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(labelText: l.foodsGrams),
+            onChanged: (_) => _fill(),
+          ),
+        Padding(
+          padding: const EdgeInsets.only(top: 6, bottom: 4),
+          child: Text(l.foodsApprox,
+              style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+        ),
+      ];
+    }
+    if (catalog == null) return const [];
+    final q = _search.text;
+    final results = catalog.search(q, usage: _usage, limit: 6);
+    return [
+      TextField(
+        controller: _search,
+        autofocus: widget.existing == null,
+        decoration: InputDecoration(
+          labelText: l.foodsSearch,
+          prefixIcon: const Icon(Icons.search_rounded),
+        ),
+        onChanged: (_) => setState(() {}),
+      ),
+      if (q.trim().isEmpty && results.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(l.foodsRecent,
+                style: GoogleFonts.inter(
+                    fontSize: 12, fontWeight: FontWeight.w600, color: fg3)),
+          ),
+        ),
+      for (final f in results)
+        ListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: Text(f.name(locale)),
+          subtitle: Text(l.foodsPortionKcal(f.portion(locale), f.kcal)),
+          onTap: () => _pick(f),
+        ),
+      if (q.trim().isNotEmpty && results.isEmpty)
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text(l.foodsNoMatch,
+              style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+        ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -591,6 +743,7 @@ class _LogFoodDialogState extends State<_LogFoodDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ..._foodSearch(context),
             TextField(
               controller: _name,
               maxLength: 60,
@@ -599,7 +752,6 @@ class _LogFoodDialogState extends State<_LogFoodDialog> {
             ),
             TextField(
               controller: _kcal,
-              autofocus: widget.existing == null,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(labelText: l.foodKcal, errorText: _error),

@@ -2534,4 +2534,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String fuelMacroF(String g) {
     return 'F $g g';
   }
+
+  @override
+  String get foodsSearch => 'Search foods (e.g. roti, biryani)';
+
+  @override
+  String get foodsRecent => 'Recent';
+
+  @override
+  String get foodsNoMatch => 'Not in the list. Enter the values below.';
+
+  @override
+  String foodsPortionKcal(String portion, int kcal) {
+    return '$portion · $kcal kcal';
+  }
+
+  @override
+  String get foodsCustom => 'Custom';
+
+  @override
+  String get foodsGrams => 'Grams eaten';
+
+  @override
+  String get foodsApprox => 'Values are approximate.';
+
+  @override
+  String get foodsClear => 'Clear food';
 }

@@ -4492,6 +4492,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'F {g} g'**
   String fuelMacroF(String g);
+
+  /// Search field in the Log food dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Search foods (e.g. roti, biryani)'**
+  String get foodsSearch;
+
+  /// Header above recently logged foods
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get foodsRecent;
+
+  /// Search found nothing
+  ///
+  /// In en, this message translates to:
+  /// **'Not in the list. Enter the values below.'**
+  String get foodsNoMatch;
+
+  /// Food suggestion subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'{portion} · {kcal} kcal'**
+  String foodsPortionKcal(String portion, int kcal);
+
+  /// Portion chip to enter grams
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get foodsCustom;
+
+  /// Custom portion field
+  ///
+  /// In en, this message translates to:
+  /// **'Grams eaten'**
+  String get foodsGrams;
+
+  /// Note under a picked food
+  ///
+  /// In en, this message translates to:
+  /// **'Values are approximate.'**
+  String get foodsApprox;
+
+  /// Tooltip to unpick a food
+  ///
+  /// In en, this message translates to:
+  /// **'Clear food'**
+  String get foodsClear;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

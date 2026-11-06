@@ -732,5 +732,13 @@
   "fuelMacroError": "گرام 0 سے 1000 کے درمیان ہونے چاہئیں۔",
   "fuelMacroP": "پ {g} گ",
   "fuelMacroC": "ک {g} گ",
-  "fuelMacroF": "چ {g} گ"
+  "fuelMacroF": "چ {g} گ",
+  "foodsSearch": "کھانا تلاش کریں (مثلاً روٹی، بریانی)",
+  "foodsRecent": "حالیہ",
+  "foodsNoMatch": "فہرست میں نہیں۔ نیچے خود درج کریں۔",
+  "foodsPortionKcal": "{portion} · {kcal} kcal",
+  "foodsCustom": "اپنی مقدار",
+  "foodsGrams": "کتنے گرام کھائے",
+  "foodsApprox": "یہ مقداریں تخمینی ہیں۔",
+  "foodsClear": "کھانا ہٹائیں"
 }

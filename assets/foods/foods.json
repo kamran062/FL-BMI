@@ -1,0 +1,2795 @@
+{
+ "version": 1,
+ "foods": [
+  {
+   "id": "roti",
+   "en": "Roti (chapati)",
+   "ur": "روٹی (چپاتی)",
+   "portionEn": "1 medium (40 g)",
+   "portionUr": "1 درمیانہ (40 گرام)",
+   "grams": 40,
+   "kcal": 120,
+   "protein": 4,
+   "carbs": 25,
+   "fat": 0.6,
+   "aliases": [
+    "chapati",
+    "phulka"
+   ]
+  },
+  {
+   "id": "tandoori_roti",
+   "en": "Tandoori roti",
+   "ur": "تندوری روٹی",
+   "portionEn": "1 piece (60 g)",
+   "portionUr": "1 عدد (60 گرام)",
+   "grams": 60,
+   "kcal": 160,
+   "protein": 5,
+   "carbs": 33,
+   "fat": 1
+  },
+  {
+   "id": "paratha",
+   "en": "Paratha",
+   "ur": "پراٹھا",
+   "portionEn": "1 piece (80 g)",
+   "portionUr": "1 عدد (80 گرام)",
+   "grams": 80,
+   "kcal": 260,
+   "protein": 5,
+   "carbs": 36,
+   "fat": 11,
+   "aliases": [
+    "parata"
+   ]
+  },
+  {
+   "id": "aloo_paratha",
+   "en": "Aloo paratha",
+   "ur": "آلو پراٹھا",
+   "portionEn": "1 piece (120 g)",
+   "portionUr": "1 عدد (120 گرام)",
+   "grams": 120,
+   "kcal": 320,
+   "protein": 7,
+   "carbs": 45,
+   "fat": 13
+  },
+  {
+   "id": "anda_paratha",
+   "en": "Egg paratha",
+   "ur": "انڈا پراٹھا",
+   "portionEn": "1 piece (130 g)",
+   "portionUr": "1 عدد (130 گرام)",
+   "grams": 130,
+   "kcal": 380,
+   "protein": 12,
+   "carbs": 38,
+   "fat": 20,
+   "aliases": [
+    "anda paratha"
+   ]
+  },
+  {
+   "id": "naan",
+   "en": "Naan",
+   "ur": "نان",
+   "portionEn": "1 piece (90 g)",
+   "portionUr": "1 عدد (90 گرام)",
+   "grams": 90,
+   "kcal": 260,
+   "protein": 8,
+   "carbs": 45,
+   "fat": 5
+  },
+  {
+   "id": "roghni_naan",
+   "en": "Roghni naan",
+   "ur": "روغنی نان",
+   "portionEn": "1 piece (100 g)",
+   "portionUr": "1 عدد (100 گرام)",
+   "grams": 100,
+   "kcal": 320,
+   "protein": 9,
+   "carbs": 48,
+   "fat": 10
+  },
+  {
+   "id": "puri",
+   "en": "Puri",
+   "ur": "پوری",
+   "portionEn": "1 piece (30 g)",
+   "portionUr": "1 عدد (30 گرام)",
+   "grams": 30,
+   "kcal": 110,
+   "protein": 2,
+   "carbs": 12,
+   "fat": 6
+  },
+  {
+   "id": "white_bread",
+   "en": "White bread",
+   "ur": "سفید ڈبل روٹی",
+   "portionEn": "1 slice (28 g)",
+   "portionUr": "1 سلائس (28 گرام)",
+   "grams": 28,
+   "kcal": 75,
+   "protein": 2.5,
+   "carbs": 14,
+   "fat": 1,
+   "aliases": [
+    "double roti"
+   ]
+  },
+  {
+   "id": "brown_bread",
+   "en": "Brown bread",
+   "ur": "براؤن ڈبل روٹی",
+   "portionEn": "1 slice (28 g)",
+   "portionUr": "1 سلائس (28 گرام)",
+   "grams": 28,
+   "kcal": 70,
+   "protein": 3.5,
+   "carbs": 12,
+   "fat": 1
+  },
+  {
+   "id": "rusk",
+   "en": "Rusk",
+   "ur": "رس",
+   "portionEn": "2 rusks (30 g)",
+   "portionUr": "2 رس (30 گرام)",
+   "grams": 30,
+   "kcal": 125,
+   "protein": 3.5,
+   "carbs": 21,
+   "fat": 3
+  },
+  {
+   "id": "rice_white",
+   "en": "Boiled white rice",
+   "ur": "ابلے سفید چاول",
+   "portionEn": "1 cup (160 g)",
+   "portionUr": "1 کپ (160 گرام)",
+   "grams": 160,
+   "kcal": 205,
+   "protein": 4,
+   "carbs": 45,
+   "fat": 0.4,
+   "aliases": [
+    "chawal",
+    "plain rice"
+   ]
+  },
+  {
+   "id": "rice_brown",
+   "en": "Brown rice",
+   "ur": "براؤن چاول",
+   "portionEn": "1 cup (195 g)",
+   "portionUr": "1 کپ (195 گرام)",
+   "grams": 195,
+   "kcal": 215,
+   "protein": 5,
+   "carbs": 45,
+   "fat": 1.8,
+   "aliases": [
+    "chawal"
+   ]
+  },
+  {
+   "id": "chicken_biryani",
+   "en": "Chicken biryani",
+   "ur": "چکن بریانی",
+   "portionEn": "1 plate (300 g)",
+   "portionUr": "1 پلیٹ (300 گرام)",
+   "grams": 300,
+   "kcal": 500,
+   "protein": 25,
+   "carbs": 60,
+   "fat": 18,
+   "aliases": [
+    "biryani"
+   ]
+  },
+  {
+   "id": "beef_biryani",
+   "en": "Beef biryani",
+   "ur": "بیف بریانی",
+   "portionEn": "1 plate (300 g)",
+   "portionUr": "1 پلیٹ (300 گرام)",
+   "grams": 300,
+   "kcal": 540,
+   "protein": 26,
+   "carbs": 60,
+   "fat": 22,
+   "aliases": [
+    "biryani"
+   ]
+  },
+  {
+   "id": "chicken_pulao",
+   "en": "Chicken pulao",
+   "ur": "چکن پلاؤ",
+   "portionEn": "1 plate (300 g)",
+   "portionUr": "1 پلیٹ (300 گرام)",
+   "grams": 300,
+   "kcal": 450,
+   "protein": 22,
+   "carbs": 58,
+   "fat": 14,
+   "aliases": [
+    "pulao",
+    "yakhni pulao"
+   ]
+  },
+  {
+   "id": "kabuli_pulao",
+   "en": "Kabuli pulao",
+   "ur": "کابلی پلاؤ",
+   "portionEn": "1 plate (300 g)",
+   "portionUr": "1 پلیٹ (300 گرام)",
+   "grams": 300,
+   "kcal": 520,
+   "protein": 22,
+   "carbs": 65,
+   "fat": 19,
+   "aliases": [
+    "pulao"
+   ]
+  },
+  {
+   "id": "matar_pulao",
+   "en": "Matar pulao",
+   "ur": "مٹر پلاؤ",
+   "portionEn": "1 plate (250 g)",
+   "portionUr": "1 پلیٹ (250 گرام)",
+   "grams": 250,
+   "kcal": 350,
+   "protein": 8,
+   "carbs": 60,
+   "fat": 9,
+   "aliases": [
+    "pea rice",
+    "pulao"
+   ]
+  },
+  {
+   "id": "khichdi",
+   "en": "Khichdi",
+   "ur": "کھچڑی",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 300,
+   "protein": 10,
+   "carbs": 50,
+   "fat": 7
+  },
+  {
+   "id": "fried_rice",
+   "en": "Egg fried rice",
+   "ur": "انڈا فرائیڈ رائس",
+   "portionEn": "1 plate (250 g)",
+   "portionUr": "1 پلیٹ (250 گرام)",
+   "grams": 250,
+   "kcal": 420,
+   "protein": 10,
+   "carbs": 60,
+   "fat": 15,
+   "aliases": [
+    "chawal"
+   ]
+  },
+  {
+   "id": "zarda",
+   "en": "Zarda (sweet rice)",
+   "ur": "زردہ",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 330,
+   "protein": 4,
+   "carbs": 60,
+   "fat": 8,
+   "aliases": [
+    "meethe chawal"
+   ]
+  },
+  {
+   "id": "daal_masoor",
+   "en": "Masoor daal",
+   "ur": "مسور کی دال",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 230,
+   "protein": 12,
+   "carbs": 30,
+   "fat": 7,
+   "aliases": [
+    "dal",
+    "lentils"
+   ]
+  },
+  {
+   "id": "daal_chana",
+   "en": "Chana daal",
+   "ur": "چنے کی دال",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 280,
+   "protein": 14,
+   "carbs": 36,
+   "fat": 9,
+   "aliases": [
+    "dal"
+   ]
+  },
+  {
+   "id": "daal_mash",
+   "en": "Mash daal",
+   "ur": "ماش کی دال",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 260,
+   "protein": 13,
+   "carbs": 30,
+   "fat": 10,
+   "aliases": [
+    "dal",
+    "urad"
+   ]
+  },
+  {
+   "id": "daal_moong",
+   "en": "Moong daal",
+   "ur": "مونگ کی دال",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 220,
+   "protein": 12,
+   "carbs": 30,
+   "fat": 6,
+   "aliases": [
+    "dal"
+   ]
+  },
+  {
+   "id": "cholay",
+   "en": "Chana masala (cholay)",
+   "ur": "چنے (چھولے)",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 300,
+   "protein": 12,
+   "carbs": 40,
+   "fat": 10,
+   "aliases": [
+    "chickpeas",
+    "chole",
+    "chanay"
+   ]
+  },
+  {
+   "id": "rajma",
+   "en": "Rajma (kidney beans)",
+   "ur": "راجما",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 280,
+   "protein": 13,
+   "carbs": 38,
+   "fat": 8,
+   "aliases": [
+    "lobia"
+   ]
+  },
+  {
+   "id": "lobia",
+   "en": "Lobia (black-eyed beans)",
+   "ur": "لوبیا",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 250,
+   "protein": 13,
+   "carbs": 34,
+   "fat": 7
+  },
+  {
+   "id": "haleem",
+   "en": "Haleem",
+   "ur": "حلیم",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 400,
+   "protein": 25,
+   "carbs": 35,
+   "fat": 18,
+   "aliases": [
+    "daleem"
+   ]
+  },
+  {
+   "id": "daal_gosht",
+   "en": "Daal gosht",
+   "ur": "دال گوشت",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 380,
+   "protein": 26,
+   "carbs": 25,
+   "fat": 20
+  },
+  {
+   "id": "chicken_karahi",
+   "en": "Chicken karahi",
+   "ur": "چکن کڑاہی",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 380,
+   "protein": 30,
+   "carbs": 8,
+   "fat": 25,
+   "aliases": [
+    "karahi"
+   ]
+  },
+  {
+   "id": "mutton_karahi",
+   "en": "Mutton karahi",
+   "ur": "مٹن کڑاہی",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 450,
+   "protein": 30,
+   "carbs": 6,
+   "fat": 34,
+   "aliases": [
+    "karahi",
+    "gosht"
+   ]
+  },
+  {
+   "id": "chicken_curry",
+   "en": "Chicken curry (salan)",
+   "ur": "چکن سالن",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 300,
+   "protein": 25,
+   "carbs": 8,
+   "fat": 19,
+   "aliases": [
+    "murgh",
+    "salan"
+   ]
+  },
+  {
+   "id": "chicken_handi",
+   "en": "Chicken handi",
+   "ur": "چکن ہانڈی",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 400,
+   "protein": 28,
+   "carbs": 8,
+   "fat": 28
+  },
+  {
+   "id": "chicken_jalfrezi",
+   "en": "Chicken jalfrezi",
+   "ur": "چکن جلفریزی",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 320,
+   "protein": 28,
+   "carbs": 10,
+   "fat": 19
+  },
+  {
+   "id": "butter_chicken",
+   "en": "Butter chicken",
+   "ur": "بٹر چکن",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 430,
+   "protein": 28,
+   "carbs": 12,
+   "fat": 30
+  },
+  {
+   "id": "chicken_korma",
+   "en": "Chicken korma",
+   "ur": "چکن قورمہ",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 420,
+   "protein": 26,
+   "carbs": 10,
+   "fat": 31,
+   "aliases": [
+    "qorma"
+   ]
+  },
+  {
+   "id": "mutton_korma",
+   "en": "Mutton korma",
+   "ur": "مٹن قورمہ",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 480,
+   "protein": 28,
+   "carbs": 10,
+   "fat": 36,
+   "aliases": [
+    "qorma",
+    "gosht"
+   ]
+  },
+  {
+   "id": "nihari",
+   "en": "Beef nihari",
+   "ur": "نہاری",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 500,
+   "protein": 32,
+   "carbs": 12,
+   "fat": 36
+  },
+  {
+   "id": "qeema",
+   "en": "Qeema",
+   "ur": "قیمہ",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 400,
+   "protein": 26,
+   "carbs": 8,
+   "fat": 29,
+   "aliases": [
+    "keema",
+    "mince"
+   ]
+  },
+  {
+   "id": "aloo_qeema",
+   "en": "Aloo qeema",
+   "ur": "آلو قیمہ",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 330,
+   "protein": 18,
+   "carbs": 18,
+   "fat": 21,
+   "aliases": [
+    "keema"
+   ]
+  },
+  {
+   "id": "aloo_gosht",
+   "en": "Aloo gosht",
+   "ur": "آلو گوشت",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 380,
+   "protein": 24,
+   "carbs": 20,
+   "fat": 22
+  },
+  {
+   "id": "palak_gosht",
+   "en": "Palak gosht",
+   "ur": "پالک گوشت",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 350,
+   "protein": 26,
+   "carbs": 10,
+   "fat": 23
+  },
+  {
+   "id": "paya",
+   "en": "Paya",
+   "ur": "پائے",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 380,
+   "protein": 28,
+   "carbs": 5,
+   "fat": 28,
+   "aliases": [
+    "siri paye"
+   ]
+  },
+  {
+   "id": "fish_curry",
+   "en": "Fish curry",
+   "ur": "مچھلی کا سالن",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 280,
+   "protein": 26,
+   "carbs": 6,
+   "fat": 17,
+   "aliases": [
+    "machli"
+   ]
+  },
+  {
+   "id": "egg_curry",
+   "en": "Egg curry (2 eggs)",
+   "ur": "انڈا کری (2 انڈے)",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 300,
+   "protein": 14,
+   "carbs": 8,
+   "fat": 24,
+   "aliases": [
+    "anda curry"
+   ]
+  },
+  {
+   "id": "chicken_manchurian",
+   "en": "Chicken manchurian",
+   "ur": "چکن منچورین",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 380,
+   "protein": 24,
+   "carbs": 20,
+   "fat": 22
+  },
+  {
+   "id": "yakhni",
+   "en": "Chicken yakhni (broth)",
+   "ur": "یخنی",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 60,
+   "protein": 6,
+   "carbs": 2,
+   "fat": 3,
+   "aliases": [
+    "soup"
+   ]
+  },
+  {
+   "id": "chicken_tikka",
+   "en": "Chicken tikka (leg piece)",
+   "ur": "چکن تکہ",
+   "portionEn": "1 piece (150 g)",
+   "portionUr": "1 عدد (150 گرام)",
+   "grams": 150,
+   "kcal": 260,
+   "protein": 32,
+   "carbs": 3,
+   "fat": 13,
+   "aliases": [
+    "bbq"
+   ]
+  },
+  {
+   "id": "tandoori_chicken",
+   "en": "Tandoori chicken",
+   "ur": "تندوری چکن",
+   "portionEn": "1 quarter (200 g)",
+   "portionUr": "1 چوتھائی (200 گرام)",
+   "grams": 200,
+   "kcal": 330,
+   "protein": 40,
+   "carbs": 4,
+   "fat": 17
+  },
+  {
+   "id": "malai_boti",
+   "en": "Malai boti",
+   "ur": "ملائی بوٹی",
+   "portionEn": "6 pieces (150 g)",
+   "portionUr": "6 بوٹیاں (150 گرام)",
+   "grams": 150,
+   "kcal": 330,
+   "protein": 30,
+   "carbs": 3,
+   "fat": 22,
+   "aliases": [
+    "bbq"
+   ]
+  },
+  {
+   "id": "seekh_kebab",
+   "en": "Seekh kebab",
+   "ur": "سیخ کباب",
+   "portionEn": "1 piece (50 g)",
+   "portionUr": "1 عدد (50 گرام)",
+   "grams": 50,
+   "kcal": 140,
+   "protein": 9,
+   "carbs": 2,
+   "fat": 11,
+   "aliases": [
+    "kabab"
+   ]
+  },
+  {
+   "id": "shami_kebab",
+   "en": "Shami kebab",
+   "ur": "شامی کباب",
+   "portionEn": "1 piece (50 g)",
+   "portionUr": "1 عدد (50 گرام)",
+   "grams": 50,
+   "kcal": 130,
+   "protein": 8,
+   "carbs": 7,
+   "fat": 8,
+   "aliases": [
+    "kabab"
+   ]
+  },
+  {
+   "id": "chapli_kebab",
+   "en": "Chapli kebab",
+   "ur": "چپلی کباب",
+   "portionEn": "1 piece (100 g)",
+   "portionUr": "1 عدد (100 گرام)",
+   "grams": 100,
+   "kcal": 300,
+   "protein": 17,
+   "carbs": 8,
+   "fat": 22,
+   "aliases": [
+    "kabab"
+   ]
+  },
+  {
+   "id": "sajji",
+   "en": "Chicken sajji",
+   "ur": "سجی",
+   "portionEn": "1 quarter (250 g)",
+   "portionUr": "1 چوتھائی (250 گرام)",
+   "grams": 250,
+   "kcal": 450,
+   "protein": 45,
+   "carbs": 5,
+   "fat": 28
+  },
+  {
+   "id": "shawarma",
+   "en": "Chicken shawarma",
+   "ur": "چکن شوارما",
+   "portionEn": "1 piece (250 g)",
+   "portionUr": "1 عدد (250 گرام)",
+   "grams": 250,
+   "kcal": 550,
+   "protein": 30,
+   "carbs": 55,
+   "fat": 23
+  },
+  {
+   "id": "roll_paratha",
+   "en": "Chicken roll paratha",
+   "ur": "رول پراٹھا",
+   "portionEn": "1 piece (200 g)",
+   "portionUr": "1 عدد (200 گرام)",
+   "grams": 200,
+   "kcal": 500,
+   "protein": 22,
+   "carbs": 45,
+   "fat": 26,
+   "aliases": [
+    "paratha roll"
+   ]
+  },
+  {
+   "id": "chicken_breast",
+   "en": "Chicken breast (cooked)",
+   "ur": "چکن بریسٹ (پکی ہوئی)",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 165,
+   "protein": 31,
+   "carbs": 0,
+   "fat": 3.6,
+   "aliases": [
+    "murgh"
+   ]
+  },
+  {
+   "id": "chicken_thigh",
+   "en": "Chicken thigh (cooked)",
+   "ur": "چکن ران (پکی ہوئی)",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 210,
+   "protein": 26,
+   "carbs": 0,
+   "fat": 11,
+   "aliases": [
+    "murgh"
+   ]
+  },
+  {
+   "id": "beef_lean",
+   "en": "Lean beef (cooked)",
+   "ur": "بیف (پکا ہوا)",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 220,
+   "protein": 27,
+   "carbs": 0,
+   "fat": 12,
+   "aliases": [
+    "gosht",
+    "gaye"
+   ]
+  },
+  {
+   "id": "mutton",
+   "en": "Mutton (cooked)",
+   "ur": "مٹن (پکا ہوا)",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 260,
+   "protein": 25,
+   "carbs": 0,
+   "fat": 17,
+   "aliases": [
+    "gosht",
+    "bakra"
+   ]
+  },
+  {
+   "id": "fish_grilled",
+   "en": "Grilled fish",
+   "ur": "گرل مچھلی",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 150,
+   "protein": 22,
+   "carbs": 0,
+   "fat": 6.5,
+   "aliases": [
+    "machli"
+   ]
+  },
+  {
+   "id": "fried_fish",
+   "en": "Fried fish",
+   "ur": "فرائیڈ مچھلی",
+   "portionEn": "1 plate (150 g)",
+   "portionUr": "1 پلیٹ (150 گرام)",
+   "grams": 150,
+   "kcal": 380,
+   "protein": 25,
+   "carbs": 18,
+   "fat": 23,
+   "aliases": [
+    "machli",
+    "lahori fish"
+   ]
+  },
+  {
+   "id": "tuna",
+   "en": "Tuna in water",
+   "ur": "ٹونا (پانی میں)",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 116,
+   "protein": 26,
+   "carbs": 0,
+   "fat": 1
+  },
+  {
+   "id": "prawns",
+   "en": "Prawns (cooked)",
+   "ur": "جھینگے",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 99,
+   "protein": 22,
+   "carbs": 0,
+   "fat": 1.4,
+   "aliases": [
+    "shrimp"
+   ]
+  },
+  {
+   "id": "kaleji",
+   "en": "Liver (kaleji), fried",
+   "ur": "کلیجی",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 190,
+   "protein": 24,
+   "carbs": 5,
+   "fat": 8,
+   "aliases": [
+    "liver"
+   ]
+  },
+  {
+   "id": "nuggets",
+   "en": "Chicken nuggets",
+   "ur": "چکن نگٹس",
+   "portionEn": "6 pieces (100 g)",
+   "portionUr": "6 عدد (100 گرام)",
+   "grams": 100,
+   "kcal": 290,
+   "protein": 15,
+   "carbs": 17,
+   "fat": 18
+  },
+  {
+   "id": "egg_boiled",
+   "en": "Boiled egg",
+   "ur": "ابلا ہوا انڈا",
+   "portionEn": "1 piece (50 g)",
+   "portionUr": "1 عدد (50 گرام)",
+   "grams": 50,
+   "kcal": 78,
+   "protein": 6.3,
+   "carbs": 0.6,
+   "fat": 5.3,
+   "aliases": [
+    "anda"
+   ]
+  },
+  {
+   "id": "egg_fried",
+   "en": "Fried egg",
+   "ur": "تلا ہوا انڈا",
+   "portionEn": "1 piece (46 g)",
+   "portionUr": "1 عدد (46 گرام)",
+   "grams": 46,
+   "kcal": 90,
+   "protein": 6,
+   "carbs": 0.4,
+   "fat": 7,
+   "aliases": [
+    "anda"
+   ]
+  },
+  {
+   "id": "omelette",
+   "en": "Omelette (2 eggs)",
+   "ur": "آملیٹ (2 انڈے)",
+   "portionEn": "1 piece (120 g)",
+   "portionUr": "1 عدد (120 گرام)",
+   "grams": 120,
+   "kcal": 200,
+   "protein": 13,
+   "carbs": 2,
+   "fat": 15.5,
+   "aliases": [
+    "anda",
+    "omelet"
+   ]
+  },
+  {
+   "id": "egg_white",
+   "en": "Egg white",
+   "ur": "انڈے کی سفیدی",
+   "portionEn": "1 piece (33 g)",
+   "portionUr": "1 عدد (33 گرام)",
+   "grams": 33,
+   "kcal": 17,
+   "protein": 3.6,
+   "carbs": 0.2,
+   "fat": 0.1,
+   "aliases": [
+    "anda"
+   ]
+  },
+  {
+   "id": "aloo_sabzi",
+   "en": "Aloo sabzi",
+   "ur": "آلو کی سبزی",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 200,
+   "protein": 3,
+   "carbs": 25,
+   "fat": 10,
+   "aliases": [
+    "potato",
+    "aloo bhujia"
+   ]
+  },
+  {
+   "id": "bhindi",
+   "en": "Bhindi (okra)",
+   "ur": "بھنڈی",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 160,
+   "protein": 3,
+   "carbs": 12,
+   "fat": 11,
+   "aliases": [
+    "okra"
+   ]
+  },
+  {
+   "id": "mixed_sabzi",
+   "en": "Mixed vegetables",
+   "ur": "مکس سبزی",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 150,
+   "protein": 4,
+   "carbs": 14,
+   "fat": 9,
+   "aliases": [
+    "sabzi"
+   ]
+  },
+  {
+   "id": "palak",
+   "en": "Palak (spinach)",
+   "ur": "پالک",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 160,
+   "protein": 5,
+   "carbs": 10,
+   "fat": 11,
+   "aliases": [
+    "spinach",
+    "saag"
+   ]
+  },
+  {
+   "id": "aloo_gobi",
+   "en": "Aloo gobi",
+   "ur": "آلو گوبھی",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 170,
+   "protein": 4,
+   "carbs": 18,
+   "fat": 9,
+   "aliases": [
+    "cauliflower"
+   ]
+  },
+  {
+   "id": "baingan",
+   "en": "Baingan bharta",
+   "ur": "بینگن کا بھرتہ",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 150,
+   "protein": 3,
+   "carbs": 12,
+   "fat": 10,
+   "aliases": [
+    "eggplant",
+    "brinjal"
+   ]
+  },
+  {
+   "id": "saag",
+   "en": "Sarson ka saag",
+   "ur": "سرسوں کا ساگ",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 220,
+   "protein": 6,
+   "carbs": 14,
+   "fat": 16,
+   "aliases": [
+    "saag"
+   ]
+  },
+  {
+   "id": "lauki",
+   "en": "Lauki (bottle gourd)",
+   "ur": "لوکی (گھیا)",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 100,
+   "protein": 2,
+   "carbs": 8,
+   "fat": 7,
+   "aliases": [
+    "ghiya",
+    "kaddu"
+   ]
+  },
+  {
+   "id": "salad",
+   "en": "Green salad",
+   "ur": "سبز سلاد",
+   "portionEn": "1 bowl (100 g)",
+   "portionUr": "1 پیالہ (100 گرام)",
+   "grams": 100,
+   "kcal": 20,
+   "protein": 1,
+   "carbs": 4,
+   "fat": 0.2,
+   "aliases": [
+    "salad"
+   ]
+  },
+  {
+   "id": "kachumber",
+   "en": "Kachumber salad",
+   "ur": "کچومر سلاد",
+   "portionEn": "1 bowl (100 g)",
+   "portionUr": "1 پیالہ (100 گرام)",
+   "grams": 100,
+   "kcal": 25,
+   "protein": 1,
+   "carbs": 5,
+   "fat": 0.2,
+   "aliases": [
+    "salad"
+   ]
+  },
+  {
+   "id": "raita",
+   "en": "Raita",
+   "ur": "رائتہ",
+   "portionEn": "1 bowl (100 g)",
+   "portionUr": "1 پیالہ (100 گرام)",
+   "grams": 100,
+   "kcal": 70,
+   "protein": 3.5,
+   "carbs": 6,
+   "fat": 3.5
+  },
+  {
+   "id": "potato_boiled",
+   "en": "Boiled potato",
+   "ur": "ابلا ہوا آلو",
+   "portionEn": "1 medium (150 g)",
+   "portionUr": "1 درمیانہ (150 گرام)",
+   "grams": 150,
+   "kcal": 130,
+   "protein": 3,
+   "carbs": 30,
+   "fat": 0.2,
+   "aliases": [
+    "aloo"
+   ]
+  },
+  {
+   "id": "sweet_potato",
+   "en": "Sweet potato (boiled)",
+   "ur": "شکرقندی",
+   "portionEn": "1 medium (130 g)",
+   "portionUr": "1 درمیانہ (130 گرام)",
+   "grams": 130,
+   "kcal": 112,
+   "protein": 2,
+   "carbs": 26,
+   "fat": 0.1,
+   "aliases": [
+    "shakarkandi"
+   ]
+  },
+  {
+   "id": "bhutta",
+   "en": "Corn on the cob",
+   "ur": "بھٹا",
+   "portionEn": "1 piece (100 g)",
+   "portionUr": "1 عدد (100 گرام)",
+   "grams": 100,
+   "kcal": 105,
+   "protein": 3.4,
+   "carbs": 21,
+   "fat": 1.5,
+   "aliases": [
+    "corn",
+    "makai"
+   ]
+  },
+  {
+   "id": "hummus",
+   "en": "Hummus",
+   "ur": "حمص",
+   "portionEn": "2 tbsp (30 g)",
+   "portionUr": "2 کھانے کے چمچ (30 گرام)",
+   "grams": 30,
+   "kcal": 75,
+   "protein": 2.4,
+   "carbs": 4.3,
+   "fat": 5.4
+  },
+  {
+   "id": "samosa",
+   "en": "Samosa (aloo)",
+   "ur": "آلو سموسہ",
+   "portionEn": "1 piece (80 g)",
+   "portionUr": "1 عدد (80 گرام)",
+   "grams": 80,
+   "kcal": 260,
+   "protein": 4,
+   "carbs": 28,
+   "fat": 15
+  },
+  {
+   "id": "samosa_qeema",
+   "en": "Samosa (qeema)",
+   "ur": "قیمہ سموسہ",
+   "portionEn": "1 piece (80 g)",
+   "portionUr": "1 عدد (80 گرام)",
+   "grams": 80,
+   "kcal": 280,
+   "protein": 8,
+   "carbs": 24,
+   "fat": 17,
+   "aliases": [
+    "keema"
+   ]
+  },
+  {
+   "id": "pakora",
+   "en": "Pakoras",
+   "ur": "پکوڑے",
+   "portionEn": "5 pieces (100 g)",
+   "portionUr": "5 عدد (100 گرام)",
+   "grams": 100,
+   "kcal": 300,
+   "protein": 7,
+   "carbs": 28,
+   "fat": 18,
+   "aliases": [
+    "pakoray",
+    "bhajia"
+   ]
+  },
+  {
+   "id": "kachori",
+   "en": "Kachori",
+   "ur": "کچوری",
+   "portionEn": "1 piece (60 g)",
+   "portionUr": "1 عدد (60 گرام)",
+   "grams": 60,
+   "kcal": 230,
+   "protein": 5,
+   "carbs": 24,
+   "fat": 13
+  },
+  {
+   "id": "spring_roll",
+   "en": "Spring roll",
+   "ur": "اسپرنگ رول",
+   "portionEn": "1 piece (60 g)",
+   "portionUr": "1 عدد (60 گرام)",
+   "grams": 60,
+   "kcal": 150,
+   "protein": 4,
+   "carbs": 15,
+   "fat": 8
+  },
+  {
+   "id": "dahi_bhallay",
+   "en": "Dahi bhallay",
+   "ur": "دہی بھلے",
+   "portionEn": "1 plate (200 g)",
+   "portionUr": "1 پلیٹ (200 گرام)",
+   "grams": 200,
+   "kcal": 280,
+   "protein": 8,
+   "carbs": 42,
+   "fat": 9,
+   "aliases": [
+    "dahi baray"
+   ]
+  },
+  {
+   "id": "chana_chaat",
+   "en": "Chana chaat",
+   "ur": "چنا چاٹ",
+   "portionEn": "1 plate (200 g)",
+   "portionUr": "1 پلیٹ (200 گرام)",
+   "grams": 200,
+   "kcal": 250,
+   "protein": 10,
+   "carbs": 38,
+   "fat": 7,
+   "aliases": [
+    "chaat"
+   ]
+  },
+  {
+   "id": "fruit_chaat",
+   "en": "Fruit chaat",
+   "ur": "فروٹ چاٹ",
+   "portionEn": "1 plate (200 g)",
+   "portionUr": "1 پلیٹ (200 گرام)",
+   "grams": 200,
+   "kcal": 140,
+   "protein": 1.5,
+   "carbs": 34,
+   "fat": 0.5,
+   "aliases": [
+    "chaat"
+   ]
+  },
+  {
+   "id": "gol_gappay",
+   "en": "Gol gappay",
+   "ur": "گول گپے",
+   "portionEn": "6 pieces (120 g)",
+   "portionUr": "6 عدد (120 گرام)",
+   "grams": 120,
+   "kcal": 200,
+   "protein": 4,
+   "carbs": 32,
+   "fat": 6,
+   "aliases": [
+    "pani puri"
+   ]
+  },
+  {
+   "id": "bun_kebab",
+   "en": "Bun kebab",
+   "ur": "بن کباب",
+   "portionEn": "1 piece (180 g)",
+   "portionUr": "1 عدد (180 گرام)",
+   "grams": 180,
+   "kcal": 420,
+   "protein": 15,
+   "carbs": 45,
+   "fat": 20
+  },
+  {
+   "id": "nimko",
+   "en": "Nimko (mixture)",
+   "ur": "نمکو",
+   "portionEn": "1 handful (30 g)",
+   "portionUr": "1 مٹھی (30 گرام)",
+   "grams": 30,
+   "kcal": 160,
+   "protein": 4,
+   "carbs": 14,
+   "fat": 10,
+   "aliases": [
+    "namkeen"
+   ]
+  },
+  {
+   "id": "chips",
+   "en": "Potato chips",
+   "ur": "چپس",
+   "portionEn": "1 pack (30 g)",
+   "portionUr": "1 پیکٹ (30 گرام)",
+   "grams": 30,
+   "kcal": 160,
+   "protein": 2,
+   "carbs": 15,
+   "fat": 10,
+   "aliases": [
+    "crisps"
+   ]
+  },
+  {
+   "id": "popcorn",
+   "en": "Popcorn (plain)",
+   "ur": "پاپ کارن",
+   "portionEn": "1 cup (8 g)",
+   "portionUr": "1 کپ (8 گرام)",
+   "grams": 8,
+   "kcal": 31,
+   "protein": 1,
+   "carbs": 6,
+   "fat": 0.4
+  },
+  {
+   "id": "biscuits",
+   "en": "Biscuits",
+   "ur": "بسکٹ",
+   "portionEn": "3 biscuits (30 g)",
+   "portionUr": "3 بسکٹ (30 گرام)",
+   "grams": 30,
+   "kcal": 140,
+   "protein": 2,
+   "carbs": 21,
+   "fat": 5.5,
+   "aliases": [
+    "cookies"
+   ]
+  },
+  {
+   "id": "nan_khatai",
+   "en": "Nan khatai",
+   "ur": "نان خطائی",
+   "portionEn": "1 piece (25 g)",
+   "portionUr": "1 عدد (25 گرام)",
+   "grams": 25,
+   "kcal": 130,
+   "protein": 1.5,
+   "carbs": 14,
+   "fat": 7.5
+  },
+  {
+   "id": "bhunay_chanay",
+   "en": "Roasted chickpeas",
+   "ur": "بھنے ہوئے چنے",
+   "portionEn": "1 handful (30 g)",
+   "portionUr": "1 مٹھی (30 گرام)",
+   "grams": 30,
+   "kcal": 110,
+   "protein": 6,
+   "carbs": 17,
+   "fat": 2,
+   "aliases": [
+    "bhunay chanay",
+    "chana"
+   ]
+  },
+  {
+   "id": "macaroni",
+   "en": "Macaroni (desi style)",
+   "ur": "میکرونی",
+   "portionEn": "1 plate (250 g)",
+   "portionUr": "1 پلیٹ (250 گرام)",
+   "grams": 250,
+   "kcal": 400,
+   "protein": 12,
+   "carbs": 55,
+   "fat": 14,
+   "aliases": [
+    "pasta"
+   ]
+  },
+  {
+   "id": "chow_mein",
+   "en": "Chicken chow mein",
+   "ur": "چکن چاؤمین",
+   "portionEn": "1 plate (300 g)",
+   "portionUr": "1 پلیٹ (300 گرام)",
+   "grams": 300,
+   "kcal": 480,
+   "protein": 20,
+   "carbs": 55,
+   "fat": 20,
+   "aliases": [
+    "noodles"
+   ]
+  },
+  {
+   "id": "instant_noodles",
+   "en": "Instant noodles",
+   "ur": "انسٹنٹ نوڈلز",
+   "portionEn": "1 pack (75 g)",
+   "portionUr": "1 پیکٹ (75 گرام)",
+   "grams": 75,
+   "kcal": 350,
+   "protein": 7,
+   "carbs": 48,
+   "fat": 14,
+   "aliases": [
+    "noodles"
+   ]
+  },
+  {
+   "id": "corn_soup",
+   "en": "Chicken corn soup",
+   "ur": "چکن کارن سوپ",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 180,
+   "protein": 10,
+   "carbs": 22,
+   "fat": 5.5,
+   "aliases": [
+    "soup"
+   ]
+  },
+  {
+   "id": "hot_sour_soup",
+   "en": "Hot and sour soup",
+   "ur": "ہاٹ اینڈ ساور سوپ",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 150,
+   "protein": 8,
+   "carbs": 18,
+   "fat": 5,
+   "aliases": [
+    "soup"
+   ]
+  },
+  {
+   "id": "idli",
+   "en": "Idli",
+   "ur": "اڈلی",
+   "portionEn": "2 pieces (80 g)",
+   "portionUr": "2 عدد (80 گرام)",
+   "grams": 80,
+   "kcal": 120,
+   "protein": 4,
+   "carbs": 25,
+   "fat": 0.5
+  },
+  {
+   "id": "masala_dosa",
+   "en": "Masala dosa",
+   "ur": "مسالہ ڈوسا",
+   "portionEn": "1 piece (150 g)",
+   "portionUr": "1 عدد (150 گرام)",
+   "grams": 150,
+   "kcal": 350,
+   "protein": 7,
+   "carbs": 48,
+   "fat": 14,
+   "aliases": [
+    "dosa"
+   ]
+  },
+  {
+   "id": "zinger",
+   "en": "Zinger burger",
+   "ur": "زنگر برگر",
+   "portionEn": "1 piece (220 g)",
+   "portionUr": "1 عدد (220 گرام)",
+   "grams": 220,
+   "kcal": 560,
+   "protein": 26,
+   "carbs": 50,
+   "fat": 28,
+   "aliases": [
+    "burger"
+   ]
+  },
+  {
+   "id": "beef_burger",
+   "en": "Beef burger",
+   "ur": "بیف برگر",
+   "portionEn": "1 piece (200 g)",
+   "portionUr": "1 عدد (200 گرام)",
+   "grams": 200,
+   "kcal": 520,
+   "protein": 27,
+   "carbs": 40,
+   "fat": 27,
+   "aliases": [
+    "burger"
+   ]
+  },
+  {
+   "id": "pizza",
+   "en": "Pizza",
+   "ur": "پیزا",
+   "portionEn": "1 slice (110 g)",
+   "portionUr": "1 سلائس (110 گرام)",
+   "grams": 110,
+   "kcal": 290,
+   "protein": 12,
+   "carbs": 33,
+   "fat": 12
+  },
+  {
+   "id": "fries",
+   "en": "French fries (medium)",
+   "ur": "فرنچ فرائز",
+   "portionEn": "1 pack (110 g)",
+   "portionUr": "1 پیکٹ (110 گرام)",
+   "grams": 110,
+   "kcal": 340,
+   "protein": 4,
+   "carbs": 44,
+   "fat": 16,
+   "aliases": [
+    "chips"
+   ]
+  },
+  {
+   "id": "fried_chicken",
+   "en": "Fried chicken",
+   "ur": "فرائیڈ چکن",
+   "portionEn": "1 piece (120 g)",
+   "portionUr": "1 عدد (120 گرام)",
+   "grams": 120,
+   "kcal": 320,
+   "protein": 22,
+   "carbs": 10,
+   "fat": 21
+  },
+  {
+   "id": "broast",
+   "en": "Chicken broast",
+   "ur": "چکن بروسٹ",
+   "portionEn": "1 quarter (250 g)",
+   "portionUr": "1 چوتھائی (250 گرام)",
+   "grams": 250,
+   "kcal": 650,
+   "protein": 38,
+   "carbs": 25,
+   "fat": 44
+  },
+  {
+   "id": "club_sandwich",
+   "en": "Club sandwich",
+   "ur": "کلب سینڈوچ",
+   "portionEn": "1 plate (250 g)",
+   "portionUr": "1 پلیٹ (250 گرام)",
+   "grams": 250,
+   "kcal": 550,
+   "protein": 28,
+   "carbs": 45,
+   "fat": 28,
+   "aliases": [
+    "sandwich"
+   ]
+  },
+  {
+   "id": "chicken_sandwich",
+   "en": "Chicken sandwich",
+   "ur": "چکن سینڈوچ",
+   "portionEn": "1 piece (150 g)",
+   "portionUr": "1 عدد (150 گرام)",
+   "grams": 150,
+   "kcal": 320,
+   "protein": 18,
+   "carbs": 32,
+   "fat": 13,
+   "aliases": [
+    "sandwich"
+   ]
+  },
+  {
+   "id": "chicken_wrap",
+   "en": "Chicken wrap",
+   "ur": "چکن ریپ",
+   "portionEn": "1 piece (220 g)",
+   "portionUr": "1 عدد (220 گرام)",
+   "grams": 220,
+   "kcal": 480,
+   "protein": 25,
+   "carbs": 45,
+   "fat": 21
+  },
+  {
+   "id": "pasta_white",
+   "en": "Pasta in white sauce",
+   "ur": "وائٹ ساس پاستا",
+   "portionEn": "1 plate (300 g)",
+   "portionUr": "1 پلیٹ (300 گرام)",
+   "grams": 300,
+   "kcal": 600,
+   "protein": 22,
+   "carbs": 65,
+   "fat": 28,
+   "aliases": [
+    "pasta"
+   ]
+  },
+  {
+   "id": "halwa_puri",
+   "en": "Halwa puri breakfast",
+   "ur": "حلوہ پوری ناشتہ",
+   "portionEn": "2 puri + halwa + cholay (350 g)",
+   "portionUr": "2 پوری + حلوہ + چنے (350 گرام)",
+   "grams": 350,
+   "kcal": 900,
+   "protein": 18,
+   "carbs": 105,
+   "fat": 45,
+   "aliases": [
+    "nashta"
+   ]
+  },
+  {
+   "id": "oats_milk",
+   "en": "Oats with milk",
+   "ur": "دودھ میں دلیہ",
+   "portionEn": "1 bowl (250 g)",
+   "portionUr": "1 پیالہ (250 گرام)",
+   "grams": 250,
+   "kcal": 250,
+   "protein": 10,
+   "carbs": 38,
+   "fat": 6.5,
+   "aliases": [
+    "oatmeal",
+    "daliya",
+    "porridge"
+   ]
+  },
+  {
+   "id": "oats_dry",
+   "en": "Oats (dry)",
+   "ur": "جئی (خشک)",
+   "portionEn": "½ cup (40 g)",
+   "portionUr": "½ کپ (40 گرام)",
+   "grams": 40,
+   "kcal": 150,
+   "protein": 5,
+   "carbs": 27,
+   "fat": 2.7,
+   "aliases": [
+    "oatmeal"
+   ]
+  },
+  {
+   "id": "cornflakes",
+   "en": "Cornflakes with milk",
+   "ur": "کارن فلیکس دودھ کے ساتھ",
+   "portionEn": "1 bowl (180 g)",
+   "portionUr": "1 پیالہ (180 گرام)",
+   "grams": 180,
+   "kcal": 200,
+   "protein": 7,
+   "carbs": 34,
+   "fat": 4.5,
+   "aliases": [
+    "cereal"
+   ]
+  },
+  {
+   "id": "peanut_butter",
+   "en": "Peanut butter",
+   "ur": "پینٹ بٹر",
+   "portionEn": "1 tbsp (16 g)",
+   "portionUr": "1 کھانے کا چمچ (16 گرام)",
+   "grams": 16,
+   "kcal": 95,
+   "protein": 3.5,
+   "carbs": 3.5,
+   "fat": 8
+  },
+  {
+   "id": "butter",
+   "en": "Butter",
+   "ur": "مکھن",
+   "portionEn": "1 tsp (5 g)",
+   "portionUr": "1 چائے کا چمچ (5 گرام)",
+   "grams": 5,
+   "kcal": 36,
+   "protein": 0,
+   "carbs": 0,
+   "fat": 4,
+   "aliases": [
+    "makhan"
+   ]
+  },
+  {
+   "id": "jam",
+   "en": "Jam",
+   "ur": "جام",
+   "portionEn": "1 tbsp (20 g)",
+   "portionUr": "1 کھانے کا چمچ (20 گرام)",
+   "grams": 20,
+   "kcal": 55,
+   "protein": 0,
+   "carbs": 14,
+   "fat": 0
+  },
+  {
+   "id": "honey",
+   "en": "Honey",
+   "ur": "شہد",
+   "portionEn": "1 tbsp (21 g)",
+   "portionUr": "1 کھانے کا چمچ (21 گرام)",
+   "grams": 21,
+   "kcal": 64,
+   "protein": 0,
+   "carbs": 17,
+   "fat": 0,
+   "aliases": [
+    "shehad"
+   ]
+  },
+  {
+   "id": "cheese_slice",
+   "en": "Cheese slice",
+   "ur": "چیز سلائس",
+   "portionEn": "1 slice (20 g)",
+   "portionUr": "1 سلائس (20 گرام)",
+   "grams": 20,
+   "kcal": 65,
+   "protein": 4,
+   "carbs": 1,
+   "fat": 5,
+   "aliases": [
+    "cheese"
+   ]
+  },
+  {
+   "id": "paneer",
+   "en": "Paneer",
+   "ur": "پنیر",
+   "portionEn": "100 g",
+   "portionUr": "100 گرام",
+   "grams": 100,
+   "kcal": 300,
+   "protein": 18,
+   "carbs": 4,
+   "fat": 23,
+   "aliases": [
+    "cottage cheese"
+   ]
+  },
+  {
+   "id": "milk_whole",
+   "en": "Milk (full cream)",
+   "ur": "دودھ",
+   "portionEn": "1 glass (250 g)",
+   "portionUr": "1 گلاس (250 گرام)",
+   "grams": 250,
+   "kcal": 160,
+   "protein": 8,
+   "carbs": 12,
+   "fat": 8.5,
+   "aliases": [
+    "doodh"
+   ]
+  },
+  {
+   "id": "milk_lowfat",
+   "en": "Milk (low fat)",
+   "ur": "کم چکنائی والا دودھ",
+   "portionEn": "1 glass (250 g)",
+   "portionUr": "1 گلاس (250 گرام)",
+   "grams": 250,
+   "kcal": 110,
+   "protein": 8.5,
+   "carbs": 12.5,
+   "fat": 2.5,
+   "aliases": [
+    "doodh"
+   ]
+  },
+  {
+   "id": "yogurt",
+   "en": "Yogurt (dahi)",
+   "ur": "دہی",
+   "portionEn": "1 cup (200 g)",
+   "portionUr": "1 کپ (200 گرام)",
+   "grams": 200,
+   "kcal": 120,
+   "protein": 7,
+   "carbs": 9,
+   "fat": 6.5,
+   "aliases": [
+    "dahi",
+    "curd"
+   ]
+  },
+  {
+   "id": "greek_yogurt",
+   "en": "Greek yogurt (plain)",
+   "ur": "یونانی دہی",
+   "portionEn": "1 cup (170 g)",
+   "portionUr": "1 کپ (170 گرام)",
+   "grams": 170,
+   "kcal": 100,
+   "protein": 17,
+   "carbs": 6,
+   "fat": 0.7,
+   "aliases": [
+    "dahi"
+   ]
+  },
+  {
+   "id": "lassi_sweet",
+   "en": "Sweet lassi",
+   "ur": "میٹھی لسی",
+   "portionEn": "1 glass (300 g)",
+   "portionUr": "1 گلاس (300 گرام)",
+   "grams": 300,
+   "kcal": 250,
+   "protein": 8,
+   "carbs": 38,
+   "fat": 7
+  },
+  {
+   "id": "lassi_salty",
+   "en": "Salty lassi",
+   "ur": "نمکین لسی",
+   "portionEn": "1 glass (300 g)",
+   "portionUr": "1 گلاس (300 گرام)",
+   "grams": 300,
+   "kcal": 140,
+   "protein": 7,
+   "carbs": 10,
+   "fat": 8
+  },
+  {
+   "id": "chai",
+   "en": "Doodh patti chai (with sugar)",
+   "ur": "دودھ پتی چائے (چینی کے ساتھ)",
+   "portionEn": "1 cup (200 g)",
+   "portionUr": "1 کپ (200 گرام)",
+   "grams": 200,
+   "kcal": 110,
+   "protein": 3.5,
+   "carbs": 15,
+   "fat": 4,
+   "aliases": [
+    "tea",
+    "chay"
+   ]
+  },
+  {
+   "id": "chai_no_sugar",
+   "en": "Tea with milk (no sugar)",
+   "ur": "چائے (بغیر چینی)",
+   "portionEn": "1 cup (150 g)",
+   "portionUr": "1 کپ (150 گرام)",
+   "grams": 150,
+   "kcal": 40,
+   "protein": 1.5,
+   "carbs": 3,
+   "fat": 2,
+   "aliases": [
+    "tea",
+    "chay"
+   ]
+  },
+  {
+   "id": "green_tea",
+   "en": "Green tea",
+   "ur": "سبز چائے",
+   "portionEn": "1 cup (240 g)",
+   "portionUr": "1 کپ (240 گرام)",
+   "grams": 240,
+   "kcal": 2,
+   "protein": 0,
+   "carbs": 0.5,
+   "fat": 0,
+   "aliases": [
+    "qehwa",
+    "kahwa"
+   ]
+  },
+  {
+   "id": "black_coffee",
+   "en": "Black coffee",
+   "ur": "بلیک کافی",
+   "portionEn": "1 cup (240 g)",
+   "portionUr": "1 کپ (240 گرام)",
+   "grams": 240,
+   "kcal": 2,
+   "protein": 0.3,
+   "carbs": 0,
+   "fat": 0,
+   "aliases": [
+    "coffee"
+   ]
+  },
+  {
+   "id": "cappuccino",
+   "en": "Cappuccino",
+   "ur": "کیپوچینو",
+   "portionEn": "1 cup (240 g)",
+   "portionUr": "1 کپ (240 گرام)",
+   "grams": 240,
+   "kcal": 120,
+   "protein": 6,
+   "carbs": 10,
+   "fat": 6,
+   "aliases": [
+    "coffee"
+   ]
+  },
+  {
+   "id": "soft_drink",
+   "en": "Soft drink",
+   "ur": "کولڈ ڈرنک",
+   "portionEn": "1 can (330 g)",
+   "portionUr": "1 کین (330 گرام)",
+   "grams": 330,
+   "kcal": 140,
+   "protein": 0,
+   "carbs": 35,
+   "fat": 0,
+   "aliases": [
+    "cola",
+    "coke",
+    "pepsi",
+    "cold drink"
+   ]
+  },
+  {
+   "id": "energy_drink",
+   "en": "Energy drink",
+   "ur": "انرجی ڈرنک",
+   "portionEn": "1 can (250 g)",
+   "portionUr": "1 کین (250 گرام)",
+   "grams": 250,
+   "kcal": 110,
+   "protein": 0,
+   "carbs": 28,
+   "fat": 0
+  },
+  {
+   "id": "orange_juice",
+   "en": "Fresh orange juice",
+   "ur": "مالٹے کا جوس",
+   "portionEn": "1 glass (250 g)",
+   "portionUr": "1 گلاس (250 گرام)",
+   "grams": 250,
+   "kcal": 112,
+   "protein": 1.7,
+   "carbs": 26,
+   "fat": 0.5,
+   "aliases": [
+    "juice",
+    "kinnow"
+   ]
+  },
+  {
+   "id": "sugarcane_juice",
+   "en": "Sugarcane juice",
+   "ur": "گنے کا رس",
+   "portionEn": "1 glass (250 g)",
+   "portionUr": "1 گلاس (250 گرام)",
+   "grams": 250,
+   "kcal": 180,
+   "protein": 0,
+   "carbs": 45,
+   "fat": 0,
+   "aliases": [
+    "ganna"
+   ]
+  },
+  {
+   "id": "mango_shake",
+   "en": "Mango shake",
+   "ur": "آم کا شیک",
+   "portionEn": "1 glass (300 g)",
+   "portionUr": "1 گلاس (300 گرام)",
+   "grams": 300,
+   "kcal": 300,
+   "protein": 8,
+   "carbs": 50,
+   "fat": 7.5,
+   "aliases": [
+    "milkshake"
+   ]
+  },
+  {
+   "id": "banana_shake",
+   "en": "Banana shake",
+   "ur": "کیلے کا شیک",
+   "portionEn": "1 glass (300 g)",
+   "portionUr": "1 گلاس (300 گرام)",
+   "grams": 300,
+   "kcal": 280,
+   "protein": 9,
+   "carbs": 45,
+   "fat": 7,
+   "aliases": [
+    "milkshake"
+   ]
+  },
+  {
+   "id": "rooh_afza_milk",
+   "en": "Rooh Afza with milk",
+   "ur": "روح افزا دودھ",
+   "portionEn": "1 glass (250 g)",
+   "portionUr": "1 گلاس (250 گرام)",
+   "grams": 250,
+   "kcal": 230,
+   "protein": 8,
+   "carbs": 33,
+   "fat": 7.5,
+   "aliases": [
+    "doodh"
+   ]
+  },
+  {
+   "id": "nimbu_pani",
+   "en": "Lemonade (nimbu pani)",
+   "ur": "لیموں پانی",
+   "portionEn": "1 glass (250 g)",
+   "portionUr": "1 گلاس (250 گرام)",
+   "grams": 250,
+   "kcal": 80,
+   "protein": 0,
+   "carbs": 20,
+   "fat": 0,
+   "aliases": [
+    "shikanjbeen"
+   ]
+  },
+  {
+   "id": "whey",
+   "en": "Whey protein",
+   "ur": "وے پروٹین",
+   "portionEn": "1 scoop (30 g)",
+   "portionUr": "1 اسکوپ (30 گرام)",
+   "grams": 30,
+   "kcal": 120,
+   "protein": 24,
+   "carbs": 3,
+   "fat": 1.5,
+   "aliases": [
+    "protein shake"
+   ]
+  },
+  {
+   "id": "protein_bar",
+   "en": "Protein bar",
+   "ur": "پروٹین بار",
+   "portionEn": "1 piece (60 g)",
+   "portionUr": "1 عدد (60 گرام)",
+   "grams": 60,
+   "kcal": 220,
+   "protein": 20,
+   "carbs": 22,
+   "fat": 7
+  },
+  {
+   "id": "granola_bar",
+   "en": "Granola bar",
+   "ur": "گرینولا بار",
+   "portionEn": "1 piece (35 g)",
+   "portionUr": "1 عدد (35 گرام)",
+   "grams": 35,
+   "kcal": 150,
+   "protein": 3,
+   "carbs": 24,
+   "fat": 5
+  },
+  {
+   "id": "gulab_jamun",
+   "en": "Gulab jamun",
+   "ur": "گلاب جامن",
+   "portionEn": "1 piece (40 g)",
+   "portionUr": "1 عدد (40 گرام)",
+   "grams": 40,
+   "kcal": 150,
+   "protein": 2,
+   "carbs": 22,
+   "fat": 6
+  },
+  {
+   "id": "jalebi",
+   "en": "Jalebi",
+   "ur": "جلیبی",
+   "portionEn": "50 g (50 g)",
+   "portionUr": "50 گرام (50 گرام)",
+   "grams": 50,
+   "kcal": 200,
+   "protein": 1.5,
+   "carbs": 30,
+   "fat": 8
+  },
+  {
+   "id": "kheer",
+   "en": "Kheer",
+   "ur": "کھیر",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 220,
+   "protein": 6,
+   "carbs": 32,
+   "fat": 7.5
+  },
+  {
+   "id": "gajar_halwa",
+   "en": "Gajar ka halwa",
+   "ur": "گاجر کا حلوہ",
+   "portionEn": "½ cup (100 g)",
+   "portionUr": "½ کپ (100 گرام)",
+   "grams": 100,
+   "kcal": 280,
+   "protein": 5,
+   "carbs": 35,
+   "fat": 14,
+   "aliases": [
+    "halwa"
+   ]
+  },
+  {
+   "id": "suji_halwa",
+   "en": "Suji halwa",
+   "ur": "سوجی کا حلوہ",
+   "portionEn": "½ cup (100 g)",
+   "portionUr": "½ کپ (100 گرام)",
+   "grams": 100,
+   "kcal": 330,
+   "protein": 4,
+   "carbs": 42,
+   "fat": 16,
+   "aliases": [
+    "halwa"
+   ]
+  },
+  {
+   "id": "barfi",
+   "en": "Barfi",
+   "ur": "برفی",
+   "portionEn": "1 piece (30 g)",
+   "portionUr": "1 عدد (30 گرام)",
+   "grams": 30,
+   "kcal": 130,
+   "protein": 3,
+   "carbs": 16,
+   "fat": 6,
+   "aliases": [
+    "mithai"
+   ]
+  },
+  {
+   "id": "laddu",
+   "en": "Laddu",
+   "ur": "لڈو",
+   "portionEn": "1 piece (40 g)",
+   "portionUr": "1 عدد (40 گرام)",
+   "grams": 40,
+   "kcal": 180,
+   "protein": 3,
+   "carbs": 22,
+   "fat": 9,
+   "aliases": [
+    "mithai"
+   ]
+  },
+  {
+   "id": "ras_malai",
+   "en": "Ras malai",
+   "ur": "رس ملائی",
+   "portionEn": "2 pieces (100 g)",
+   "portionUr": "2 عدد (100 گرام)",
+   "grams": 100,
+   "kcal": 220,
+   "protein": 8,
+   "carbs": 26,
+   "fat": 9.5,
+   "aliases": [
+    "mithai"
+   ]
+  },
+  {
+   "id": "sheer_khurma",
+   "en": "Sheer khurma",
+   "ur": "شیر خرمہ",
+   "portionEn": "1 bowl (200 g)",
+   "portionUr": "1 پیالہ (200 گرام)",
+   "grams": 200,
+   "kcal": 350,
+   "protein": 9,
+   "carbs": 45,
+   "fat": 15
+  },
+  {
+   "id": "custard",
+   "en": "Custard",
+   "ur": "کسٹرڈ",
+   "portionEn": "1 bowl (150 g)",
+   "portionUr": "1 پیالہ (150 گرام)",
+   "grams": 150,
+   "kcal": 180,
+   "protein": 5,
+   "carbs": 28,
+   "fat": 5.5
+  },
+  {
+   "id": "kulfi",
+   "en": "Kulfi",
+   "ur": "قلفی",
+   "portionEn": "1 piece (70 g)",
+   "portionUr": "1 عدد (70 گرام)",
+   "grams": 70,
+   "kcal": 160,
+   "protein": 4,
+   "carbs": 18,
+   "fat": 8
+  },
+  {
+   "id": "falooda",
+   "en": "Falooda",
+   "ur": "فالودہ",
+   "portionEn": "1 glass (300 g)",
+   "portionUr": "1 گلاس (300 گرام)",
+   "grams": 300,
+   "kcal": 400,
+   "protein": 9,
+   "carbs": 60,
+   "fat": 13
+  },
+  {
+   "id": "ice_cream",
+   "en": "Ice cream",
+   "ur": "آئس کریم",
+   "portionEn": "1 scoop (70 g)",
+   "portionUr": "1 اسکوپ (70 گرام)",
+   "grams": 70,
+   "kcal": 140,
+   "protein": 2.5,
+   "carbs": 16,
+   "fat": 7.5
+  },
+  {
+   "id": "chocolate",
+   "en": "Milk chocolate bar",
+   "ur": "چاکلیٹ",
+   "portionEn": "1 piece (45 g)",
+   "portionUr": "1 عدد (45 گرام)",
+   "grams": 45,
+   "kcal": 240,
+   "protein": 3,
+   "carbs": 26,
+   "fat": 14
+  },
+  {
+   "id": "dark_chocolate",
+   "en": "Dark chocolate",
+   "ur": "ڈارک چاکلیٹ",
+   "portionEn": "2 squares (20 g)",
+   "portionUr": "2 ٹکڑے (20 گرام)",
+   "grams": 20,
+   "kcal": 120,
+   "protein": 1.5,
+   "carbs": 9,
+   "fat": 8.5
+  },
+  {
+   "id": "cake",
+   "en": "Cake",
+   "ur": "کیک",
+   "portionEn": "1 slice (80 g)",
+   "portionUr": "1 سلائس (80 گرام)",
+   "grams": 80,
+   "kcal": 300,
+   "protein": 4,
+   "carbs": 40,
+   "fat": 14
+  },
+  {
+   "id": "banana",
+   "en": "Banana",
+   "ur": "کیلا",
+   "portionEn": "1 medium (118 g)",
+   "portionUr": "1 درمیانہ (118 گرام)",
+   "grams": 118,
+   "kcal": 105,
+   "protein": 1.3,
+   "carbs": 27,
+   "fat": 0.4,
+   "aliases": [
+    "kela"
+   ]
+  },
+  {
+   "id": "apple",
+   "en": "Apple",
+   "ur": "سیب",
+   "portionEn": "1 medium (180 g)",
+   "portionUr": "1 درمیانہ (180 گرام)",
+   "grams": 180,
+   "kcal": 95,
+   "protein": 0.5,
+   "carbs": 25,
+   "fat": 0.3,
+   "aliases": [
+    "saib",
+    "seb"
+   ]
+  },
+  {
+   "id": "mango",
+   "en": "Mango",
+   "ur": "آم",
+   "portionEn": "1 medium (200 g)",
+   "portionUr": "1 درمیانہ (200 گرام)",
+   "grams": 200,
+   "kcal": 120,
+   "protein": 1.6,
+   "carbs": 30,
+   "fat": 0.8,
+   "aliases": [
+    "aam"
+   ]
+  },
+  {
+   "id": "orange",
+   "en": "Orange (kinnow)",
+   "ur": "کینو",
+   "portionEn": "1 medium (130 g)",
+   "portionUr": "1 درمیانہ (130 گرام)",
+   "grams": 130,
+   "kcal": 60,
+   "protein": 1.2,
+   "carbs": 15,
+   "fat": 0.2,
+   "aliases": [
+    "kinnow",
+    "malta"
+   ]
+  },
+  {
+   "id": "guava",
+   "en": "Guava",
+   "ur": "امرود",
+   "portionEn": "1 medium (100 g)",
+   "portionUr": "1 درمیانہ (100 گرام)",
+   "grams": 100,
+   "kcal": 68,
+   "protein": 2.6,
+   "carbs": 14,
+   "fat": 1,
+   "aliases": [
+    "amrood"
+   ]
+  },
+  {
+   "id": "dates",
+   "en": "Dates",
+   "ur": "کھجور",
+   "portionEn": "3 dates (24 g)",
+   "portionUr": "3 کھجوریں (24 گرام)",
+   "grams": 24,
+   "kcal": 67,
+   "protein": 0.6,
+   "carbs": 18,
+   "fat": 0,
+   "aliases": [
+    "khajoor"
+   ]
+  },
+  {
+   "id": "grapes",
+   "en": "Grapes",
+   "ur": "انگور",
+   "portionEn": "1 cup (150 g)",
+   "portionUr": "1 کپ (150 گرام)",
+   "grams": 150,
+   "kcal": 104,
+   "protein": 1,
+   "carbs": 27,
+   "fat": 0.2,
+   "aliases": [
+    "angoor"
+   ]
+  },
+  {
+   "id": "watermelon",
+   "en": "Watermelon",
+   "ur": "تربوز",
+   "portionEn": "1 cup (150 g)",
+   "portionUr": "1 کپ (150 گرام)",
+   "grams": 150,
+   "kcal": 46,
+   "protein": 0.9,
+   "carbs": 11.5,
+   "fat": 0.2,
+   "aliases": [
+    "tarbooz"
+   ]
+  },
+  {
+   "id": "melon",
+   "en": "Melon (kharbooza)",
+   "ur": "خربوزہ",
+   "portionEn": "1 cup (160 g)",
+   "portionUr": "1 کپ (160 گرام)",
+   "grams": 160,
+   "kcal": 54,
+   "protein": 1.3,
+   "carbs": 13,
+   "fat": 0.3,
+   "aliases": [
+    "kharbooza"
+   ]
+  },
+  {
+   "id": "pomegranate",
+   "en": "Pomegranate",
+   "ur": "انار",
+   "portionEn": "½ fruit (140 g)",
+   "portionUr": "آدھا انار (140 گرام)",
+   "grams": 140,
+   "kcal": 115,
+   "protein": 2.3,
+   "carbs": 26,
+   "fat": 1.6,
+   "aliases": [
+    "anar"
+   ]
+  },
+  {
+   "id": "papaya",
+   "en": "Papaya",
+   "ur": "پپیتا",
+   "portionEn": "1 cup (145 g)",
+   "portionUr": "1 کپ (145 گرام)",
+   "grams": 145,
+   "kcal": 62,
+   "protein": 0.7,
+   "carbs": 16,
+   "fat": 0.4,
+   "aliases": [
+    "papita"
+   ]
+  },
+  {
+   "id": "pear",
+   "en": "Pear",
+   "ur": "ناشپاتی",
+   "portionEn": "1 medium (180 g)",
+   "portionUr": "1 درمیانہ (180 گرام)",
+   "grams": 180,
+   "kcal": 100,
+   "protein": 0.6,
+   "carbs": 27,
+   "fat": 0.2,
+   "aliases": [
+    "nashpati"
+   ]
+  },
+  {
+   "id": "peach",
+   "en": "Peach",
+   "ur": "آڑو",
+   "portionEn": "1 medium (150 g)",
+   "portionUr": "1 درمیانہ (150 گرام)",
+   "grams": 150,
+   "kcal": 60,
+   "protein": 1.4,
+   "carbs": 14,
+   "fat": 0.4,
+   "aliases": [
+    "aaru"
+   ]
+  },
+  {
+   "id": "strawberries",
+   "en": "Strawberries",
+   "ur": "اسٹرابیری",
+   "portionEn": "1 cup (150 g)",
+   "portionUr": "1 کپ (150 گرام)",
+   "grams": 150,
+   "kcal": 48,
+   "protein": 1,
+   "carbs": 11.5,
+   "fat": 0.5
+  },
+  {
+   "id": "chikoo",
+   "en": "Chikoo (sapodilla)",
+   "ur": "چیکو",
+   "portionEn": "1 medium (100 g)",
+   "portionUr": "1 درمیانہ (100 گرام)",
+   "grams": 100,
+   "kcal": 83,
+   "protein": 0.4,
+   "carbs": 20,
+   "fat": 1.1
+  },
+  {
+   "id": "dried_apricot",
+   "en": "Dried apricots",
+   "ur": "خشک خوبانی",
+   "portionEn": "5 pieces (35 g)",
+   "portionUr": "5 عدد (35 گرام)",
+   "grams": 35,
+   "kcal": 84,
+   "protein": 1.2,
+   "carbs": 22,
+   "fat": 0.2,
+   "aliases": [
+    "khubani"
+   ]
+  },
+  {
+   "id": "raisins",
+   "en": "Raisins",
+   "ur": "کشمش",
+   "portionEn": "2 tbsp (20 g)",
+   "portionUr": "2 کھانے کے چمچ (20 گرام)",
+   "grams": 20,
+   "kcal": 60,
+   "protein": 0.6,
+   "carbs": 16,
+   "fat": 0.1,
+   "aliases": [
+    "kishmish"
+   ]
+  },
+  {
+   "id": "almonds",
+   "en": "Almonds",
+   "ur": "بادام",
+   "portionEn": "10 almonds (14 g)",
+   "portionUr": "10 بادام (14 گرام)",
+   "grams": 14,
+   "kcal": 82,
+   "protein": 3,
+   "carbs": 3,
+   "fat": 7,
+   "aliases": [
+    "badam"
+   ]
+  },
+  {
+   "id": "walnuts",
+   "en": "Walnuts",
+   "ur": "اخروٹ",
+   "portionEn": "5 halves (15 g)",
+   "portionUr": "5 ٹکڑے (15 گرام)",
+   "grams": 15,
+   "kcal": 98,
+   "protein": 2.3,
+   "carbs": 2,
+   "fat": 9.8,
+   "aliases": [
+    "akhrot"
+   ]
+  },
+  {
+   "id": "peanuts",
+   "en": "Peanuts",
+   "ur": "مونگ پھلی",
+   "portionEn": "1 handful (28 g)",
+   "portionUr": "1 مٹھی (28 گرام)",
+   "grams": 28,
+   "kcal": 160,
+   "protein": 7,
+   "carbs": 4.5,
+   "fat": 14,
+   "aliases": [
+    "moongphali"
+   ]
+  },
+  {
+   "id": "cashews",
+   "en": "Cashews",
+   "ur": "کاجو",
+   "portionEn": "10 cashews (15 g)",
+   "portionUr": "10 کاجو (15 گرام)",
+   "grams": 15,
+   "kcal": 85,
+   "protein": 2.7,
+   "carbs": 4.5,
+   "fat": 6.6,
+   "aliases": [
+    "kaju"
+   ]
+  },
+  {
+   "id": "pistachios",
+   "en": "Pistachios",
+   "ur": "پستہ",
+   "portionEn": "20 pistachios (15 g)",
+   "portionUr": "20 پستے (15 گرام)",
+   "grams": 15,
+   "kcal": 85,
+   "protein": 3,
+   "carbs": 4,
+   "fat": 7,
+   "aliases": [
+    "pista"
+   ]
+  },
+  {
+   "id": "mixed_nuts",
+   "en": "Mixed dry fruit",
+   "ur": "مکس ڈرائی فروٹ",
+   "portionEn": "1 handful (30 g)",
+   "portionUr": "1 مٹھی (30 گرام)",
+   "grams": 30,
+   "kcal": 170,
+   "protein": 5,
+   "carbs": 7,
+   "fat": 14,
+   "aliases": [
+    "dry fruit",
+    "mewa"
+   ]
+  },
+  {
+   "id": "oil",
+   "en": "Cooking oil",
+   "ur": "کوکنگ آئل",
+   "portionEn": "1 tbsp (14 g)",
+   "portionUr": "1 کھانے کا چمچ (14 گرام)",
+   "grams": 14,
+   "kcal": 124,
+   "protein": 0,
+   "carbs": 0,
+   "fat": 14,
+   "aliases": [
+    "tel"
+   ]
+  },
+  {
+   "id": "ghee",
+   "en": "Desi ghee",
+   "ur": "دیسی گھی",
+   "portionEn": "1 tsp (5 g)",
+   "portionUr": "1 چائے کا چمچ (5 گرام)",
+   "grams": 5,
+   "kcal": 45,
+   "protein": 0,
+   "carbs": 0,
+   "fat": 5
+  },
+  {
+   "id": "sugar",
+   "en": "Sugar",
+   "ur": "چینی",
+   "portionEn": "1 tsp (4 g)",
+   "portionUr": "1 چائے کا چمچ (4 گرام)",
+   "grams": 4,
+   "kcal": 16,
+   "protein": 0,
+   "carbs": 4,
+   "fat": 0,
+   "aliases": [
+    "cheeni"
+   ]
+  },
+  {
+   "id": "ketchup",
+   "en": "Ketchup",
+   "ur": "کیچپ",
+   "portionEn": "1 tbsp (17 g)",
+   "portionUr": "1 کھانے کا چمچ (17 گرام)",
+   "grams": 17,
+   "kcal": 20,
+   "protein": 0.2,
+   "carbs": 5,
+   "fat": 0
+  },
+  {
+   "id": "mayonnaise",
+   "en": "Mayonnaise",
+   "ur": "مایونیز",
+   "portionEn": "1 tbsp (14 g)",
+   "portionUr": "1 کھانے کا چمچ (14 گرام)",
+   "grams": 14,
+   "kcal": 95,
+   "protein": 0.1,
+   "carbs": 0.1,
+   "fat": 10.5,
+   "aliases": [
+    "mayo"
+   ]
+  }
+ ]
+}
