@@ -129,15 +129,15 @@ class DemoMotion {
 /// Segment lengths in body units.
 abstract final class Body {
   static const torso = 0.30;
-  static const neck = 0.10;
+  static const neck = 0.085;
   static const headR = 0.065;
   static const upperArm = 0.16;
   static const forearm = 0.15;
   static const thigh = 0.22;
   static const shin = 0.21;
   static const foot = 0.07;
-  static const shoulderHalf = 0.08;
-  static const hipHalf = 0.05;
+  static const shoulderHalf = 0.095;
+  static const hipHalf = 0.042;
 }
 
 /// Joint positions. Lists hold [near, far].
@@ -195,9 +195,11 @@ Skeleton buildSkeleton(DemoPose p, DemoView view, DemoAnchor anchor) {
   // Sideways unit vector across the body (front view only).
   final across = Offset(-spine.dy, spine.dx);
   final front = view == DemoView.front;
+  // Shoulder joints sit a little below the base of the neck
+  final shoulderLine = neck - spine * 0.035;
   final shoulder = front
-      ? [neck + across * Body.shoulderHalf, neck - across * Body.shoulderHalf]
-      : [neck, neck];
+      ? [shoulderLine + across * Body.shoulderHalf, shoulderLine - across * Body.shoulderHalf]
+      : [shoulderLine, shoulderLine];
   final hip = front
       ? [pelvis + across * Body.hipHalf, pelvis - across * Body.hipHalf]
       : [pelvis, pelvis];

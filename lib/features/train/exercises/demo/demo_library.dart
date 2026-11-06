@@ -47,8 +47,8 @@ const _seatLeg = Limb(90, 90);
 /// Flat bench under a body lying on its back, head left (anchor: pelvis).
 const _bench = [
   DemoProp.pad(Offset(-0.44, 0.03), Offset(0.12, 0.075)),
-  DemoProp.line(Offset(-0.38, 0.075), Offset(-0.38, 0.27), width: 0.03),
-  DemoProp.line(Offset(0.06, 0.075), Offset(0.06, 0.27), width: 0.03),
+  DemoProp.line(Offset(-0.38, 0.075), Offset(-0.38, 0.2), width: 0.03),
+  DemoProp.line(Offset(0.06, 0.075), Offset(0.06, 0.2), width: 0.03),
 ];
 const _benchLeg = Limb(100, 90);
 

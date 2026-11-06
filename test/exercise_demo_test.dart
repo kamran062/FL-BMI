@@ -42,7 +42,7 @@ void main() {
   });
 
   test('every animation paints at every phase', () {
-    const colors = DemoColors(body: Colors.black, far: Colors.grey, accent: Colors.green, prop: Colors.black12);
+    const colors = DemoColors(dark: false, accent: Colors.green, prop: Colors.black12);
     for (final e in catalog.exercises) {
       final m = DemoLibrary.motionFor(e.id)!;
       final frame = DemoFrame.of(m);
