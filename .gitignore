@@ -53,8 +53,6 @@ android/key.properties
 .env.json
 
 # Cloud Functions
-functions/node_modules/
-entitlement_private.pem
 *.p8
 play-service-account*.json
 .claude/worktrees/

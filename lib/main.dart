@@ -91,7 +91,7 @@ void main() async {
     // Consent (UMP) is gathered first; no ad is requested before it completes.
     AdService.instance.initialize();
     // Store connection after the first frame too; premium state is read
-    // from the saved signed entitlement inside.
+    // from the saved entitlement inside.
     purchases.init();
     BackupExclusion.apply();
   });

@@ -1,4 +1,5 @@
 import 'package:bmi_health/features/premium/paywall_screen.dart';
+import 'package:bmi_health/features/premium/entitlement.dart';
 import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ void main() {
     addTearDown(tester.view.reset);
 
     await tester.pumpWidget(ChangeNotifierProvider.value(
-      value: PurchaseService(publicKey: ''), // no store products loaded
+      value: PurchaseService(store: MemoryEntitlementStore()), // no store products loaded
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

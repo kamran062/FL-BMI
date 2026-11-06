@@ -21,6 +21,7 @@ under that rule.
 | Progress photos | Encrypted files in app storage |
 | Camera frames (rep counter, barcode) | Analysed in memory, never saved |
 | Watch heart rate / set taps | Phone ↔ own watch only |
+| Premium status | Saved on the phone (secure storage); purchases go through Google Play / the App Store only, we run no purchase server |
 
 Cloud backup and device transfer are switched off (Android) / excluded
 (iOS). The user's own encrypted backup file is created by them and stored
@@ -34,7 +35,6 @@ where they choose; we cannot read it, so it is not collection either.
 | **Approximate location** (from IP) | Google AdMob | Ads shown | Advertising | Yes — consent | No |
 | **App interactions, diagnostics** | Google AdMob | Ads shown | Advertising, fraud prevention | Yes — consent | No |
 | **Crash logs, diagnostics** | Sentry | Only if `SENTRY_DSN` is set | App functionality (crash fixing) | No | No |
-| **Purchase history** (purchase token, product) | Our verification server → Google / Apple | Buying / restoring premium | App functionality | Yes | **Yes** (nothing stored) |
 | **Other user-generated content** (coach questions) | Our server → Anthropic | Using the AI coach | App functionality | Yes, with consent screen | **Yes** |
 | **Photos** (meal photo) | Our server → Anthropic | Photo calorie estimate | App functionality | Yes, with consent screen | **Yes** |
 | **Health info / fitness info** (age, sex, weight, goal, experience, training days) | Our server → Anthropic | With each coach question | App functionality (personalised answers) | Yes, with consent screen | **Yes** |
@@ -42,6 +42,8 @@ where they choose; we cannot read it, so it is not collection either.
 | Map area being viewed | OpenStreetMap tile server | Opening the timeline map | App functionality | Yes | See note |
 
 Notes:
+- **Purchases:** handled entirely by Google Play Billing / StoreKit; the
+  app sends nothing to us, so purchase history is not collected by us.
 - **Sharing vs collection (Play):** Anthropic, Sentry and the stores act as
   service providers processing on our behalf, so mark these as *collected*,
   not *shared*. **AdMob is collection by a third-party SDK for advertising** —
@@ -65,7 +67,7 @@ Notes:
 - **Data Linked to You:** none (no accounts).
 - **Data Not Linked to You:** Coarse location, Product interaction,
   Advertising data (AdMob); Crash data, Performance data (Sentry, if
-  enabled); Purchase history (verification); Health & Fitness, Photos,
+  enabled); Health & Fitness, Photos,
   Other user content (AI features, only when used).
 
 ## Health-specific declarations
