@@ -4540,6 +4540,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear food'**
   String get foodsClear;
+
+  /// Caption under the drawn exercise animation shown until a filmed video exists
+  ///
+  /// In en, this message translates to:
+  /// **'Animated guide · video coming soon'**
+  String get demoCaption;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

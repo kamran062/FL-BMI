@@ -2536,4 +2536,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get foodsClear => 'کھانا ہٹائیں';
+
+  @override
+  String get demoCaption => 'اینیمیٹڈ رہنمائی · ویڈیو جلد آ رہی ہے';
 }

@@ -1,3 +1,4 @@
+import 'package:bmi_health/features/train/exercises/demo/exercise_demo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -42,7 +43,9 @@ void main() {
 
     await tapText(tester, 'Goblet Squat');
     expect(find.text('HOW TO DO IT'), findsOneWidget); // overline labels are upper-case
-    expect(find.text('Video coming soon'), findsOneWidget);
+    // No filmed clip yet: the drawn animation stands in
+    expect(find.byType(ExerciseDemo), findsOneWidget);
+    expect(find.text('Animated guide · video coming soon'), findsOneWidget);
   });
 
   testWidgets('log a workout from start to finish', (tester) async {

@@ -2560,4 +2560,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get foodsClear => 'Clear food';
+
+  @override
+  String get demoCaption => 'Animated guide · video coming soon';
 }

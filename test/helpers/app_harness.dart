@@ -26,12 +26,14 @@ import 'package:bmi_health/features/body/photos/photos_provider.dart';
 import 'package:bmi_health/features/body/photos/photo_vault.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
+import 'package:bmi_health/features/train/exercises/demo/exercise_demo.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
   sqfliteFfiInit();
   databaseFactory = databaseFactoryFfi;
   GoogleFonts.config.allowRuntimeFetching = false;
+  ExerciseDemo.loop = false;
 }
 
 typedef AppState = ({

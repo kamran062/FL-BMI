@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:bmi_health/features/profile/domain/user_profile.dart';
+import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/challenges/domain/challenge.dart';
 import 'package:bmi_health/features/train/challenges/voice_coach.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart' show ChallengeLabels;
+import 'package:bmi_health/features/train/exercises/demo/exercise_demo.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
@@ -110,6 +113,8 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
 
   ({String exerciseId, WorkoutSet set, int index, int total})? get _next =>
       _w.active == null ? null : WearState.nextSet(_w);
+
+  bool get _female => context.read<ProfileProvider>().profile.demonstrator == Sex.female;
 
   ChallengeStep? get _step => _next == null ? null : _steps[_next!.exerciseId];
 
@@ -313,26 +318,28 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
             style: GoogleFonts.inter(fontSize: 26, fontWeight: FontWeight.w700)),
         const SizedBox(height: 4),
         Text(l.setOfTotal(next.index + 1, next.total), style: GoogleFonts.inter(fontSize: 15)),
-        const Spacer(),
+        const SizedBox(height: 12),
+        Expanded(child: ExerciseDemo(exercise: e, female: _female)),
+        const SizedBox(height: 12),
         // Big target: countdown for holds, rep goal otherwise
         SizedBox(
-          width: 220,
-          height: 220,
+          width: 160,
+          height: 160,
           child: Stack(alignment: Alignment.center, children: [
             SizedBox.expand(
               child: CircularProgressIndicator(
                 value: timed ? left / step.target : 1,
-                strokeWidth: 10,
+                strokeWidth: 9,
                 color: brand,
                 backgroundColor: brand.withAlpha(40),
               ),
             ),
             Text(timed ? _clock(left) : l.repsTarget(step.target),
                 textAlign: TextAlign.center,
-                style: GoogleFonts.inter(fontSize: 40, fontWeight: FontWeight.w700)),
+                style: GoogleFonts.inter(fontSize: 34, fontWeight: FontWeight.w700)),
           ]),
         ),
-        const Spacer(),
+        const SizedBox(height: 8),
         ExpansionTile(
           title: Text(l.howTo2),
           children: [
@@ -371,7 +378,12 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(fontSize: 16, height: 1.4),
           ),
-        const Spacer(),
+        const SizedBox(height: 12),
+        if (step != null)
+          Expanded(child: ExerciseDemo(exercise: step.exercise, female: _female))
+        else
+          const Spacer(),
+        const SizedBox(height: 12),
         Row(children: [
           Expanded(
             child: AppButton(

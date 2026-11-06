@@ -3815,5 +3815,9 @@
   "foodsClear": "Clear food",
   "@foodsClear": {
     "description": "Tooltip to unpick a food"
+  },
+  "demoCaption": "Animated guide · video coming soon",
+  "@demoCaption": {
+    "description": "Caption under the drawn exercise animation shown until a filmed video exists"
   }
 }

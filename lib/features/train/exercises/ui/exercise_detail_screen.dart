@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
+import 'package:bmi_health/features/train/exercises/demo/exercise_demo.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
@@ -44,6 +45,7 @@ class ExerciseDetailScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
         children: [
           _ExerciseVideo(
+            exercise: exercise,
             url: exercise.videoFor(demonstrator),
             demonstrator: demonstrator,
           ),
@@ -411,10 +413,11 @@ class _AlternativesCard extends StatelessWidget {
 /// Looping, muted demonstrator clip. Shows a placeholder until the clip for
 /// this exercise has been filmed (ROADMAP §4).
 class _ExerciseVideo extends StatefulWidget {
+  final Exercise exercise;
   final String? url;
   final Sex demonstrator;
 
-  const _ExerciseVideo({required this.url, required this.demonstrator});
+  const _ExerciseVideo({required this.exercise, required this.url, required this.demonstrator});
 
   @override
   State<_ExerciseVideo> createState() => _ExerciseVideoState();
@@ -473,7 +476,22 @@ class _ExerciseVideoState extends State<_ExerciseVideo> {
                   child: VideoPlayer(c),
                 ),
               )
-            : Container(
+            : (widget.url == null || _failed) && ExerciseDemo.has(widget.exercise)
+                ? Container(
+                    color: sunken,
+                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
+                    child: Column(children: [
+                      Expanded(
+                        child: ExerciseDemo(
+                          exercise: widget.exercise,
+                          female: widget.demonstrator == Sex.female,
+                        ),
+                      ),
+                      Text(l.demoCaption,
+                          style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+                    ]),
+                  )
+                : Container(
                 color: sunken,
                 alignment: Alignment.center,
                 child: Column(
