@@ -18,7 +18,6 @@ import 'package:bmi_health/features/premium/purchase_service.dart';
 import 'package:bmi_health/features/recovery/recovery_provider.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/body/photos/photos_provider.dart';
-import 'package:bmi_health/features/coach/ai_client.dart';
 import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
@@ -39,7 +38,6 @@ class BmiHealthProviders extends StatelessWidget {
     required this.recovery,
     required this.cycle,
     required this.photos,
-    required this.ai,
     required this.db,
     required this.wear,
     required this.challenges,
@@ -59,7 +57,6 @@ class BmiHealthProviders extends StatelessWidget {
   final RecoveryProvider recovery;
   final CycleProvider cycle;
   final PhotosProvider photos;
-  final AiClient ai;
   final DatabaseHelper db;
   final WearBridge wear;
   final ChallengeProvider challenges;
@@ -81,7 +78,6 @@ class BmiHealthProviders extends StatelessWidget {
           ChangeNotifierProvider.value(value: recovery),
           ChangeNotifierProvider.value(value: cycle),
           ChangeNotifierProvider.value(value: photos),
-          Provider.value(value: ai),
           Provider.value(value: db),
           Provider.value(value: wear),
           ChangeNotifierProvider.value(value: challenges),

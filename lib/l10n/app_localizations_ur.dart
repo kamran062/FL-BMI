@@ -1762,62 +1762,6 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get coachTitle => 'اے آئی کوچ';
-
-  @override
-  String get coachCardBody => 'ورزش، کھانے یا بحالی کے بارے میں پوچھیں۔';
-
-  @override
-  String get coachHint => 'سوال پوچھیں…';
-
-  @override
-  String get coachWelcome => 'السلام علیکم! میں ورزش، غذائیت، بحالی اور عادات میں مدد کر سکتا ہوں۔ میں ڈاکٹر نہیں ہوں، اس لیے طبی سوالات کے لیے کسی ماہر سے رجوع کریں۔';
-
-  @override
-  String get aiConsentTitle => 'شروع کرنے سے پہلے';
-
-  @override
-  String get aiConsentBody => 'آپ کے سوالات اور مختصر پروفائل (عمر، جنس، وزن، ہدف، تجربہ، ورزش کے دن) جوابات لکھنے کے لیے ہمارے سرور اور اینتھروپک کے کلاڈ اے آئی کو بھیجے جاتے ہیں۔ کیلوری کے اندازے کے لیے بھیجی گئی تصاویر بھی اسی طرح جاتی ہیں۔ کچھ بھی محفوظ یا اشتہارات کے لیے استعمال نہیں ہوتا۔ جوابات عمومی رہنمائی ہیں، طبی مشورہ نہیں۔';
-
-  @override
-  String get aiAgree => 'میں متفق ہوں';
-
-  @override
-  String get aiLimit => 'آج کی حد پوری ہو گئی۔ کل دوبارہ کوشش کریں۔';
-
-  @override
-  String get aiUnavailable => 'کوچ سے رابطہ نہیں ہو سکا۔ کنکشن چیک کر کے دوبارہ کوشش کریں۔';
-
-  @override
-  String get coachThinking => 'سوچ رہا ہے…';
-
-  @override
-  String get photoEstimate => 'تصویر سے اندازہ';
-
-  @override
-  String get photoEstimating => 'کیلوریز کا اندازہ ہو رہا ہے…';
-
-  @override
-  String get photoNotFood => 'یہ کھانا نہیں لگتا۔ دوسری تصویر آزمائیں۔';
-
-  @override
-  String get photoEstimateNote => 'تصویر سے اے آئی کا اندازہ — مقدار میں 20–40٪ فرق ہو سکتا ہے۔ اگر آپ بہتر جانتے ہیں تو تبدیل کریں۔';
-
-  @override
-  String get photoConfidenceLow => 'کم یقین';
-
-  @override
-  String photoTotal(int kcal) {
-    return 'کل: $kcal کیلوری';
-  }
-
-  @override
-  String get logSelected => 'منتخب درج کریں';
-
-  @override
-  String get estimateSuffix => '(اندازہ)';
-
-  @override
   String get progressTitle => 'پیش رفت';
 
   @override
