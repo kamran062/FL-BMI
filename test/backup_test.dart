@@ -152,7 +152,7 @@ void main() {
     final csv = await CsvExport.build(phoneA);
     expect(csv['weights.csv']!.split('\n'), hasLength(731));
     expect(csv['workout_sets.csv']!.split('\n').first,
-        'started,workout,exercise,weight_kg,reps,done');
+        'started,workout,exercise,weight_kg,reps,done,set_type,rpe');
     expect(csv['food.csv'], contains('"Daal, ""special"""'));
   });
 }

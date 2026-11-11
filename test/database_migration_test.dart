@@ -119,7 +119,7 @@ void main() {
 
   test('migration 11 adds carbs and fat to food entries, keeping old ones',
       () async {
-    // A v10 food table with one entry (11 only touches this table)
+    // A v10 food table with one entry
     final path = p.join(tmp.path, 'v10.db');
     final old = await factory.openDatabase(path,
         options: OpenDatabaseOptions(
@@ -138,6 +138,18 @@ void main() {
               'date': DateTime(2026, 11, 1, 13).millisecondsSinceEpoch,
               'name': 'Daal', 'kcal': 320, 'protein_g': 14.0,
             });
+            // Later migrations touch this table
+            await db.execute('''
+              CREATE TABLE workout_sets (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                workout_id INTEGER NOT NULL,
+                exercise_id TEXT NOT NULL,
+                exercise_order INTEGER NOT NULL,
+                weight_kg REAL NOT NULL DEFAULT 0,
+                reps INTEGER NOT NULL DEFAULT 0,
+                done INTEGER NOT NULL DEFAULT 0
+              )
+            ''');
           },
         ));
     await old.close();
