@@ -2563,4 +2563,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get demoCaption => 'Animated guide · video coming soon';
+
+  @override
+  String get trainSetOptions => 'Set type and effort';
+
+  @override
+  String get trainSetNormal => 'Normal';
+
+  @override
+  String get trainSetWarmup => 'Warm-up';
+
+  @override
+  String get trainSetDrop => 'Drop set';
+
+  @override
+  String get trainWarmupNote => 'Warm-up sets don\'t count toward volume, records or weight suggestions.';
+
+  @override
+  String get trainRpe => 'Effort (RPE)';
+
+  @override
+  String get trainRpeHelp => 'How hard was it? 10 = no reps left, 9 = one left, 8 = two left.';
+
+  @override
+  String get trainRpeNone => 'Not rated';
+
+  @override
+  String trainRpeValue(String value) {
+    return 'RPE $value';
+  }
 }

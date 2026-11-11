@@ -14,7 +14,7 @@ class DatabaseHelper {
   static const _dbName = 'bmi_health.db';
 
   /// Current schema version. Must equal 1 + the number of [_migrations].
-  static const schemaVersion = 11;
+  static const schemaVersion = 12;
 
   /// Ordered schema migrations: `_migrations[i]` upgrades version i+1 → i+2.
   ///
@@ -192,6 +192,11 @@ class DatabaseHelper {
     (db) async {
       await db.execute('ALTER TABLE food_logs ADD COLUMN carbs_g REAL');
       await db.execute('ALTER TABLE food_logs ADD COLUMN fat_g REAL');
+    },
+    // 11 → 12: set type (normal / warm-up / drop) and effort (RPE) per set
+    (db) async {
+      await db.execute("ALTER TABLE workout_sets ADD COLUMN set_type TEXT NOT NULL DEFAULT 'normal'");
+      await db.execute('ALTER TABLE workout_sets ADD COLUMN rpe REAL');
     },
   ];
 

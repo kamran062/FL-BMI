@@ -2539,4 +2539,33 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get demoCaption => 'اینیمیٹڈ رہنمائی · ویڈیو جلد آ رہی ہے';
+
+  @override
+  String get trainSetOptions => 'سیٹ کی قسم اور محنت';
+
+  @override
+  String get trainSetNormal => 'عام';
+
+  @override
+  String get trainSetWarmup => 'وارم اپ';
+
+  @override
+  String get trainSetDrop => 'ڈراپ سیٹ';
+
+  @override
+  String get trainWarmupNote => 'وارم اپ سیٹ والیوم، ریکارڈ یا وزن کی تجویز میں شمار نہیں ہوتے۔';
+
+  @override
+  String get trainRpe => 'محنت (RPE)';
+
+  @override
+  String get trainRpeHelp => 'کتنا مشکل تھا؟ 10 = ایک بھی ریپ باقی نہیں، 9 = ایک باقی، 8 = دو باقی۔';
+
+  @override
+  String get trainRpeNone => 'درجہ نہیں دیا';
+
+  @override
+  String trainRpeValue(String value) {
+    return 'RPE $value';
+  }
 }

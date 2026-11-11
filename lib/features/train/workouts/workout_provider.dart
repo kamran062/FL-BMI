@@ -126,6 +126,8 @@ class WorkoutProvider extends ChangeNotifier {
         workoutId: w.id!, exerciseId: exerciseId, order: order,
         weightKg: p?.weightKg ?? 0,
         reps: p?.reps ?? (target != null && !target.timed ? target.repMin : 0),
+        // Warm-ups stay warm-ups; effort is rated fresh each time
+        type: p?.type ?? SetType.normal,
       );
       _activeSets.add(WorkoutSet.fromMap({...s.toMap(), 'id': await _db.insertSet(s)}));
     }

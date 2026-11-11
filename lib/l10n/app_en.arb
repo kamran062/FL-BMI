@@ -3819,5 +3819,46 @@
   "demoCaption": "Animated guide · video coming soon",
   "@demoCaption": {
     "description": "Caption under the drawn exercise animation shown until a filmed video exists"
+  },
+  "trainSetOptions": "Set type and effort",
+  "@trainSetOptions": {
+    "description": "Title of the sheet opened by tapping a set number in the workout logger"
+  },
+  "trainSetNormal": "Normal",
+  "@trainSetNormal": {
+    "description": "Set type: a normal working set"
+  },
+  "trainSetWarmup": "Warm-up",
+  "@trainSetWarmup": {
+    "description": "Set type: a light warm-up set"
+  },
+  "trainSetDrop": "Drop set",
+  "@trainSetDrop": {
+    "description": "Set type: drop set (lighter weight straight after a set, no rest)"
+  },
+  "trainWarmupNote": "Warm-up sets don't count toward volume, records or weight suggestions.",
+  "@trainWarmupNote": {
+    "description": "Explains what marking a set as warm-up does"
+  },
+  "trainRpe": "Effort (RPE)",
+  "@trainRpe": {
+    "description": "Heading for rating perceived exertion of a set"
+  },
+  "trainRpeHelp": "How hard was it? 10 = no reps left, 9 = one left, 8 = two left.",
+  "@trainRpeHelp": {
+    "description": "Explains the RPE scale"
+  },
+  "trainRpeNone": "Not rated",
+  "@trainRpeNone": {
+    "description": "Choice to clear the effort rating"
+  },
+  "trainRpeValue": "RPE {value}",
+  "@trainRpeValue": {
+    "description": "Short effort label shown next to a set, e.g. RPE 8",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
   }
 }

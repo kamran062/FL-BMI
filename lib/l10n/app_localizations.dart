@@ -4546,6 +4546,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Animated guide · video coming soon'**
   String get demoCaption;
+
+  /// Title of the sheet opened by tapping a set number in the workout logger
+  ///
+  /// In en, this message translates to:
+  /// **'Set type and effort'**
+  String get trainSetOptions;
+
+  /// Set type: a normal working set
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get trainSetNormal;
+
+  /// Set type: a light warm-up set
+  ///
+  /// In en, this message translates to:
+  /// **'Warm-up'**
+  String get trainSetWarmup;
+
+  /// Set type: drop set (lighter weight straight after a set, no rest)
+  ///
+  /// In en, this message translates to:
+  /// **'Drop set'**
+  String get trainSetDrop;
+
+  /// Explains what marking a set as warm-up does
+  ///
+  /// In en, this message translates to:
+  /// **'Warm-up sets don\'t count toward volume, records or weight suggestions.'**
+  String get trainWarmupNote;
+
+  /// Heading for rating perceived exertion of a set
+  ///
+  /// In en, this message translates to:
+  /// **'Effort (RPE)'**
+  String get trainRpe;
+
+  /// Explains the RPE scale
+  ///
+  /// In en, this message translates to:
+  /// **'How hard was it? 10 = no reps left, 9 = one left, 8 = two left.'**
+  String get trainRpeHelp;
+
+  /// Choice to clear the effort rating
+  ///
+  /// In en, this message translates to:
+  /// **'Not rated'**
+  String get trainRpeNone;
+
+  /// Short effort label shown next to a set, e.g. RPE 8
+  ///
+  /// In en, this message translates to:
+  /// **'RPE {value}'**
+  String trainRpeValue(String value);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

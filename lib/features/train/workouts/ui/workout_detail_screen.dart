@@ -133,7 +133,10 @@ class WorkoutDetailScreen extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.w700, color: brand)),
                     const SizedBox(height: 4),
                     for (final (i, s) in h.sets.where((s) => s.exerciseId == id).indexed)
-                      _FinishedSetRow(index: i, set: s, unit: unit),
+                      _FinishedSetRow(
+                          tag: WorkoutMath.setTag(h.sets.where((s) => s.exerciseId == id).toList(), i),
+                          set: s,
+                          unit: unit),
                   ],
                 ),
               ),
@@ -145,10 +148,10 @@ class WorkoutDetailScreen extends StatelessWidget {
 }
 
 class _FinishedSetRow extends StatelessWidget {
-  final int index;
+  final String tag;
   final WorkoutSet set;
   final String unit;
-  const _FinishedSetRow({required this.index, required this.set, required this.unit});
+  const _FinishedSetRow({required this.tag, required this.set, required this.unit});
 
   @override
   Widget build(BuildContext context) {
@@ -174,9 +177,9 @@ class _FinishedSetRow extends StatelessWidget {
         dense: true,
         leading: CircleAvatar(
           radius: 14,
-          child: Text('${index + 1}', style: GoogleFonts.inter(fontSize: 12)),
+          child: Text(tag, style: GoogleFonts.inter(fontSize: 12)),
         ),
-        title: Text(text,
+        title: Text(set.rpe == null ? text : '$text  ·  ${l.trainRpeValue(WorkoutMath.rpeText(set.rpe!))}',
             textDirection: TextDirection.ltr,
             style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600)),
         trailing: Icon(Icons.edit_outlined, size: 18, color: fg3),

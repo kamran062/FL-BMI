@@ -35,6 +35,10 @@ class Workout {
       );
 }
 
+/// Warm-up sets are logged but don't count toward volume, records or
+/// weekly hard sets. Drop sets count like normal sets.
+enum SetType { normal, warmup, drop }
+
 /// One set. Weight is stored in kg.
 class WorkoutSet {
   final int? id;
@@ -44,6 +48,10 @@ class WorkoutSet {
   final double weightKg;
   final int reps;
   final bool done;
+  final SetType type;
+
+  /// Effort, 6–10 (10 = nothing left, 8 = two reps left); null if not rated.
+  final double? rpe;
 
   const WorkoutSet({
     this.id,
@@ -53,9 +61,17 @@ class WorkoutSet {
     this.weightKg = 0,
     this.reps = 0,
     this.done = false,
+    this.type = SetType.normal,
+    this.rpe,
   });
 
-  WorkoutSet copyWith({double? weightKg, int? reps, bool? done}) => WorkoutSet(
+  /// Done and not a warm-up: what totals, records and suggestions use.
+  bool get counts => done && type != SetType.warmup;
+
+  static const rpeChoices = [6.0, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0];
+
+  WorkoutSet copyWith({double? weightKg, int? reps, bool? done, SetType? type, double? rpe, bool clearRpe = false}) =>
+      WorkoutSet(
         id: id,
         workoutId: workoutId,
         exerciseId: exerciseId,
@@ -63,6 +79,8 @@ class WorkoutSet {
         weightKg: weightKg ?? this.weightKg,
         reps: reps ?? this.reps,
         done: done ?? this.done,
+        type: type ?? this.type,
+        rpe: clearRpe ? null : (rpe ?? this.rpe),
       );
 
   Map<String, dynamic> toMap() => {
@@ -73,6 +91,8 @@ class WorkoutSet {
         'weight_kg': weightKg,
         'reps': reps,
         'done': done ? 1 : 0,
+        'set_type': type.name,
+        'rpe': rpe,
       };
 
   factory WorkoutSet.fromMap(Map<String, dynamic> m) => WorkoutSet(
@@ -83,6 +103,8 @@ class WorkoutSet {
         weightKg: (m['weight_kg'] as num).toDouble(),
         reps: m['reps'] as int,
         done: (m['done'] as int) == 1,
+        type: SetType.values.asNameMap()[m['set_type']] ?? SetType.normal,
+        rpe: (m['rpe'] as num?)?.toDouble(),
       );
 }
 
@@ -120,6 +142,17 @@ class WorkoutSummary {
 }
 
 abstract final class WorkoutMath {
+  /// Label for set [i] of one exercise: "W" for a warm-up, "D" for a drop
+  /// set, otherwise its number among the working sets.
+  static String setTag(List<WorkoutSet> sets, int i) => switch (sets[i].type) {
+        SetType.warmup => 'W',
+        SetType.drop => 'D',
+        SetType.normal => '${sets.take(i + 1).where((s) => s.type != SetType.warmup).length}',
+      };
+
+  /// "8" or "8.5" for an effort rating.
+  static String rpeText(double rpe) => rpe == rpe.roundToDouble() ? rpe.toStringAsFixed(0) : '$rpe';
+
   /// Estimated one-rep max (Epley). Reps above 12 are unreliable, so they
   /// are capped there.
   static double estimated1RM(double weightKg, int reps) {
@@ -128,15 +161,15 @@ abstract final class WorkoutMath {
     return weightKg * (1 + reps.clamp(1, 12) / 30);
   }
 
-  /// Total kg lifted in completed sets.
+  /// Total kg lifted in completed sets (warm-ups excluded).
   static double volume(Iterable<WorkoutSet> sets) => sets
-      .where((s) => s.done)
+      .where((s) => s.counts)
       .fold(0.0, (sum, s) => sum + s.weightKg * s.reps);
 
   /// Best estimated 1RM per exercise over completed sets.
   static Map<String, double> bestByExercise(Iterable<WorkoutSet> sets) {
     final best = <String, double>{};
-    for (final s in sets.where((s) => s.done)) {
+    for (final s in sets.where((s) => s.counts)) {
       final e = estimated1RM(s.weightKg, s.reps);
       if (e > (best[s.exerciseId] ?? 0)) best[s.exerciseId] = e;
     }
@@ -185,7 +218,7 @@ class ExerciseSession {
       List<WorkoutSummary> history, String exerciseId) {
     final out = <ExerciseSession>[];
     for (final h in history.reversed) {
-      final sets = h.doneSets.where((s) => s.exerciseId == exerciseId).toList();
+      final sets = h.sets.where((s) => s.counts && s.exerciseId == exerciseId).toList();
       if (sets.isEmpty) continue;
       var top = sets.first;
       for (final s in sets) {

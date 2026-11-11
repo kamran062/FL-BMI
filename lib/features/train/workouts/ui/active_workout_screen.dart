@@ -315,7 +315,7 @@ class _ExerciseBlock extends StatelessWidget {
             for (var i = 0; i < sets.length; i++)
               _SetRow(
                 key: ValueKey(sets[i].id),
-                index: i,
+                tag: WorkoutMath.setTag(sets, i),
                 set: sets[i],
                 previous: i < previous.length ? previous[i] : null,
                 unit: unit,
@@ -334,7 +334,8 @@ class _ExerciseBlock extends StatelessWidget {
 }
 
 class _SetRow extends StatefulWidget {
-  final int index;
+  /// "1", "2"… or "W" (warm-up) / "D" (drop set).
+  final String tag;
   final WorkoutSet set;
   final WorkoutSet? previous;
   final String unit;
@@ -342,7 +343,7 @@ class _SetRow extends StatefulWidget {
 
   const _SetRow({
     super.key,
-    required this.index,
+    required this.tag,
     required this.set,
     required this.previous,
     required this.unit,
@@ -374,6 +375,18 @@ class _SetRowState extends State<_SetRow> {
         weightKg: Units.toKg(widget.unit, double.tryParse(_weight.text) ?? 0),
         reps: int.tryParse(_reps.text) ?? 0,
       );
+
+  Future<void> _options(BuildContext context) async {
+    final workouts = context.read<WorkoutProvider>();
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (_) => SetOptionsSheet(
+        set: widget.set,
+        onChanged: (s) => workouts.updateSet(_fromFields().copyWith(type: s.type, rpe: s.rpe, clearRpe: s.rpe == null)),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -407,8 +420,27 @@ class _SetRowState extends State<_SetRow> {
           children: [
             SizedBox(
               width: 36,
-              child: Text('${widget.index + 1}',
-                  style: GoogleFonts.inter(fontWeight: FontWeight.w700)),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                onTap: () => _options(context),
+                child: Semantics(
+                  button: true,
+                  label: context.l10n.trainSetOptions,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(widget.tag,
+                          style: GoogleFonts.inter(
+                              fontWeight: FontWeight.w700,
+                              color: widget.set.type == SetType.normal ? null : AppColors.bmiOver)),
+                      if (widget.set.rpe != null)
+                        Text('@${WorkoutMath.rpeText(widget.set.rpe!)}',
+                            style: GoogleFonts.inter(fontSize: 11, color: fg3)),
+                    ],
+                  ),
+                ),
+              ),
             ),
             Expanded(
               flex: 3,
@@ -587,3 +619,76 @@ class _SuggestionText extends StatelessWidget {
   }
 }
 
+/// Choose a set's type (normal / warm-up / drop) and rate its effort.
+class SetOptionsSheet extends StatefulWidget {
+  final WorkoutSet set;
+  final ValueChanged<WorkoutSet> onChanged;
+  const SetOptionsSheet({super.key, required this.set, required this.onChanged});
+
+  @override
+  State<SetOptionsSheet> createState() => _SetOptionsSheetState();
+}
+
+class _SetOptionsSheetState extends State<SetOptionsSheet> {
+  late WorkoutSet _set = widget.set;
+
+  void _change(WorkoutSet s) {
+    setState(() => _set = s);
+    widget.onChanged(s);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    final label = GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600);
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l.trainSetOptions, style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w700)),
+            const SizedBox(height: 16),
+            Wrap(spacing: 8, runSpacing: 8, children: [
+              for (final (t, name) in [
+                (SetType.normal, l.trainSetNormal),
+                (SetType.warmup, l.trainSetWarmup),
+                (SetType.drop, l.trainSetDrop),
+              ])
+                ChoiceChip(
+                  label: Text(name),
+                  selected: _set.type == t,
+                  onSelected: (_) => _change(_set.copyWith(type: t)),
+                ),
+            ]),
+            if (_set.type == SetType.warmup) ...[
+              const SizedBox(height: 8),
+              Text(l.trainWarmupNote, style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+            ],
+            const SizedBox(height: 20),
+            Text(l.trainRpe, style: label),
+            const SizedBox(height: 4),
+            Text(l.trainRpeHelp, style: GoogleFonts.inter(fontSize: 12, color: fg3)),
+            const SizedBox(height: 10),
+            Wrap(spacing: 6, runSpacing: 6, children: [
+              ChoiceChip(
+                label: Text(l.trainRpeNone),
+                selected: _set.rpe == null,
+                onSelected: (_) => _change(_set.copyWith(clearRpe: true)),
+              ),
+              for (final r in WorkoutSet.rpeChoices)
+                ChoiceChip(
+                  label: Text(WorkoutMath.rpeText(r)),
+                  selected: _set.rpe == r,
+                  onSelected: (_) => _change(_set.copyWith(rpe: r)),
+                ),
+            ]),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -216,11 +216,11 @@ abstract final class CsvExport {
         for (final r in await d.query('weight_logs', orderBy: 'date'))
           [_date(r['date']), r['weight_kg']]
       ]),
-      'workout_sets.csv': _csv(['started', 'workout', 'exercise', 'weight_kg', 'reps', 'done'], [
+      'workout_sets.csv': _csv(['started', 'workout', 'exercise', 'weight_kg', 'reps', 'done', 'set_type', 'rpe'], [
         for (final r in await d.rawQuery(
-            'SELECT w.started_at, w.name, s.exercise_id, s.weight_kg, s.reps, s.done '
+            'SELECT w.started_at, w.name, s.exercise_id, s.weight_kg, s.reps, s.done, s.set_type, s.rpe '
             'FROM workout_sets s JOIN workouts w ON w.id = s.workout_id ORDER BY w.started_at'))
-          [_date(r['started_at']), r['name'], r['exercise_id'], r['weight_kg'], r['reps'], r['done']]
+          [_date(r['started_at']), r['name'], r['exercise_id'], r['weight_kg'], r['reps'], r['done'], r['set_type'], r['rpe']]
       ]),
       'food.csv': _csv(['date', 'name', 'kcal', 'protein_g', 'carbs_g', 'fat_g'], [
         for (final r in await d.query('food_logs', orderBy: 'date'))

@@ -741,5 +741,14 @@
   "foodsGrams": "کتنے گرام کھائے",
   "foodsApprox": "یہ مقداریں تخمینی ہیں۔",
   "foodsClear": "کھانا ہٹائیں",
-  "demoCaption": "اینیمیٹڈ رہنمائی · ویڈیو جلد آ رہی ہے"
+  "demoCaption": "اینیمیٹڈ رہنمائی · ویڈیو جلد آ رہی ہے",
+  "trainSetOptions": "سیٹ کی قسم اور محنت",
+  "trainSetNormal": "عام",
+  "trainSetWarmup": "وارم اپ",
+  "trainSetDrop": "ڈراپ سیٹ",
+  "trainWarmupNote": "وارم اپ سیٹ والیوم، ریکارڈ یا وزن کی تجویز میں شمار نہیں ہوتے۔",
+  "trainRpe": "محنت (RPE)",
+  "trainRpeHelp": "کتنا مشکل تھا؟ 10 = ایک بھی ریپ باقی نہیں، 9 = ایک باقی، 8 = دو باقی۔",
+  "trainRpeNone": "درجہ نہیں دیا",
+  "trainRpeValue": "RPE {value}"
 }

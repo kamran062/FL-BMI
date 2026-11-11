@@ -45,7 +45,7 @@ abstract final class Progression {
   static Suggestion suggest(List<List<WorkoutSet>> sessions, ExerciseEquipment eq) {
     final done = [
       for (final s in sessions)
-        if (s.any((x) => x.done)) s.where((x) => x.done).toList()
+        if (s.any((x) => x.counts)) s.where((x) => x.counts).toList()
     ];
     if (done.isEmpty) return const Suggestion(0, repMin, SuggestionReason.firstTime);
 
@@ -214,7 +214,7 @@ abstract final class MuscleVolume {
   static Map<Muscle, double> weeklySets(
       Iterable<WorkoutSet> sets, ExerciseCatalog catalog) {
     final out = {for (final m in Muscle.values) m: 0.0};
-    for (final s in sets.where((s) => s.done)) {
+    for (final s in sets.where((s) => s.counts)) {
       final e = catalog.byId(s.exerciseId);
       if (e == null) continue;
       out[e.primary] = out[e.primary]! + 1;
