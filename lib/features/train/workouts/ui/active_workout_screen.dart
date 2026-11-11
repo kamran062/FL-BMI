@@ -15,7 +15,6 @@ import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/features/train/programs/progression.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/workouts/rest_alerts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// Logs the active workout: exercises, sets (weight × reps), rest timer.
 class ActiveWorkoutScreen extends StatefulWidget {
@@ -32,7 +31,6 @@ class ActiveWorkoutScreen extends StatefulWidget {
 
 class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen>
     with WidgetsBindingObserver {
-  static const _askedKey = 'rest_notify_asked';
 
   Timer? _ticker;
 
@@ -92,32 +90,12 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen>
 
   void _startRest(int seconds) {
     setState(() => _restEnd = DateTime.now().add(Duration(seconds: seconds)));
-    _offerRestAlerts();
+    offerRestAlertsOnce(context);
   }
 
   void _skipRest() {
     setState(() => _restEnd = null);
     restAlerts.cancel();
-  }
-
-  /// Once, at the first rest: offer a notification for when rest ends
-  /// with the app closed. Nothing is asked if they're already allowed.
-  Future<void> _offerRestAlerts() async {
-    final l = context.l10n;
-    final messenger = ScaffoldMessenger.of(context);
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      if (prefs.getBool(_askedKey) ?? false) return;
-      await prefs.setBool(_askedKey, true);
-    } catch (_) {
-      return;
-    }
-    if (await restAlerts.allowed() != false || !mounted) return;
-    messenger.showSnackBar(SnackBar(
-      content: Text(l.trainRestNotifyAsk),
-      duration: const Duration(seconds: 8),
-      action: SnackBarAction(label: l.trainAllow, onPressed: restAlerts.request),
-    ));
   }
 
   Future<void> _addExercise() async {

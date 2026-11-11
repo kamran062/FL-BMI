@@ -4,6 +4,8 @@ import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/challenges/domain/challenge.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
+import 'package:bmi_health/features/train/challenges/ui/guided_player_screen.dart';
+import 'package:bmi_health/features/train/workouts/rest_alerts.dart';
 import 'package:bmi_health/features/train/challenges/voice_coach.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -150,5 +152,62 @@ void main() {
     // Labels used in the list exist in Urdu too
     expect(ChallengeLevel.values.length, 3);
     expect(focusIcon(ChallengeFocus.stretch), isNotNull);
+  });
+
+  testWidgets('guided player: rest alert in the background, catches up on return', (tester) async {
+    setUpAppHarness();
+    createVoiceCoach = RecordingVoiceCoach.new;
+    final alerts = RecordingRestAlerts();
+    restAlerts = alerts;
+    await launchApp(tester);
+
+    await tester.tap(find.text('Train'));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.text('Home Challenges'), 200,
+        scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.text('Home Challenges'));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.text('Core & Abs'), 200,
+        scrollable: find.byType(Scrollable).last);
+    await tester.tap(find.text('Core & Abs'));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.text('Start Day 1'), 200,
+        scrollable: find.byType(Scrollable).last);
+    await tester.tap(find.text('Start Day 1'));
+    for (var i = 0; i < 40 && find.text('WARM-UP').evaluate().isEmpty; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 200)));
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+
+    // Finish the warm-up: rest starts
+    await tester.ensureVisible(find.text('Done'));
+    await tester.tap(find.text('Done'));
+    for (var i = 0; i < 20 && find.text('Skip rest').evaluate().isEmpty; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 150)));
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+    expect(find.text('Skip rest'), findsOneWidget);
+
+    // App goes to the background: one alert for the end of rest
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+    expect(alerts.scheduled, hasLength(1));
+    expect(alerts.scheduled.single.isAfter(DateTime.now()), isTrue);
+
+    // Back again: the alert is cancelled
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    expect(alerts.cancels, greaterThanOrEqualTo(1));
+
+    // Time spent away longer than the rest: straight to the next exercise
+    tester.state<GuidedPlayerScreenState>(find.byType(GuidedPlayerScreen)).catchUp(600);
+    await tester.pump();
+    expect(find.text('Skip rest'), findsNothing);
+    expect(find.text('Done'), findsOneWidget);
+
+    // Close the player so its ticker stops
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 10));
   });
 }

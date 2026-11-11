@@ -12,6 +12,7 @@ import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart' 
 import 'package:bmi_health/features/train/exercises/ui/exercise_media.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
+import 'package:bmi_health/features/train/workouts/rest_alerts.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
@@ -39,7 +40,7 @@ class GuidedPlayerScreen extends StatefulWidget {
   State<GuidedPlayerScreen> createState() => GuidedPlayerScreenState();
 }
 
-class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
+class GuidedPlayerScreenState extends State<GuidedPlayerScreen> with WidgetsBindingObserver {
   late final WorkoutProvider _w = context.read<WorkoutProvider>();
   late final Map<String, ChallengeStep> _steps = {
     for (final s in widget.plan.steps) s.exercise.id: s
@@ -57,9 +58,14 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
   late final VoiceCoach _coach = widget.coach ?? createVoiceCoach();
   int? _announcedSet;
 
+  /// When the app went to the background; the countdowns stop meanwhile
+  /// and catch up on return.
+  DateTime? _bgAt;
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _coach.load().then((_) {
       if (mounted) setState(() {});
     });
@@ -105,10 +111,49 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    if (_bgAt != null || _phase == _Phase.rest) restAlerts.cancel();
     _ticker?.cancel();
     _w.removeListener(_onWorkout);
     _coach.stop();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.paused || AppLifecycleState.hidden:
+        if (_bgAt != null) return;
+        _bgAt = DateTime.now();
+        if (!_paused && _phase == _Phase.rest && _restLeft > 0) {
+          restAlerts.schedule(_bgAt!.add(Duration(seconds: _restLeft)), context.l10n);
+        }
+      case AppLifecycleState.resumed:
+        final since = _bgAt;
+        if (since == null) return;
+        _bgAt = null;
+        restAlerts.cancel();
+        if (!_paused) catchUp(DateTime.now().difference(since).inSeconds);
+      default:
+    }
+  }
+
+  /// Applies [seconds] spent away to the rest or timed-hold countdown.
+  @visibleForTesting
+  void catchUp(int seconds) {
+    if (!mounted || seconds <= 0) return;
+    setState(() {
+      if (_phase == _Phase.rest) {
+        _restLeft -= seconds;
+        if (_restLeft <= 0) {
+          _phase = _Phase.work;
+          _announce();
+        }
+      } else if (_phase == _Phase.work && _timedLeft != null) {
+        _timedLeft = _timedLeft! - seconds;
+        if (_timedLeft! <= 0) _markDone();
+      }
+    });
   }
 
   ({String exerciseId, WorkoutSet set, int index, int total})? get _next =>
@@ -140,6 +185,7 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
           _phase = _Phase.work;
         }
       });
+      if (rest > 0) offerRestAlertsOnce(context);
       final l = context.l10n;
       if (rest > 0 && _step != null) {
         _say(l.sayRest(rest, _step!.exercise.nameIn(l.localeName)));
@@ -152,7 +198,7 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> {
   }
 
   void _tick() {
-    if (!mounted || _paused) return;
+    if (!mounted || _paused || _bgAt != null) return;
     setState(() {
       if (_phase == _Phase.rest) {
         _restLeft--;
