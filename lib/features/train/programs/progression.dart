@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
@@ -23,6 +25,12 @@ enum SuggestionReason {
 
   /// No history yet.
   firstTime,
+
+  /// Scheduled lighter week after a block of hard weeks.
+  deloadWeek,
+
+  /// Hit the top of the range but rated it 9.5+ → stay at this weight.
+  hold,
 }
 
 /// Double progression: work up the rep range at a fixed weight, then add
@@ -42,7 +50,22 @@ abstract final class Progression {
 
   /// [sessions]: completed sets of this exercise, one list per workout,
   /// oldest first.
-  static Suggestion suggest(List<List<WorkoutSet>> sessions, ExerciseEquipment eq) {
+  ///
+  /// Effort ratings (RPE) refine it: very hard top sets hold the weight,
+  /// easy ones (7 or less) jump two steps. In a [deloadWeek] everything is
+  /// about 10 % lighter (bodyweight: about 30 % fewer reps).
+  static Suggestion suggest(List<List<WorkoutSet>> sessions, ExerciseEquipment eq, {bool deloadWeek = false}) {
+    final s = _suggest(sessions, eq);
+    if (!deloadWeek || s.reason == SuggestionReason.firstTime) return s;
+    final step = increment(eq);
+    if (step == 0 || s.weightKg == 0) {
+      return Suggestion(s.weightKg, (s.reps * 0.7).round().clamp(1, 50), SuggestionReason.deloadWeek);
+    }
+    // Nearest plate step, so it stays close to 10 %
+    return Suggestion((s.weightKg * 0.9 / step).roundToDouble() * step, s.reps, SuggestionReason.deloadWeek);
+  }
+
+  static Suggestion _suggest(List<List<WorkoutSet>> sessions, ExerciseEquipment eq) {
     final done = [
       for (final s in sessions)
         if (s.any((x) => x.counts)) s.where((x) => x.counts).toList()
@@ -70,7 +93,13 @@ abstract final class Progression {
     }
 
     if (minReps >= repMax && step > 0) {
-      return Suggestion(top.weightKg + step, repMin, SuggestionReason.increase);
+      final rated = atTop.map((s) => s.rpe).whereType<double>().toList();
+      final effort = rated.isEmpty ? null : rated.reduce((a, b) => a + b) / rated.length;
+      if (effort != null && effort >= 9.5) {
+        return Suggestion(top.weightKg, repMax, SuggestionReason.hold);
+      }
+      final jump = effort != null && effort <= 7 ? step * 2 : step;
+      return Suggestion(top.weightKg + jump, repMin, SuggestionReason.increase);
     }
     return Suggestion(top.weightKg, (minReps + 1).clamp(1, step > 0 ? repMax : 50),
         SuggestionReason.addRep);
@@ -284,5 +313,39 @@ class ProgramWeek {
       doneDays: days,
       nextDay: last == null ? 0 : (last + 1) % p.days.length,
     );
+  }
+}
+
+/// Planned lighter weeks (ROADMAP 3.1): after [hardWeeks] hard training
+/// weeks in a row, the next week is a deload week, then the count restarts.
+abstract final class Deload {
+  static const hardWeeks = 5;
+
+  /// Monday 00:00 of [d]'s week.
+  static DateTime weekStart(DateTime d) => DateTime(d.year, d.month, d.day - (d.weekday - 1));
+
+  /// Hard weeks in a row right before [now]'s week. A week is hard with at
+  /// least `daysPerWeek - 1` workouts (and at least 2).
+  static int streak(Iterable<WorkoutSummary> history, DateTime now, int daysPerWeek) {
+    final need = math.max(2, daysPerWeek - 1);
+    final perWeek = <DateTime, int>{};
+    for (final h in history) {
+      final w = weekStart(h.workout.startedAt);
+      perWeek[w] = (perWeek[w] ?? 0) + 1;
+    }
+    var week = weekStart(now);
+    week = DateTime(week.year, week.month, week.day - 7);
+    var n = 0;
+    while ((perWeek[week] ?? 0) >= need) {
+      n++;
+      week = DateTime(week.year, week.month, week.day - 7);
+    }
+    return n;
+  }
+
+  /// Whether [now]'s week should be a deload week.
+  static bool due(Iterable<WorkoutSummary> history, DateTime now, int daysPerWeek) {
+    final n = streak(history, now, daysPerWeek);
+    return n >= hardWeeks && n % (hardWeeks + 1) == hardWeeks;
   }
 }

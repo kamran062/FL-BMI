@@ -289,7 +289,9 @@ class _ExerciseBlock extends StatelessWidget {
                       if (exercise != null)
                         _SuggestionText(
                           suggestion: Progression.suggest(
-                              workouts.sessionsFor(exerciseId), exercise!.equipment),
+                              workouts.sessionsFor(exerciseId), exercise!.equipment,
+                              deloadWeek: workouts.deloadDue(
+                                  context.read<ProfileProvider>().profile.daysPerWeek)),
                           unit: unit,
                         ),
                     ],
@@ -588,10 +590,12 @@ class _SuggestionText extends StatelessWidget {
     if (s.reason == SuggestionReason.firstTime) return const SizedBox.shrink();
     final w = Units.weight(s.weightKg, unit);
     final text = s.weightKg == 0
-        ? l.suggestionRepsOnly(s.reps)
+        ? (s.reason == SuggestionReason.deloadWeek ? l.suggestionDeloadReps(s.reps) : l.suggestionRepsOnly(s.reps))
         : switch (s.reason) {
             SuggestionReason.increase => l.suggestionIncrease(w, s.reps),
             SuggestionReason.deload => l.suggestionDeload(w, s.reps),
+            SuggestionReason.deloadWeek => l.suggestionDeloadWeek(w, s.reps),
+            SuggestionReason.hold => l.suggestionHold(w, s.reps),
             _ => l.suggestionAddRep(w, s.reps),
           };
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -599,11 +603,13 @@ class _SuggestionText extends StatelessWidget {
       padding: const EdgeInsets.only(top: 2),
       child: Row(children: [
         Icon(
-          s.reason == SuggestionReason.increase
-              ? Icons.trending_up_rounded
-              : s.reason == SuggestionReason.deload
-                  ? Icons.refresh_rounded
-                  : Icons.add_rounded,
+          switch (s.reason) {
+            SuggestionReason.increase => Icons.trending_up_rounded,
+            SuggestionReason.deload => Icons.refresh_rounded,
+            SuggestionReason.deloadWeek => Icons.battery_charging_full_rounded,
+            SuggestionReason.hold => Icons.pause_rounded,
+            _ => Icons.add_rounded,
+          },
           size: 14,
           color: isDark ? AppColors.darkFg3 : AppColors.fg3,
         ),

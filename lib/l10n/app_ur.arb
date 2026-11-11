@@ -750,5 +750,11 @@
   "trainRpe": "محنت (RPE)",
   "trainRpeHelp": "کتنا مشکل تھا؟ 10 = ایک بھی ریپ باقی نہیں، 9 = ایک باقی، 8 = دو باقی۔",
   "trainRpeNone": "درجہ نہیں دیا",
-  "trainRpeValue": "RPE {value}"
+  "trainRpeValue": "RPE {value}",
+  "trainDeloadTitle": "ہلکا ہفتہ (ڈی لوڈ)",
+  "trainDeloadBody": "آپ نے لگاتار 5 ہفتے سخت ٹریننگ کی ہے۔ اس ہفتے تقریباً 10% ہلکا وزن اٹھائیں تاکہ جسم ریکور ہو کر زیادہ مضبوط ہو۔ وزن کی تجاویز پہلے ہی ہلکی کر دی گئی ہیں۔",
+  "trainDeloadSkip": "اس ہفتے نہیں",
+  "suggestionDeloadWeek": "ہلکا ہفتہ: {weight} × {reps}",
+  "suggestionDeloadReps": "ہلکا ہفتہ: {reps} ریپس کا ہدف",
+  "suggestionHold": "{weight} × {reps} پر رہیں جب تک آسان نہ لگے"
 }

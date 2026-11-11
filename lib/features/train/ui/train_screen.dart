@@ -98,6 +98,30 @@ class TrainScreen extends StatelessWidget {
                     fullWidth: true,
                     onPressed: () => _start(context),
                   ),
+                if (workouts.deloadDue(profile.daysPerWeek)) ...[
+                  const SizedBox(height: 12),
+                  AppCard(
+                    padding: 16,
+                    tint: AppColors.bmiOver.withAlpha(30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(children: [
+                          const Icon(Icons.battery_charging_full_rounded, color: AppColors.bmiOver),
+                          const SizedBox(width: 8),
+                          Text(l.trainDeloadTitle,
+                              style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w700)),
+                        ]),
+                        const SizedBox(height: 6),
+                        Text(l.trainDeloadBody, style: GoogleFonts.inter(fontSize: 14, height: 1.4)),
+                        Align(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: TextButton(onPressed: workouts.skipDeload, child: Text(l.trainDeloadSkip)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 Row(children: [
                   Expanded(

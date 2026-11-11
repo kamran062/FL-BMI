@@ -3860,5 +3860,50 @@
         "type": "String"
       }
     }
+  },
+  "trainDeloadTitle": "Deload week",
+  "@trainDeloadTitle": {
+    "description": "Title of the card shown in a planned lighter training week"
+  },
+  "trainDeloadBody": "You've trained hard for 5 weeks in a row. This week, lift about 10% lighter so your body recovers and comes back stronger. Suggestions below are already lighter.",
+  "@trainDeloadBody": {
+    "description": "Explains the deload week"
+  },
+  "trainDeloadSkip": "Skip this week",
+  "@trainDeloadSkip": {
+    "description": "Button to train normally instead of the deload week"
+  },
+  "suggestionDeloadWeek": "Deload week: {weight} × {reps}",
+  "@suggestionDeloadWeek": {
+    "description": "Weight suggestion during a deload week",
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "int"
+      }
+    }
+  },
+  "suggestionDeloadReps": "Deload week: aim for {reps} reps",
+  "@suggestionDeloadReps": {
+    "description": "Bodyweight suggestion during a deload week",
+    "placeholders": {
+      "reps": {
+        "type": "int"
+      }
+    }
+  },
+  "suggestionHold": "Stay at {weight} × {reps} until it feels easier",
+  "@suggestionHold": {
+    "description": "Suggestion when the last sets were rated very hard",
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "reps": {
+        "type": "int"
+      }
+    }
   }
 }

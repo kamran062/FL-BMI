@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bmi_health/core/database/database_helper.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
+import 'package:bmi_health/features/train/programs/progression.dart';
 
 /// Active workout, workout history and saved routines.
 /// Every change is written to the database immediately, so a workout
@@ -10,6 +12,33 @@ class WorkoutProvider extends ChangeNotifier {
   WorkoutProvider(this._db);
 
   final DatabaseHelper _db;
+
+  static const _deloadSkipKey = 'deload_skipped_week';
+
+  /// Monday of a deload week the user chose to train through.
+  DateTime? _deloadSkipped;
+
+  /// Whether this is a deload week (see [Deload]) and it wasn't skipped.
+  bool deloadDue(int daysPerWeek, {DateTime? now}) {
+    final t = now ?? DateTime.now();
+    return _deloadSkipped != Deload.weekStart(t) && Deload.due(_history, t, daysPerWeek);
+  }
+
+  Future<void> skipDeload({DateTime? now}) async {
+    _deloadSkipped = Deload.weekStart(now ?? DateTime.now());
+    notifyListeners();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt(_deloadSkipKey, _deloadSkipped!.millisecondsSinceEpoch);
+    } catch (_) {}
+  }
+
+  Future<void> _loadDeloadSkip() async {
+    try {
+      final ms = (await SharedPreferences.getInstance()).getInt(_deloadSkipKey);
+      _deloadSkipped = ms == null ? null : DateTime.fromMillisecondsSinceEpoch(ms);
+    } catch (_) {}
+  }
 
   Workout? _active;
   List<WorkoutSet> _activeSets = [];
@@ -64,6 +93,7 @@ class WorkoutProvider extends ChangeNotifier {
     _activeSets = _active == null ? [] : await _db.getSets(_active!.id!);
     _routines = await _db.getRoutines();
     await _loadHistory();
+    await _loadDeloadSkip();
     notifyListeners();
   }
 

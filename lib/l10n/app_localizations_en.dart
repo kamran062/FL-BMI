@@ -2592,4 +2592,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String trainRpeValue(String value) {
     return 'RPE $value';
   }
+
+  @override
+  String get trainDeloadTitle => 'Deload week';
+
+  @override
+  String get trainDeloadBody => 'You\'ve trained hard for 5 weeks in a row. This week, lift about 10% lighter so your body recovers and comes back stronger. Suggestions below are already lighter.';
+
+  @override
+  String get trainDeloadSkip => 'Skip this week';
+
+  @override
+  String suggestionDeloadWeek(String weight, int reps) {
+    return 'Deload week: $weight × $reps';
+  }
+
+  @override
+  String suggestionDeloadReps(int reps) {
+    return 'Deload week: aim for $reps reps';
+  }
+
+  @override
+  String suggestionHold(String weight, int reps) {
+    return 'Stay at $weight × $reps until it feels easier';
+  }
 }

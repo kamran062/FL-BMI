@@ -4600,6 +4600,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'RPE {value}'**
   String trainRpeValue(String value);
+
+  /// Title of the card shown in a planned lighter training week
+  ///
+  /// In en, this message translates to:
+  /// **'Deload week'**
+  String get trainDeloadTitle;
+
+  /// Explains the deload week
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve trained hard for 5 weeks in a row. This week, lift about 10% lighter so your body recovers and comes back stronger. Suggestions below are already lighter.'**
+  String get trainDeloadBody;
+
+  /// Button to train normally instead of the deload week
+  ///
+  /// In en, this message translates to:
+  /// **'Skip this week'**
+  String get trainDeloadSkip;
+
+  /// Weight suggestion during a deload week
+  ///
+  /// In en, this message translates to:
+  /// **'Deload week: {weight} × {reps}'**
+  String suggestionDeloadWeek(String weight, int reps);
+
+  /// Bodyweight suggestion during a deload week
+  ///
+  /// In en, this message translates to:
+  /// **'Deload week: aim for {reps} reps'**
+  String suggestionDeloadReps(int reps);
+
+  /// Suggestion when the last sets were rated very hard
+  ///
+  /// In en, this message translates to:
+  /// **'Stay at {weight} × {reps} until it feels easier'**
+  String suggestionHold(String weight, int reps);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

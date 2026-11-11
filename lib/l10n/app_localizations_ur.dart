@@ -2568,4 +2568,28 @@ class AppLocalizationsUr extends AppLocalizations {
   String trainRpeValue(String value) {
     return 'RPE $value';
   }
+
+  @override
+  String get trainDeloadTitle => 'ہلکا ہفتہ (ڈی لوڈ)';
+
+  @override
+  String get trainDeloadBody => 'آپ نے لگاتار 5 ہفتے سخت ٹریننگ کی ہے۔ اس ہفتے تقریباً 10% ہلکا وزن اٹھائیں تاکہ جسم ریکور ہو کر زیادہ مضبوط ہو۔ وزن کی تجاویز پہلے ہی ہلکی کر دی گئی ہیں۔';
+
+  @override
+  String get trainDeloadSkip => 'اس ہفتے نہیں';
+
+  @override
+  String suggestionDeloadWeek(String weight, int reps) {
+    return 'ہلکا ہفتہ: $weight × $reps';
+  }
+
+  @override
+  String suggestionDeloadReps(int reps) {
+    return 'ہلکا ہفتہ: $reps ریپس کا ہدف';
+  }
+
+  @override
+  String suggestionHold(String weight, int reps) {
+    return '$weight × $reps پر رہیں جب تک آسان نہ لگے';
+  }
 }
