@@ -56,3 +56,4 @@ android/key.properties
 *.p8
 play-service-account*.json
 .claude/worktrees/
+.firebase/

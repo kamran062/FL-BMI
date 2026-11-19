@@ -3,7 +3,7 @@
 **App Name:** BMI Calculator & Health
 **Developer:** Kamran Iqbal
 **Effective Date:** May 17, 2026
-**Last Updated:** November 3, 2026
+**Last Updated:** November 19, 2026
 
 ---
 
@@ -18,12 +18,13 @@ By downloading and using BMI Calculator & Health, you agree to the practices des
 ## 1. Information We Collect
 
 ### 1.1 Information You Provide
-When you use BMI Calculator & Health, you may enter the following personal health information:
+When you use BMI Calculator & Health, you may enter personal and health information such as:
 
-- **Height** (in cm or inches)
-- **Weight** (in kg or lbs)
-- **Age**
-- **Gender**
+- **Profile:** height, weight, age, gender, goal, experience and training days
+- **Body:** weigh-ins, body measurements and BMI history
+- **Training:** workouts, sets, weights, reps and effort ratings
+- **Nutrition:** food entries (calories, protein, carbs, fat) and water
+- **Recovery:** how sore or tired you feel
 
 **Important:** All this information is stored **locally on your device only**. We do **not** collect, transmit, or store this data on any external server. You have full control over your data and can delete it at any time by clearing the app data or uninstalling the App.
 
@@ -37,8 +38,8 @@ Our App uses **Google AdMob** to display advertisements. AdMob may automatically
 
 This information is collected and processed by Google according to their privacy policy.
 
-### 1.3 Step Count (Health Connect / Apple Health)
-If you choose to connect, the App reads your **daily step count** from Health Connect (Android) or Apple Health (iOS) to show it on your Today screen. The App only reads steps; it does not read any other health data and does not write to these services. Step data is **never** sent off your device, shared with advertisers, or used for advertising. You can revoke access at any time in Health Connect or the Health app.
+### 1.3 Health Connect / Apple Health (optional)
+If you choose to connect, the App reads your **daily step count** from Health Connect (Android) or Apple Health (iOS). If you also connect sleep and heart data, it reads **sleep, resting heart rate and heart-rate variability** to calculate your recovery score. The App only reads this data; it does not write to these services. This data is **never** sent off your device, shared with advertisers, or used for advertising. You can revoke access at any time in Health Connect or the Health app.
 
 ### 1.3a Watch Apps (optional)
 If you use the Wear OS or Apple Watch app, your phone sends the current exercise, set and rest timer to your watch, and the watch sends back "set done" taps and your heart rate during a workout. This goes directly between your own devices. On Apple Watch, a workout session keeps the heart-rate sensor on during your workout; it is discarded afterwards and nothing is saved to Apple Health.
@@ -59,8 +60,16 @@ Progress photos you add are encrypted and stored in the App's private storage on
 ### 1.7 Device Backups
 To keep your health data on your device, the App opts out of Android cloud backup and device-to-device transfer, and excludes its data from iCloud device backups. This means your App data is not restored automatically when you move to a new phone. Instead, you can create an encrypted backup file in Settings, protected by a passphrase only you know, and save it wherever you choose; we cannot open it. Spreadsheet (CSV) exports are not encrypted.
 
-### 1.8 Food Search
+### 1.8 Food Search and Barcode Scanning
 The food list used to look up calories and macros is built into the App. Searching it works offline and sends nothing anywhere.
+
+If you scan a product barcode, the App sends **only the barcode number** to Open Food Facts (a free, open food database) to look up the product's nutrition. No personal information is sent. Looked-up products are kept on your device for offline use.
+
+### 1.8a Camera (optional)
+The camera is used only when you choose to: to scan a barcode, to take a progress photo, or for the **rep counter**, which counts your reps from your body's position. Rep counting runs entirely on your device; the camera images are not saved, uploaded or shared.
+
+### 1.8b Notifications and Voice Coach
+Reminders and rest-timer alerts are scheduled on your device. The voice coach in guided workouts uses your phone's own text-to-speech; nothing is sent anywhere.
 
 ### 1.9 Premium Purchases (optional)
 Purchases are made through Google Play or the App Store; they handle payment and we never see your payment details. Your Premium status is checked with the store and kept on your device. The App does not send your purchase to any server of ours.
@@ -111,7 +120,7 @@ We use Sentry to receive anonymous crash reports (see section 1.10). Sentry proc
 
 ## 4. Data Storage and Security
 
-- All health-related data (height, weight, age, gender) is stored **locally on your device**.
+- All personal and health data (see section 1) is stored **locally on your device**.
 - We do not have access to this data, and it is not uploaded to any cloud or server.
 - We use industry-standard practices to protect the limited data processed within the App.
 - However, no method of transmission over the Internet or electronic storage is 100% secure.
@@ -141,12 +150,17 @@ Since we do not store your personal data on our servers, all data control rests 
 
 ## 7. Permissions Used
 
-The App may request the following permissions:
+The App asks for each permission only when you use the feature that needs it, and works without the optional ones:
 
-- **Internet access** — Required to display advertisements through AdMob
-- **Network state** — To check connectivity for ad loading
+- **Internet and network state** — advertisements (AdMob), barcode lookups and map images
+- **Camera** (optional) — barcode scanning, progress photos and the rep counter
+- **Location while using the App, with a visible notification on Android** (optional) — the movement timeline and gym check-in
+- **Health Connect / Apple Health** (optional) — steps, sleep and heart data
+- **Notifications** (optional) — reminders and rest-timer alerts
+- **Fingerprint / face unlock** (optional) — locking cycle-tracking data
+- **Photos / files** (optional) — choosing a progress photo or saving and restoring a backup file
 
-We do **not** request access to your contacts, camera, microphone, location, or any other sensitive data.
+We do **not** request access to your contacts or microphone, and the App never uses "all the time" background location.
 
 ---
 
@@ -170,7 +184,3 @@ If you have any questions, concerns, or feedback regarding this Privacy Policy o
 
 **Developer:** Kamran Iqbal
 **Email:** kamraniqbal.bcs062@gmail.com
-
----
-
-*This Privacy Policy is compliant with Google Play Store requirements and applicable data protection regulations.*
