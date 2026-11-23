@@ -1940,13 +1940,13 @@ abstract class AppLocalizations {
   /// Bottom nav tab: calories and water
   ///
   /// In en, this message translates to:
-  /// **'Fuel'**
+  /// **'Food'**
   String get navFuel;
 
   /// Fuel screen title
   ///
   /// In en, this message translates to:
-  /// **'Fuel'**
+  /// **'Food'**
   String get fuelTitle;
 
   /// Card title
@@ -4636,6 +4636,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stay at {weight} × {reps} until it feels easier'**
   String suggestionHold(String weight, int reps);
+
+  /// Bottom navigation tab: the user's body, progress and settings
+  ///
+  /// In en, this message translates to:
+  /// **'Me'**
+  String get navMe;
+
+  /// Card on the Me tab opening streaks, badges and recaps
+  ///
+  /// In en, this message translates to:
+  /// **'Progress & badges'**
+  String get meProgressTitle;
+
+  /// Subtitle of the progress card before any streak
+  ///
+  /// In en, this message translates to:
+  /// **'Streaks, badges and your weekly recap'**
+  String get meProgressBody;
+
+  /// Heading of the four daily goal rings on Today
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s goals'**
+  String get todayGoalsTitle;
+
+  /// How many daily goals are complete
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} done'**
+  String todayGoalsProgress(int done, int total);
+
+  /// Shown when all daily goals are complete
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect day! Every goal done.'**
+  String get todayPerfectDay;
+
+  /// Daily goal ring: steps
+  ///
+  /// In en, this message translates to:
+  /// **'Move'**
+  String get goalMove;
+
+  /// Daily goal ring: a workout today
+  ///
+  /// In en, this message translates to:
+  /// **'Train'**
+  String get goalTrain;
+
+  /// Daily goal ring: calories logged
+  ///
+  /// In en, this message translates to:
+  /// **'Eat'**
+  String get goalEat;
+
+  /// Daily goal ring: water
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get goalWater;
+
+  /// Move ring label when steps aren't connected yet
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get goalConnect;
+
+  /// Train ring label when today's workout is done
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get goalDone;
+
+  /// Accessibility label of the daily streak chip
+  ///
+  /// In en, this message translates to:
+  /// **'{days}-day streak'**
+  String streakChip(int days);
+
+  /// Title of the daily streak explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Daily streak'**
+  String get streakHelpTitle;
+
+  /// Explains how the daily streak works
+  ///
+  /// In en, this message translates to:
+  /// **'Log anything each day (a workout, a meal, water or your weight) to keep your streak going. Today counts as soon as you log something.'**
+  String get streakHelpBody;
+
+  /// Overline of the main action card on Today
+  ///
+  /// In en, this message translates to:
+  /// **'Your plan today'**
+  String get planTitle;
+
+  /// Button starting today's planned workout
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get planStart;
+
+  /// Subtitle of today's challenge workout, e.g. Day 7 of 30 · about 12 min
+  ///
+  /// In en, this message translates to:
+  /// **'{day} · about {minutes} min'**
+  String planChallengeSub(String day, int minutes);
+
+  /// Today's plan on a challenge rest day
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery is part of training. A walk or light stretching is perfect today.'**
+  String get planRestBody;
+
+  /// Button to tick off a rest day
+  ///
+  /// In en, this message translates to:
+  /// **'Mark rest day done'**
+  String get planRestDone;
+
+  /// Today's plan after the workout is done
+  ///
+  /// In en, this message translates to:
+  /// **'Done for today'**
+  String get planDoneTitle;
+
+  /// Encouragement after today's workout
+  ///
+  /// In en, this message translates to:
+  /// **'Great work! Your next session is ready tomorrow.'**
+  String get planDoneBody;
+
+  /// Why this gym workout is suggested
+  ///
+  /// In en, this message translates to:
+  /// **'Your least-trained muscles this week'**
+  String get planGymSub;
+
+  /// Today's plan before any workout
+  ///
+  /// In en, this message translates to:
+  /// **'Start your 30-day plan'**
+  String get planFirstTitle;
+
+  /// Suggested first challenge
+  ///
+  /// In en, this message translates to:
+  /// **'{focus} · Beginner · no equipment'**
+  String planFirstSub(String focus);
+
+  /// Heading of the quick add buttons on Today
+  ///
+  /// In en, this message translates to:
+  /// **'Quick add'**
+  String get quickAddTitle;
+
+  /// Quick add water button
+  ///
+  /// In en, this message translates to:
+  /// **'+250 ml'**
+  String get quickWater;
+
+  /// Snackbar after adding water
+  ///
+  /// In en, this message translates to:
+  /// **'250 ml water added'**
+  String get quickWaterDone;
+
+  /// Quick add food button
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get quickFood;
+
+  /// Quick add weight button
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get quickWeight;
+
+  /// Heading of the row of extra tools on Today
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get todayMore;
+
+  /// Button on Today's recovery card showing sleep details
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep details'**
+  String get recoveryShowSleep;
+
+  /// Button folding the sleep details away
+  ///
+  /// In en, this message translates to:
+  /// **'Hide sleep details'**
+  String get recoveryHideSleep;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

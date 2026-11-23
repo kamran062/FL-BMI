@@ -9,12 +9,13 @@ void main() {
   setUpAll(setUpAppHarness);
 
   Future<void> openBody(WidgetTester tester) async {
-    await tester.tap(find.text('Body'));
+    await tester.tap(find.text('Me').last);
     await tester.pumpAndSettle();
   }
 
   Future<void> tapText(WidgetTester tester, String text) async {
     await tester.ensureVisible(find.text(text).last);
+    await tester.pumpAndSettle();
     await tester.tap(find.text(text).last);
     await tester.pumpAndSettle();
   }

@@ -21,7 +21,7 @@ void main() {
   testWidgets('photos are stored encrypted, compared, and deleted from disk',
       (tester) async {
     final app = await launchApp(tester);
-    await tester.tap(find.text('Body'));
+    await tester.tap(find.text('Me').last);
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(find.text('PROGRESS PHOTOS'), 200,
         scrollable: find.byType(Scrollable).first);
@@ -43,6 +43,7 @@ void main() {
     // Compare view shows both, with dates and weights
     await tester.scrollUntilVisible(find.text('Compare first and latest'), 200,
         scrollable: find.byType(Scrollable).first);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Compare first and latest'));
     await tester.pumpAndSettle();
     expect(find.text('Sep 1, 2026 · 80.0 kg'), findsOneWidget);

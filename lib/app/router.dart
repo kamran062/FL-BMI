@@ -40,12 +40,12 @@ abstract final class Routes {
   static const tips       = '/today/tips';
   static const movement   = '/today/movement';
   static const cycle      = '/today/cycle';
-  static const progress   = '/today/progress';
+  static const progress   = '/body/progress';
   static const body       = '/body';
   static const calculate  = '/body/calculate';
   static const history    = '/body/history';
   static const fuel       = '/fuel';
-  static const settings   = '/settings';
+  static const settings   = '/body/settings';
   static const result     = '/result';
   static const goal       = '/goal';
   static const share      = '/share';
@@ -137,17 +137,13 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
                 onOpenTimeline: () => context.go(Routes.movement),
                 onOpenCycle: () => context.go(Routes.cycle),
                 onOpenProgress: () => context.go(Routes.progress),
+                onOpenTrain: () => context.go(Routes.train),
               ),
               routes: [
                 GoRoute(
                   path: 'tips',
                   builder: (context, _) =>
                       TipsScreen(onBack: () => context.go(Routes.today)),
-                ),
-                GoRoute(
-                  path: 'progress',
-                  builder: (context, _) =>
-                      ProgressScreen(onBack: () => context.go(Routes.today)),
                 ),
                 GoRoute(
                   path: 'cycle',
@@ -158,37 +154,6 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
                   path: 'movement',
                   builder: (context, _) =>
                       TimelineScreen(onBack: () => context.go(Routes.today)),
-                ),
-              ],
-            ),
-          ]),
-          StatefulShellBranch(routes: [
-            GoRoute(
-              path: Routes.body,
-              builder: (context, _) => BodyScreen(
-                onOpenBmiHistory: () => context.go(Routes.history),
-                onCalculateBmi: () => context.go(Routes.calculate),
-              ),
-              routes: [
-                // Nested so the Body tab stays underneath and Back returns to it
-                GoRoute(
-                  path: 'calculate',
-                  builder: (context, _) => HomeScreen(
-                    onCalculate: () => context.push(Routes.resultFor()),
-                    onOpenSettings: () => context.go(Routes.settings),
-                    onViewLastResult: (bmi) =>
-                        context.push(Routes.resultFor(bmi)),
-                    onBack: () => context.go(Routes.body),
-                  ),
-                ),
-                GoRoute(
-                  path: 'history',
-                  builder: (context, _) => HistoryScreen(
-                    onAddEntry: () => context.go(Routes.calculate),
-                    onViewEntry: (entry) =>
-                        context.push(Routes.resultFor(entry.bmi)),
-                    onBack: () => context.go(Routes.body),
-                  ),
                 ),
               ],
             ),
@@ -213,11 +178,48 @@ GoRouter createRouter(SettingsProvider settings, ProfileProvider profile) {
           ]),
           StatefulShellBranch(routes: [
             GoRoute(
-              path: Routes.settings,
-              builder: (context, _) => SettingsScreen(
-                onOpenProfile: () => context.push(Routes.profile),
-                onOpenPremium: () => context.push(Routes.premium),
+              path: Routes.body,
+              builder: (context, _) => BodyScreen(
+                onOpenBmiHistory: () => context.go(Routes.history),
+                onCalculateBmi: () => context.go(Routes.calculate),
+                onOpenSettings: () => context.go(Routes.settings),
+                onOpenProgress: () => context.go(Routes.progress),
               ),
+              routes: [
+                GoRoute(
+                  path: 'progress',
+                  builder: (context, _) =>
+                      ProgressScreen(onBack: () => context.go(Routes.body)),
+                ),
+                GoRoute(
+                  path: 'settings',
+                  builder: (context, _) => SettingsScreen(
+                    onOpenProfile: () => context.push(Routes.profile),
+                    onOpenPremium: () => context.push(Routes.premium),
+                    onBack: () => context.go(Routes.body),
+                  ),
+                ),
+                // Nested so the Body tab stays underneath and Back returns to it
+                GoRoute(
+                  path: 'calculate',
+                  builder: (context, _) => HomeScreen(
+                    onCalculate: () => context.push(Routes.resultFor()),
+                    onOpenSettings: () => context.go(Routes.settings),
+                    onViewLastResult: (bmi) =>
+                        context.push(Routes.resultFor(bmi)),
+                    onBack: () => context.go(Routes.body),
+                  ),
+                ),
+                GoRoute(
+                  path: 'history',
+                  builder: (context, _) => HistoryScreen(
+                    onAddEntry: () => context.go(Routes.calculate),
+                    onViewEntry: (entry) =>
+                        context.push(Routes.resultFor(entry.bmi)),
+                    onBack: () => context.go(Routes.body),
+                  ),
+                ),
+              ],
             ),
           ]),
         ],

@@ -87,7 +87,7 @@ void main() {
     final app = await launchApp(tester);
 
     // Open Home Challenges from the Train tab
-    await tester.tap(find.text('Train'));
+    await tester.tap(find.text('Train').last);
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(find.text('Home Challenges'), 200,
         scrollable: find.byType(Scrollable).first);
@@ -161,7 +161,7 @@ void main() {
     restAlerts = alerts;
     await launchApp(tester);
 
-    await tester.tap(find.text('Train'));
+    await tester.tap(find.text('Train').last);
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(find.text('Home Challenges'), 200,
         scrollable: find.byType(Scrollable).first);

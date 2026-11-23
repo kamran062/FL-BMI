@@ -2592,4 +2592,111 @@ class AppLocalizationsUr extends AppLocalizations {
   String suggestionHold(String weight, int reps) {
     return '$weight × $reps پر رہیں جب تک آسان نہ لگے';
   }
+
+  @override
+  String get navMe => 'میں';
+
+  @override
+  String get meProgressTitle => 'پیش رفت اور بیجز';
+
+  @override
+  String get meProgressBody => 'اسٹریک، بیجز اور ہفتہ وار خلاصہ';
+
+  @override
+  String get todayGoalsTitle => 'آج کے اہداف';
+
+  @override
+  String todayGoalsProgress(int done, int total) {
+    return '$total میں سے $done مکمل';
+  }
+
+  @override
+  String get todayPerfectDay => 'بہترین دن! تمام اہداف مکمل۔';
+
+  @override
+  String get goalMove => 'چلنا';
+
+  @override
+  String get goalTrain => 'ورزش';
+
+  @override
+  String get goalEat => 'کھانا';
+
+  @override
+  String get goalWater => 'پانی';
+
+  @override
+  String get goalConnect => 'جوڑیں';
+
+  @override
+  String get goalDone => 'مکمل';
+
+  @override
+  String streakChip(int days) {
+    return '$days دن کی اسٹریک';
+  }
+
+  @override
+  String get streakHelpTitle => 'روزانہ اسٹریک';
+
+  @override
+  String get streakHelpBody => 'اسٹریک جاری رکھنے کے لیے روزانہ کچھ بھی درج کریں: ورزش، کھانا، پانی یا وزن۔ جیسے ہی آپ کچھ درج کریں آج شمار ہو جاتا ہے۔';
+
+  @override
+  String get planTitle => 'آج کا پلان';
+
+  @override
+  String get planStart => 'شروع کریں';
+
+  @override
+  String planChallengeSub(String day, int minutes) {
+    return '$day · تقریباً $minutes منٹ';
+  }
+
+  @override
+  String get planRestBody => 'ریکوری بھی ٹریننگ کا حصہ ہے۔ آج ہلکی واک یا اسٹریچنگ بہترین ہے۔';
+
+  @override
+  String get planRestDone => 'آرام کا دن مکمل کریں';
+
+  @override
+  String get planDoneTitle => 'آج کے لیے مکمل';
+
+  @override
+  String get planDoneBody => 'شاباش! آپ کا اگلا سیشن کل تیار ہوگا۔';
+
+  @override
+  String get planGymSub => 'اس ہفتے کم ورزش والے پٹھے';
+
+  @override
+  String get planFirstTitle => 'اپنا 30 دن کا پلان شروع کریں';
+
+  @override
+  String planFirstSub(String focus) {
+    return '$focus · ابتدائی · کسی سامان کے بغیر';
+  }
+
+  @override
+  String get quickAddTitle => 'فوری اندراج';
+
+  @override
+  String get quickWater => '+250 ملی لیٹر';
+
+  @override
+  String get quickWaterDone => '250 ملی لیٹر پانی شامل';
+
+  @override
+  String get quickFood => 'کھانا';
+
+  @override
+  String get quickWeight => 'وزن';
+
+  @override
+  String get todayMore => 'مزید';
+
+  @override
+  String get recoveryShowSleep => 'نیند کی تفصیل';
+
+  @override
+  String get recoveryHideSleep => 'نیند کی تفصیل چھپائیں';
 }

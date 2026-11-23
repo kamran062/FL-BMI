@@ -19,14 +19,25 @@ import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/features/body/photos/progress_photos_card.dart';
+import 'package:bmi_health/features/progress/domain/achievements.dart';
+import 'package:bmi_health/features/train/workouts/workout_provider.dart';
 
 /// Body tab: weight trend, body-fat estimate, measurements, BMI history.
+/// The "Me" tab: progress and badges, weight, BMI, body measurements and
+/// photos. Settings open from the gear in the header.
 class BodyScreen extends StatelessWidget {
   final VoidCallback onOpenBmiHistory;
   final VoidCallback onCalculateBmi;
+  final VoidCallback onOpenSettings;
+  final VoidCallback onOpenProgress;
 
-  const BodyScreen(
-      {super.key, required this.onOpenBmiHistory, required this.onCalculateBmi});
+  const BodyScreen({
+    super.key,
+    required this.onOpenBmiHistory,
+    required this.onCalculateBmi,
+    required this.onOpenSettings,
+    required this.onOpenProgress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +55,22 @@ class BodyScreen extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: ScreenHeader(title: l.bodyTitle, large: true),
+              child: ScreenHeader(
+                title: l.navMe,
+                large: true,
+                trailing: IconButton(
+                  tooltip: l.navSettings,
+                  icon: const Icon(Icons.settings_outlined),
+                  onPressed: onOpenSettings,
+                ),
+              ),
             ),
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
               sliver: SliverList.list(children: [
+                _ProgressCard(onOpen: onOpenProgress),
+                const SizedBox(height: 14),
                 _WeightCard(profile: profile, logs: body.weights),
-                const SizedBox(height: 14),
-                _BodyFatCard(profile: profile, latest: body.latestMeasurement),
-                const SizedBox(height: 14),
-                _MeasurementsCard(
-                    profile: profile, latest: body.latestMeasurement),
-                const SizedBox(height: 14),
-                const ProgressPhotosCard(),
                 const SizedBox(height: 14),
                 _BmiCard(bmi: lastBmi?.bmi, onOpen: onOpenBmiHistory),
                 const SizedBox(height: 10),
@@ -66,6 +80,13 @@ class BodyScreen extends StatelessWidget {
                   fullWidth: true,
                   onPressed: onCalculateBmi,
                 ),
+                const SizedBox(height: 14),
+                _BodyFatCard(profile: profile, latest: body.latestMeasurement),
+                const SizedBox(height: 14),
+                _MeasurementsCard(
+                    profile: profile, latest: body.latestMeasurement),
+                const SizedBox(height: 14),
+                const ProgressPhotosCard(),
                 const SizedBox(height: 18),
                 Text(
                   l.wellnessDisclaimer,
@@ -76,6 +97,32 @@ class BodyScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ── Progress ─────────────────────────────────────────────────────────────────
+
+/// Week streak and badges; opens the progress screen.
+class _ProgressCard extends StatelessWidget {
+  final VoidCallback onOpen;
+  const _ProgressCard({required this.onOpen});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final history = context.watch<WorkoutProvider>().history;
+    final goal = context.watch<ProfileProvider>().profile.daysPerWeek;
+    final streak = Streaks.weeks([for (final h in history) h.workout.startedAt], goal, DateTime.now());
+    return AppCard(
+      padding: 4,
+      onTap: onOpen,
+      child: ListTile(
+        leading: const Icon(Icons.emoji_events_rounded, color: AppColors.bmiOver),
+        title: Text(l.meProgressTitle, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+        subtitle: Text(streak > 0 ? l.weekStreak(streak) : l.meProgressBody),
+        trailing: const Icon(Icons.chevron_right_rounded),
       ),
     );
   }

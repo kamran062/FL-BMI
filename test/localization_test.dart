@@ -61,7 +61,7 @@ void main() {
 
   testWidgets('English is the default', (tester) async {
     await launchApp(tester);
-    expect(find.text('Start workout'), findsOneWidget);
+    expect(find.text("TODAY'S GOALS"), findsOneWidget);
   });
 
   testWidgets('choosing Urdu shows Urdu text right-to-left', (tester) async {
@@ -69,18 +69,21 @@ void main() {
 
     await scrollToBmiTile(tester);
     expect(find.text('بی ایم آئی معلوم کریں'), findsOneWidget); // Calculate BMI
-    expect(find.text('ترتیبات'), findsOneWidget); // Settings tab
+    expect(find.text('میں'), findsOneWidget); // Me tab
     final dir = Directionality.of(tester.element(find.text('بی ایم آئی معلوم کریں')));
     expect(dir, TextDirection.rtl);
   });
 
   testWidgets('back navigation still works in Urdu', (tester) async {
     await launchApp(tester, prefs: {'language': 'ur'});
-    await tester.tap(find.text('ترتیبات'));
+    await tester.tap(find.text('میں').last); // Me tab
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('ترتیبات')); // Settings gear
     await tester.pumpAndSettle();
     expect(find.text('ڈارک موڈ'), findsOneWidget); // Dark mode
 
-    await pressBack(tester);
+    await pressBack(tester); // Settings → Me
+    await pressBack(tester); // Me → Today
     expect(find.text('آج'), findsWidgets); // back on the Today tab
     await scrollToBmiTile(tester);
     expect(find.text('بی ایم آئی معلوم کریں'), findsOneWidget);

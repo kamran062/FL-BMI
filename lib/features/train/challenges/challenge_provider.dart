@@ -56,6 +56,19 @@ class ChallengeProvider extends ChangeNotifier {
     return (focus: f, level: l);
   }
 
+  /// When each challenge day was completed (for the daily streak).
+  Iterable<DateTime> get completionDates sync* {
+    for (final m in _done.values) {
+      yield* m.values;
+    }
+  }
+
+  /// Whether a challenge day was completed today.
+  bool get doneToday {
+    final n = _now();
+    return _done.values.any((m) => m.values.any((t) => t.year == n.year && t.month == n.month && t.day == n.day));
+  }
+
   /// Consecutive calendar days (ending today or yesterday) with at least
   /// one challenge day completed.
   int get streak {

@@ -18,7 +18,7 @@ void main() {
   testWidgets('chest day: plan with sets and rest, starts with sets prefilled',
       (tester) async {
     final app = await launchApp(tester);
-    await tester.tap(find.text('Train'));
+    await tester.tap(find.text('Train').last);
     await tester.pumpAndSettle();
     final chip = find.widgetWithText(ActionChip, 'Chest');
     await tester.scrollUntilVisible(chip, 200, scrollable: find.byType(Scrollable).first);

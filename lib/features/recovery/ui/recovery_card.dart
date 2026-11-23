@@ -13,8 +13,17 @@ import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 
 /// Today's recovery score, soreness check-in and sleep summary.
-class RecoveryCard extends StatelessWidget {
-  const RecoveryCard({super.key});
+class RecoveryCard extends StatefulWidget {
+  /// Today screen: sleep details stay folded until asked for.
+  final bool compact;
+  const RecoveryCard({super.key, this.compact = false});
+
+  @override
+  State<RecoveryCard> createState() => _RecoveryCardState();
+}
+
+class _RecoveryCardState extends State<RecoveryCard> {
+  bool _showSleep = false;
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +132,17 @@ class RecoveryCard extends StatelessWidget {
                 onPressed: r.connect,
               ),
             ],
-            if (r.connected) ..._sleep(context, r, text),
+            if (r.connected && (!widget.compact || _showSleep)) ..._sleep(context, r, text),
+            if (r.connected && widget.compact)
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: TextButton.icon(
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                  onPressed: () => setState(() => _showSleep = !_showSleep),
+                  icon: Icon(_showSleep ? Icons.expand_less_rounded : Icons.bedtime_outlined, size: 18),
+                  label: Text(_showSleep ? l.recoveryHideSleep : l.recoveryShowSleep),
+                ),
+              ),
           ],
         ),
       ),

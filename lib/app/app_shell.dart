@@ -48,10 +48,9 @@ class _AppShellState extends State<AppShell> {
   // Order must match the router's StatefulShellRoute branches.
   static const _tabs = [
     (icon: Icons.today_outlined,      iconActive: Icons.today_rounded),
-    (icon: Icons.monitor_weight_outlined, iconActive: Icons.monitor_weight_rounded),
     (icon: Icons.fitness_center_outlined, iconActive: Icons.fitness_center_rounded),
     (icon: Icons.restaurant_outlined, iconActive: Icons.restaurant_rounded),
-    (icon: Icons.settings_outlined,   iconActive: Icons.settings_rounded),
+    (icon: Icons.person_outline_rounded, iconActive: Icons.person_rounded),
   ];
 
   void _goTab(int i) {
@@ -70,7 +69,7 @@ class _AppShellState extends State<AppShell> {
         .withValues(alpha: 0.85);
     final current = widget.navigationShell.currentIndex;
     final l = context.l10n;
-    final labels = [l.navToday, l.navBody, l.navTrain, l.navFuel, l.navSettings];
+    final labels = [l.navToday, l.navTrain, l.navFuel, l.navMe];
 
     final bottomPad = MediaQuery.of(context).padding.bottom;
     // Nav bar: 64px height + 12px bottom margin + safe area

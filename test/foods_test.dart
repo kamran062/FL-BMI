@@ -66,7 +66,7 @@ void main() {
       }
     }
 
-    await tester.tap(find.text('Fuel'));
+    await tester.tap(find.text('Food').last);
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('Log food'));
     await tester.tap(find.text('Log food'));

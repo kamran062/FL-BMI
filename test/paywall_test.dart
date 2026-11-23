@@ -52,7 +52,7 @@ void main() {
   testWidgets('no premium row in Settings when premium is not configured',
       (tester) async {
     await launchApp(tester);
-    await tester.tap(find.text('Settings'));
+    await openSettings(tester);
     await tester.pumpAndSettle();
     expect(find.text('Go Premium'), findsNothing);
   });

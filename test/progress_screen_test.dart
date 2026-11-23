@@ -21,9 +21,10 @@ void main() {
     });
     await tester.pumpAndSettle();
 
-    await tester.scrollUntilVisible(find.text('Progress'), 200,
-        scrollable: find.byType(Scrollable).first);
-    await tester.tap(find.text('Progress'));
+    // Progress & badges live on the Me tab
+    await tester.tap(find.text('Me').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Progress & badges'));
     await tester.pumpAndSettle();
 
     expect(find.text('This month'), findsOneWidget);

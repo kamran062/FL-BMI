@@ -195,7 +195,7 @@ void main() {
     testWidgets('history: open a workout, edit a set, delete the workout', (tester) async {
       final app = await launchApp(tester);
       final id = await logBench(app, tester, 60, 10);
-      await tester.tap(find.text('Train'));
+      await tester.tap(find.text('Train').last);
       await tester.pumpAndSettle();
       await tester.scrollUntilVisible(find.text('Bench day'), 300,
           scrollable: find.byType(Scrollable).first);
@@ -254,7 +254,7 @@ void main() {
         await w.updateSet(s.copyWith(reps: 10, done: true));
         await w.finish();
       });
-      await tester.tap(find.text('Train'));
+      await tester.tap(find.text('Train').last);
       await tester.pumpAndSettle();
       await tester.scrollUntilVisible(find.text('This week 1/3'), 200,
           scrollable: find.byType(Scrollable).first);

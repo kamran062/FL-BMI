@@ -1,37 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:bmi_health/features/body/bmi/bmi_provider.dart';
-import 'package:bmi_health/features/body/bmi/domain/bmi_calculator.dart';
 import 'package:bmi_health/features/body/bmi/ui/tips_screen.dart';
-import 'package:bmi_health/features/body/bmi/ui/widgets/status_pill.dart';
-import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/features/fuel/domain/nutrition.dart';
 import 'package:bmi_health/features/fuel/fuel_provider.dart';
-import 'package:bmi_health/features/fuel/ui/fuel_screen.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
+import 'package:bmi_health/features/today/domain/daily_goals.dart';
+import 'package:bmi_health/features/today/ui/today_widgets.dart';
+import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/workouts/workout_provider.dart';
+import 'package:bmi_health/features/body/metrics/body_provider.dart';
 import 'package:bmi_health/l10n/l10n.dart';
 import 'package:bmi_health/shared/theme/app_colors.dart';
-import 'package:bmi_health/shared/units/units.dart';
 import 'package:bmi_health/shared/widgets/app_button.dart';
 import 'package:bmi_health/shared/widgets/app_card.dart';
 import 'package:bmi_health/shared/widgets/overline_label.dart';
 import 'package:bmi_health/shared/widgets/screen_header.dart';
 import 'package:bmi_health/features/movement/steps_provider.dart';
 import 'package:bmi_health/features/movement/ui/step_goal_dialog.dart';
-import 'dart:io' show Platform;
 import 'package:bmi_health/features/movement/movement_provider.dart';
 import 'package:bmi_health/features/movement/ui/timeline_screen.dart';
 import 'package:bmi_health/features/recovery/ui/recovery_card.dart';
 import 'package:bmi_health/features/cycle/cycle_provider.dart';
 import 'package:bmi_health/features/cycle/ui/cycle_screen.dart';
-import 'package:bmi_health/features/progress/domain/achievements.dart';
-import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
-import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
 
-/// Home dashboard: the day at a glance with one-tap actions.
-class TodayScreen extends StatelessWidget {
+/// Home: today's goals, one plan with one button, quick logging, and a
+/// daily streak that rewards coming back.
+class TodayScreen extends StatefulWidget {
   final VoidCallback onOpenWorkout;
   final VoidCallback onOpenFuel;
   final VoidCallback onOpenBody;
@@ -40,6 +35,7 @@ class TodayScreen extends StatelessWidget {
   final VoidCallback onOpenTimeline;
   final VoidCallback onOpenCycle;
   final VoidCallback onOpenProgress;
+  final VoidCallback onOpenTrain;
 
   const TodayScreen({
     super.key,
@@ -51,33 +47,61 @@ class TodayScreen extends StatelessWidget {
     required this.onOpenTimeline,
     required this.onOpenCycle,
     required this.onOpenProgress,
+    required this.onOpenTrain,
   });
+
+  @override
+  State<TodayScreen> createState() => _TodayScreenState();
+}
+
+class _TodayScreenState extends State<TodayScreen> {
 
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgCanvas = isDark ? AppColors.darkBgCanvas : AppColors.bgCanvas;
-    final brand = isDark ? AppColors.darkBrand500 : AppColors.brand500;
-    final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
-    final fg2 = isDark ? AppColors.darkFg2 : AppColors.fg2;
     final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
 
     final profile = context.watch<ProfileProvider>().profile;
     final workouts = context.watch<WorkoutProvider>();
     final fuel = context.watch<FuelProvider>();
-    final latestWeight = context.watch<BodyProvider>().latestWeight;
-    final lastBmi = context.watch<BmiProvider>().lastEntry;
+    final steps = context.watch<StepsProvider>();
+    final challenges = context.watch<ChallengeProvider>();
+    final weighIns = context.watch<BodyProvider>().weights;
     final targets = Nutrition.targetsFor(profile);
     final tip = TipsScreen.tipOfTheDay(l, DateTime.now());
-
     final now = DateTime.now();
-    final weekStart = DateTime(now.year, now.month, now.day)
-        .subtract(Duration(days: now.weekday - 1));
-    final doneThisWeek = workouts.history
-        .where((h) => !h.workout.startedAt.isBefore(weekStart))
-        .length;
-    final active = workouts.active;
+
+    final trainedToday = challenges.doneToday ||
+        workouts.history.any((h) =>
+            h.workout.startedAt.year == now.year &&
+            h.workout.startedAt.month == now.month &&
+            h.workout.startedAt.day == now.day);
+    final stepsOn = steps.status == StepsStatus.connected;
+    final goals = DailyGoals.from(
+      steps: stepsOn ? steps.today : null,
+      stepGoal: steps.goal,
+      trained: trainedToday,
+      kcal: fuel.kcal,
+      kcalTarget: targets.calories,
+      waterMl: fuel.waterMl,
+      waterGoal: targets.waterMl,
+    );
+    // Days with anything logged: workouts, challenge days, weigh-ins, and
+    // food or water (the Food tab keeps the last week in memory)
+    final streak = DailyStreak.count(
+      DailyStreak.days([
+        for (final h in workouts.history) h.workout.startedAt,
+        ...challenges.completionDates,
+        for (final w in weighIns) w.date,
+        if (fuel.viewingToday)
+          for (final d in fuel.week)
+            if (d.kcal > 0) d.day,
+        if (fuel.kcal > 0 || fuel.waterMl > 0) now,
+      ]),
+      now,
+    );
 
     return Scaffold(
       backgroundColor: bgCanvas,
@@ -86,125 +110,60 @@ class TodayScreen extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: ScreenHeader(
-                title: profile.name.isEmpty
-                    ? l.greetingNoName
-                    : l.greeting(profile.name),
+                title: profile.name.isEmpty ? l.greetingNoName : l.greeting(profile.name),
                 large: true,
+                trailing: StreakChip(days: streak),
               ),
             ),
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
               sliver: SliverList.list(children: [
-                // ── Training ───────────────────────────────────────────
-                AppCard(
-                  padding: 18,
-                  tint: brand.withAlpha(24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      OverlineLabel(l.navTrain),
-                      const SizedBox(height: 8),
-                      Text(
-                        active != null
-                            ? l.workoutInProgress(
-                                l.minutesShort(active.duration.inMinutes))
-                            : l.thisWeekWorkouts(doneThisWeek, profile.daysPerWeek),
-                        style: GoogleFonts.inter(
-                            fontSize: 17, fontWeight: FontWeight.w600, color: fg1),
-                      ),
-                      const SizedBox(height: 12),
-                      AppButton(
-                        label: active != null ? l.resumeWorkout : l.startWorkout,
-                        icon: Icons.fitness_center_rounded,
-                        fullWidth: true,
-                        onPressed: () async {
-                          if (active == null) {
-                            await context
-                                .read<WorkoutProvider>()
-                                .start(name: l.workoutDefaultName);
-                          }
-                          onOpenWorkout();
-                        },
-                      ),
-                    ],
+                GoalsCard(
+                  goals: goals,
+                  moveValue: stepsOn ? _compact(steps.today) : l.goalConnect,
+                  trainValue: trainedToday ? l.goalDone : '0/1',
+                  eatValue: '${fuel.kcal}',
+                  waterValue: '${(fuel.waterMl / 1000).toStringAsFixed(1)} L',
+                  onMove: stepsOn ? () => showStepGoalDialog(context) : steps.connect,
+                  onTrain: widget.onOpenTrain,
+                  onEat: widget.onOpenFuel,
+                  onWater: () => _addWater(context),
+                ),
+                const SizedBox(height: 14),
+                TodayPlanCard(onOpenWorkout: widget.onOpenWorkout),
+                const SizedBox(height: 18),
+                QuickAddRow(
+                  onWater: () => _addWater(context),
+                  onFood: widget.onOpenFuel,
+                  onWeight: widget.onOpenBody,
+                ),
+                const SizedBox(height: 18),
+                const RecoveryCard(compact: true),
+                if (context.watch<MovementProvider>().enabled) _MovementCard(onOpen: widget.onOpenTimeline),
+                _CycleCard(onOpen: widget.onOpenCycle),
+                OverlineLabel(l.todayMore),
+                const SizedBox(height: 10),
+                Wrap(spacing: 8, runSpacing: 8, children: [
+                  ActionChip(
+                    avatar: const Icon(Icons.calculate_rounded, size: 18),
+                    label: Text(l.calculateBmiShort),
+                    onPressed: widget.onCalculateBmi,
                   ),
-                ),
-                const SizedBox(height: 14),
-                const _ChallengeCard(),
-                _StreakCard(onOpen: onOpenProgress),
-                const RecoveryCard(),
-                _CycleCard(onOpen: onOpenCycle),
-                const _StepsCard(),
-                _MovementCard(onOpen: onOpenTimeline),
-                // ── Fuel ───────────────────────────────────────────────
-                CaloriesCard(
-                    eaten: fuel.kcal, target: targets.calories, onTap: onOpenFuel),
-                const SizedBox(height: 14),
-                WaterCard(drunk: fuel.waterMl, goal: targets.waterMl),
-                const SizedBox(height: 14),
-                // ── Body ───────────────────────────────────────────────
-                Row(
-                  children: [
-                    Expanded(
-                      child: AppCard(
-                        padding: 16,
-                        onTap: onOpenBody,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            OverlineLabel(l.latestWeight),
-                            const SizedBox(height: 8),
-                            Text(
-                              latestWeight == null
-                                  ? '—'
-                                  : Units.weight(
-                                      latestWeight.weightKg, profile.weightUnit),
-                              style: GoogleFonts.inter(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                  color: fg1),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: AppCard(
-                        padding: 16,
-                        onTap: onCalculateBmi,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            OverlineLabel(l.calculateBmiShort),
-                            const SizedBox(height: 8),
-                            if (lastBmi == null)
-                              Icon(Icons.calculate_rounded, color: brand, size: 28)
-                            else
-                              Row(children: [
-                                Text(lastBmi.bmi.toStringAsFixed(1),
-                                    style: GoogleFonts.inter(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: fg1)),
-                                const SizedBox(width: 6),
-                                Flexible(
-                                  child: StatusPill(
-                                      category:
-                                          BmiCalculator.category(lastBmi.bmi)),
-                                ),
-                              ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-                // ── Tip ────────────────────────────────────────────────
+                  ActionChip(
+                    avatar: const Icon(Icons.route_rounded, size: 18),
+                    label: Text(l.movementTitle),
+                    onPressed: widget.onOpenTimeline,
+                  ),
+                  ActionChip(
+                    avatar: const Icon(Icons.lightbulb_outline_rounded, size: 18),
+                    label: Text(l.tipsTitle),
+                    onPressed: widget.onOpenTips,
+                  ),
+                ]),
+                const SizedBox(height: 18),
                 AppCard(
                   padding: 18,
-                  onTap: onOpenTips,
+                  onTap: widget.onOpenTips,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -217,18 +176,9 @@ class TodayScreen extends StatelessWidget {
                             OverlineLabel(l.tipOfTheDay),
                             const SizedBox(height: 6),
                             Text(tip.title,
-                                style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: fg1)),
+                                style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w700)),
                             const SizedBox(height: 4),
-                            Text(tip.body,
-                                style: GoogleFonts.inter(
-                                    fontSize: 14, height: 1.45, color: fg2)),
-                            const SizedBox(height: 8),
-                            Text(l.moreTips,
-                                style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w600, color: brand)),
+                            Text(tip.body, style: GoogleFonts.inter(fontSize: 14, height: 1.45)),
                           ],
                         ),
                       ),
@@ -246,98 +196,20 @@ class TodayScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class _StepsCard extends StatelessWidget {
-  const _StepsCard();
+  static String _compact(int n) => n >= 10000
+      ? '${(n / 1000).toStringAsFixed(0)}k'
+      : n >= 1000
+          ? '${(n / 1000).toStringAsFixed(1)}k'
+          : '$n';
 
-  @override
-  Widget build(BuildContext context) {
+  Future<void> _addWater(BuildContext context) async {
     final l = context.l10n;
-    final steps = context.watch<StepsProvider>();
-    if (steps.status == StepsStatus.unsupported) return const SizedBox.shrink();
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final fg1 = isDark ? AppColors.darkFg1 : AppColors.fg1;
-    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
-    final sunken = isDark ? AppColors.darkBgSunken : AppColors.bgSunken;
-    const color = AppColors.bmiOver;
-
-    final Widget body = switch (steps.status) {
-      StepsStatus.connected => GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => showStepGoalDialog(context),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(l.stepsOf(steps.today, steps.goal),
-                style: GoogleFonts.inter(
-                    fontSize: 22, fontWeight: FontWeight.w700, color: fg1)),
-            const SizedBox(height: 10),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: LinearProgressIndicator(
-                value: (steps.today / steps.goal).clamp(0.0, 1.0),
-                minHeight: 10,
-                color: color,
-                backgroundColor: sunken,
-              ),
-            ),
-          ],
-        ),
-      ),
-      _ => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              steps.status == StepsStatus.needsInstall
-                  ? l.stepsNeedsInstall
-                  : (Platform.isIOS ? l.stepsConnectBodyIos : l.stepsConnectBody),
-              style: GoogleFonts.inter(fontSize: 14, color: fg3, height: 1.45),
-            ),
-            const SizedBox(height: 10),
-            AppButton(
-              label: steps.status == StepsStatus.needsInstall
-                  ? l.installHealthConnect
-                  : l.connectSteps,
-              icon: Icons.directions_walk_rounded,
-              variant: AppButtonVariant.secondary,
-              fullWidth: true,
-              onPressed: steps.connect,
-            ),
-          ],
-        ),
-    };
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 14),
-      child: AppCard(
-        padding: 18,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(children: [
-              const Icon(Icons.directions_walk_rounded, color: color, size: 20),
-              const SizedBox(width: 6),
-              OverlineLabel(l.stepsTitle),
-              const Spacer(),
-              if (steps.status == StepsStatus.connected)
-                SizedBox(
-                  height: 28,
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 18,
-                    tooltip: l.stepsGoal,
-                    icon: Icon(Icons.flag_outlined, color: fg3),
-                    onPressed: () => showStepGoalDialog(context),
-                  ),
-                ),
-            ]),
-            const SizedBox(height: 8),
-            body,
-          ],
-        ),
-      ),
-    );
+    final messenger = ScaffoldMessenger.of(context);
+    await context.read<FuelProvider>().addWater(250);
+    messenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(l.quickWaterDone), duration: const Duration(seconds: 2)));
   }
 }
 
@@ -448,60 +320,3 @@ class _CycleCard extends StatelessWidget {
 }
 
 /// Week streak; opens Progress (recap and badges).
-class _StreakCard extends StatelessWidget {
-  final VoidCallback onOpen;
-  const _StreakCard({required this.onOpen});
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    final history = context.watch<WorkoutProvider>().history;
-    if (history.isEmpty) return const SizedBox.shrink();
-    final goal = context.watch<ProfileProvider>().profile.daysPerWeek;
-    final streak =
-        Streaks.weeks([for (final h in history) h.workout.startedAt], goal, DateTime.now());
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 14),
-      child: AppCard(
-        padding: 4,
-        onTap: onOpen,
-        child: ListTile(
-          leading: const Icon(Icons.local_fire_department_rounded, color: AppColors.bmiOver),
-          title: Text(l.weekStreak(streak)),
-          subtitle: Text(l.progressTitle),
-          trailing: const Icon(Icons.chevron_right_rounded),
-        ),
-      ),
-    );
-  }
-}
-
-/// "Continue: Core & Abs · Day 5 of 30" for the challenge in progress.
-class _ChallengeCard extends StatelessWidget {
-  const _ChallengeCard();
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.watch<ChallengeProvider>();
-    final latest = c.latest;
-    if (latest == null) return const SizedBox.shrink();
-    final l = context.l10n;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 14),
-      child: AppCard(
-        padding: 4,
-        onTap: () => Navigator.of(context, rootNavigator: true).push(MaterialPageRoute<void>(
-            builder: (_) => ChallengeDetailScreen(focus: latest.focus, level: latest.level))),
-        child: ListTile(
-          leading: Icon(focusIcon(latest.focus), color: AppColors.bmiOver),
-          title: Text(l.continueChallenge(l.focus(latest.focus)),
-              style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
-          subtitle: Text(l.challengeProgress(
-              c.currentDay(latest.focus, latest.level), latest.level.days)),
-          trailing: const Icon(Icons.play_circle_fill_rounded, size: 32, color: AppColors.bmiNormal),
-        ),
-      ),
-    );
-  }
-}
-

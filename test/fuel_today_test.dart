@@ -18,7 +18,7 @@ void main() {
     final app = await launchApp(tester);
     final target = Nutrition.targetsFor(app.profile.profile).calories;
 
-    await tester.tap(find.text('Fuel'));
+    await tester.tap(find.text('Food').last);
     await tester.pumpAndSettle();
     expect(find.text('$target kcal left'), findsOneWidget);
 
@@ -40,13 +40,15 @@ void main() {
     // The nav bar's "Today" (the day switcher shows one too)
     await tester.tap(find.text('Today').last);
     await tester.pumpAndSettle();
-    expect(find.text('${target - 650} kcal left'), findsOneWidget);
+    // Today's Eat and Water rings show the totals
+    expect(find.text('650'), findsOneWidget);
+    expect(find.text('0.3 L'), findsOneWidget);
   });
 
   testWidgets('Fuel: go back a day, log with macros, edit, chart, back to today',
       (tester) async {
     final app = await launchApp(tester);
-    await tester.tap(find.text('Fuel'));
+    await tester.tap(find.text('Food').last);
     await tester.pumpAndSettle();
 
     await tester.tap(find.byTooltip('Previous day'));
@@ -103,7 +105,7 @@ void main() {
 
   testWidgets('calorie entry is validated', (tester) async {
     final app = await launchApp(tester);
-    await tester.tap(find.text('Fuel'));
+    await tester.tap(find.text('Food').last);
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('Log food'));
     await tester.tap(find.text('Log food'));

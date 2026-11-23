@@ -53,10 +53,8 @@ void main() {
     await tester.tap(find.text('Connect'));
     await settleIO(tester);
     expect(fake.requests, 1);
-    // The card gets shorter once connected; scroll it back into view
-    await tester.ensureVisible(find.text('5420 / 8000', skipOffstage: false));
-    await tester.pumpAndSettle();
-    expect(find.text('5420 / 8000'), findsOneWidget);
+    // The Move ring on Today shows the count
+    expect(find.text('5.4k'), findsOneWidget);
   });
 
   testWidgets('custom step goal is used on the card and can be changed there',
@@ -67,20 +65,23 @@ void main() {
     fake.granted = true;
     await app.steps.refresh();
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('5420 / 10000'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('5420 / 10000'));
+    expect(app.steps.goal, 10000);
+    // Tapping the Move ring edits the goal
+    await tester.tap(find.text('5.4k'));
     await tester.pumpAndSettle();
     expect(find.text('Daily step goal'), findsOneWidget);
     await tester.tap(find.widgetWithText(ChoiceChip, '6,000'));
     await settleIO(tester);
-    expect(find.text('5420 / 6000'), findsOneWidget);
+    expect(app.steps.goal, 6000);
   });
 
   testWidgets('offers Health Connect when it is missing', (tester) async {
     final fake = FakeSteps()..installed = false;
     await launchApp(tester, steps: fake);
-    expect(find.text('Get Health Connect'), findsOneWidget);
+    // The Move ring offers to connect; tapping it gets Health Connect
+    await tester.tap(find.text('Connect'));
+    await settleIO(tester);
+    expect(fake.installed, isTrue);
   });
 
   testWidgets('card is hidden where health data is unsupported', (tester) async {

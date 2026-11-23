@@ -13,6 +13,15 @@ enum MuscleDay {
 
   const MuscleDay(this.muscles);
   final List<Muscle> muscles;
+
+  /// The day whose muscles got the fewest hard sets this week (the main
+  /// days only; core and glutes are add-ons).
+  static MuscleDay suggested(Map<Muscle, double> weeklySets) {
+    double load(MuscleDay d) =>
+        d.muscles.fold(0.0, (s, m) => s + (weeklySets[m] ?? 0)) / d.muscles.length;
+    const main = [chest, back, legs, shoulders, arms];
+    return main.reduce((a, b) => load(b) < load(a) ? b : a);
+  }
 }
 
 class MuscleDayPlan {

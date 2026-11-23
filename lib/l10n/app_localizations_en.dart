@@ -1018,10 +1018,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navToday => 'Today';
 
   @override
-  String get navFuel => 'Fuel';
+  String get navFuel => 'Food';
 
   @override
-  String get fuelTitle => 'Fuel';
+  String get fuelTitle => 'Food';
 
   @override
   String get caloriesTitle => 'Calories';
@@ -2616,4 +2616,111 @@ class AppLocalizationsEn extends AppLocalizations {
   String suggestionHold(String weight, int reps) {
     return 'Stay at $weight × $reps until it feels easier';
   }
+
+  @override
+  String get navMe => 'Me';
+
+  @override
+  String get meProgressTitle => 'Progress & badges';
+
+  @override
+  String get meProgressBody => 'Streaks, badges and your weekly recap';
+
+  @override
+  String get todayGoalsTitle => 'Today\'s goals';
+
+  @override
+  String todayGoalsProgress(int done, int total) {
+    return '$done of $total done';
+  }
+
+  @override
+  String get todayPerfectDay => 'Perfect day! Every goal done.';
+
+  @override
+  String get goalMove => 'Move';
+
+  @override
+  String get goalTrain => 'Train';
+
+  @override
+  String get goalEat => 'Eat';
+
+  @override
+  String get goalWater => 'Water';
+
+  @override
+  String get goalConnect => 'Connect';
+
+  @override
+  String get goalDone => 'Done';
+
+  @override
+  String streakChip(int days) {
+    return '$days-day streak';
+  }
+
+  @override
+  String get streakHelpTitle => 'Daily streak';
+
+  @override
+  String get streakHelpBody => 'Log anything each day (a workout, a meal, water or your weight) to keep your streak going. Today counts as soon as you log something.';
+
+  @override
+  String get planTitle => 'Your plan today';
+
+  @override
+  String get planStart => 'Start';
+
+  @override
+  String planChallengeSub(String day, int minutes) {
+    return '$day · about $minutes min';
+  }
+
+  @override
+  String get planRestBody => 'Recovery is part of training. A walk or light stretching is perfect today.';
+
+  @override
+  String get planRestDone => 'Mark rest day done';
+
+  @override
+  String get planDoneTitle => 'Done for today';
+
+  @override
+  String get planDoneBody => 'Great work! Your next session is ready tomorrow.';
+
+  @override
+  String get planGymSub => 'Your least-trained muscles this week';
+
+  @override
+  String get planFirstTitle => 'Start your 30-day plan';
+
+  @override
+  String planFirstSub(String focus) {
+    return '$focus · Beginner · no equipment';
+  }
+
+  @override
+  String get quickAddTitle => 'Quick add';
+
+  @override
+  String get quickWater => '+250 ml';
+
+  @override
+  String get quickWaterDone => '250 ml water added';
+
+  @override
+  String get quickFood => 'Food';
+
+  @override
+  String get quickWeight => 'Weight';
+
+  @override
+  String get todayMore => 'More';
+
+  @override
+  String get recoveryShowSleep => 'Sleep details';
+
+  @override
+  String get recoveryHideSleep => 'Hide sleep details';
 }

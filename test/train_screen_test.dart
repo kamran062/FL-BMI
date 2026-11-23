@@ -99,7 +99,7 @@ void main() {
       await w.start(name: 'B');
       await w.addExercise('barbell_bench_press');
     });
-    await tester.tap(find.text('Train'));
+    await tester.tap(find.text('Train').last);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Resume workout'));
     await settleIO(tester);

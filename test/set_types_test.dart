@@ -106,7 +106,7 @@ void main() {
       }
     }
 
-    await tester.tap(find.text('Train'));
+    await tester.tap(find.text('Train').last);
     await tester.pumpAndSettle();
     await tester.runAsync(() async {
       await app.workouts.start();

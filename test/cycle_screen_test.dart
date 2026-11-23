@@ -27,8 +27,8 @@ void main() {
     }
   }
 
-  Future<void> openSettings(WidgetTester tester) async {
-    await tester.tap(find.text('Settings'));
+  Future<void> openSettingsHere(WidgetTester tester) async {
+    await openSettings(tester);
     await tester.pumpAndSettle();
   }
 
@@ -36,7 +36,7 @@ void main() {
     final app = await launchApp(tester, lock: FakeLock());
     expect(find.text('CYCLE'), findsNothing); // no Today card before opt-in
 
-    await openSettings(tester);
+    await openSettingsHere(tester);
     await tester.scrollUntilVisible(find.text('Cycle tracking'), 200,
         scrollable: find.byType(Scrollable).first);
     await tester.tap(find.descendant(
@@ -71,7 +71,7 @@ void main() {
 
   testWidgets('male profile is never offered cycle tracking', (tester) async {
     await launchApp(tester, prefs: {'profile_gender': 'm'});
-    await openSettings(tester);
+    await openSettingsHere(tester);
     await tester.scrollUntilVisible(find.text('Dark mode'), 200,
         scrollable: find.byType(Scrollable).first);
     expect(find.text('Cycle tracking', skipOffstage: false), findsNothing);

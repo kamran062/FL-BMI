@@ -10,8 +10,8 @@ import 'helpers/app_harness.dart';
 void main() {
   setUpAll(setUpAppHarness);
 
-  Future<void> openSettings(WidgetTester tester) async {
-    await tester.tap(find.text('Settings'));
+  Future<void> openSettingsHere(WidgetTester tester) async {
+    await openSettings(tester);
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(find.text('Create backup'), 200,
         scrollable: find.byType(Scrollable).first);
@@ -19,7 +19,7 @@ void main() {
 
   testWidgets('create backup checks the passphrase', (tester) async {
     await launchApp(tester);
-    await openSettings(tester);
+    await openSettingsHere(tester);
     expect(find.text('Restore from backup'), findsOneWidget);
     expect(find.text('Export as spreadsheet (CSV)'), findsOneWidget);
 

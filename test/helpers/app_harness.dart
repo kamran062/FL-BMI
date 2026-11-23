@@ -159,3 +159,11 @@ class NoWatchChannel implements WearChannel {
   void listen(Future<void> Function(String event, Object? arg) onEvent) {}
 }
 
+
+/// Settings live behind the gear on the Me tab.
+Future<void> openSettings(WidgetTester tester) async {
+  await tester.tap(find.text('Me').last);
+  await tester.pumpAndSettle();
+  await tester.tap(find.byTooltip('Settings'));
+  await tester.pumpAndSettle();
+}

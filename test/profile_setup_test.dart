@@ -49,7 +49,7 @@ void main() {
     expect(p.equipment, Equipment.gym);
     expect(p.daysPerWeek, 4);
     expect(p.demonstrator, Sex.male);
-    expect(find.text('Start workout'), findsOneWidget);
+    expect(find.text("TODAY'S GOALS"), findsOneWidget);
   });
 
   testWidgets('"Later" skips setup and does not ask again', (tester) async {
@@ -58,7 +58,7 @@ void main() {
 
     expect(app.settings.profileSetupDismissed, isTrue);
     expect(app.profile.profile.completed, isFalse);
-    expect(find.text('Start workout'), findsOneWidget);
+    expect(find.text("TODAY'S GOALS"), findsOneWidget);
   });
 
   testWidgets('goal is required before continuing', (tester) async {
@@ -102,7 +102,7 @@ void main() {
         app.profile.update(app.profile.profile.copyWith(name: 'Ayesha')));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Settings'));
+    await openSettings(tester);
     await tester.pumpAndSettle();
     expect(find.text('Ayesha'), findsOneWidget); // row shows the name
     await tester.tap(find.text('Personal details'));

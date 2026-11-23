@@ -53,6 +53,7 @@ void main() {
 
     // Soreness 1 → a score appears and is remembered for today
     await tester.ensureVisible(find.widgetWithText(ChoiceChip, '1'));
+    await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(ChoiceChip, '1'));
     await settleIO(tester);
     expect(find.text('100 / 100'), findsOneWidget);
@@ -63,6 +64,11 @@ void main() {
     await tester.ensureVisible(find.text('Connect sleep & heart data'));
     await tester.tap(find.text('Connect sleep & heart data'));
     await settleIO(tester);
+    // On Today the sleep details are folded away until asked for
+    await tester.ensureVisible(find.text('Sleep details'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Sleep details'));
+    await tester.pumpAndSettle();
     expect(find.text('Last night: 8 h 0 min'), findsOneWidget);
     expect(find.textContaining('7-night average'), findsOneWidget);
     expect(find.textContaining('regular'), findsOneWidget);

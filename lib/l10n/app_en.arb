@@ -1400,11 +1400,11 @@
   "@navToday": {
     "description": "Bottom nav tab: home dashboard"
   },
-  "navFuel": "Fuel",
+  "navFuel": "Food",
   "@navFuel": {
     "description": "Bottom nav tab: calories and water"
   },
-  "fuelTitle": "Fuel",
+  "fuelTitle": "Food",
   "@fuelTitle": {
     "description": "Fuel screen title"
   },
@@ -3905,5 +3905,163 @@
         "type": "int"
       }
     }
+  },
+  "navMe": "Me",
+  "@navMe": {
+    "description": "Bottom navigation tab: the user's body, progress and settings"
+  },
+  "meProgressTitle": "Progress & badges",
+  "@meProgressTitle": {
+    "description": "Card on the Me tab opening streaks, badges and recaps"
+  },
+  "meProgressBody": "Streaks, badges and your weekly recap",
+  "@meProgressBody": {
+    "description": "Subtitle of the progress card before any streak"
+  },
+  "todayGoalsTitle": "Today's goals",
+  "@todayGoalsTitle": {
+    "description": "Heading of the four daily goal rings on Today"
+  },
+  "todayGoalsProgress": "{done} of {total} done",
+  "@todayGoalsProgress": {
+    "description": "How many daily goals are complete",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "todayPerfectDay": "Perfect day! Every goal done.",
+  "@todayPerfectDay": {
+    "description": "Shown when all daily goals are complete"
+  },
+  "goalMove": "Move",
+  "@goalMove": {
+    "description": "Daily goal ring: steps"
+  },
+  "goalTrain": "Train",
+  "@goalTrain": {
+    "description": "Daily goal ring: a workout today"
+  },
+  "goalEat": "Eat",
+  "@goalEat": {
+    "description": "Daily goal ring: calories logged"
+  },
+  "goalWater": "Water",
+  "@goalWater": {
+    "description": "Daily goal ring: water"
+  },
+  "goalConnect": "Connect",
+  "@goalConnect": {
+    "description": "Move ring label when steps aren't connected yet"
+  },
+  "goalDone": "Done",
+  "@goalDone": {
+    "description": "Train ring label when today's workout is done"
+  },
+  "streakChip": "{days}-day streak",
+  "@streakChip": {
+    "description": "Accessibility label of the daily streak chip",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakHelpTitle": "Daily streak",
+  "@streakHelpTitle": {
+    "description": "Title of the daily streak explanation"
+  },
+  "streakHelpBody": "Log anything each day (a workout, a meal, water or your weight) to keep your streak going. Today counts as soon as you log something.",
+  "@streakHelpBody": {
+    "description": "Explains how the daily streak works"
+  },
+  "planTitle": "Your plan today",
+  "@planTitle": {
+    "description": "Overline of the main action card on Today"
+  },
+  "planStart": "Start",
+  "@planStart": {
+    "description": "Button starting today's planned workout"
+  },
+  "planChallengeSub": "{day} · about {minutes} min",
+  "@planChallengeSub": {
+    "description": "Subtitle of today's challenge workout, e.g. Day 7 of 30 · about 12 min",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "planRestBody": "Recovery is part of training. A walk or light stretching is perfect today.",
+  "@planRestBody": {
+    "description": "Today's plan on a challenge rest day"
+  },
+  "planRestDone": "Mark rest day done",
+  "@planRestDone": {
+    "description": "Button to tick off a rest day"
+  },
+  "planDoneTitle": "Done for today",
+  "@planDoneTitle": {
+    "description": "Today's plan after the workout is done"
+  },
+  "planDoneBody": "Great work! Your next session is ready tomorrow.",
+  "@planDoneBody": {
+    "description": "Encouragement after today's workout"
+  },
+  "planGymSub": "Your least-trained muscles this week",
+  "@planGymSub": {
+    "description": "Why this gym workout is suggested"
+  },
+  "planFirstTitle": "Start your 30-day plan",
+  "@planFirstTitle": {
+    "description": "Today's plan before any workout"
+  },
+  "planFirstSub": "{focus} · Beginner · no equipment",
+  "@planFirstSub": {
+    "description": "Suggested first challenge",
+    "placeholders": {
+      "focus": {
+        "type": "String"
+      }
+    }
+  },
+  "quickAddTitle": "Quick add",
+  "@quickAddTitle": {
+    "description": "Heading of the quick add buttons on Today"
+  },
+  "quickWater": "+250 ml",
+  "@quickWater": {
+    "description": "Quick add water button"
+  },
+  "quickWaterDone": "250 ml water added",
+  "@quickWaterDone": {
+    "description": "Snackbar after adding water"
+  },
+  "quickFood": "Food",
+  "@quickFood": {
+    "description": "Quick add food button"
+  },
+  "quickWeight": "Weight",
+  "@quickWeight": {
+    "description": "Quick add weight button"
+  },
+  "todayMore": "More",
+  "@todayMore": {
+    "description": "Heading of the row of extra tools on Today"
+  },
+  "recoveryShowSleep": "Sleep details",
+  "@recoveryShowSleep": {
+    "description": "Button on Today's recovery card showing sleep details"
+  },
+  "recoveryHideSleep": "Hide sleep details",
+  "@recoveryHideSleep": {
+    "description": "Button folding the sleep details away"
   }
 }

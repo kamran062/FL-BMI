@@ -8,7 +8,7 @@ void main() {
   setUpAll(setUpAppHarness);
 
   Future<void> openNotifications(WidgetTester tester, String row) async {
-    await tester.tap(find.text('Settings'));
+    await openSettings(tester);
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(find.text(row), 200,
         scrollable: find.byType(Scrollable).first);
@@ -69,7 +69,7 @@ void main() {
 
   testWidgets('step goal can be changed from Settings', (tester) async {
     final app = await launchApp(tester);
-    await tester.tap(find.text('Settings'));
+    await openSettings(tester);
     await tester.pumpAndSettle();
     expect(find.text('Daily step goal'), findsOneWidget);
     expect(find.text('8,000'), findsOneWidget);

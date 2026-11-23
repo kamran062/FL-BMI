@@ -23,8 +23,9 @@ import 'package:bmi_health/features/profile/ui/reminder_sheet.dart';
 class SettingsScreen extends StatelessWidget {
   final VoidCallback onOpenProfile;
   final VoidCallback onOpenPremium;
+  final VoidCallback? onBack;
   const SettingsScreen(
-      {super.key, required this.onOpenProfile, required this.onOpenPremium});
+      {super.key, required this.onOpenProfile, required this.onOpenPremium, this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +223,17 @@ class SettingsScreen extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: ScreenHeader(title: l.settingsTitle, large: true),
+                  child: ScreenHeader(
+                    title: l.settingsTitle,
+                    large: true,
+                    leading: onBack == null
+                        ? null
+                        : IconButton(
+                            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                            icon: const Icon(Icons.arrow_back_rounded),
+                            onPressed: onBack,
+                          ),
+                  ),
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),

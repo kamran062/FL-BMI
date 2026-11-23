@@ -169,7 +169,7 @@ class TrainScreen extends StatelessWidget {
                       ActionChip(
                         avatar: const Icon(Icons.fitness_center_rounded, size: 16),
                         label: Text(muscleDayName(l, d)),
-                        onPressed: active != null ? null : () => _showMuscleDay(context, d),
+                        onPressed: active != null ? null : () => showMuscleDay(context, d),
                       ),
                   ],
                 ),
@@ -466,7 +466,8 @@ String muscleDayName(AppLocalizations l, MuscleDay d) => switch (d) {
 
 /// Builds the day's plan from profile, equipment and BMI, shows it, and
 /// starts it with the recommended sets prefilled.
-void _showMuscleDay(BuildContext context, MuscleDay day) {
+/// Shows the plan for [day] with a Start button (Train chips, Today plan).
+void showMuscleDay(BuildContext context, MuscleDay day) {
   final profile = context.read<ProfileProvider>().profile;
   // Latest logged weight, else the one from the profile
   final weight = context.read<BodyProvider>().latestWeight?.weightKg ??
