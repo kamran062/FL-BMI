@@ -113,7 +113,7 @@ void main() {
       await app.workouts.addExercise('push_up');
     });
     await tester.pump();
-    await tester.tap(find.text('Resume workout'));
+    await tester.tap(find.text('Resume workout').last);
     await tester.pumpAndSettle();
 
     await tester.tap(find.bySemanticsLabel(RegExp('^Set type and effort')).first);

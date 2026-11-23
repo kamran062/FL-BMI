@@ -2723,4 +2723,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recoveryHideSleep => 'Hide sleep details';
+
+  @override
+  String get trainHomeSub => 'No equipment · day-by-day plans';
+
+  @override
+  String get trainLibrarySub => '114 exercises with guides';
+
+  @override
+  String get trainMoreOptions => 'More options';
+
+  @override
+  String get trainSeeAll => 'See all';
+
+  @override
+  String get trainShowLess => 'Show less';
 }

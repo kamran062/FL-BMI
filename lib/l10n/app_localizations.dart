@@ -4834,6 +4834,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide sleep details'**
   String get recoveryHideSleep;
+
+  /// Subtitle of the Home Challenges tile on Train
+  ///
+  /// In en, this message translates to:
+  /// **'No equipment · day-by-day plans'**
+  String get trainHomeSub;
+
+  /// Subtitle of the Exercise library tile on Train
+  ///
+  /// In en, this message translates to:
+  /// **'114 exercises with guides'**
+  String get trainLibrarySub;
+
+  /// Folded section on Train: empty workout, rep counter, muscle map, routines
+  ///
+  /// In en, this message translates to:
+  /// **'More options'**
+  String get trainMoreOptions;
+
+  /// Show all recent workouts
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get trainSeeAll;
+
+  /// Show only the latest workouts
+  ///
+  /// In en, this message translates to:
+  /// **'Show less'**
+  String get trainShowLess;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

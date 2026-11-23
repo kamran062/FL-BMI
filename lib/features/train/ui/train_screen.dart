@@ -21,8 +21,10 @@ import 'package:bmi_health/app/router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bmi_health/features/train/challenges/ui/challenges_screen.dart';
 import 'package:bmi_health/features/train/workouts/ui/workout_detail_screen.dart';
+import 'package:bmi_health/features/today/ui/today_widgets.dart';
 
-/// Train tab: start or resume a workout, routines, library, history.
+/// Train tab: today's plan first, then home or gym training, history, and
+/// everything else folded under More options.
 class TrainScreen extends StatelessWidget {
   final VoidCallback onOpenWorkout;
   final VoidCallback onOpenLibrary;
@@ -66,38 +68,8 @@ class TrainScreen extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
               sliver: SliverList.list(children: [
-                if (active != null)
-                  AppCard(
-                    padding: 16,
-                    tint: brand.withAlpha(30),
-                    onTap: onOpenWorkout,
-                    child: Row(
-                      children: [
-                        Icon(Icons.play_circle_fill_rounded, color: brand, size: 36),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(l.resumeWorkout,
-                                  style: GoogleFonts.inter(
-                                      fontSize: 16, fontWeight: FontWeight.w700)),
-                              Text(l.workoutInProgress(
-                                  l.minutesShort(active.duration.inMinutes))),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                else
-                  AppButton(
-                    label: l.startEmptyWorkout,
-                    icon: Icons.add_rounded,
-                    size: AppButtonSize.lg,
-                    fullWidth: true,
-                    onPressed: () => _start(context),
-                  ),
+                // One clear next step (resume, today's day, a muscle day…)
+                TodayPlanCard(onOpenWorkout: onOpenWorkout),
                 if (workouts.deloadDue(profile.daysPerWeek)) ...[
                   const SizedBox(height: 12),
                   AppCard(
@@ -122,43 +94,33 @@ class TrainScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-                const SizedBox(height: 12),
-                Row(children: [
-                  Expanded(
-                    child: AppButton(
-                      label: l.exerciseLibrary,
-                      icon: Icons.menu_book_rounded,
-                      variant: AppButtonVariant.secondary,
-                      fullWidth: true,
-                      onPressed: onOpenLibrary,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: AppButton(
-                      label: l.repCounter,
-                      icon: Icons.videocam_rounded,
-                      variant: AppButtonVariant.secondary,
-                      fullWidth: true,
-                      onPressed: onOpenRepCounter,
-                    ),
-                  ),
-                ]),
                 const SizedBox(height: 14),
-                AppCard(
-                  padding: 4,
-                  onTap: () => Navigator.of(context, rootNavigator: true).push(
-                      MaterialPageRoute<void>(
-                          builder: (c) => ChallengesScreen(onBack: () => Navigator.pop(c)))),
-                  child: ListTile(
-                    leading: const Icon(Icons.home_rounded, color: AppColors.bmiOver),
-                    title: Text(l.homeChallenges,
-                        style: GoogleFonts.inter(fontWeight: FontWeight.w700)),
-                    subtitle: Text(l.homeChallengesBody),
-                    trailing: const Icon(Icons.chevron_right_rounded),
-                  ),
+                // The two ways in: at home, or pick exercises
+                IntrinsicHeight(
+                  child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                    Expanded(
+                      child: _BigTile(
+                        icon: Icons.home_rounded,
+                        color: AppColors.bmiOver,
+                        title: l.homeChallenges,
+                        subtitle: l.trainHomeSub,
+                        onTap: () => Navigator.of(context, rootNavigator: true).push(MaterialPageRoute<void>(
+                            builder: (c) => ChallengesScreen(onBack: () => Navigator.pop(c)))),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _BigTile(
+                        icon: Icons.menu_book_rounded,
+                        color: brand,
+                        title: l.exerciseLibrary,
+                        subtitle: l.trainLibrarySub,
+                        onTap: onOpenLibrary,
+                      ),
+                    ),
+                  ]),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 22),
                 OverlineLabel(l.muscleDayTitle),
                 const SizedBox(height: 8),
                 Wrap(
@@ -173,7 +135,7 @@ class TrainScreen extends StatelessWidget {
                       ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 22),
                 OverlineLabel(l.programs),
                 const SizedBox(height: 8),
                 SizedBox(
@@ -195,71 +157,164 @@ class TrainScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                const _MuscleMapCard(),
-                const SizedBox(height: 20),
-                OverlineLabel(l.routines),
-                const SizedBox(height: 8),
-                if (workouts.routines.isEmpty)
-                  Text(l.routinesEmpty, style: empty)
-                else
-                  for (final r in workouts.routines)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: AppCard(
-                        padding: 4,
-                        child: ListTile(
-                          title: Text(r.name,
-                              style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
-                          subtitle: Text(l.exercisesCount(r.exerciseIds.length)),
-                          trailing: IconButton(
-                            icon: Icon(Icons.play_arrow_rounded, color: brand),
-                            onPressed: active == null
-                                ? () => _start(context, routine: r)
-                                : null,
-                          ),
-                          onLongPress: () => workouts.deleteRoutine(r.id!),
-                        ),
-                      ),
-                    ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 22),
                 OverlineLabel(l.recentWorkouts),
                 const SizedBox(height: 8),
                 if (workouts.history.isEmpty)
                   Text(l.noWorkoutsYet, style: empty)
                 else
-                  for (final h in workouts.history.take(20))
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: AppCard(
-                        padding: 4,
-                        child: ListTile(
-                          onTap: () => WorkoutDetailScreen.open(context, h.workout.id!),
-                          title: Text(
-                              h.workout.name.isEmpty
-                                  ? l.workoutDefaultName
-                                  : h.workout.name,
-                              style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
-                          subtitle: Text(
-                            '${DateFormat('d MMM', l.localeName).format(h.workout.startedAt)}'
-                            ' · ${l.minutesShort(h.workout.duration.inMinutes)}'
-                            ' · ${l.volumeLabel(Units.weight(h.volumeKg, unit))}',
+                  _RecentWorkouts(history: workouts.history, unit: unit),
+                const SizedBox(height: 10),
+                // Everything else, folded away
+                AppCard(
+                  padding: 0,
+                  child: Theme(
+                    data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                    child: ExpansionTile(
+                      leading: Icon(Icons.tune_rounded, color: fg3),
+                      title: Text(l.trainMoreOptions, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                      childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (active == null)
+                          AppButton(
+                            label: l.startEmptyWorkout,
+                            icon: Icons.add_rounded,
+                            variant: AppButtonVariant.secondary,
+                            fullWidth: true,
+                            onPressed: () => _start(context),
                           ),
-                          trailing: h.prCount > 0
-                              ? Chip(
-                                  label: Text('🏆 ${l.prCount(h.prCount)}'),
-                                  visualDensity: VisualDensity.compact,
-                                )
-                              : null,
+                        const SizedBox(height: 10),
+                        AppButton(
+                          label: l.repCounter,
+                          icon: Icons.videocam_rounded,
+                          variant: AppButtonVariant.secondary,
+                          fullWidth: true,
+                          onPressed: onOpenRepCounter,
                         ),
-                      ),
+                        const SizedBox(height: 18),
+                        const _MuscleMapCard(),
+                        const SizedBox(height: 18),
+                        OverlineLabel(l.routines),
+                        const SizedBox(height: 8),
+                        if (workouts.routines.isEmpty)
+                          Text(l.routinesEmpty, style: empty)
+                        else
+                          for (final r in workouts.routines)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: AppCard(
+                                padding: 4,
+                                child: ListTile(
+                                  title: Text(r.name, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+                                  subtitle: Text(l.exercisesCount(r.exerciseIds.length)),
+                                  trailing: IconButton(
+                                    icon: Icon(Icons.play_arrow_rounded, color: brand),
+                                    onPressed: active == null ? () => _start(context, routine: r) : null,
+                                  ),
+                                  onLongPress: () => workouts.deleteRoutine(r.id!),
+                                ),
+                              ),
+                            ),
+                      ],
                     ),
+                  ),
+                ),
               ]),
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+/// A big, friendly entry point.
+class _BigTile extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+  const _BigTile({
+    required this.icon,
+    required this.color,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fg3 = isDark ? AppColors.darkFg3 : AppColors.fg3;
+    return AppCard(
+      padding: 16,
+      onTap: onTap,
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(color: color.withAlpha(36), borderRadius: BorderRadius.circular(12)),
+          child: Icon(icon, color: color),
+        ),
+        const SizedBox(height: 12),
+        Text(title, style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w700)),
+        const SizedBox(height: 2),
+        Text(subtitle, style: GoogleFonts.inter(fontSize: 13, height: 1.35, color: fg3)),
+      ]),
+    );
+  }
+}
+
+/// The last few workouts; the rest on request.
+class _RecentWorkouts extends StatefulWidget {
+  final List<WorkoutSummary> history;
+  final String unit;
+  const _RecentWorkouts({required this.history, required this.unit});
+
+  @override
+  State<_RecentWorkouts> createState() => _RecentWorkoutsState();
+}
+
+class _RecentWorkoutsState extends State<_RecentWorkouts> {
+  static const _short = 5;
+  bool _all = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final shown = widget.history.take(_all ? 50 : _short);
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      for (final h in shown)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: AppCard(
+            padding: 4,
+            child: ListTile(
+              onTap: () => WorkoutDetailScreen.open(context, h.workout.id!),
+              title: Text(h.workout.name.isEmpty ? l.workoutDefaultName : h.workout.name,
+                  style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+              subtitle: Text(
+                '${DateFormat('d MMM', l.localeName).format(h.workout.startedAt)}'
+                ' · ${l.minutesShort(h.workout.duration.inMinutes)}'
+                ' · ${l.volumeLabel(Units.weight(h.volumeKg, widget.unit))}',
+              ),
+              trailing: h.prCount > 0
+                  ? Chip(label: Text('🏆 ${l.prCount(h.prCount)}'), visualDensity: VisualDensity.compact)
+                  : null,
+            ),
+          ),
+        ),
+      if (widget.history.length > _short)
+        Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: TextButton(
+            onPressed: () => setState(() => _all = !_all),
+            child: Text(_all ? l.trainShowLess : l.trainSeeAll),
+          ),
+        ),
+    ]);
   }
 }
 

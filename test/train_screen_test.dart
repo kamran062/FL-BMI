@@ -51,6 +51,12 @@ void main() {
   testWidgets('log a workout from start to finish', (tester) async {
     final app = await launchApp(tester);
     await tapText(tester, 'Train');
+    // The empty workout is folded under More options, below the fold
+    await tester.scrollUntilVisible(find.text('More options'), 300,
+        scrollable: find.byType(Scrollable).first);
+    await tapText(tester, 'More options');
+    await tester.ensureVisible(find.text('Start empty workout'));
+    await tester.pumpAndSettle();
     await tapAndSave(tester, find.text('Start empty workout'));
     await settleIO(tester);
     expect(app.workouts.active, isNotNull);
@@ -101,7 +107,7 @@ void main() {
     });
     await tester.tap(find.text('Train').last);
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Resume workout'));
+    await tester.tap(find.text('Resume workout').last);
     await settleIO(tester);
     expect(find.text('Try 62.5 kg × 8'), findsOneWidget);
   });

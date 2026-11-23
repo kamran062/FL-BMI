@@ -2699,4 +2699,19 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get recoveryHideSleep => 'نیند کی تفصیل چھپائیں';
+
+  @override
+  String get trainHomeSub => 'کسی سامان کے بغیر · دن بہ دن پلان';
+
+  @override
+  String get trainLibrarySub => '114 ورزشیں رہنمائی کے ساتھ';
+
+  @override
+  String get trainMoreOptions => 'مزید آپشنز';
+
+  @override
+  String get trainSeeAll => 'سب دیکھیں';
+
+  @override
+  String get trainShowLess => 'کم دکھائیں';
 }

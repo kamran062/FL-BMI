@@ -789,5 +789,10 @@
   "quickWeight": "وزن",
   "todayMore": "مزید",
   "recoveryShowSleep": "نیند کی تفصیل",
-  "recoveryHideSleep": "نیند کی تفصیل چھپائیں"
+  "recoveryHideSleep": "نیند کی تفصیل چھپائیں",
+  "trainHomeSub": "کسی سامان کے بغیر · دن بہ دن پلان",
+  "trainLibrarySub": "114 ورزشیں رہنمائی کے ساتھ",
+  "trainMoreOptions": "مزید آپشنز",
+  "trainSeeAll": "سب دیکھیں",
+  "trainShowLess": "کم دکھائیں"
 }

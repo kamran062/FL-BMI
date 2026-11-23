@@ -4063,5 +4063,25 @@
   "recoveryHideSleep": "Hide sleep details",
   "@recoveryHideSleep": {
     "description": "Button folding the sleep details away"
+  },
+  "trainHomeSub": "No equipment · day-by-day plans",
+  "@trainHomeSub": {
+    "description": "Subtitle of the Home Challenges tile on Train"
+  },
+  "trainLibrarySub": "114 exercises with guides",
+  "@trainLibrarySub": {
+    "description": "Subtitle of the Exercise library tile on Train"
+  },
+  "trainMoreOptions": "More options",
+  "@trainMoreOptions": {
+    "description": "Folded section on Train: empty workout, rep counter, muscle map, routines"
+  },
+  "trainSeeAll": "See all",
+  "@trainSeeAll": {
+    "description": "Show all recent workouts"
+  },
+  "trainShowLess": "Show less",
+  "@trainShowLess": {
+    "description": "Show only the latest workouts"
   }
 }
