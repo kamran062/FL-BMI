@@ -24,8 +24,12 @@ android {
         minSdk = 30 // Wear OS 3+
         targetSdk = 34
         // Wear versions must differ from the phone's on Play; offset them.
-        versionCode = 100000 + 3
-        versionName = "1.0.1"
+        // Same version as the phone app (pubspec.yaml); the watch's version
+        // code is 100000 + the build number so the two never collide
+        val pubspecVersion = rootProject.file("../pubspec.yaml").readLines()
+            .first { it.startsWith("version:") }.substringAfter(":").trim()
+        versionCode = 100000 + pubspecVersion.substringAfter("+").toInt()
+        versionName = pubspecVersion.substringBefore("+")
     }
 
     signingConfigs {
@@ -33,7 +37,9 @@ android {
             if (keystorePropertiesFile.exists()) {
                 keyAlias = keystoreProperties["keyAlias"] as String
                 keyPassword = keystoreProperties["keyPassword"] as String
-                storeFile = file(keystoreProperties["storeFile"] as String)
+                // key.properties paths are relative to the phone app module (android/app),
+                // so the watch app is signed with the same key
+                storeFile = rootProject.file("app").resolve(keystoreProperties["storeFile"] as String)
                 storePassword = keystoreProperties["storePassword"] as String
             }
         }
