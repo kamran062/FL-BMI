@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:bmi_health/core/review/review_prompter.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/train/exercises/domain/exercise.dart';
 import 'package:bmi_health/features/train/workouts/domain/workout.dart';
@@ -120,6 +121,7 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen>
       context: context,
       builder: (_) => _SummaryDialog(summary: summary),
     );
+    ReviewPrompter.happyMoment();
     if (mounted) widget.onClose();
   }
 

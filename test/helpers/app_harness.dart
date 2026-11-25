@@ -27,6 +27,7 @@ import 'package:bmi_health/features/body/photos/photo_vault.dart';
 import 'package:bmi_health/features/train/wear/wear_bridge.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
 import 'package:bmi_health/features/train/exercises/demo/exercise_demo.dart';
+import 'package:bmi_health/core/review/review_prompter.dart';
 
 /// Call once per test file, in setUpAll.
 void setUpAppHarness() {
@@ -34,6 +35,7 @@ void setUpAppHarness() {
   databaseFactory = databaseFactoryFfi;
   GoogleFonts.config.allowRuntimeFetching = false;
   ExerciseDemo.loop = false;
+  reviewSheet = RecordingReviewSheet();
 }
 
 typedef AppState = ({

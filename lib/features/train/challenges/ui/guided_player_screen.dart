@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:bmi_health/core/review/review_prompter.dart';
 import 'package:bmi_health/features/profile/domain/user_profile.dart';
 import 'package:bmi_health/features/profile/profile_provider.dart';
 import 'package:bmi_health/features/train/challenges/challenge_provider.dart';
@@ -270,6 +271,7 @@ class GuidedPlayerScreenState extends State<GuidedPlayerScreen> with WidgetsBind
     await _w.finish();
     await challenges.completeDay(widget.focus, widget.level, widget.plan.day);
     HapticFeedback.heavyImpact();
+    ReviewPrompter.happyMoment();
     if (mounted) _say(context.l10n.sayDayComplete(widget.plan.day));
   }
 

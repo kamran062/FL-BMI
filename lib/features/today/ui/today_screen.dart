@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:bmi_health/core/review/review_prompter.dart';
 import 'package:bmi_health/features/body/bmi/ui/tips_screen.dart';
 import 'package:bmi_health/features/fuel/domain/nutrition.dart';
 import 'package:bmi_health/features/fuel/fuel_provider.dart';
@@ -55,6 +56,8 @@ class TodayScreen extends StatefulWidget {
 }
 
 class _TodayScreenState extends State<TodayScreen> {
+  /// A perfect day was already counted as a happy moment this session.
+  bool _perfectNoted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +91,10 @@ class _TodayScreenState extends State<TodayScreen> {
       waterMl: fuel.waterMl,
       waterGoal: targets.waterMl,
     );
+    if (goals.perfect && !_perfectNoted) {
+      _perfectNoted = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) => ReviewPrompter.perfectDay());
+    }
     // Days with anything logged: workouts, challenge days, weigh-ins, and
     // food or water (the Food tab keeps the last week in memory)
     final streak = DailyStreak.count(
