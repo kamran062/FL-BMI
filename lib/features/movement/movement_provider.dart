@@ -181,11 +181,20 @@ class MovementProvider extends ChangeNotifier {
               pauseLocationUpdatesAutomatically: true,
               showBackgroundLocationIndicator: true,
             );
+      // Another call may have started the stream (or the user stopped
+      // tracking) while we awaited the permission check. A second
+      // subscription would leak and keep the foreground service running.
+      if (!_enabled || _sub != null) return;
       _sub = Geolocator.getPositionStream(locationSettings: settings).listen(
         (pos) => _onPosition(pos, l),
         onError: (Object e, StackTrace st) {
           reportError(e, st, reason: 'location-stream');
+          // Cancel, don't just forget it: a stream that is still listened to
+          // keeps the foreground service and its notification alive, and
+          // Stop tracking could no longer reach it. resume() retries later.
+          final dead = _sub;
           _sub = null;
+          dead?.cancel();
           notifyListeners();
         },
       );
