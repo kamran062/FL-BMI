@@ -85,10 +85,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get errorEnterHeightWeight => 'حساب کے لیے اپنا قد اور وزن درج کریں۔';
 
   @override
-  String get errorHeightRange => 'قد 50 سے 272 سینٹی میٹر (20 سے 107 انچ) کے درمیان درج کریں۔';
+  String get errorHeightRange =>
+      'قد 50 سے 272 سینٹی میٹر (20 سے 107 انچ) کے درمیان درج کریں۔';
 
   @override
-  String get errorWeightRange => 'وزن 2 سے 635 کلوگرام (5 سے 1400 پاؤنڈ) کے درمیان درج کریں۔';
+  String get errorWeightRange =>
+      'وزن 2 سے 635 کلوگرام (5 سے 1400 پاؤنڈ) کے درمیان درج کریں۔';
 
   @override
   String get resultTitle => 'آپ کا نتیجہ';
@@ -138,7 +140,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get onboardTitle1 => 'اپنی صحت آسانی سے ٹریک کریں';
 
   @override
-  String get onboardBody1 => 'سیکنڈوں میں اپنا بی ایم آئی معلوم کریں، کسی اکاؤنٹ کی ضرورت نہیں۔';
+  String get onboardBody1 =>
+      'سیکنڈوں میں اپنا بی ایم آئی معلوم کریں، کسی اکاؤنٹ کی ضرورت نہیں۔';
 
   @override
   String get onboardTitle2 => 'سمارٹ مشورے حاصل کریں';
@@ -222,31 +225,36 @@ class AppLocalizationsUr extends AppLocalizations {
   String get privacyDataTitle => '🔒 ڈیٹا آپ کے فون پر رہتا ہے';
 
   @override
-  String get privacyDataBody => 'بی ایم آئی کیلکولیٹر اور صحت آپ کا سارا ڈیٹا — وزن کے ریکارڈ، اہداف اور پروفائل — آپ کے فون پر ہی SQLite میں محفوظ کرتی ہے۔ کچھ بھی کسی سرور پر نہیں بھیجا جاتا۔';
+  String get privacyDataBody =>
+      'بی ایم آئی کیلکولیٹر اور صحت آپ کا سارا ڈیٹا — وزن کے ریکارڈ، اہداف اور پروفائل — آپ کے فون پر ہی SQLite میں محفوظ کرتی ہے۔ کچھ بھی کسی سرور پر نہیں بھیجا جاتا۔';
 
   @override
   String get privacyAnalyticsTitle => '📊 کوئی اینالیٹکس یا ٹریکنگ نہیں';
 
   @override
-  String get privacyAnalyticsBody => 'ہم کوئی اینالیٹکس یا ٹریکنگ ٹول استعمال نہیں کرتے۔ اگر ایپ کریش ہو جائے تو ایک گمنام کریش رپورٹ (فون کا ماڈل، اینڈرائیڈ یا آئی او ایس ورژن اور تکنیکی خرابی) ہماری کریش رپورٹنگ سروس Sentry کو بھیجی جا سکتی ہے تاکہ ہم مسئلہ حل کر سکیں۔ کریش رپورٹس میں آپ کا وزن، بی ایم آئی یا صحت کا کوئی اور ڈیٹا کبھی شامل نہیں ہوتا۔';
+  String get privacyAnalyticsBody =>
+      'ہم کوئی اینالیٹکس یا ٹریکنگ ٹول استعمال نہیں کرتے۔ اگر ایپ کریش ہو جائے تو ایک گمنام کریش رپورٹ (فون کا ماڈل، اینڈرائیڈ یا آئی او ایس ورژن اور تکنیکی خرابی) ہماری کریش رپورٹنگ سروس Sentry کو بھیجی جا سکتی ہے تاکہ ہم مسئلہ حل کر سکیں۔ کریش رپورٹس میں آپ کا وزن، بی ایم آئی یا صحت کا کوئی اور ڈیٹا کبھی شامل نہیں ہوتا۔';
 
   @override
   String get privacyAdsTitle => '📢 اشتہارات';
 
   @override
-  String get privacyAdsBody => 'بی ایم آئی کیلکولیٹر اور صحت مفت ہے اور گوگل ایڈموب کے اشتہارات سے چلتی ہے۔ ایڈموب متعلقہ اشتہارات دکھانے کے لیے آپ کے فون کی ایڈورٹائزنگ آئی ڈی استعمال کر سکتا ہے۔ آپ کسی بھی وقت فون کی سیٹنگز میں Google → Ads → Delete advertising ID سے ذاتی نوعیت کے اشتہارات بند کر سکتے ہیں۔';
+  String get privacyAdsBody =>
+      'بی ایم آئی کیلکولیٹر اور صحت مفت ہے اور گوگل ایڈموب کے اشتہارات سے چلتی ہے۔ ایڈموب متعلقہ اشتہارات دکھانے کے لیے آپ کے فون کی ایڈورٹائزنگ آئی ڈی استعمال کر سکتا ہے۔ آپ کسی بھی وقت فون کی سیٹنگز میں Google → Ads → Delete advertising ID سے ذاتی نوعیت کے اشتہارات بند کر سکتے ہیں۔';
 
   @override
   String get privacyThirdPartyTitle => '🔗 تھرڈ پارٹی اشتہاری سروسز';
 
   @override
-  String get privacyThirdPartyBody => 'گوگل ایڈموب اشتہارات دکھانے کے لیے فون کی کچھ معلومات (جیسے آئی پی ایڈریس، ڈیوائس آئی ڈی اور عمومی مقام) جمع کر سکتا ہے۔ یہ ڈیٹا گوگل کی پرائیویسی پالیسی کے تحت ہے۔ بی ایم آئی کیلکولیٹر اور صحت کو اس ڈیٹا تک رسائی نہیں ہے۔';
+  String get privacyThirdPartyBody =>
+      'گوگل ایڈموب اشتہارات دکھانے کے لیے فون کی کچھ معلومات (جیسے آئی پی ایڈریس، ڈیوائس آئی ڈی اور عمومی مقام) جمع کر سکتا ہے۔ یہ ڈیٹا گوگل کی پرائیویسی پالیسی کے تحت ہے۔ بی ایم آئی کیلکولیٹر اور صحت کو اس ڈیٹا تک رسائی نہیں ہے۔';
 
   @override
   String get privacyDeleteTitle => '🗑 اپنا ڈیٹا حذف کرنا';
 
   @override
-  String get privacyDeleteBody => 'ایپ ان انسٹال کرنے سے آپ کا صحت کا سارا ڈیٹا فون سے مستقل طور پر حذف ہو جاتا ہے۔ کوئی کلاؤڈ بیک اپ نہیں — آپ کا ڈیٹا کبھی آپ کے فون سے باہر نہیں جاتا۔';
+  String get privacyDeleteBody =>
+      'ایپ ان انسٹال کرنے سے آپ کا صحت کا سارا ڈیٹا فون سے مستقل طور پر حذف ہو جاتا ہے۔ کوئی کلاؤڈ بیک اپ نہیں — آپ کا ڈیٹا کبھی آپ کے فون سے باہر نہیں جاتا۔';
 
   @override
   String get gotIt => 'ٹھیک ہے';
@@ -307,7 +315,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get noHistoryYet => 'ابھی کوئی ریکارڈ نہیں';
 
   @override
-  String get noHistoryBody => 'آج سے ٹریکنگ شروع کریں — ہر اندراج آپ کا رجحان بناتا ہے۔';
+  String get noHistoryBody =>
+      'آج سے ٹریکنگ شروع کریں — ہر اندراج آپ کا رجحان بناتا ہے۔';
 
   @override
   String get addFirstEntry => 'پہلا اندراج کریں';
@@ -421,157 +430,197 @@ class AppLocalizationsUr extends AppLocalizations {
   String get tip1Title => 'آدھی پلیٹ سبزیاں';
 
   @override
-  String get tip1Body => 'ایک آسان اصول جو کیلوریز گنے بغیر زیادہ کیلوری والی غذا کو کم کر دیتا ہے۔';
+  String get tip1Body =>
+      'ایک آسان اصول جو کیلوریز گنے بغیر زیادہ کیلوری والی غذا کو کم کر دیتا ہے۔';
 
   @override
   String get tip2Title => 'کافی سے پہلے پانی';
 
   @override
-  String get tip2Body => 'رات بھر کی پانی کی کمی پوری کرنے کے لیے دن کی پہلی کافی سے پہلے 200 ملی لیٹر پانی پئیں۔';
+  String get tip2Body =>
+      'رات بھر کی پانی کی کمی پوری کرنے کے لیے دن کی پہلی کافی سے پہلے 200 ملی لیٹر پانی پئیں۔';
 
   @override
   String get tip3Title => 'کھانے کے بعد 10 منٹ کی واک';
 
   @override
-  String get tip3Body => 'تحقیق کے مطابق کھانے کے بعد مختصر واک خون میں شوگر کے اضافے کو نمایاں طور پر کم کرتی ہے۔';
+  String get tip3Body =>
+      'تحقیق کے مطابق کھانے کے بعد مختصر واک خون میں شوگر کے اضافے کو نمایاں طور پر کم کرتی ہے۔';
 
   @override
   String get tip4Title => 'اچھی نیند سب کچھ بہتر کرتی ہے';
 
   @override
-  String get tip4Body => '7 گھنٹے سے کم نیند اگلے دن بھوک کے ہارمون بڑھا دیتی ہے۔ سونے سے پہلے پرسکون معمول اپنائیں۔';
+  String get tip4Body =>
+      '7 گھنٹے سے کم نیند اگلے دن بھوک کے ہارمون بڑھا دیتی ہے۔ سونے سے پہلے پرسکون معمول اپنائیں۔';
 
   @override
   String get tip5Title => 'ہر کھانے میں پہلے پروٹین';
 
   @override
-  String get tip5Body => 'پلیٹ میں موجود پروٹین کاربوہائیڈریٹس سے پہلے کھائیں — پیٹ دیر تک بھرا رہتا ہے۔';
+  String get tip5Body =>
+      'پلیٹ میں موجود پروٹین کاربوہائیڈریٹس سے پہلے کھائیں — پیٹ دیر تک بھرا رہتا ہے۔';
 
   @override
   String get tip6Title => 'ہفتے میں دو بار طاقت کی ورزش';
 
   @override
-  String get tip6Body => 'ہفتے میں دو بار مزاحمتی ورزش میٹابولک صحت کو نمایاں طور پر بہتر کرتی ہے۔';
+  String get tip6Body =>
+      'ہفتے میں دو بار مزاحمتی ورزش میٹابولک صحت کو نمایاں طور پر بہتر کرتی ہے۔';
 
   @override
   String get tip7Title => 'کھانے کے ساتھ بھی پانی';
 
   @override
-  String get tip7Body => 'کھانے کے دوران گھونٹ گھونٹ پانی پینا ہاضمے میں مدد دیتا ہے اور زیادہ کھانے سے بچاتا ہے۔';
+  String get tip7Body =>
+      'کھانے کے دوران گھونٹ گھونٹ پانی پینا ہاضمے میں مدد دیتا ہے اور زیادہ کھانے سے بچاتا ہے۔';
 
   @override
   String get tip8Title => 'ذہنی دباؤ بھوک بڑھاتا ہے';
 
   @override
-  String get tip8Body => 'کورٹیسول بڑھنے سے بھوک بڑھتی ہے۔ کھانے سے پہلے 5 منٹ گہری سانس لیں۔';
+  String get tip8Body =>
+      'کورٹیسول بڑھنے سے بھوک بڑھتی ہے۔ کھانے سے پہلے 5 منٹ گہری سانس لیں۔';
 
   @override
   String get adviceUnderHeadline => 'آپ کا وزن صحت مند حد سے کم ہے';
 
   @override
-  String get adviceUnderCopy => 'کم وزن قوتِ مدافعت کمزور کر سکتا ہے، ہڈیوں کی مضبوطی کم کر سکتا ہے اور توانائی پر اثر ڈال سکتا ہے۔ مقصد آہستہ آہستہ اور معیاری طریقے سے وزن بڑھانا ہے — صرف زیادہ جنک فوڈ کھانا نہیں۔';
+  String get adviceUnderCopy =>
+      'کم وزن قوتِ مدافعت کمزور کر سکتا ہے، ہڈیوں کی مضبوطی کم کر سکتا ہے اور توانائی پر اثر ڈال سکتا ہے۔ مقصد آہستہ آہستہ اور معیاری طریقے سے وزن بڑھانا ہے — صرف زیادہ جنک فوڈ کھانا نہیں۔';
 
   @override
-  String get adviceUnderStep1 => 'زیادہ کیلوری والی قدرتی غذائیں کھائیں: میوے، پینٹ بٹر، ایواکاڈو، انڈے، فل کریم دودھ، جو کا دلیہ اور براؤن چاول';
+  String get adviceUnderStep1 =>
+      'زیادہ کیلوری والی قدرتی غذائیں کھائیں: میوے، پینٹ بٹر، ایواکاڈو، انڈے، فل کریم دودھ، جو کا دلیہ اور براؤن چاول';
 
   @override
-  String get adviceUnderStep2 => 'روزانہ 300–500 اضافی کیلوریز شامل کریں — اتنی کہ ہر ہفتے تقریباً 0.3–0.5 کلوگرام وزن پائیدار طریقے سے بڑھے';
+  String get adviceUnderStep2 =>
+      'روزانہ 300–500 اضافی کیلوریز شامل کریں — اتنی کہ ہر ہفتے تقریباً 0.3–0.5 کلوگرام وزن پائیدار طریقے سے بڑھے';
 
   @override
-  String get adviceUnderStep3 => 'روزانہ 3 بڑے کھانے اور 2–3 اسنیکس کھائیں؛ ناشتہ کبھی نہ چھوڑیں';
+  String get adviceUnderStep3 =>
+      'روزانہ 3 بڑے کھانے اور 2–3 اسنیکس کھائیں؛ ناشتہ کبھی نہ چھوڑیں';
 
   @override
-  String get adviceUnderStep4 => 'ہر کھانے میں پروٹین شامل کریں — پٹھے بنانے کے لیے جسمانی وزن کے ہر کلوگرام پر 1.2–1.6 گرام کا ہدف رکھیں';
+  String get adviceUnderStep4 =>
+      'ہر کھانے میں پروٹین شامل کریں — پٹھے بنانے کے لیے جسمانی وزن کے ہر کلوگرام پر 1.2–1.6 گرام کا ہدف رکھیں';
 
   @override
-  String get adviceUnderStep5 => 'ہفتے میں 2–3 بار طاقت کی ورزش کریں (اسکواٹس، پش اپس، رو) تاکہ بڑھنے والا وزن صرف چربی نہیں بلکہ پٹھے بنے';
+  String get adviceUnderStep5 =>
+      'ہفتے میں 2–3 بار طاقت کی ورزش کریں (اسکواٹس، پش اپس، رو) تاکہ بڑھنے والا وزن صرف چربی نہیں بلکہ پٹھے بنے';
 
   @override
-  String get adviceUnderStep6 => 'اگر وزن بغیر وجہ یا تیزی سے کم ہو رہا ہو تو ڈاکٹر سے ملیں — یہ کسی اندرونی بیماری کی علامت ہو سکتی ہے';
+  String get adviceUnderStep6 =>
+      'اگر وزن بغیر وجہ یا تیزی سے کم ہو رہا ہو تو ڈاکٹر سے ملیں — یہ کسی اندرونی بیماری کی علامت ہو سکتی ہے';
 
   @override
-  String get adviceUnderNote => 'اگر آپ کا وزن کافی عرصے سے کم ہے تو ذاتی رہنمائی کے لیے ڈاکٹر یا مستند ماہرِ غذائیت سے مشورہ کریں۔';
+  String get adviceUnderNote =>
+      'اگر آپ کا وزن کافی عرصے سے کم ہے تو ذاتی رہنمائی کے لیے ڈاکٹر یا مستند ماہرِ غذائیت سے مشورہ کریں۔';
 
   @override
   String get adviceNormalHeadline => 'آپ کا وزن صحت مند حد میں ہے';
 
   @override
-  String get adviceNormalCopy => 'صحت مند بی ایم آئی ایک بہترین بنیاد ہے۔ اب ترجیح مستقل عادات کے ذریعے اسے برقرار رکھنا ہے — جسمانی سرگرمی، معیاری غذا، نیند اور ذہنی دباؤ پر قابو سب اہم ہیں۔';
+  String get adviceNormalCopy =>
+      'صحت مند بی ایم آئی ایک بہترین بنیاد ہے۔ اب ترجیح مستقل عادات کے ذریعے اسے برقرار رکھنا ہے — جسمانی سرگرمی، معیاری غذا، نیند اور ذہنی دباؤ پر قابو سب اہم ہیں۔';
 
   @override
-  String get adviceNormalStep1 => 'ہفتے میں 150–300 منٹ درمیانی ایروبک سرگرمی کریں: تیز چہل قدمی، سائیکلنگ یا تیراکی';
+  String get adviceNormalStep1 =>
+      'ہفتے میں 150–300 منٹ درمیانی ایروبک سرگرمی کریں: تیز چہل قدمی، سائیکلنگ یا تیراکی';
 
   @override
-  String get adviceNormalStep2 => 'عمر کے ساتھ پٹھوں کو برقرار رکھنے کے لیے ہفتے میں 2–3 بار طاقت کی ورزش کریں';
+  String get adviceNormalStep2 =>
+      'عمر کے ساتھ پٹھوں کو برقرار رکھنے کے لیے ہفتے میں 2–3 بار طاقت کی ورزش کریں';
 
   @override
-  String get adviceNormalStep3 => 'ہر بڑے کھانے میں آدھی پلیٹ سبزیوں اور پھلوں سے بھریں';
+  String get adviceNormalStep3 =>
+      'ہر بڑے کھانے میں آدھی پلیٹ سبزیوں اور پھلوں سے بھریں';
 
   @override
-  String get adviceNormalStep4 => 'انتہائی پراسیسڈ غذا، اضافی چینی اور الکحل کم کریں — ان میں کیلوریز زیادہ اور غذائیت کم ہوتی ہے';
+  String get adviceNormalStep4 =>
+      'انتہائی پراسیسڈ غذا، اضافی چینی اور الکحل کم کریں — ان میں کیلوریز زیادہ اور غذائیت کم ہوتی ہے';
 
   @override
-  String get adviceNormalStep5 => 'رات کو 7–9 گھنٹے سوئیں؛ کم نیند گھریلن (بھوک کا ہارمون) بڑھاتی ہے اور زیادہ کھانے کا سبب بنتی ہے';
+  String get adviceNormalStep5 =>
+      'رات کو 7–9 گھنٹے سوئیں؛ کم نیند گھریلن (بھوک کا ہارمون) بڑھاتی ہے اور زیادہ کھانے کا سبب بنتی ہے';
 
   @override
-  String get adviceNormalStep6 => 'ہر 4–6 ہفتے بعد اپنا بی ایم آئی دوبارہ چیک کریں تاکہ کسی تبدیلی کا جلد پتا چل سکے';
+  String get adviceNormalStep6 =>
+      'ہر 4–6 ہفتے بعد اپنا بی ایم آئی دوبارہ چیک کریں تاکہ کسی تبدیلی کا جلد پتا چل سکے';
 
   @override
-  String get adviceNormalNote => 'بی ایم آئی صرف ابتدائی جانچ کا ذریعہ ہے، صحت کی مکمل تصویر نہیں۔ جسم کی ساخت، بلڈ پریشر اور بلڈ شوگر بھی اہم ہیں۔';
+  String get adviceNormalNote =>
+      'بی ایم آئی صرف ابتدائی جانچ کا ذریعہ ہے، صحت کی مکمل تصویر نہیں۔ جسم کی ساخت، بلڈ پریشر اور بلڈ شوگر بھی اہم ہیں۔';
 
   @override
   String get adviceOverHeadline => 'آپ کا وزن صحت مند حد سے کچھ زیادہ ہے';
 
   @override
-  String get adviceOverCopy => 'زیادہ وزن وقت کے ساتھ ٹائپ 2 ذیابیطس، ہائی بلڈ پریشر اور جوڑوں کے مسائل کا خطرہ بڑھاتا ہے۔ جسمانی وزن میں صرف 5–10% کمی بھی ان خطرات کو نمایاں طور پر کم کر دیتی ہے۔';
+  String get adviceOverCopy =>
+      'زیادہ وزن وقت کے ساتھ ٹائپ 2 ذیابیطس، ہائی بلڈ پریشر اور جوڑوں کے مسائل کا خطرہ بڑھاتا ہے۔ جسمانی وزن میں صرف 5–10% کمی بھی ان خطرات کو نمایاں طور پر کم کر دیتی ہے۔';
 
   @override
-  String get adviceOverStep1 => 'روزانہ 300–500 کیلوریز کی معتدل کمی کریں — ہر ہفتے 0.3–0.5 کلوگرام کمی کا ہدف رکھیں (پائیدار رفتار)';
+  String get adviceOverStep1 =>
+      'روزانہ 300–500 کیلوریز کی معتدل کمی کریں — ہر ہفتے 0.3–0.5 کلوگرام کمی کا ہدف رکھیں (پائیدار رفتار)';
 
   @override
-  String get adviceOverStep2 => 'روزانہ 8,000–10,000 قدم چلیں؛ 30 منٹ کی تیز واک سے شروع کریں اور آہستہ آہستہ بڑھائیں';
+  String get adviceOverStep2 =>
+      'روزانہ 8,000–10,000 قدم چلیں؛ 30 منٹ کی تیز واک سے شروع کریں اور آہستہ آہستہ بڑھائیں';
 
   @override
-  String get adviceOverStep3 => 'میٹھے مشروبات (سوڈا، جوس، انرجی ڈرنکس) کی جگہ پانی، سوڈا واٹر یا بغیر چینی کی چائے پئیں';
+  String get adviceOverStep3 =>
+      'میٹھے مشروبات (سوڈا، جوس، انرجی ڈرنکس) کی جگہ پانی، سوڈا واٹر یا بغیر چینی کی چائے پئیں';
 
   @override
-  String get adviceOverStep4 => 'ہر کھانے میں پہلے پروٹین کھائیں — اس سے پیٹ زیادہ بھرتا ہے اور مجموعی کیلوریز کم ہوتی ہیں';
+  String get adviceOverStep4 =>
+      'ہر کھانے میں پہلے پروٹین کھائیں — اس سے پیٹ زیادہ بھرتا ہے اور مجموعی کیلوریز کم ہوتی ہیں';
 
   @override
-  String get adviceOverStep5 => 'دوپہر اور رات کے کھانے میں آدھی پلیٹ کم نشاستے والی سبزیوں (بروکولی، پالک، کھیرا، شملہ مرچ) سے بھریں';
+  String get adviceOverStep5 =>
+      'دوپہر اور رات کے کھانے میں آدھی پلیٹ کم نشاستے والی سبزیوں (بروکولی، پالک، کھیرا، شملہ مرچ) سے بھریں';
 
   @override
-  String get adviceOverStep6 => 'سونے سے 2–3 گھنٹے پہلے کھانے سے پرہیز کریں — رات دیر سے کھانا چربی جمع ہونے کا باعث بنتا ہے';
+  String get adviceOverStep6 =>
+      'سونے سے 2–3 گھنٹے پہلے کھانے سے پرہیز کریں — رات دیر سے کھانا چربی جمع ہونے کا باعث بنتا ہے';
 
   @override
-  String get adviceOverNote => 'سخت ڈائٹ الٹا نقصان دیتی ہے۔ 300–500 کیلوریز کی کمی کافی ہے — آہستہ وزن کم کرنے سے پٹھے محفوظ رہتے ہیں اور اسے برقرار رکھنا آسان ہوتا ہے۔';
+  String get adviceOverNote =>
+      'سخت ڈائٹ الٹا نقصان دیتی ہے۔ 300–500 کیلوریز کی کمی کافی ہے — آہستہ وزن کم کرنے سے پٹھے محفوظ رہتے ہیں اور اسے برقرار رکھنا آسان ہوتا ہے۔';
 
   @override
   String get adviceObeseHeadline => 'آپ کا وزن موٹاپے کی حد میں ہے';
 
   @override
-  String get adviceObeseCopy => 'موٹاپا دل کی بیماری، ٹائپ 2 ذیابیطس، نیند میں سانس رکنے (سلیپ ایپنیا) اور جوڑوں کے درد کا خطرہ بڑھاتا ہے۔ اچھی خبر یہ ہے کہ جسمانی وزن میں صرف 5–10% کمی سے بھی صحت میں نمایاں بہتری آتی ہے۔';
+  String get adviceObeseCopy =>
+      'موٹاپا دل کی بیماری، ٹائپ 2 ذیابیطس، نیند میں سانس رکنے (سلیپ ایپنیا) اور جوڑوں کے درد کا خطرہ بڑھاتا ہے۔ اچھی خبر یہ ہے کہ جسمانی وزن میں صرف 5–10% کمی سے بھی صحت میں نمایاں بہتری آتی ہے۔';
 
   @override
-  String get adviceObeseStep1 => 'پہلا ہدف موجودہ وزن کا 5–10% رکھیں — 100 کلوگرام والے شخص کے لیے یہ صرف 5–10 کلوگرام ہے';
+  String get adviceObeseStep1 =>
+      'پہلا ہدف موجودہ وزن کا 5–10% رکھیں — 100 کلوگرام والے شخص کے لیے یہ صرف 5–10 کلوگرام ہے';
 
   @override
-  String get adviceObeseStep2 => 'ہر ہفتے 0.5–1.0 کلوگرام کمی کا ہدف رکھیں؛ اس سے تیز کمی عموماً پٹھوں کے نقصان اور دوبارہ وزن بڑھنے کا سبب بنتی ہے';
+  String get adviceObeseStep2 =>
+      'ہر ہفتے 0.5–1.0 کلوگرام کمی کا ہدف رکھیں؛ اس سے تیز کمی عموماً پٹھوں کے نقصان اور دوبارہ وزن بڑھنے کا سبب بنتی ہے';
 
   @override
-  String get adviceObeseStep3 => 'روزانہ ہلکی پھلکی سرگرمی سے شروع کریں: 30 منٹ چہل قدمی، تیراکی یا اسٹیشنری سائیکلنگ — گھٹنوں اور جوڑوں پر کم بوجھ';
+  String get adviceObeseStep3 =>
+      'روزانہ ہلکی پھلکی سرگرمی سے شروع کریں: 30 منٹ چہل قدمی، تیراکی یا اسٹیشنری سائیکلنگ — گھٹنوں اور جوڑوں پر کم بوجھ';
 
   @override
-  String get adviceObeseStep4 => 'سب سے پہلے انتہائی پراسیسڈ غذا، تلی ہوئی چیزیں اور اضافی چینی ختم کریں — صرف اس سے روزانہ 500 سے زیادہ کیلوریز کم ہو سکتی ہیں';
+  String get adviceObeseStep4 =>
+      'سب سے پہلے انتہائی پراسیسڈ غذا، تلی ہوئی چیزیں اور اضافی چینی ختم کریں — صرف اس سے روزانہ 500 سے زیادہ کیلوریز کم ہو سکتی ہیں';
 
   @override
-  String get adviceObeseStep5 => 'کھانوں کی بنیاد پروٹین (مرغی، مچھلی، دالیں، انڈے) اور سبزیوں پر رکھیں؛ یہ دیر تک پیٹ بھرا رکھتی ہیں';
+  String get adviceObeseStep5 =>
+      'کھانوں کی بنیاد پروٹین (مرغی، مچھلی، دالیں، انڈے) اور سبزیوں پر رکھیں؛ یہ دیر تک پیٹ بھرا رکھتی ہیں';
 
   @override
-  String get adviceObeseStep6 => 'بنیادی معائنے کے لیے ڈاکٹر سے ملیں — بلڈ پریشر، بلڈ شوگر اور کولیسٹرول — اور منظم رہنمائی کے پروگراموں کے بارے میں پوچھیں';
+  String get adviceObeseStep6 =>
+      'بنیادی معائنے کے لیے ڈاکٹر سے ملیں — بلڈ پریشر، بلڈ شوگر اور کولیسٹرول — اور منظم رہنمائی کے پروگراموں کے بارے میں پوچھیں';
 
   @override
-  String get adviceObeseNote => 'صرف بی ایم آئی سے صحت کی تشخیص نہیں ہوتی۔ اپنی طبی تاریخ کے مطابق منصوبے کے لیے ڈاکٹر یا مستند ماہرِ غذائیت سے بات کریں۔';
+  String get adviceObeseNote =>
+      'صرف بی ایم آئی سے صحت کی تشخیص نہیں ہوتی۔ اپنی طبی تاریخ کے مطابق منصوبے کے لیے ڈاکٹر یا مستند ماہرِ غذائیت سے بات کریں۔';
 
   @override
   String stepOf(int current, int total) {
@@ -597,7 +646,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get notSet => 'شامل نہیں';
 
   @override
-  String get setupIntro => 'چند مختصر سوالات تاکہ ایپ ورزش اور اہداف آپ کے مطابق بنا سکے۔';
+  String get setupIntro =>
+      'چند مختصر سوالات تاکہ ایپ ورزش اور اہداف آپ کے مطابق بنا سکے۔';
 
   @override
   String get setupNameTitle => 'ہم آپ کو کس نام سے پکاریں؟';
@@ -609,13 +659,15 @@ class AppLocalizationsUr extends AppLocalizations {
   String get setupGenderTitle => 'آپ کی جنس کیا ہے؟';
 
   @override
-  String get setupGenderBody => 'ہم اسے کیلوریز اور جسمانی چربی کے فارمولوں کے لیے اور ورزش کی ویڈیوز میں مناسب ٹرینر دکھانے کے لیے استعمال کرتے ہیں۔ آپ اسے کسی بھی وقت بدل سکتے ہیں۔';
+  String get setupGenderBody =>
+      'ہم اسے کیلوریز اور جسمانی چربی کے فارمولوں کے لیے اور ورزش کی ویڈیوز میں مناسب ٹرینر دکھانے کے لیے استعمال کرتے ہیں۔ آپ اسے کسی بھی وقت بدل سکتے ہیں۔';
 
   @override
   String get setupFormulaTitle => 'حساب کی بنیاد';
 
   @override
-  String get setupFormulaBody => 'کیلوریز اور جسمانی چربی کے فارمولے مرد اور خاتون کے جسم کے لیے مختلف ہوتے ہیں۔ جو آپ کے لیے بہتر ہو وہ منتخب کریں۔';
+  String get setupFormulaBody =>
+      'کیلوریز اور جسمانی چربی کے فارمولے مرد اور خاتون کے جسم کے لیے مختلف ہوتے ہیں۔ جو آپ کے لیے بہتر ہو وہ منتخب کریں۔';
 
   @override
   String get bodyMale => 'مردانہ جسم';
@@ -736,7 +788,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get logWeight => 'وزن درج کریں';
 
   @override
-  String get weightEmpty => 'اپنا رجحان دیکھنے کے لیے باقاعدگی سے وزن درج کریں۔';
+  String get weightEmpty =>
+      'اپنا رجحان دیکھنے کے لیے باقاعدگی سے وزن درج کریں۔';
 
   @override
   String weightAverage(String value) {
@@ -752,13 +805,16 @@ class AppLocalizationsUr extends AppLocalizations {
   String get bodyFatTitle => 'جسمانی چربی (اندازہ)';
 
   @override
-  String get bodyFatNeedsMale => 'جسمانی چربی کا اندازہ لگانے کے لیے گردن اور کمر کی پیمائش شامل کریں۔';
+  String get bodyFatNeedsMale =>
+      'جسمانی چربی کا اندازہ لگانے کے لیے گردن اور کمر کی پیمائش شامل کریں۔';
 
   @override
-  String get bodyFatNeedsFemale => 'جسمانی چربی کا اندازہ لگانے کے لیے گردن، کمر اور کولہوں کی پیمائش شامل کریں۔';
+  String get bodyFatNeedsFemale =>
+      'جسمانی چربی کا اندازہ لگانے کے لیے گردن، کمر اور کولہوں کی پیمائش شامل کریں۔';
 
   @override
-  String get bodyFatMethod => 'امریکی نیوی ٹیپ طریقہ — یہ ایک اندازہ ہے، طبی پیمائش نہیں۔';
+  String get bodyFatMethod =>
+      'امریکی نیوی ٹیپ طریقہ — یہ ایک اندازہ ہے، طبی پیمائش نہیں۔';
 
   @override
   String get measurementsTitle => 'پیمائشیں';
@@ -767,7 +823,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get addMeasurements => 'پیمائشیں شامل کریں';
 
   @override
-  String get measurementsEmpty => 'کمر، کولہوں اور دیگر پیمائشوں کو ٹریک کریں تاکہ وہ تبدیلیاں نظر آئیں جو ترازو نہیں دکھاتا۔';
+  String get measurementsEmpty =>
+      'کمر، کولہوں اور دیگر پیمائشوں کو ٹریک کریں تاکہ وہ تبدیلیاں نظر آئیں جو ترازو نہیں دکھاتا۔';
 
   @override
   String get measureNeck => 'گردن';
@@ -791,10 +848,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get measureThigh => 'ران';
 
   @override
-  String get measureHint => 'آرام کی حالت میں، سب سے چوڑی جگہ سے، ٹیپ کو زیادہ کسے بغیر ناپیں۔';
+  String get measureHint =>
+      'آرام کی حالت میں، سب سے چوڑی جگہ سے، ٹیپ کو زیادہ کسے بغیر ناپیں۔';
 
   @override
-  String get measureRangeError => 'پیمائش 5 سے 300 سینٹی میٹر (2 سے 118 انچ) کے درمیان ہونی چاہیے۔';
+  String get measureRangeError =>
+      'پیمائش 5 سے 300 سینٹی میٹر (2 سے 118 انچ) کے درمیان ہونی چاہیے۔';
 
   @override
   String get bmiHistory => 'بی ایم آئی ریکارڈ';
@@ -806,7 +865,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get noBmiYet => 'ابھی کوئی بی ایم آئی محفوظ نہیں';
 
   @override
-  String get wellnessDisclaimer => 'صرف عمومی صحت کے لیے۔ یہ طبی مشورہ نہیں ہے۔';
+  String get wellnessDisclaimer =>
+      'صرف عمومی صحت کے لیے۔ یہ طبی مشورہ نہیں ہے۔';
 
   @override
   String get navTrain => 'ورزش';
@@ -832,7 +892,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get routines => 'روٹینز';
 
   @override
-  String get routinesEmpty => 'کسی ورزش کو روٹین کے طور پر محفوظ کریں تاکہ ایک ٹیپ میں دہرا سکیں۔';
+  String get routinesEmpty =>
+      'کسی ورزش کو روٹین کے طور پر محفوظ کریں تاکہ ایک ٹیپ میں دہرا سکیں۔';
 
   @override
   String get recentWorkouts => 'حالیہ ورزشیں';
@@ -934,7 +995,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get done => 'ہو گیا';
 
   @override
-  String get nothingLogged => 'کوئی سیٹ مکمل نہیں ہوا، اس لیے ورزش محفوظ نہیں ہوئی۔';
+  String get nothingLogged =>
+      'کوئی سیٹ مکمل نہیں ہوا، اس لیے ورزش محفوظ نہیں ہوئی۔';
 
   @override
   String get searchExercises => 'ورزشیں تلاش کریں';
@@ -1072,7 +1134,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get foodKcalError => '1 سے 5000 کے درمیان کیلوریز درج کریں۔';
 
   @override
-  String get foodEmpty => 'آج کچھ درج نہیں ہوا۔ ہر کھانے کے بعد کیلوریز شامل کریں۔';
+  String get foodEmpty =>
+      'آج کچھ درج نہیں ہوا۔ ہر کھانے کے بعد کیلوریز شامل کریں۔';
 
   @override
   String get foodUnnamed => 'کھانا';
@@ -1092,10 +1155,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get removeGlass => '−250 ملی لیٹر';
 
   @override
-  String get targetsExplain => 'آپ کی عمر، قد، وزن، جنس، ہدف اور ورزش کے دنوں کی بنیاد پر (مفلن سینٹ جیور)۔ یہ ابتدائی رہنمائی ہے، طبی نسخہ نہیں۔';
+  String get targetsExplain =>
+      'آپ کی عمر، قد، وزن، جنس، ہدف اور ورزش کے دنوں کی بنیاد پر (مفلن سینٹ جیور)۔ یہ ابتدائی رہنمائی ہے، طبی نسخہ نہیں۔';
 
   @override
-  String get completeProfileForTargets => 'ذاتی اہداف کے لیے ذاتی معلومات میں اپنا ہدف مقرر کریں۔';
+  String get completeProfileForTargets =>
+      'ذاتی اہداف کے لیے ذاتی معلومات میں اپنا ہدف مقرر کریں۔';
 
   @override
   String greeting(String name) {
@@ -1132,13 +1197,15 @@ class AppLocalizationsUr extends AppLocalizations {
   String get dailyReminderTitle => 'فوری جائزے کا وقت';
 
   @override
-  String get dailyReminderBody => 'آج کا وزن، پانی اور کھانا درج کریں تاکہ آپ کا رجحان درست رہے۔';
+  String get dailyReminderBody =>
+      'آج کا وزن، پانی اور کھانا درج کریں تاکہ آپ کا رجحان درست رہے۔';
 
   @override
   String get weeklyReminderTitle => 'آپ کا ہفتہ وار جائزہ';
 
   @override
-  String get weeklyReminderBody => 'دیکھیں آپ کا ہفتہ کیسا رہا اور اگلی ورزشوں کی منصوبہ بندی کریں۔';
+  String get weeklyReminderBody =>
+      'دیکھیں آپ کا ہفتہ کیسا رہا اور اگلی ورزشوں کی منصوبہ بندی کریں۔';
 
   @override
   String get dailyReminderAt => 'ہر روز رات 8 بجے';
@@ -1147,7 +1214,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get weeklyReminderAt => 'اتوار صبح 10 بجے';
 
   @override
-  String get notificationsDenied => 'اس ایپ کی اطلاعات بند ہیں۔ یاد دہانیاں حاصل کرنے کے لیے فون کی ترتیبات میں انہیں آن کریں۔';
+  String get notificationsDenied =>
+      'اس ایپ کی اطلاعات بند ہیں۔ یاد دہانیاں حاصل کرنے کے لیے فون کی ترتیبات میں انہیں آن کریں۔';
 
   @override
   String get stepsTitle => 'قدم';
@@ -1158,10 +1226,12 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get stepsConnectBody => 'اپنے روزانہ کے قدم یہاں دیکھیں۔ قدم ہیلتھ کنیکٹ سے پڑھے جاتے ہیں اور آپ کے فون پر ہی رہتے ہیں۔';
+  String get stepsConnectBody =>
+      'اپنے روزانہ کے قدم یہاں دیکھیں۔ قدم ہیلتھ کنیکٹ سے پڑھے جاتے ہیں اور آپ کے فون پر ہی رہتے ہیں۔';
 
   @override
-  String get stepsConnectBodyIos => 'اپنے روزانہ کے قدم یہاں دیکھیں۔ قدم ایپل ہیلتھ سے پڑھے جاتے ہیں اور آپ کے فون پر ہی رہتے ہیں۔';
+  String get stepsConnectBodyIos =>
+      'اپنے روزانہ کے قدم یہاں دیکھیں۔ قدم ایپل ہیلتھ سے پڑھے جاتے ہیں اور آپ کے فون پر ہی رہتے ہیں۔';
 
   @override
   String get connectSteps => 'جوڑیں';
@@ -1170,7 +1240,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get installHealthConnect => 'ہیلتھ کنیکٹ حاصل کریں';
 
   @override
-  String get stepsNeedsInstall => 'قدم گننے کے لیے گوگل کی ہیلتھ کنیکٹ ایپ درکار ہے۔';
+  String get stepsNeedsInstall =>
+      'قدم گننے کے لیے گوگل کی ہیلتھ کنیکٹ ایپ درکار ہے۔';
 
   @override
   String get activityChannel => 'سرگرمی';
@@ -1182,7 +1253,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get movementCardTitle => 'آپ کا دن';
 
   @override
-  String get trackingOff => 'ٹریکنگ آن کریں تاکہ دیکھ سکیں آپ کہاں گئے، کتنی دیر رہے اور کتنا چلے۔ آپ کا مقام کبھی اس فون سے باہر نہیں جاتا۔';
+  String get trackingOff =>
+      'ٹریکنگ آن کریں تاکہ دیکھ سکیں آپ کہاں گئے، کتنی دیر رہے اور کتنا چلے۔ آپ کا مقام کبھی اس فون سے باہر نہیں جاتا۔';
 
   @override
   String get trackingOn => 'ٹریکنگ آن ہے';
@@ -1197,13 +1269,16 @@ class AppLocalizationsUr extends AppLocalizations {
   String get trackingNotificationTitle => 'آپ کا دن ٹریک ہو رہا ہے';
 
   @override
-  String get trackingNotificationBody => 'آپ کی نجی ٹائم لائن بن رہی ہے۔ کھولنے کے لیے ٹیپ کریں۔';
+  String get trackingNotificationBody =>
+      'آپ کی نجی ٹائم لائن بن رہی ہے۔ کھولنے کے لیے ٹیپ کریں۔';
 
   @override
-  String get locationDenied => 'مقام تک رسائی بند ہے۔ ٹائم لائن کے لیے فون کی ترتیبات میں اجازت دیں۔';
+  String get locationDenied =>
+      'مقام تک رسائی بند ہے۔ ٹائم لائن کے لیے فون کی ترتیبات میں اجازت دیں۔';
 
   @override
-  String get locationServiceOff => 'اپنا دن ٹریک کرنے کے لیے فون کا مقام (جی پی ایس) آن کریں۔';
+  String get locationServiceOff =>
+      'اپنا دن ٹریک کرنے کے لیے فون کا مقام (جی پی ایس) آن کریں۔';
 
   @override
   String placesVisited(int count) {
@@ -1257,7 +1332,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get deleteAllLocation => 'مقام کی پوری تاریخ حذف کریں';
 
   @override
-  String get deleteLocationConfirm => 'یہ منتخب مقام کی تاریخ اس فون سے مستقل طور پر حذف کر دے گا۔';
+  String get deleteLocationConfirm =>
+      'یہ منتخب مقام کی تاریخ اس فون سے مستقل طور پر حذف کر دے گا۔';
 
   @override
   String get delete => 'حذف کریں';
@@ -1271,10 +1347,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get gymCheckInTitle => 'آپ جم میں ہیں 💪';
 
   @override
-  String get gymCheckInBody => 'آج کی ورزش شروع کریں؟ لاگ کرنا شروع کرنے کے لیے ایپ کھولیں۔';
+  String get gymCheckInBody =>
+      'آج کی ورزش شروع کریں؟ لاگ کرنا شروع کرنے کے لیے ایپ کھولیں۔';
 
   @override
-  String get trackingLimitNote => 'اگر آپ حالیہ ایپس سے ایپ بند کر دیں تو ٹریکنگ رک جاتی ہے۔';
+  String get trackingLimitNote =>
+      'اگر آپ حالیہ ایپس سے ایپ بند کر دیں تو ٹریکنگ رک جاتی ہے۔';
 
   @override
   String get programs => 'پروگرام';
@@ -1321,7 +1399,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get muscleMapTitle => 'اس ہفتے کے پٹھے';
 
   @override
-  String get muscleMapHint => 'ہر پٹھے کے لیے سخت سیٹس (ثانوی پٹھے آدھے شمار ہوتے ہیں)۔ ہفتے میں تقریباً 10 سیٹ پٹھے بناتے ہیں۔';
+  String get muscleMapHint =>
+      'ہر پٹھے کے لیے سخت سیٹس (ثانوی پٹھے آدھے شمار ہوتے ہیں)۔ ہفتے میں تقریباً 10 سیٹ پٹھے بناتے ہیں۔';
 
   @override
   String undertrained(String muscles) {
@@ -1337,10 +1416,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get repCounter => 'ریپ کاؤنٹر';
 
   @override
-  String get repCounterIntro => 'فون ایسے رکھیں کہ پہلو سے آپ کا پورا جسم نظر آئے، پھر ورزش شروع کریں۔';
+  String get repCounterIntro =>
+      'فون ایسے رکھیں کہ پہلو سے آپ کا پورا جسم نظر آئے، پھر ورزش شروع کریں۔';
 
   @override
-  String get repCounterPrivacy => 'آپ کے فون پر ہی تجزیہ ہوتا ہے۔ کچھ بھی ریکارڈ یا اپ لوڈ نہیں ہوتا۔';
+  String get repCounterPrivacy =>
+      'آپ کے فون پر ہی تجزیہ ہوتا ہے۔ کچھ بھی ریکارڈ یا اپ لوڈ نہیں ہوتا۔';
 
   @override
   String repsCounted(int count) {
@@ -1391,7 +1472,8 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get cameraDenied => 'کیمرے تک رسائی بند ہے۔ ریپس گننے کے لیے فون کی ترتیبات میں اجازت دیں۔';
+  String get cameraDenied =>
+      'کیمرے تک رسائی بند ہے۔ ریپس گننے کے لیے فون کی ترتیبات میں اجازت دیں۔';
 
   @override
   String get cameraUnavailable => 'اس آلے پر کوئی کیمرا دستیاب نہیں۔';
@@ -1415,7 +1497,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get premiumWelcome => 'پریمیم میں خوش آمدید!';
 
   @override
-  String get premiumThanksBody => 'اشتہارات ہٹا دیے گئے۔ بی ایم آئی ہیلتھ کی مدد کا شکریہ۔';
+  String get premiumThanksBody =>
+      'اشتہارات ہٹا دیے گئے۔ بی ایم آئی ہیلتھ کی مدد کا شکریہ۔';
 
   @override
   String get premiumFeatureNoAds => 'کوئی بینر یا فل اسکرین اشتہار نہیں';
@@ -1424,7 +1507,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get premiumFeatureSupport => 'ایک آزاد ایپ کی مدد کریں';
 
   @override
-  String get premiumFeaturePrivacy => 'وہی پرائیویسی: آپ کا صحت کا ڈیٹا آپ کے فون پر رہتا ہے';
+  String get premiumFeaturePrivacy =>
+      'وہی پرائیویسی: آپ کا صحت کا ڈیٹا آپ کے فون پر رہتا ہے';
 
   @override
   String get planMonthly => 'ماہانہ';
@@ -1468,7 +1552,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get pricesLoading => 'قیمتیں لوڈ ہو رہی ہیں…';
 
   @override
-  String get renewNote => 'سبسکرپشن منسوخ کرنے تک خود بخود تجدید ہوتی ہے۔ گوگل پلے یا ایپ اسٹور کی سبسکرپشنز میں کسی بھی وقت منسوخ کریں۔ کوئی ٹریکنگ نہیں۔ کوئی ڈیٹا فروخت نہیں ہوتا۔';
+  String get renewNote =>
+      'سبسکرپشن منسوخ کرنے تک خود بخود تجدید ہوتی ہے۔ گوگل پلے یا ایپ اسٹور کی سبسکرپشنز میں کسی بھی وقت منسوخ کریں۔ کوئی ٹریکنگ نہیں۔ کوئی ڈیٹا فروخت نہیں ہوتا۔';
 
   @override
   String get thanksNote => 'بی ایم آئی ہیلتھ کی مدد کا شکریہ۔';
@@ -1515,10 +1600,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get connectSleepHeart => 'نیند اور دل کا ڈیٹا جوڑیں';
 
   @override
-  String get connectSleepHeartBody => 'اختیاری: زیادہ درست اسکور کے لیے آپ کی گھڑی یا فون سے نیند، آرام کی دل کی دھڑکن اور HRV شامل کرتا ہے۔';
+  String get connectSleepHeartBody =>
+      'اختیاری: زیادہ درست اسکور کے لیے آپ کی گھڑی یا فون سے نیند، آرام کی دل کی دھڑکن اور HRV شامل کرتا ہے۔';
 
   @override
-  String get recoveryEmpty => 'اپنی بحالی دیکھنے کے لیے سوال کا جواب دیں یا ورزش درج کریں۔';
+  String get recoveryEmpty =>
+      'اپنی بحالی دیکھنے کے لیے سوال کا جواب دیں یا ورزش درج کریں۔';
 
   @override
   String get sleepTitle => 'نیند';
@@ -1539,10 +1626,12 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get sleepRegular => 'آپ کے سونے کے اوقات باقاعدہ ہیں، جو نیند کے معیار میں مدد کرتا ہے۔';
+  String get sleepRegular =>
+      'آپ کے سونے کے اوقات باقاعدہ ہیں، جو نیند کے معیار میں مدد کرتا ہے۔';
 
   @override
-  String get sleepIrregular => 'سونے کے اوقات میں بہت فرق ہے۔ ایک مقررہ وقت عموماً نیند بہتر بناتا ہے۔';
+  String get sleepIrregular =>
+      'سونے کے اوقات میں بہت فرق ہے۔ ایک مقررہ وقت عموماً نیند بہتر بناتا ہے۔';
 
   @override
   String get cycleTitle => 'سائیکل';
@@ -1551,7 +1640,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get cycleTracking => 'ماہواری ٹریکنگ';
 
   @override
-  String get cycleOptInBody => 'اپنی ماہواری اور علامات ٹریک کریں اور ہر مرحلے کے لیے ورزش اور غذائیت کے مشورے حاصل کریں۔ صرف اسی فون پر محفوظ۔ آپ کسی بھی وقت سب حذف کر سکتے ہیں۔';
+  String get cycleOptInBody =>
+      'اپنی ماہواری اور علامات ٹریک کریں اور ہر مرحلے کے لیے ورزش اور غذائیت کے مشورے حاصل کریں۔ صرف اسی فون پر محفوظ۔ آپ کسی بھی وقت سب حذف کر سکتے ہیں۔';
 
   @override
   String get cycleLock => 'فنگر پرنٹ یا پن سے لاک کریں';
@@ -1569,7 +1659,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get cycleDeleteAll => 'تمام سائیکل ڈیٹا حذف کریں';
 
   @override
-  String get cycleDeleteConfirm => 'یہ تمام ماہواری اور علامات اس فون سے مستقل طور پر حذف کر دے گا اور ٹریکنگ بند کر دے گا۔';
+  String get cycleDeleteConfirm =>
+      'یہ تمام ماہواری اور علامات اس فون سے مستقل طور پر حذف کر دے گا اور ٹریکنگ بند کر دے گا۔';
 
   @override
   String cycleDay(int day) {
@@ -1599,10 +1690,12 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get periodLate => 'آپ کی ماہواری معمول سے دیر سے ہے۔ سائیکل اکثر بدلتے ہیں؛ اگر فکر ہو تو ڈاکٹر سے بات کریں۔';
+  String get periodLate =>
+      'آپ کی ماہواری معمول سے دیر سے ہے۔ سائیکل اکثر بدلتے ہیں؛ اگر فکر ہو تو ڈاکٹر سے بات کریں۔';
 
   @override
-  String get cycleIrregular => 'آپ کے سائیکل کی لمبائی بدلتی رہتی ہے، اس لیے اندازے وسیع ہیں۔';
+  String get cycleIrregular =>
+      'آپ کے سائیکل کی لمبائی بدلتی رہتی ہے، اس لیے اندازے وسیع ہیں۔';
 
   @override
   String get cycleNoData => 'اندازے حاصل کرنے کے لیے اپنی ماہواری درج کریں۔';
@@ -1620,19 +1713,24 @@ class AppLocalizationsUr extends AppLocalizations {
   String get phaseLuteal => 'لیوٹیل مرحلہ';
 
   @override
-  String get tipMenstrual => 'اپنی کیفیت کے مطابق ورزش کریں: ہلکے سیشن، چہل قدمی اور اسٹریچنگ ٹھیک ہیں۔ آئرن والی غذائیں (دالیں، پالک، گوشت) کمی پوری کرتی ہیں۔';
+  String get tipMenstrual =>
+      'اپنی کیفیت کے مطابق ورزش کریں: ہلکے سیشن، چہل قدمی اور اسٹریچنگ ٹھیک ہیں۔ آئرن والی غذائیں (دالیں، پالک، گوشت) کمی پوری کرتی ہیں۔';
 
   @override
-  String get tipFollicular => 'توانائی اکثر بڑھتی ہے: بھاری وزن اور نئے ریکارڈ آزمانے کا اچھا وقت۔';
+  String get tipFollicular =>
+      'توانائی اکثر بڑھتی ہے: بھاری وزن اور نئے ریکارڈ آزمانے کا اچھا وقت۔';
 
   @override
-  String get tipOvulation => 'طاقت زیادہ محسوس ہو سکتی ہے۔ اچھی طرح وارم اپ کریں اور چھلانگ اور تیز موڑ پر درست انداز رکھیں۔';
+  String get tipOvulation =>
+      'طاقت زیادہ محسوس ہو سکتی ہے۔ اچھی طرح وارم اپ کریں اور چھلانگ اور تیز موڑ پر درست انداز رکھیں۔';
 
   @override
-  String get tipLuteal => 'آپ کو زیادہ گرمی اور بھوک لگ سکتی ہے۔ پروٹین برقرار رکھیں، پانی پیتے رہیں، اور اس مرحلے کے آخر میں زیادہ سے زیادہ کوشش کے بجائے مستقل ورزش کریں۔';
+  String get tipLuteal =>
+      'آپ کو زیادہ گرمی اور بھوک لگ سکتی ہے۔ پروٹین برقرار رکھیں، پانی پیتے رہیں، اور اس مرحلے کے آخر میں زیادہ سے زیادہ کوشش کے بجائے مستقل ورزش کریں۔';
 
   @override
-  String get cycleTipNote => 'عمومی رہنمائی؛ ہر کسی کا سائیکل مختلف محسوس ہوتا ہے۔';
+  String get cycleTipNote =>
+      'عمومی رہنمائی؛ ہر کسی کا سائیکل مختلف محسوس ہوتا ہے۔';
 
   @override
   String get symptomsToday => 'آج کی علامات';
@@ -1687,10 +1785,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get productNotFound => 'پروڈکٹ نہیں ملی۔ آپ خود درج کر سکتے ہیں۔';
 
   @override
-  String get productNoNutrition => 'اس پروڈکٹ میں ابھی کیلوریز کی معلومات نہیں۔ آپ خود درج کر سکتے ہیں۔';
+  String get productNoNutrition =>
+      'اس پروڈکٹ میں ابھی کیلوریز کی معلومات نہیں۔ آپ خود درج کر سکتے ہیں۔';
 
   @override
-  String get lookupOffline => 'فوڈ ڈیٹا بیس سے رابطہ نہیں ہو سکا۔ کنکشن چیک کریں یا خود درج کریں۔';
+  String get lookupOffline =>
+      'فوڈ ڈیٹا بیس سے رابطہ نہیں ہو سکا۔ کنکشن چیک کریں یا خود درج کریں۔';
 
   @override
   String get enterManually => 'خود درج کریں';
@@ -1736,7 +1836,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get progressPhotos => 'پیش رفت کی تصاویر';
 
   @override
-  String get progressPhotosBody => 'نجی: اس فون پر خفیہ کردہ اور آپ کی گیلری میں کبھی شامل نہیں۔';
+  String get progressPhotosBody =>
+      'نجی: اس فون پر خفیہ کردہ اور آپ کی گیلری میں کبھی شامل نہیں۔';
 
   @override
   String get addPhoto => 'تصویر شامل کریں';
@@ -1754,7 +1855,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get deletePhoto => 'تصویر حذف کریں';
 
   @override
-  String get deletePhotoConfirm => 'یہ تصویر اس فون سے مستقل طور پر حذف کر دے گا۔';
+  String get deletePhotoConfirm =>
+      'یہ تصویر اس فون سے مستقل طور پر حذف کر دے گا۔';
 
   @override
   String photoDate(String date) {
@@ -1896,7 +1998,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get exportCsv => 'اسپریڈشیٹ (CSV) کے طور پر ایکسپورٹ کریں';
 
   @override
-  String get backupBody => 'آپ کا ڈیٹا کلاؤڈ بیک اپ میں نہیں جاتا۔ ایک خفیہ بیک اپ فائل بنائیں اور گوگل ڈرائیو، آئی کلاؤڈ یا کہیں بھی محفوظ کریں۔ صرف آپ کا پاس فریز اسے کھول سکتا ہے — اگر یہ گم ہو جائے تو بیک اپ بحال نہیں ہو سکتا۔';
+  String get backupBody =>
+      'آپ کا ڈیٹا کلاؤڈ بیک اپ میں نہیں جاتا۔ ایک خفیہ بیک اپ فائل بنائیں اور گوگل ڈرائیو، آئی کلاؤڈ یا کہیں بھی محفوظ کریں۔ صرف آپ کا پاس فریز اسے کھول سکتا ہے — اگر یہ گم ہو جائے تو بیک اپ بحال نہیں ہو سکتا۔';
 
   @override
   String get passphrase => 'پاس فریز';
@@ -1922,7 +2025,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get working => 'کام جاری ہے…';
 
   @override
-  String get restoreWarning => 'بحالی اس فون کا ڈیٹا بیک اپ کے ڈیٹا سے بدل دے گی۔ اسے واپس نہیں کیا جا سکتا۔';
+  String get restoreWarning =>
+      'بحالی اس فون کا ڈیٹا بیک اپ کے ڈیٹا سے بدل دے گی۔ اسے واپس نہیں کیا جا سکتا۔';
 
   @override
   String get restoreDone => 'بیک اپ بحال ہو گیا۔';
@@ -1934,10 +2038,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get restoreNotBackup => 'یہ بی ایم آئی ہیلتھ کی بیک اپ فائل نہیں ہے۔';
 
   @override
-  String get restoreNewer => 'یہ بیک اپ ایپ کے نئے ورژن کا ہے۔ پہلے ایپ اپ ڈیٹ کریں۔';
+  String get restoreNewer =>
+      'یہ بیک اپ ایپ کے نئے ورژن کا ہے۔ پہلے ایپ اپ ڈیٹ کریں۔';
 
   @override
-  String get csvWarning => 'اسپریڈشیٹ فائلیں خفیہ نہیں ہوتیں۔ جس کے ساتھ آپ شیئر کریں وہ انہیں پڑھ سکتا ہے۔';
+  String get csvWarning =>
+      'اسپریڈشیٹ فائلیں خفیہ نہیں ہوتیں۔ جس کے ساتھ آپ شیئر کریں وہ انہیں پڑھ سکتا ہے۔';
 
   @override
   String get termsOfUse => 'شرائط استعمال';
@@ -1946,7 +2052,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get batterySaver => 'بیٹری بچت';
 
   @override
-  String get batterySaverBody => 'کم اور کم درست مقام۔ بیٹری کم خرچ ہوتی ہے؛ مختصر چہل قدمی رہ سکتی ہے۔';
+  String get batterySaverBody =>
+      'کم اور کم درست مقام۔ بیٹری کم خرچ ہوتی ہے؛ مختصر چہل قدمی رہ سکتی ہے۔';
 
   @override
   String trackingGap(String from, String to) {
@@ -1954,31 +2061,39 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get trackingGapBody => 'غالباً آپ کے فون کے بیٹری سیور نے ایپ بند کر دی۔';
+  String get trackingGapBody =>
+      'غالباً آپ کے فون کے بیٹری سیور نے ایپ بند کر دی۔';
 
   @override
   String get keepTrackingOn => 'ٹریکنگ کیسے جاری رکھیں';
 
   @override
-  String get keepTrackingIntro => 'اپنے فون پر بی ایم آئی ہیلتھ کو پس منظر میں چلنے دیں:';
+  String get keepTrackingIntro =>
+      'اپنے فون پر بی ایم آئی ہیلتھ کو پس منظر میں چلنے دیں:';
 
   @override
-  String get guideXiaomi => 'Xiaomi / Redmi / POCO: ترتیبات ← ایپس ← BMI Health ← بیٹری سیور ← کوئی پابندی نہیں۔ آٹو اسٹارٹ بھی آن کریں۔';
+  String get guideXiaomi =>
+      'Xiaomi / Redmi / POCO: ترتیبات ← ایپس ← BMI Health ← بیٹری سیور ← کوئی پابندی نہیں۔ آٹو اسٹارٹ بھی آن کریں۔';
 
   @override
-  String get guideOppo => 'Oppo / Realme / OnePlus: ترتیبات ← بیٹری ← ایپ بیٹری مینجمنٹ ← BMI Health ← پس منظر کی سرگرمی کی اجازت۔';
+  String get guideOppo =>
+      'Oppo / Realme / OnePlus: ترتیبات ← بیٹری ← ایپ بیٹری مینجمنٹ ← BMI Health ← پس منظر کی سرگرمی کی اجازت۔';
 
   @override
-  String get guideVivo => 'Vivo / iQOO: ترتیبات ← بیٹری ← پس منظر بجلی کا استعمال ← BMI Health ← اجازت۔';
+  String get guideVivo =>
+      'Vivo / iQOO: ترتیبات ← بیٹری ← پس منظر بجلی کا استعمال ← BMI Health ← اجازت۔';
 
   @override
-  String get guideSamsung => 'Samsung: ترتیبات ← ایپس ← BMI Health ← بیٹری ← بلا پابندی۔';
+  String get guideSamsung =>
+      'Samsung: ترتیبات ← ایپس ← BMI Health ← بیٹری ← بلا پابندی۔';
 
   @override
-  String get guideHuawei => 'Huawei / Honor: ترتیبات ← بیٹری ← ایپ لانچ ← BMI Health ← دستی انتظام، سب آن۔';
+  String get guideHuawei =>
+      'Huawei / Honor: ترتیبات ← بیٹری ← ایپ لانچ ← BMI Health ← دستی انتظام، سب آن۔';
 
   @override
-  String get guideOther => 'دیگر فون: ترتیبات ← ایپس ← BMI Health ← بیٹری ← بلا پابندی۔ حالیہ ایپس سے ایپ کو سوائپ نہ کریں۔';
+  String get guideOther =>
+      'دیگر فون: ترتیبات ← ایپس ← BMI Health ← بیٹری ← بلا پابندی۔ حالیہ ایپس سے ایپ کو سوائپ نہ کریں۔';
 
   @override
   String setsReps(int sets, int min, int max) {
@@ -2036,22 +2151,26 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get jointFriendlyNote => 'آپ کے بی ایم آئی کے مطابق جوڑوں کے لیے آسان انتخاب: کودنے والی ورزشیں شامل نہیں۔';
+  String get jointFriendlyNote =>
+      'آپ کے بی ایم آئی کے مطابق جوڑوں کے لیے آسان انتخاب: کودنے والی ورزشیں شامل نہیں۔';
 
   @override
-  String get planBasedOn => 'آپ کے سامان اور تجربے کے مطابق۔ طریقہ اور مشوروں کے لیے ورزش پر ٹیپ کریں۔';
+  String get planBasedOn =>
+      'آپ کے سامان اور تجربے کے مطابق۔ طریقہ اور مشوروں کے لیے ورزش پر ٹیپ کریں۔';
 
   @override
   String get startThisWorkout => 'یہ ورزش شروع کریں';
 
   @override
-  String get noExercisesForDay => 'اس دن کے لیے ابھی آپ کے سامان کے مطابق کوئی ورزش نہیں۔';
+  String get noExercisesForDay =>
+      'اس دن کے لیے ابھی آپ کے سامان کے مطابق کوئی ورزش نہیں۔';
 
   @override
   String get homeChallenges => 'گھریلو چیلنجز';
 
   @override
-  String get homeChallengesBody => 'بغیر سامان کے روزانہ کے منصوبے۔ سطح اور توجہ منتخب کریں۔';
+  String get homeChallengesBody =>
+      'بغیر سامان کے روزانہ کے منصوبے۔ سطح اور توجہ منتخب کریں۔';
 
   @override
   String get levelBeginner => 'ابتدائی';
@@ -2102,7 +2221,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get restDay => 'آرام کا دن';
 
   @override
-  String get restDayBody => 'بحالی بھی ورزش کا حصہ ہے۔ چہل قدمی کریں یا ہلکا اسٹریچ کریں۔';
+  String get restDayBody =>
+      'بحالی بھی ورزش کا حصہ ہے۔ چہل قدمی کریں یا ہلکا اسٹریچ کریں۔';
 
   @override
   String get markRested => 'آرام مکمل کریں';
@@ -2238,13 +2358,15 @@ class AppLocalizationsUr extends AppLocalizations {
   String get remindWaterTitle => 'پانی پینے کا وقت';
 
   @override
-  String get remindWaterBody => 'ابھی ایک گلاس پانی آج کے ہدف کی طرف آپ کو رکھے گا۔';
+  String get remindWaterBody =>
+      'ابھی ایک گلاس پانی آج کے ہدف کی طرف آپ کو رکھے گا۔';
 
   @override
   String get remindWeighInTitle => 'وزن کرنے کا وقت';
 
   @override
-  String get remindWeighInBody => 'سب سے درست رجحان کے لیے ناشتے سے پہلے وزن کریں۔';
+  String get remindWeighInBody =>
+      'سب سے درست رجحان کے لیے ناشتے سے پہلے وزن کریں۔';
 
   @override
   String get remindWorkoutTitle => 'آج ورزش کا دن ہے';
@@ -2323,7 +2445,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get stepsGoal => 'روزانہ قدموں کا ہدف';
 
   @override
-  String get stepsGoalHint => 'ایسا ہدف چنیں جو زیادہ تر دن پورا ہو سکے، پھر بڑھائیں۔';
+  String get stepsGoalHint =>
+      'ایسا ہدف چنیں جو زیادہ تر دن پورا ہو سکے، پھر بڑھائیں۔';
 
   @override
   String stepsGoalValue(int steps) {
@@ -2334,7 +2457,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get sleepTrend => 'پچھلی 14 راتیں';
 
   @override
-  String get sleepTrendHint => 'ہر بار ایک رات ہے۔ نارنجی کا مطلب 7 گھنٹے سے کم۔';
+  String get sleepTrendHint =>
+      'ہر بار ایک رات ہے۔ نارنجی کا مطلب 7 گھنٹے سے کم۔';
 
   @override
   String sleepTrendSemantics(int nights) {
@@ -2357,7 +2481,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get trainRestOverBody => 'اگلے سیٹ کا وقت ہو گیا۔';
 
   @override
-  String get trainRestNotifyAsk => 'ایپ بند ہو تو آرام ختم ہونے پر اطلاع چاہیے؟';
+  String get trainRestNotifyAsk =>
+      'ایپ بند ہو تو آرام ختم ہونے پر اطلاع چاہیے؟';
 
   @override
   String get trainAllow => 'اجازت دیں';
@@ -2372,10 +2497,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get trainDeleteWorkout => 'ورزش حذف کریں';
 
   @override
-  String get trainDeleteWorkoutConfirm => 'یہ ورزش حذف کریں؟ اس کے سیٹ، والیوم اور ریکارڈ آپ کی ہسٹری سے ہٹ جائیں گے۔';
+  String get trainDeleteWorkoutConfirm =>
+      'یہ ورزش حذف کریں؟ اس کے سیٹ، والیوم اور ریکارڈ آپ کی ہسٹری سے ہٹ جائیں گے۔';
 
   @override
-  String get trainEditHint => 'سیٹ میں تبدیلی کے لیے اس پر ٹیپ کریں، حذف کرنے کے لیے بائیں سوائپ کریں۔';
+  String get trainEditHint =>
+      'سیٹ میں تبدیلی کے لیے اس پر ٹیپ کریں، حذف کرنے کے لیے بائیں سوائپ کریں۔';
 
   @override
   String get trainEditSet => 'سیٹ میں تبدیلی';
@@ -2392,7 +2519,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get trainProgressTitle => 'آپ کی پیش رفت';
 
   @override
-  String get trainProgressEmpty => 'اپنی پیش رفت یہاں دیکھنے کے لیے یہ ورزش کسی ورک آؤٹ میں لاگ کریں۔';
+  String get trainProgressEmpty =>
+      'اپنی پیش رفت یہاں دیکھنے کے لیے یہ ورزش کسی ورک آؤٹ میں لاگ کریں۔';
 
   @override
   String get trainBestSet => 'بہترین سیٹ';
@@ -2553,13 +2681,15 @@ class AppLocalizationsUr extends AppLocalizations {
   String get trainSetDrop => 'ڈراپ سیٹ';
 
   @override
-  String get trainWarmupNote => 'وارم اپ سیٹ والیوم، ریکارڈ یا وزن کی تجویز میں شمار نہیں ہوتے۔';
+  String get trainWarmupNote =>
+      'وارم اپ سیٹ والیوم، ریکارڈ یا وزن کی تجویز میں شمار نہیں ہوتے۔';
 
   @override
   String get trainRpe => 'محنت (RPE)';
 
   @override
-  String get trainRpeHelp => 'کتنا مشکل تھا؟ 10 = ایک بھی ریپ باقی نہیں، 9 = ایک باقی، 8 = دو باقی۔';
+  String get trainRpeHelp =>
+      'کتنا مشکل تھا؟ 10 = ایک بھی ریپ باقی نہیں، 9 = ایک باقی، 8 = دو باقی۔';
 
   @override
   String get trainRpeNone => 'درجہ نہیں دیا';
@@ -2573,7 +2703,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get trainDeloadTitle => 'ہلکا ہفتہ (ڈی لوڈ)';
 
   @override
-  String get trainDeloadBody => 'آپ نے لگاتار 5 ہفتے سخت ٹریننگ کی ہے۔ اس ہفتے تقریباً 10% ہلکا وزن اٹھائیں تاکہ جسم ریکور ہو کر زیادہ مضبوط ہو۔ وزن کی تجاویز پہلے ہی ہلکی کر دی گئی ہیں۔';
+  String get trainDeloadBody =>
+      'آپ نے لگاتار 5 ہفتے سخت ٹریننگ کی ہے۔ اس ہفتے تقریباً 10% ہلکا وزن اٹھائیں تاکہ جسم ریکور ہو کر زیادہ مضبوط ہو۔ وزن کی تجاویز پہلے ہی ہلکی کر دی گئی ہیں۔';
 
   @override
   String get trainDeloadSkip => 'اس ہفتے نہیں';
@@ -2640,7 +2771,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get streakHelpTitle => 'روزانہ اسٹریک';
 
   @override
-  String get streakHelpBody => 'اسٹریک جاری رکھنے کے لیے روزانہ کچھ بھی درج کریں: ورزش، کھانا، پانی یا وزن۔ جیسے ہی آپ کچھ درج کریں آج شمار ہو جاتا ہے۔';
+  String get streakHelpBody =>
+      'اسٹریک جاری رکھنے کے لیے روزانہ کچھ بھی درج کریں: ورزش، کھانا، پانی یا وزن۔ جیسے ہی آپ کچھ درج کریں آج شمار ہو جاتا ہے۔';
 
   @override
   String get planTitle => 'آج کا پلان';
@@ -2654,7 +2786,8 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get planRestBody => 'ریکوری بھی ٹریننگ کا حصہ ہے۔ آج ہلکی واک یا اسٹریچنگ بہترین ہے۔';
+  String get planRestBody =>
+      'ریکوری بھی ٹریننگ کا حصہ ہے۔ آج ہلکی واک یا اسٹریچنگ بہترین ہے۔';
 
   @override
   String get planRestDone => 'آرام کا دن مکمل کریں';

@@ -17,12 +17,12 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.bmihealth.bmi_health.wear"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.bmihealth.bmi_health"
         minSdk = 30 // Wear OS 3+
-        targetSdk = 34
+        targetSdk = 36
         // Wear versions must differ from the phone's on Play; offset them.
         // Same version as the phone app (pubspec.yaml); the watch's version
         // code is 100000 + the build number so the two never collide

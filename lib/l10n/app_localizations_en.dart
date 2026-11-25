@@ -82,13 +82,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get errorEnterHeightWeight => 'Enter your height and weight to calculate.';
+  String get errorEnterHeightWeight =>
+      'Enter your height and weight to calculate.';
 
   @override
-  String get errorHeightRange => 'Enter a height between 50 and 272 cm (20–107 in).';
+  String get errorHeightRange =>
+      'Enter a height between 50 and 272 cm (20–107 in).';
 
   @override
-  String get errorWeightRange => 'Enter a weight between 2 and 635 kg (5–1400 lbs).';
+  String get errorWeightRange =>
+      'Enter a weight between 2 and 635 kg (5–1400 lbs).';
 
   @override
   String get resultTitle => 'Your result';
@@ -138,13 +141,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardTitle1 => 'Track your health easily';
 
   @override
-  String get onboardBody1 => 'Calculate your BMI in seconds, no account needed.';
+  String get onboardBody1 =>
+      'Calculate your BMI in seconds, no account needed.';
 
   @override
   String get onboardTitle2 => 'Get smart recommendations';
 
   @override
-  String get onboardBody2 => 'Personalized advice based on your body and goals.';
+  String get onboardBody2 =>
+      'Personalized advice based on your body and goals.';
 
   @override
   String get onboardTitle3 => 'Track progress over time';
@@ -222,31 +227,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyDataTitle => '🔒 Data stays on your device';
 
   @override
-  String get privacyDataBody => 'BMI Calculator & Health stores all your data — weight entries, goals, and profile — locally on your device using SQLite. Nothing is sent to any server.';
+  String get privacyDataBody =>
+      'BMI Calculator & Health stores all your data — weight entries, goals, and profile — locally on your device using SQLite. Nothing is sent to any server.';
 
   @override
   String get privacyAnalyticsTitle => '📊 No analytics or tracking';
 
   @override
-  String get privacyAnalyticsBody => 'We do not use analytics or user-tracking tools. If the app crashes, an anonymous crash report (device model, Android or iOS version, and the technical error) may be sent to our crash-reporting service, Sentry, so we can fix the problem. Crash reports never include your weight, BMI or other health data.';
+  String get privacyAnalyticsBody =>
+      'We do not use analytics or user-tracking tools. If the app crashes, an anonymous crash report (device model, Android or iOS version, and the technical error) may be sent to our crash-reporting service, Sentry, so we can fix the problem. Crash reports never include your weight, BMI or other health data.';
 
   @override
   String get privacyAdsTitle => '📢 Ads';
 
   @override
-  String get privacyAdsBody => 'BMI Calculator & Health is free and supported by ads powered by Google AdMob. AdMob may use your device\'s advertising ID to show relevant ads. You can opt out of personalised ads at any time in your device settings under Google → Ads → Delete advertising ID.';
+  String get privacyAdsBody =>
+      'BMI Calculator & Health is free and supported by ads powered by Google AdMob. AdMob may use your device\'s advertising ID to show relevant ads. You can opt out of personalised ads at any time in your device settings under Google → Ads → Delete advertising ID.';
 
   @override
   String get privacyThirdPartyTitle => '🔗 Third-party ad services';
 
   @override
-  String get privacyThirdPartyBody => 'Google AdMob may collect certain device information (such as IP address, device identifiers, and general location) to serve ads. This data is governed by Google\'s Privacy Policy. BMI Calculator & Health does not have access to this data.';
+  String get privacyThirdPartyBody =>
+      'Google AdMob may collect certain device information (such as IP address, device identifiers, and general location) to serve ads. This data is governed by Google\'s Privacy Policy. BMI Calculator & Health does not have access to this data.';
 
   @override
   String get privacyDeleteTitle => '🗑 Deleting your data';
 
   @override
-  String get privacyDeleteBody => 'Uninstalling the app permanently deletes all your health data from the device. There is no cloud backup — your data never leaves your phone.';
+  String get privacyDeleteBody =>
+      'Uninstalling the app permanently deletes all your health data from the device. There is no cloud backup — your data never leaves your phone.';
 
   @override
   String get gotIt => 'Got it';
@@ -307,7 +317,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noHistoryYet => 'No history yet';
 
   @override
-  String get noHistoryBody => 'Start tracking today — every entry shapes your trend.';
+  String get noHistoryBody =>
+      'Start tracking today — every entry shapes your trend.';
 
   @override
   String get addFirstEntry => 'Add first entry';
@@ -421,157 +432,198 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tip1Title => 'Half your plate, vegetables';
 
   @override
-  String get tip1Body => 'A simple visual rule that crowds out higher-calorie foods without counting.';
+  String get tip1Body =>
+      'A simple visual rule that crowds out higher-calorie foods without counting.';
 
   @override
   String get tip2Title => 'Water before coffee';
 
   @override
-  String get tip2Body => 'Drink 200 ml of water before your first coffee to reset overnight dehydration.';
+  String get tip2Body =>
+      'Drink 200 ml of water before your first coffee to reset overnight dehydration.';
 
   @override
   String get tip3Title => 'A 10-min walk after meals';
 
   @override
-  String get tip3Body => 'Studies show short post-meal walks meaningfully lower blood-glucose spikes.';
+  String get tip3Body =>
+      'Studies show short post-meal walks meaningfully lower blood-glucose spikes.';
 
   @override
   String get tip4Title => 'Sleep is the multiplier';
 
   @override
-  String get tip4Body => 'Under 7 hours raises hunger hormones the next day. Protect a wind-down ritual.';
+  String get tip4Body =>
+      'Under 7 hours raises hunger hormones the next day. Protect a wind-down ritual.';
 
   @override
   String get tip5Title => 'Protein first, every meal';
 
   @override
-  String get tip5Body => 'Eat the protein on your plate before carbs — satiety lasts longer.';
+  String get tip5Body =>
+      'Eat the protein on your plate before carbs — satiety lasts longer.';
 
   @override
   String get tip6Title => 'Strength training twice a week';
 
   @override
-  String get tip6Body => 'Two sessions of resistance training weekly significantly improves metabolic health.';
+  String get tip6Body =>
+      'Two sessions of resistance training weekly significantly improves metabolic health.';
 
   @override
   String get tip7Title => 'Hydrate with meals too';
 
   @override
-  String get tip7Body => 'Sipping water during meals helps digestion and reduces overeating.';
+  String get tip7Body =>
+      'Sipping water during meals helps digestion and reduces overeating.';
 
   @override
   String get tip8Title => 'Stress fuels hunger';
 
   @override
-  String get tip8Body => 'Cortisol spikes increase appetite. Try 5 minutes of deep breathing before eating.';
+  String get tip8Body =>
+      'Cortisol spikes increase appetite. Try 5 minutes of deep breathing before eating.';
 
   @override
   String get adviceUnderHeadline => 'Your weight is below the healthy range';
 
   @override
-  String get adviceUnderCopy => 'Being underweight can weaken immunity, reduce bone density, and affect energy levels. The goal is gradual, quality weight gain — not just eating more junk food.';
+  String get adviceUnderCopy =>
+      'Being underweight can weaken immunity, reduce bone density, and affect energy levels. The goal is gradual, quality weight gain — not just eating more junk food.';
 
   @override
-  String get adviceUnderStep1 => 'Eat calorie-dense whole foods: nuts, nut butter, avocado, eggs, whole milk, oats, and brown rice';
+  String get adviceUnderStep1 =>
+      'Eat calorie-dense whole foods: nuts, nut butter, avocado, eggs, whole milk, oats, and brown rice';
 
   @override
-  String get adviceUnderStep2 => 'Add 300–500 extra kcal per day — enough to gain ~0.3–0.5 kg per week sustainably';
+  String get adviceUnderStep2 =>
+      'Add 300–500 extra kcal per day — enough to gain ~0.3–0.5 kg per week sustainably';
 
   @override
-  String get adviceUnderStep3 => 'Eat 3 main meals + 2–3 snacks daily; never skip breakfast';
+  String get adviceUnderStep3 =>
+      'Eat 3 main meals + 2–3 snacks daily; never skip breakfast';
 
   @override
-  String get adviceUnderStep4 => 'Include protein at every meal — aim for 1.2–1.6 g per kg of body weight to build muscle';
+  String get adviceUnderStep4 =>
+      'Include protein at every meal — aim for 1.2–1.6 g per kg of body weight to build muscle';
 
   @override
-  String get adviceUnderStep5 => 'Do resistance training 2–3× per week (squats, push-ups, rows) so gained weight becomes muscle, not just fat';
+  String get adviceUnderStep5 =>
+      'Do resistance training 2–3× per week (squats, push-ups, rows) so gained weight becomes muscle, not just fat';
 
   @override
-  String get adviceUnderStep6 => 'If weight loss is unexplained or rapid, see a doctor — it may signal an underlying condition';
+  String get adviceUnderStep6 =>
+      'If weight loss is unexplained or rapid, see a doctor — it may signal an underlying condition';
 
   @override
-  String get adviceUnderNote => 'If you have been underweight for a long time, consult a doctor or registered dietitian for personalised support.';
+  String get adviceUnderNote =>
+      'If you have been underweight for a long time, consult a doctor or registered dietitian for personalised support.';
 
   @override
   String get adviceNormalHeadline => 'You are in the healthy weight range';
 
   @override
-  String get adviceNormalCopy => 'A healthy BMI is a great foundation. The priority now is maintaining it through consistent habits — movement, quality nutrition, sleep, and stress management all matter.';
+  String get adviceNormalCopy =>
+      'A healthy BMI is a great foundation. The priority now is maintaining it through consistent habits — movement, quality nutrition, sleep, and stress management all matter.';
 
   @override
-  String get adviceNormalStep1 => 'Get 150–300 min of moderate aerobic activity per week: brisk walking, cycling, or swimming';
+  String get adviceNormalStep1 =>
+      'Get 150–300 min of moderate aerobic activity per week: brisk walking, cycling, or swimming';
 
   @override
-  String get adviceNormalStep2 => 'Add 2–3 strength training sessions per week to preserve muscle mass as you age';
+  String get adviceNormalStep2 =>
+      'Add 2–3 strength training sessions per week to preserve muscle mass as you age';
 
   @override
-  String get adviceNormalStep3 => 'Fill half your plate with vegetables and fruit at every main meal';
+  String get adviceNormalStep3 =>
+      'Fill half your plate with vegetables and fruit at every main meal';
 
   @override
-  String get adviceNormalStep4 => 'Limit ultra-processed foods, added sugars, and alcohol — they add calories with little nutrition';
+  String get adviceNormalStep4 =>
+      'Limit ultra-processed foods, added sugars, and alcohol — they add calories with little nutrition';
 
   @override
-  String get adviceNormalStep5 => 'Sleep 7–9 hours per night; poor sleep raises ghrelin (hunger hormone) and leads to overeating';
+  String get adviceNormalStep5 =>
+      'Sleep 7–9 hours per night; poor sleep raises ghrelin (hunger hormone) and leads to overeating';
 
   @override
-  String get adviceNormalStep6 => 'Re-check your BMI every 4–6 weeks to catch any drift early';
+  String get adviceNormalStep6 =>
+      'Re-check your BMI every 4–6 weeks to catch any drift early';
 
   @override
-  String get adviceNormalNote => 'BMI is a screening tool, not a full health picture. Body composition, blood pressure, and blood sugar also matter.';
+  String get adviceNormalNote =>
+      'BMI is a screening tool, not a full health picture. Body composition, blood pressure, and blood sugar also matter.';
 
   @override
-  String get adviceOverHeadline => 'Your weight is slightly above the healthy range';
+  String get adviceOverHeadline =>
+      'Your weight is slightly above the healthy range';
 
   @override
-  String get adviceOverCopy => 'Overweight raises the risk of type 2 diabetes, high blood pressure, and joint problems over time. Even a 5–10% reduction in body weight significantly lowers these risks.';
+  String get adviceOverCopy =>
+      'Overweight raises the risk of type 2 diabetes, high blood pressure, and joint problems over time. Even a 5–10% reduction in body weight significantly lowers these risks.';
 
   @override
-  String get adviceOverStep1 => 'Create a moderate calorie deficit of 300–500 kcal/day — target 0.3–0.5 kg loss per week (sustainable pace)';
+  String get adviceOverStep1 =>
+      'Create a moderate calorie deficit of 300–500 kcal/day — target 0.3–0.5 kg loss per week (sustainable pace)';
 
   @override
-  String get adviceOverStep2 => 'Walk 8,000–10,000 steps daily; start with 30 min brisk walks and build from there';
+  String get adviceOverStep2 =>
+      'Walk 8,000–10,000 steps daily; start with 30 min brisk walks and build from there';
 
   @override
-  String get adviceOverStep3 => 'Swap sugary drinks (soda, juice, energy drinks) for water, sparkling water, or unsweetened tea';
+  String get adviceOverStep3 =>
+      'Swap sugary drinks (soda, juice, energy drinks) for water, sparkling water, or unsweetened tea';
 
   @override
-  String get adviceOverStep4 => 'Eat protein first at each meal — it increases satiety and reduces overall calorie intake';
+  String get adviceOverStep4 =>
+      'Eat protein first at each meal — it increases satiety and reduces overall calorie intake';
 
   @override
-  String get adviceOverStep5 => 'Fill half your plate with non-starchy vegetables (broccoli, spinach, cucumber, peppers) at lunch and dinner';
+  String get adviceOverStep5 =>
+      'Fill half your plate with non-starchy vegetables (broccoli, spinach, cucumber, peppers) at lunch and dinner';
 
   @override
-  String get adviceOverStep6 => 'Avoid eating within 2–3 hours of bedtime — late-night eating promotes fat storage';
+  String get adviceOverStep6 =>
+      'Avoid eating within 2–3 hours of bedtime — late-night eating promotes fat storage';
 
   @override
-  String get adviceOverNote => 'Crash diets backfire. A 300–500 kcal deficit is enough — losing weight slowly preserves muscle and is easier to maintain.';
+  String get adviceOverNote =>
+      'Crash diets backfire. A 300–500 kcal deficit is enough — losing weight slowly preserves muscle and is easier to maintain.';
 
   @override
   String get adviceObeseHeadline => 'Your weight is in the obese range';
 
   @override
-  String get adviceObeseCopy => 'Obesity is associated with increased risk of heart disease, type 2 diabetes, sleep apnea, and joint pain. The good news: even modest weight loss of 5–10% of your body weight produces meaningful health improvements.';
+  String get adviceObeseCopy =>
+      'Obesity is associated with increased risk of heart disease, type 2 diabetes, sleep apnea, and joint pain. The good news: even modest weight loss of 5–10% of your body weight produces meaningful health improvements.';
 
   @override
-  String get adviceObeseStep1 => 'Set your first target at 5–10% of current weight — for an 100 kg person, that is just 5–10 kg';
+  String get adviceObeseStep1 =>
+      'Set your first target at 5–10% of current weight — for an 100 kg person, that is just 5–10 kg';
 
   @override
-  String get adviceObeseStep2 => 'Aim for 0.5–1.0 kg loss per week; faster rates typically cause muscle loss and a rebound';
+  String get adviceObeseStep2 =>
+      'Aim for 0.5–1.0 kg loss per week; faster rates typically cause muscle loss and a rebound';
 
   @override
-  String get adviceObeseStep3 => 'Start with low-impact daily movement: 30 min walking, swimming, or stationary cycling — knees and joints will thank you';
+  String get adviceObeseStep3 =>
+      'Start with low-impact daily movement: 30 min walking, swimming, or stationary cycling — knees and joints will thank you';
 
   @override
-  String get adviceObeseStep4 => 'Cut out ultra-processed foods, fried food, and added sugars first — these alone can reduce 500+ kcal/day';
+  String get adviceObeseStep4 =>
+      'Cut out ultra-processed foods, fried food, and added sugars first — these alone can reduce 500+ kcal/day';
 
   @override
-  String get adviceObeseStep5 => 'Build meals around protein (chicken, fish, legumes, eggs) and vegetables; they keep you full longer';
+  String get adviceObeseStep5 =>
+      'Build meals around protein (chicken, fish, legumes, eggs) and vegetables; they keep you full longer';
 
   @override
-  String get adviceObeseStep6 => 'See your doctor for a baseline check — blood pressure, blood sugar, and cholesterol — and ask about structured support programs';
+  String get adviceObeseStep6 =>
+      'See your doctor for a baseline check — blood pressure, blood sugar, and cholesterol — and ask about structured support programs';
 
   @override
-  String get adviceObeseNote => 'BMI alone does not diagnose health. Speak with a doctor or registered dietitian for a plan tailored to your medical history.';
+  String get adviceObeseNote =>
+      'BMI alone does not diagnose health. Speak with a doctor or registered dietitian for a plan tailored to your medical history.';
 
   @override
   String stepOf(int current, int total) {
@@ -597,7 +649,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notSet => 'Not set';
 
   @override
-  String get setupIntro => 'A few quick questions so the app can tailor workouts and targets to you.';
+  String get setupIntro =>
+      'A few quick questions so the app can tailor workouts and targets to you.';
 
   @override
   String get setupNameTitle => 'What should we call you?';
@@ -609,13 +662,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get setupGenderTitle => 'What is your gender?';
 
   @override
-  String get setupGenderBody => 'We use this for calorie and body-fat formulas and to show exercise videos with a matching trainer. You can change it any time.';
+  String get setupGenderBody =>
+      'We use this for calorie and body-fat formulas and to show exercise videos with a matching trainer. You can change it any time.';
 
   @override
   String get setupFormulaTitle => 'Calculations based on';
 
   @override
-  String get setupFormulaBody => 'Calorie and body-fat formulas differ for male and female bodies. Pick the one that fits you best.';
+  String get setupFormulaBody =>
+      'Calorie and body-fat formulas differ for male and female bodies. Pick the one that fits you best.';
 
   @override
   String get bodyMale => 'Male body';
@@ -672,7 +727,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get expBeginner => 'Beginner';
 
   @override
-  String get expBeginnerBody => 'New to training or returning after a long break';
+  String get expBeginnerBody =>
+      'New to training or returning after a long break';
 
   @override
   String get expIntermediate => 'Intermediate';
@@ -753,13 +809,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bodyFatTitle => 'Body fat (estimate)';
 
   @override
-  String get bodyFatNeedsMale => 'Add neck and waist measurements to estimate your body fat.';
+  String get bodyFatNeedsMale =>
+      'Add neck and waist measurements to estimate your body fat.';
 
   @override
-  String get bodyFatNeedsFemale => 'Add neck, waist and hip measurements to estimate your body fat.';
+  String get bodyFatNeedsFemale =>
+      'Add neck, waist and hip measurements to estimate your body fat.';
 
   @override
-  String get bodyFatMethod => 'US Navy tape method — an estimate, not a medical measurement.';
+  String get bodyFatMethod =>
+      'US Navy tape method — an estimate, not a medical measurement.';
 
   @override
   String get measurementsTitle => 'Measurements';
@@ -768,7 +827,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addMeasurements => 'Add measurements';
 
   @override
-  String get measurementsEmpty => 'Track your waist, hips and more to see changes the scale misses.';
+  String get measurementsEmpty =>
+      'Track your waist, hips and more to see changes the scale misses.';
 
   @override
   String get measureNeck => 'Neck';
@@ -792,10 +852,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get measureThigh => 'Thigh';
 
   @override
-  String get measureHint => 'Measure relaxed, at the widest point, without pulling the tape tight.';
+  String get measureHint =>
+      'Measure relaxed, at the widest point, without pulling the tape tight.';
 
   @override
-  String get measureRangeError => 'Measurements must be between 5 and 300 cm (2–118 in).';
+  String get measureRangeError =>
+      'Measurements must be between 5 and 300 cm (2–118 in).';
 
   @override
   String get bmiHistory => 'BMI history';
@@ -807,7 +869,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noBmiYet => 'No BMI saved yet';
 
   @override
-  String get wellnessDisclaimer => 'For general wellness only. Not medical advice.';
+  String get wellnessDisclaimer =>
+      'For general wellness only. Not medical advice.';
 
   @override
   String get navTrain => 'Train';
@@ -833,7 +896,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get routines => 'Routines';
 
   @override
-  String get routinesEmpty => 'Save a workout as a routine to repeat it with one tap.';
+  String get routinesEmpty =>
+      'Save a workout as a routine to repeat it with one tap.';
 
   @override
   String get recentWorkouts => 'Recent workouts';
@@ -898,7 +962,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get discardWorkout => 'Discard workout';
 
   @override
-  String get discardConfirm => 'Discard this workout? Logged sets will be deleted.';
+  String get discardConfirm =>
+      'Discard this workout? Logged sets will be deleted.';
 
   @override
   String get discard => 'Discard';
@@ -938,7 +1003,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get done => 'Done';
 
   @override
-  String get nothingLogged => 'No sets were ticked, so the workout was not saved.';
+  String get nothingLogged =>
+      'No sets were ticked, so the workout was not saved.';
 
   @override
   String get searchExercises => 'Search exercises';
@@ -1076,7 +1142,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get foodKcalError => 'Enter calories between 1 and 5000.';
 
   @override
-  String get foodEmpty => 'Nothing logged today. Quick-add calories after each meal.';
+  String get foodEmpty =>
+      'Nothing logged today. Quick-add calories after each meal.';
 
   @override
   String get foodUnnamed => 'Food';
@@ -1096,10 +1163,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get removeGlass => '−250 ml';
 
   @override
-  String get targetsExplain => 'Based on your age, height, weight, gender, goal and training days (Mifflin-St Jeor). A starting point, not a medical prescription.';
+  String get targetsExplain =>
+      'Based on your age, height, weight, gender, goal and training days (Mifflin-St Jeor). A starting point, not a medical prescription.';
 
   @override
-  String get completeProfileForTargets => 'Set your goal in Personal details for personalised targets.';
+  String get completeProfileForTargets =>
+      'Set your goal in Personal details for personalised targets.';
 
   @override
   String greeting(String name) {
@@ -1136,13 +1205,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyReminderTitle => 'Time for a quick check-in';
 
   @override
-  String get dailyReminderBody => 'Log today\'s weight, water and meals to keep your trend accurate.';
+  String get dailyReminderBody =>
+      'Log today\'s weight, water and meals to keep your trend accurate.';
 
   @override
   String get weeklyReminderTitle => 'Your weekly check-in';
 
   @override
-  String get weeklyReminderBody => 'See how your week went and plan your next workouts.';
+  String get weeklyReminderBody =>
+      'See how your week went and plan your next workouts.';
 
   @override
   String get dailyReminderAt => 'Every day at 8:00 PM';
@@ -1151,7 +1222,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weeklyReminderAt => 'Sundays at 10:00 AM';
 
   @override
-  String get notificationsDenied => 'Notifications are turned off for this app. Turn them on in your phone\'s settings to get reminders.';
+  String get notificationsDenied =>
+      'Notifications are turned off for this app. Turn them on in your phone\'s settings to get reminders.';
 
   @override
   String get stepsTitle => 'Steps';
@@ -1162,10 +1234,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get stepsConnectBody => 'See your daily steps here. Steps are read from Health Connect and stay on your phone.';
+  String get stepsConnectBody =>
+      'See your daily steps here. Steps are read from Health Connect and stay on your phone.';
 
   @override
-  String get stepsConnectBodyIos => 'See your daily steps here. Steps are read from Apple Health and stay on your phone.';
+  String get stepsConnectBodyIos =>
+      'See your daily steps here. Steps are read from Apple Health and stay on your phone.';
 
   @override
   String get connectSteps => 'Connect';
@@ -1174,7 +1248,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get installHealthConnect => 'Get Health Connect';
 
   @override
-  String get stepsNeedsInstall => 'Step counting needs Google\'s Health Connect app.';
+  String get stepsNeedsInstall =>
+      'Step counting needs Google\'s Health Connect app.';
 
   @override
   String get activityChannel => 'Activity';
@@ -1186,7 +1261,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get movementCardTitle => 'Your day';
 
   @override
-  String get trackingOff => 'Turn on tracking to see where you went, how long you stayed and how far you walked. Your location never leaves this phone.';
+  String get trackingOff =>
+      'Turn on tracking to see where you went, how long you stayed and how far you walked. Your location never leaves this phone.';
 
   @override
   String get trackingOn => 'Tracking is on';
@@ -1201,13 +1277,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trackingNotificationTitle => 'Tracking your day';
 
   @override
-  String get trackingNotificationBody => 'Building your private timeline. Tap to open.';
+  String get trackingNotificationBody =>
+      'Building your private timeline. Tap to open.';
 
   @override
-  String get locationDenied => 'Location access is off. Allow it in your phone\'s settings to build your timeline.';
+  String get locationDenied =>
+      'Location access is off. Allow it in your phone\'s settings to build your timeline.';
 
   @override
-  String get locationServiceOff => 'Turn on location (GPS) on your phone to track your day.';
+  String get locationServiceOff =>
+      'Turn on location (GPS) on your phone to track your day.';
 
   @override
   String placesVisited(int count) {
@@ -1262,7 +1341,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteAllLocation => 'Delete all location history';
 
   @override
-  String get deleteLocationConfirm => 'This permanently deletes the selected location history from this phone.';
+  String get deleteLocationConfirm =>
+      'This permanently deletes the selected location history from this phone.';
 
   @override
   String get delete => 'Delete';
@@ -1276,10 +1356,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gymCheckInTitle => 'You\'re at the gym 💪';
 
   @override
-  String get gymCheckInBody => 'Start today\'s workout? Open the app to begin logging.';
+  String get gymCheckInBody =>
+      'Start today\'s workout? Open the app to begin logging.';
 
   @override
-  String get trackingLimitNote => 'Tracking pauses if you close the app from recent apps.';
+  String get trackingLimitNote =>
+      'Tracking pauses if you close the app from recent apps.';
 
   @override
   String get programs => 'Programs';
@@ -1327,7 +1409,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get muscleMapTitle => 'Muscles this week';
 
   @override
-  String get muscleMapHint => 'Hard sets per muscle (secondary muscles count half). About 10 a week builds muscle.';
+  String get muscleMapHint =>
+      'Hard sets per muscle (secondary muscles count half). About 10 a week builds muscle.';
 
   @override
   String undertrained(String muscles) {
@@ -1343,10 +1426,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repCounter => 'Rep counter';
 
   @override
-  String get repCounterIntro => 'Place your phone so your whole body is visible from the side, then start moving.';
+  String get repCounterIntro =>
+      'Place your phone so your whole body is visible from the side, then start moving.';
 
   @override
-  String get repCounterPrivacy => 'Analysed on your phone. Nothing is recorded or uploaded.';
+  String get repCounterPrivacy =>
+      'Analysed on your phone. Nothing is recorded or uploaded.';
 
   @override
   String repsCounted(int count) {
@@ -1398,7 +1483,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get cameraDenied => 'Camera access is off. Allow it in your phone\'s settings to count reps.';
+  String get cameraDenied =>
+      'Camera access is off. Allow it in your phone\'s settings to count reps.';
 
   @override
   String get cameraUnavailable => 'No camera is available on this device.';
@@ -1422,7 +1508,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumWelcome => 'Welcome to Premium!';
 
   @override
-  String get premiumThanksBody => 'Ads are removed. Thank you for supporting BMI Health.';
+  String get premiumThanksBody =>
+      'Ads are removed. Thank you for supporting BMI Health.';
 
   @override
   String get premiumFeatureNoAds => 'No banner or full-screen ads';
@@ -1431,7 +1518,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumFeatureSupport => 'Support an independent app';
 
   @override
-  String get premiumFeaturePrivacy => 'Same privacy: your health data stays on your phone';
+  String get premiumFeaturePrivacy =>
+      'Same privacy: your health data stays on your phone';
 
   @override
   String get planMonthly => 'Monthly';
@@ -1475,7 +1563,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pricesLoading => 'Loading prices…';
 
   @override
-  String get renewNote => 'Subscriptions renew automatically until cancelled. Cancel anytime in your Google Play or App Store subscriptions. No tracking. No data sold.';
+  String get renewNote =>
+      'Subscriptions renew automatically until cancelled. Cancel anytime in your Google Play or App Store subscriptions. No tracking. No data sold.';
 
   @override
   String get thanksNote => 'Thank you for supporting BMI Health.';
@@ -1522,10 +1611,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get connectSleepHeart => 'Connect sleep & heart data';
 
   @override
-  String get connectSleepHeartBody => 'Optional: adds sleep, resting heart rate and HRV from your watch or phone for a more accurate score.';
+  String get connectSleepHeartBody =>
+      'Optional: adds sleep, resting heart rate and HRV from your watch or phone for a more accurate score.';
 
   @override
-  String get recoveryEmpty => 'Answer the check-in or log a workout to see your recovery.';
+  String get recoveryEmpty =>
+      'Answer the check-in or log a workout to see your recovery.';
 
   @override
   String get sleepTitle => 'Sleep';
@@ -1546,10 +1637,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get sleepRegular => 'Your bedtimes are regular, which helps sleep quality.';
+  String get sleepRegular =>
+      'Your bedtimes are regular, which helps sleep quality.';
 
   @override
-  String get sleepIrregular => 'Bedtimes vary a lot. A steadier bedtime usually improves sleep.';
+  String get sleepIrregular =>
+      'Bedtimes vary a lot. A steadier bedtime usually improves sleep.';
 
   @override
   String get cycleTitle => 'Cycle';
@@ -1558,7 +1651,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cycleTracking => 'Cycle tracking';
 
   @override
-  String get cycleOptInBody => 'Track your period and symptoms and get training and nutrition tips for each phase. Stored only on this phone. You can delete it all at any time.';
+  String get cycleOptInBody =>
+      'Track your period and symptoms and get training and nutrition tips for each phase. Stored only on this phone. You can delete it all at any time.';
 
   @override
   String get cycleLock => 'Lock with fingerprint or PIN';
@@ -1576,7 +1670,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cycleDeleteAll => 'Delete all cycle data';
 
   @override
-  String get cycleDeleteConfirm => 'This permanently deletes all periods and symptoms from this phone and turns cycle tracking off.';
+  String get cycleDeleteConfirm =>
+      'This permanently deletes all periods and symptoms from this phone and turns cycle tracking off.';
 
   @override
   String cycleDay(int day) {
@@ -1606,10 +1701,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get periodLate => 'Your period is later than usual. Cycles often vary; if you\'re worried, talk to a doctor.';
+  String get periodLate =>
+      'Your period is later than usual. Cycles often vary; if you\'re worried, talk to a doctor.';
 
   @override
-  String get cycleIrregular => 'Your cycles vary in length, so predictions are wider.';
+  String get cycleIrregular =>
+      'Your cycles vary in length, so predictions are wider.';
 
   @override
   String get cycleNoData => 'Log your period to start getting predictions.';
@@ -1627,19 +1724,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phaseLuteal => 'Luteal phase';
 
   @override
-  String get tipMenstrual => 'Train by feel: lighter sessions, walking and mobility are fine. Iron-rich foods (lentils, spinach, meat) help replace losses.';
+  String get tipMenstrual =>
+      'Train by feel: lighter sessions, walking and mobility are fine. Iron-rich foods (lentils, spinach, meat) help replace losses.';
 
   @override
-  String get tipFollicular => 'Energy often rises: a good time for heavier lifts and trying new personal bests.';
+  String get tipFollicular =>
+      'Energy often rises: a good time for heavier lifts and trying new personal bests.';
 
   @override
-  String get tipOvulation => 'Strength can feel high. Warm up well and keep good form on jumps and quick changes of direction.';
+  String get tipOvulation =>
+      'Strength can feel high. Warm up well and keep good form on jumps and quick changes of direction.';
 
   @override
-  String get tipLuteal => 'You may feel warmer and hungrier. Keep protein up, stay hydrated, and favour steady training over max efforts late in this phase.';
+  String get tipLuteal =>
+      'You may feel warmer and hungrier. Keep protein up, stay hydrated, and favour steady training over max efforts late in this phase.';
 
   @override
-  String get cycleTipNote => 'General guidance; everyone\'s cycle feels different.';
+  String get cycleTipNote =>
+      'General guidance; everyone\'s cycle feels different.';
 
   @override
   String get symptomsToday => 'Symptoms today';
@@ -1694,10 +1796,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get productNotFound => 'Product not found. You can enter it yourself.';
 
   @override
-  String get productNoNutrition => 'This product has no calorie information yet. You can enter it yourself.';
+  String get productNoNutrition =>
+      'This product has no calorie information yet. You can enter it yourself.';
 
   @override
-  String get lookupOffline => 'Couldn\'t reach the food database. Check your connection or enter it yourself.';
+  String get lookupOffline =>
+      'Couldn\'t reach the food database. Check your connection or enter it yourself.';
 
   @override
   String get enterManually => 'Enter manually';
@@ -1743,7 +1847,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get progressPhotos => 'Progress photos';
 
   @override
-  String get progressPhotosBody => 'Private: encrypted on this phone and never added to your gallery.';
+  String get progressPhotosBody =>
+      'Private: encrypted on this phone and never added to your gallery.';
 
   @override
   String get addPhoto => 'Add photo';
@@ -1761,7 +1866,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deletePhoto => 'Delete photo';
 
   @override
-  String get deletePhotoConfirm => 'This permanently deletes the photo from this phone.';
+  String get deletePhotoConfirm =>
+      'This permanently deletes the photo from this phone.';
 
   @override
   String photoDate(String date) {
@@ -1907,7 +2013,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exportCsv => 'Export as spreadsheet (CSV)';
 
   @override
-  String get backupBody => 'Your data stays off cloud backups. Create an encrypted backup file and save it to Google Drive, iCloud or anywhere you like. Only your passphrase can open it — if you lose it, the backup can\'t be recovered.';
+  String get backupBody =>
+      'Your data stays off cloud backups. Create an encrypted backup file and save it to Google Drive, iCloud or anywhere you like. Only your passphrase can open it — if you lose it, the backup can\'t be recovered.';
 
   @override
   String get passphrase => 'Passphrase';
@@ -1933,22 +2040,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get working => 'Working…';
 
   @override
-  String get restoreWarning => 'Restoring replaces the data on this phone with the backup\'s. This can\'t be undone.';
+  String get restoreWarning =>
+      'Restoring replaces the data on this phone with the backup\'s. This can\'t be undone.';
 
   @override
   String get restoreDone => 'Backup restored.';
 
   @override
-  String get restoreWrongPassphrase => 'Wrong passphrase, or the file is damaged.';
+  String get restoreWrongPassphrase =>
+      'Wrong passphrase, or the file is damaged.';
 
   @override
   String get restoreNotBackup => 'This isn\'t a BMI Health backup file.';
 
   @override
-  String get restoreNewer => 'This backup is from a newer version of the app. Update the app first.';
+  String get restoreNewer =>
+      'This backup is from a newer version of the app. Update the app first.';
 
   @override
-  String get csvWarning => 'Spreadsheet files are not encrypted. Anyone you share them with can read them.';
+  String get csvWarning =>
+      'Spreadsheet files are not encrypted. Anyone you share them with can read them.';
 
   @override
   String get termsOfUse => 'Terms of Use';
@@ -1957,7 +2068,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get batterySaver => 'Battery saver';
 
   @override
-  String get batterySaverBody => 'Fewer, less precise location fixes. Uses less battery; short walks may be missed.';
+  String get batterySaverBody =>
+      'Fewer, less precise location fixes. Uses less battery; short walks may be missed.';
 
   @override
   String trackingGap(String from, String to) {
@@ -1965,31 +2077,39 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get trackingGapBody => 'Your phone\'s battery saver probably closed the app.';
+  String get trackingGapBody =>
+      'Your phone\'s battery saver probably closed the app.';
 
   @override
   String get keepTrackingOn => 'How to keep tracking on';
 
   @override
-  String get keepTrackingIntro => 'Allow BMI Health to run in the background on your phone:';
+  String get keepTrackingIntro =>
+      'Allow BMI Health to run in the background on your phone:';
 
   @override
-  String get guideXiaomi => 'Xiaomi / Redmi / POCO: Settings → Apps → BMI Health → Battery saver → No restrictions. Also turn on Autostart.';
+  String get guideXiaomi =>
+      'Xiaomi / Redmi / POCO: Settings → Apps → BMI Health → Battery saver → No restrictions. Also turn on Autostart.';
 
   @override
-  String get guideOppo => 'Oppo / Realme / OnePlus: Settings → Battery → App battery management → BMI Health → Allow background activity.';
+  String get guideOppo =>
+      'Oppo / Realme / OnePlus: Settings → Battery → App battery management → BMI Health → Allow background activity.';
 
   @override
-  String get guideVivo => 'Vivo / iQOO: Settings → Battery → Background power consumption → BMI Health → Allow.';
+  String get guideVivo =>
+      'Vivo / iQOO: Settings → Battery → Background power consumption → BMI Health → Allow.';
 
   @override
-  String get guideSamsung => 'Samsung: Settings → Apps → BMI Health → Battery → Unrestricted.';
+  String get guideSamsung =>
+      'Samsung: Settings → Apps → BMI Health → Battery → Unrestricted.';
 
   @override
-  String get guideHuawei => 'Huawei / Honor: Settings → Battery → App launch → BMI Health → Manage manually, all on.';
+  String get guideHuawei =>
+      'Huawei / Honor: Settings → Battery → App launch → BMI Health → Manage manually, all on.';
 
   @override
-  String get guideOther => 'Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don\'t optimise\"). Don\'t swipe the app away from recent apps.';
+  String get guideOther =>
+      'Other phones: Settings → Apps → BMI Health → Battery → Unrestricted (or \"Don\'t optimise\"). Don\'t swipe the app away from recent apps.';
 
   @override
   String setsReps(int sets, int min, int max) {
@@ -2047,22 +2167,26 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get jointFriendlyNote => 'Joint-friendly picks based on your BMI: no jumping moves.';
+  String get jointFriendlyNote =>
+      'Joint-friendly picks based on your BMI: no jumping moves.';
 
   @override
-  String get planBasedOn => 'Matched to your equipment and experience. Tap an exercise for steps and tips.';
+  String get planBasedOn =>
+      'Matched to your equipment and experience. Tap an exercise for steps and tips.';
 
   @override
   String get startThisWorkout => 'Start this workout';
 
   @override
-  String get noExercisesForDay => 'No exercises match your equipment for this day yet.';
+  String get noExercisesForDay =>
+      'No exercises match your equipment for this day yet.';
 
   @override
   String get homeChallenges => 'Home Challenges';
 
   @override
-  String get homeChallengesBody => 'Day-by-day plans with no equipment. Pick a level and a focus.';
+  String get homeChallengesBody =>
+      'Day-by-day plans with no equipment. Pick a level and a focus.';
 
   @override
   String get levelBeginner => 'Beginner';
@@ -2113,7 +2237,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restDay => 'Rest day';
 
   @override
-  String get restDayBody => 'Recovery is part of training. Take a walk or stretch gently.';
+  String get restDayBody =>
+      'Recovery is part of training. Take a walk or stretch gently.';
 
   @override
   String get markRested => 'Mark as rested';
@@ -2202,7 +2327,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get finishActiveFirst => 'Finish or discard your current workout first.';
+  String get finishActiveFirst =>
+      'Finish or discard your current workout first.';
 
   @override
   String get restartChallenge => 'Restart challenge';
@@ -2250,13 +2376,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get remindWaterTitle => 'Time for some water';
 
   @override
-  String get remindWaterBody => 'A glass now keeps you on track for today\'s water goal.';
+  String get remindWaterBody =>
+      'A glass now keeps you on track for today\'s water goal.';
 
   @override
   String get remindWeighInTitle => 'Weigh-in time';
 
   @override
-  String get remindWeighInBody => 'Weigh yourself before breakfast for the most consistent trend.';
+  String get remindWeighInBody =>
+      'Weigh yourself before breakfast for the most consistent trend.';
 
   @override
   String get remindWorkoutTitle => 'It\'s a training day';
@@ -2268,7 +2396,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get remindBedtimeTitle => 'Time to wind down';
 
   @override
-  String get remindBedtimeBody => 'Put the screen away soon to get a full night\'s sleep.';
+  String get remindBedtimeBody =>
+      'Put the screen away soon to get a full night\'s sleep.';
 
   @override
   String get remindWater => 'Water reminders';
@@ -2335,7 +2464,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get stepsGoal => 'Daily step goal';
 
   @override
-  String get stepsGoalHint => 'Pick a goal you can reach most days, then raise it.';
+  String get stepsGoalHint =>
+      'Pick a goal you can reach most days, then raise it.';
 
   @override
   String stepsGoalValue(int steps) {
@@ -2360,7 +2490,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trainRestCountdownTitle => 'Resting';
 
   @override
-  String get trainRestCountdownBody => 'Your next set starts when the timer ends.';
+  String get trainRestCountdownBody =>
+      'Your next set starts when the timer ends.';
 
   @override
   String get trainRestOverTitle => 'Rest is over';
@@ -2369,7 +2500,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trainRestOverBody => 'Time for your next set.';
 
   @override
-  String get trainRestNotifyAsk => 'Get a notification when rest ends while the app is closed?';
+  String get trainRestNotifyAsk =>
+      'Get a notification when rest ends while the app is closed?';
 
   @override
   String get trainAllow => 'Allow';
@@ -2384,7 +2516,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trainDeleteWorkout => 'Delete workout';
 
   @override
-  String get trainDeleteWorkoutConfirm => 'Delete this workout? Its sets, volume and records are removed from your history.';
+  String get trainDeleteWorkoutConfirm =>
+      'Delete this workout? Its sets, volume and records are removed from your history.';
 
   @override
   String get trainEditHint => 'Tap a set to edit it, swipe left to delete it.';
@@ -2410,7 +2543,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trainProgressTitle => 'Your progress';
 
   @override
-  String get trainProgressEmpty => 'Log this exercise in a workout to see your progress here.';
+  String get trainProgressEmpty =>
+      'Log this exercise in a workout to see your progress here.';
 
   @override
   String get trainBestSet => 'Best set';
@@ -2577,13 +2711,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trainSetDrop => 'Drop set';
 
   @override
-  String get trainWarmupNote => 'Warm-up sets don\'t count toward volume, records or weight suggestions.';
+  String get trainWarmupNote =>
+      'Warm-up sets don\'t count toward volume, records or weight suggestions.';
 
   @override
   String get trainRpe => 'Effort (RPE)';
 
   @override
-  String get trainRpeHelp => 'How hard was it? 10 = no reps left, 9 = one left, 8 = two left.';
+  String get trainRpeHelp =>
+      'How hard was it? 10 = no reps left, 9 = one left, 8 = two left.';
 
   @override
   String get trainRpeNone => 'Not rated';
@@ -2597,7 +2733,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trainDeloadTitle => 'Deload week';
 
   @override
-  String get trainDeloadBody => 'You\'ve trained hard for 5 weeks in a row. This week, lift about 10% lighter so your body recovers and comes back stronger. Suggestions below are already lighter.';
+  String get trainDeloadBody =>
+      'You\'ve trained hard for 5 weeks in a row. This week, lift about 10% lighter so your body recovers and comes back stronger. Suggestions below are already lighter.';
 
   @override
   String get trainDeloadSkip => 'Skip this week';
@@ -2664,7 +2801,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get streakHelpTitle => 'Daily streak';
 
   @override
-  String get streakHelpBody => 'Log anything each day (a workout, a meal, water or your weight) to keep your streak going. Today counts as soon as you log something.';
+  String get streakHelpBody =>
+      'Log anything each day (a workout, a meal, water or your weight) to keep your streak going. Today counts as soon as you log something.';
 
   @override
   String get planTitle => 'Your plan today';
@@ -2678,7 +2816,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get planRestBody => 'Recovery is part of training. A walk or light stretching is perfect today.';
+  String get planRestBody =>
+      'Recovery is part of training. A walk or light stretching is perfect today.';
 
   @override
   String get planRestDone => 'Mark rest day done';
