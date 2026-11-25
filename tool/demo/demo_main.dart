@@ -167,10 +167,11 @@ Future<void> _seed(DatabaseHelper db, SharedPreferences prefs) async {
     }
   }
 
-  // Home challenge: six days in a row, up to yesterday
+  // Home challenge: five days in a row up to yesterday, so today's plan is
+  // a workout day (day 6) rather than the day-7 rest day
   final key = ChallengePlanner.key(ChallengeFocus.coreAbs, ChallengeLevel.beginner);
-  for (var d = 1; d <= 6; d++) {
-    await db.completeChallengeDay(key, d, _day(7 - d, 7, 0));
+  for (var d = 1; d <= 5; d++) {
+    await db.completeChallengeDay(key, d, _day(6 - d, 7, 0));
   }
 
   // Today's food and water

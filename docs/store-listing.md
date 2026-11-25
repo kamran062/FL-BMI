@@ -143,3 +143,12 @@ Urdu set: the same screens with the app in Urdu and Urdu captions.
 - Fitness has the strongest seasonal swing: refresh screenshots and release an update before January (New Year resolutions) and before summer.
 
 **In-app (next development step):** ask for a rating with Google's in-app review prompt at a happy moment (after the 3rd completed workout or a perfect day), never on first launch.
+
+## Building the graphics and videos
+
+From the demo build (`tool/demo/demo_main.dart`) screenshots and screen recordings:
+
+    python3 tool/promo/make_store_graphics.py SHOTS_DIR build/promo/store   # 8 screenshots + feature graphic
+    python3 tool/promo/make_promo.py CLIPS_DIR VO_DIR build/promo            # store, YouTube and vertical videos
+
+Upload `promo_store.mp4` to YouTube (unlisted is fine) and paste its link in the listing's video field. It has no "free" or "download" line. `promo_landscape.mp4` and `promo_vertical.mp4` end with "Free on Google Play" and are for social media only.

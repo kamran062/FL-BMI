@@ -5,8 +5,11 @@
 CLIPS_DIR holds emulator recordings (adb screenrecord, 1080x2400) of the
 demo build (tool/demo/demo_main.dart): today, bmi, squat, player, logger,
 ticks, food. VO_DIR holds l1.wav … l7.wav (one line each, see SCRIPT).
-Writes OUT_DIR/promo_landscape.mp4 (1920x1080, Play Store / YouTube) and
+Writes OUT_DIR/promo_store.mp4 (1920x1080, the Play Store listing video:
+no "free" or "download" call to action, per Play's store asset policy),
+OUT_DIR/promo_landscape.mp4 (1920x1080, YouTube) and
 OUT_DIR/promo_vertical.mp4 (1080x1920, Reels / Shorts / TikTok).
+VO_DIR also needs l8.wav for the store ending.
 
 Needs ffmpeg and Pillow. Fonts: the app's bundled Inter.
 """
@@ -40,17 +43,19 @@ SCRIPT = [
     "Count calories with the food you really eat, like biryani, daal and roti.",
     "Steps, sleep and recovery, all in one place. And your data stays on your phone.",
     "Download B M I Health, free on Google Play.",
+    # Store video ending: no call to action
+    "B M I Health. Know your body, train with a plan, eat smarter.",
 ]
 
 # Scenes: caption, sub-caption, voice line, clip segments (name, start, end).
 # None as segments = the end card.
 SCENES = [
-    ("Your all-in-one\nfitness coach", "BMI · Workouts · Food · Recovery", 1, [("today", 0.2, 3.0)]),
-    ("Know your BMI", "Weight, body fat and measurements", 2, [("bmi", 0.5, 4.4)]),
-    ("Train anywhere", "114 exercises with animated guides", 3, [("squat", 3.6, 6.5), ("player", 0.4, 3.0)]),
-    ("Get stronger", "Log sets, beat records,\nsmart weight suggestions", 4, [("logger", 1.9, 4.6), ("ticks", 0.6, 2.6)]),
-    ("Eat smarter", "Desi food included:\nbiryani, daal, roti", 5, [("food", 0.3, 1.3), ("food", 9.4, 13.3)]),
-    ("Your whole day", "Steps, sleep and recovery.\nPrivate on your phone.", 6, [("today", 1.2, 6.9)]),
+    ("Your all-in-one\nfitness coach", "Daily goals, plan and streak", 1, [("today", 0.2, 2.0)]),
+    ("Know your BMI", "Weight, body fat and measurements", 2, [("bmi", 0.9, 3.35)]),
+    ("Train anywhere", "114 exercises with animated guides", 3, [("squat", 0.4, 3.6), ("player", 0.4, 3.0)]),
+    ("Get stronger", "Log sets, beat records,\nsmart weight suggestions", 4, [("logger", 0.8, 4.8), ("ticks", 0.8, 3.8)]),
+    ("Eat smarter", "Desi food included:\nbiryani, daal, roti", 5, [("food", 0.6, 2.6), ("food", 9.0, 12.0)]),
+    ("Your whole day", "Steps, sleep and recovery.\nPrivate on your phone.", 6, [("today", 1.8, 7.4)]),
     (None, None, 7, None),
 ]
 
@@ -117,7 +122,7 @@ def brand_tag(img: Image.Image, x: int, y: int, size: int) -> None:
                              fill=WHITE, anchor="lm")
 
 
-def end_card(w: int, h: int, out: pathlib.Path) -> None:
+def end_card(w: int, h: int, out: pathlib.Path, cta: bool = True) -> None:
     img = background(w, h, (w // 2, h // 2))
     s = int(min(w, h) * 0.24)
     icon = Image.open(ICON).convert("RGBA").resize((s, s), Image.LANCZOS)
@@ -129,7 +134,7 @@ def end_card(w: int, h: int, out: pathlib.Path) -> None:
     big = int(min(w, h) * 0.11)
     d.text((w // 2, cy + s // 2 + big), APP, font=font("Bold", big), fill=WHITE, anchor="mm")
     pill_font = font("Bold", int(big * 0.42))
-    label = "Free on Google Play"
+    label = "Free on Google Play" if cta else "Know your body · Train · Eat smarter"
     tw = d.textlength(label, font=pill_font)
     py = cy + s // 2 + int(big * 2.2)
     pad_x, pad_y = int(big * 0.5), int(big * 0.28)
@@ -151,7 +156,8 @@ def duration(p: pathlib.Path) -> float:
 
 
 def build(kind: str, clips: pathlib.Path, vo: pathlib.Path, out: pathlib.Path, work: pathlib.Path) -> pathlib.Path:
-    landscape = kind == "landscape"
+    landscape = kind != "vertical"
+    store = kind == "store"
     W, H = (1920, 1080) if landscape else (1080, 1920)
     screen_h = 860 if landscape else 1240
     screen_w = round(screen_h * 1080 / 2400 / 2) * 2
@@ -162,6 +168,8 @@ def build(kind: str, clips: pathlib.Path, vo: pathlib.Path, out: pathlib.Path, w
     fy = (H - frame.height) // 2 if landscape else H - frame.height - 110
 
     scenes = [SCENES[i] for i in (range(len(SCENES)) if landscape else VERTICAL)]
+    if store:
+        scenes[-1] = (None, None, 8, None)
     parts = []
     for n, (title, sub, line, segments) in enumerate(scenes):
         voice = vo / f"l{line}.wav"
@@ -169,7 +177,7 @@ def build(kind: str, clips: pathlib.Path, vo: pathlib.Path, out: pathlib.Path, w
         part = work / f"{kind}_{n}.mp4"
         if segments is None:
             card = work / f"end_{kind}.png"
-            end_card(W, H, card)
+            end_card(W, H, card, cta=not store)
             run(["-loop", "1", "-t", str(dur), "-i", str(card), "-i", str(voice),
                  "-filter_complex", f"[0:v]fps={FPS},format=yuv420p,fade=in:st=0:d=0.3[v];"
                  f"[1:a]adelay=250|250,apad,atrim=0:{dur}[a]",
@@ -182,8 +190,11 @@ def build(kind: str, clips: pathlib.Path, vo: pathlib.Path, out: pathlib.Path, w
         seg_files = []
         for k, (name, a, b) in enumerate(segments):
             sf = work / f"{kind}_{n}_{k}.mp4"
-            run(["-ss", str(a), "-to", str(b), "-i", str(clips / f"{name}.mp4"),
-                 "-vf", f"fps={FPS},scale={screen_w}:{screen_h}:flags=lanczos,format=yuv420p",
+            # screenrecord writes a variable frame rate (no frames while the
+            # screen is still), so cut on the timeline, not with -ss
+            run(["-i", str(clips / f"{name}.mp4"),
+                 "-vf", f"fps={FPS},trim=start={a}:end={b},setpts=PTS-STARTPTS,"
+                        f"scale={screen_w}:{screen_h}:flags=lanczos,format=yuv420p",
                  "-an", "-c:v", "libx264", "-crf", "16", str(sf)])
             seg_files.append(sf)
         concat = work / f"{kind}_{n}_list.txt"
@@ -226,11 +237,11 @@ def build(kind: str, clips: pathlib.Path, vo: pathlib.Path, out: pathlib.Path, w
 
 
 def main() -> None:
-    clips, vo, out = (pathlib.Path(a) for a in sys.argv[1:4])
+    clips, vo, out = (pathlib.Path(a).resolve() for a in sys.argv[1:4])
     out.mkdir(parents=True, exist_ok=True)
     work = out / "work"
     work.mkdir(exist_ok=True)
-    for kind in ("landscape", "vertical"):
+    for kind in ("store", "landscape", "vertical"):
         f = build(kind, clips, vo, out, work)
         print(f"{f}  {duration(f):.1f} s")
 
